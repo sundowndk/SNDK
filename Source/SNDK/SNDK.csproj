@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>SNDK</AssemblyName>
+    <RootNamespace>SNDK</RootNamespace>
+    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binary\Debug</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binary\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'rsport.dk|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Binary\rsport.dk</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'akvaservice.dk|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binary\akvaservice.dk</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'sorentotest.sundown.dk|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\..\Binary\sorentotest.sundown.dk</OutputPath>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="MySql.Data, Version=6.4.3.0, Culture=neutral, PublicKeyToken=20449f9ba87f7ae2">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Lib\MySql.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="SNDK.DBI\QueryBuilder.cs" />
+    <Compile Include="SNDK.DBI\Query.cs" />
+    <Compile Include="SNDK.DBI\Connection.cs" />
+    <Compile Include="SNDK.DBI\Helpers.cs" />
+    <Compile Include="SNDK.DBI\QueryBuilderOrder.cs" />
+    <Compile Include="SNDK.DBI\QueryBuilderType.cs" />
+    <Compile Include="SNDK.DBI.Connector\Mssql.cs" />
+    <Compile Include="SNDK.DBI.Connector\Mysql.cs" />
+    <Compile Include="SNDK.Enums\Month.cs" />
+    <Compile Include="SNDK.Enums\Quarter.cs" />
+    <Compile Include="SNDK.Enums\SHAHashAlgorithm.cs" />
+    <Compile Include="SNDK.Enums\DatabaseConnector.cs" />
+    <Compile Include="SNDK.Google.Geocode\DMS.cs" />
+    <Compile Include="SNDK.Google.Geocode\DD.cs" />
+    <Compile Include="SNDK.Google.Geocode\DDType.cs" />
+    <Compile Include="SNDK.Google.Geocode\Quadrasphere.cs" />
+    <Compile Include="SNDK.Google.Geocode\Request.cs" />
+    <Compile Include="SNDK.Google.Geocode\Result.cs" />
+    <Compile Include="SNDK.Google.Geocode\Type.cs" />
+    <Compile Include="SNDK.Google.Geocode\AddressComponent.cs" />
+    <Compile Include="SNDK.Google.Geocode\LocationType.cs" />
+    <Compile Include="SNDK.Google.Geocode\Geometry.cs" />
+    <Compile Include="SNDK.Google.Geocode\LatLng.cs" />
+    <Compile Include="SNDK.Google.Geocode\BoundingBox.cs" />
+    <Compile Include="SNDK.Google.Geocode\Cache.cs" />
+    <Compile Include="SNDK.Threads\ExtendedBackgroundWorker.cs" />
+    <Compile Include="SNDK.Threads\ThreadsSingleInstanceApp.cs" />
+    <Compile Include="SNDK.Toolbox\Arg.cs" />
+    <Compile Include="SNDK.Toolbox\CSVReader.cs" />
+    <Compile Include="SNDK.Toolbox\Exceptions.cs" />
+    <Compile Include="SNDK.Toolbox\Tools.cs" />
+    <Compile Include="SNDK\Graphics.cs" />
+    <Compile Include="SNDK\Date.cs" />
+    <Compile Include="SNDK\Convert.cs" />
+    <Compile Include="SNDK\Helpers.cs" />
+    <Compile Include="SNDK\Crypto.cs" />
+    <Compile Include="SNDK\Serializer.cs" />
+    <Compile Include="SNDK\IO.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="SNDK.DBI\" />
+    <Folder Include="SNDK.DBI.Connector\" />
+    <Folder Include="SNDK.Enums\" />
+    <Folder Include="SNDK.Google.Geocode\" />
+    <Folder Include="SNDK.Threads\" />
+    <Folder Include="SNDK.Toolbox\" />
+    <Folder Include="SNDK\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SNDK.Google.Geocode\Language.cs" />
+    <None Include="SNDK.Toolbox\Convert.cs" />
+    <None Include="SNDK.Toolbox\Serializer.cs" />
+    <None Include="SNDK.Toolbox\IO.cs" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,40 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workbench ActiveDocument="SNDK/SNDK/Crypto.cs">
+    <Files>
+      <File FileName="SNDK/SNDK.Toolbox/Tools.cs" Line="28" Column="1" />
+      <File FileName="SNDK/SNDK/Helpers.cs" Line="28" Column="19" />
+      <File FileName="SNDK/SNDK.Google.Geocode/Request.cs" Line="477" Column="44" />
+      <File FileName="SNDK/SNDK.Toolbox/Arg.cs" Line="85" Column="25" />
+      <File FileName="SNDK/SNDK/Graphics.cs" Line="475" Column="26" />
+      <File FileName="SNDK/SNDK/Crypto.cs" Line="77" Column="16" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State expanded="True">
+          <Node name="SNDK" expanded="True">
+            <Node name="SNDK" expanded="True">
+              <Node name="Crypto.cs" selected="True" />
+            </Node>
+            <Node name="SNDK.DBI" expanded="True" />
+            <Node name="SNDK.Google.Geocode" expanded="True" />
+            <Node name="SNDK.Toolbox" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+      <Pad Id="ClassPad">
+        <State expanded="True" selected="True" />
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

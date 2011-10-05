@@ -1,0 +1,21 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNDK", "SNDK\SNDK.csproj", "{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = SNDK\SNDK.csproj
+		name = SNDK
+	EndGlobalSection
+EndGlobal
