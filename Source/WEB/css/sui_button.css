@@ -1,0 +1,245 @@
+/* --------------------------------------------------------------------------------------------------------------
+Button
+-------------------------------------------------------------------------------------------------------------- */
+.SUIButton
+{
+	margin: 				1px;	
+
+	display: 				inline-block;
+	
+	outline:				none;
+}
+
+.SUIButtonFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUIButtonDisabled
+{
+}
+
+.SUIButtonLeftClicked
+{
+}
+
+.SUIButton .Left
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-left:				3px;
+	margin-bottom:				3px;
+	
+	width: 					5px;
+	height: 					31px;
+	background: 				transparent url('images/button/left.png') no-repeat;	
+}
+
+.SUIButtonLeftClicked .Left
+{
+	background: 				transparent url('images/button/left_clicked.png') no-repeat;
+}
+
+.SUIButtonDisabled .Left
+{
+	background: 				transparent url('images/button/left_disabled.png') no-repeat;	
+}
+
+.SUIButton .Center
+{
+	float: 					left;
+
+	margin-top: 				3px;
+	margin-bottom:				3px;
+
+	padding-top:				8px;
+	
+	height:					23px;
+	background: 				transparent url('images/button/center.png') repeat-x;
+	
+	font-family:				arial;
+	font-size: 				12px;
+	text-align:				center;		
+	text-decoration: 			none;	
+	font-weight:			bold;
+	
+	color:					#ffffff;
+
+
+
+	
+	cursor:					default;
+	
+	-moz-user-select: 			none;
+	-khtml-user-select: 			none;
+	user-select: 				none;
+}
+
+.SUIButtonLeftClicked .Center
+{
+	padding-top:				9px;
+	
+	height:					22px;
+	
+	background: 				transparent url('images/button/center_clicked.png') repeat-x;	
+}
+
+.SUIButtonDisabled .Center
+{
+	background: 				transparent url('images/button/center_disabled.png') repeat-x;	
+	
+	color:					#dddddd;
+}
+
+.SUIButton .Right
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-right:				3px;
+	margin-bottom:				3px;
+		
+	width: 					5px;
+	height: 					31px;
+	
+	background: 				transparent url('images/button/right.png') no-repeat;
+}
+
+.SUIButtonLeftClicked .Right
+{
+	background: 				transparent url('images/button/right_clicked.png') no-repeat;	
+}
+
+.SUIButtonDisabled .Right
+{
+	background: 				transparent url('images/button/right_disabled.png') no-repeat;	
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.SUIButtonContainer
+{
+	margin: 				1px;	
+
+	display: 				inline-block;
+	
+	outline:				none;
+}
+
+.SUIButtonContainerFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUIButtonControlButtonLeft
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-left:				3px;
+	margin-bottom:				3px;
+	
+	width: 					5px;
+	height: 					31px;
+	background: 				transparent url('images/button/left.png') no-repeat;	
+}
+
+.SUIButtonControlButtonLeftFocus
+{
+}
+
+
+.SUIButtonControlButtonLeftClicked
+{
+	background: 				transparent url('images/button/left_clicked.png') no-repeat;	
+}
+
+.SUIButtonControlButtonLeftDisabled
+{
+	background: 				transparent url('images/button/left_disabled.png') no-repeat;	
+}
+
+.SUIButtonControlButtonCenter
+{
+	float: 					left;
+
+	margin-top: 				3px;
+	margin-bottom:				3px;
+
+	padding-top:				8px;
+	
+	height:					23px;
+	background: 				transparent url('images/button/center.png') repeat-x;
+	
+	font-family:				arial;
+	font-size: 				12px;
+	text-align:				center;		
+	text-decoration: 			none;	
+	font-weight:			bold;
+	
+	color:					#ffffff;
+	
+	cursor:					default;
+	
+	-moz-user-select: 			none;
+	-khtml-user-select: 			none;
+	user-select: 				none;
+}
+
+.SUIButtonControlButtonCenterFocus
+{
+}
+
+.SUIButtonControlButtonCenterClicked
+{
+	padding-top:				9px;
+	
+	height:					22px;
+	
+	background: 				transparent url('images/button/center_clicked.png') repeat-x;	
+}
+
+.SUIButtonControlButtonCenterDisabled
+{
+	background: 				transparent url('images/button/center_disabled.png') repeat-x;	
+	
+	color:					#dddddd;
+}
+
+.SUIButtonControlButtonRight
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-right:				3px;
+	margin-bottom:				3px;
+		
+	width: 					5px;
+	height: 					31px;
+	
+	background: 				transparent url('images/button/right.png') no-repeat;	
+}
+
+.SUIButtonControlButtonRightFocus
+{
+}
+
+.SUIButtonControlButtonRightClicked
+{
+	background: 				transparent url('images/button/right_clicked.png') no-repeat;	
+}
+
+.SUIButtonControlButtonRightDisabled
+{
+	background: 				transparent url('images/button/right_disabled.png') no-repeat;	
+}

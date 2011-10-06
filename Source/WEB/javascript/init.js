@@ -1,0 +1,2 @@
+
+SNDK.page.init ();

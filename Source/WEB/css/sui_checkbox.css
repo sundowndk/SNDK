@@ -1,0 +1,56 @@
+/* --------------------------------------------------------------------------------------------------------------
+Checkbox
+-------------------------------------------------------------------------------------------------------------- */
+.SUICheckbox
+{
+	margin: 				3px;	
+
+	display: 				inline-block;
+
+	outline:				none;
+	cursor:					default;			
+}
+
+.SUICheckboxFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUICheckboxDisabled
+{}
+
+.SUICheckboxChecked
+{}
+
+.SUICheckboxDisabledChecked
+{}
+
+.SUICheckbox .Checkmark
+{
+	margin: 				5px;
+					
+	height: 				19px;	
+	width: 					19px;	
+
+	background-image:			url('images/checkbox/unchecked.png');
+	background-position:			center center;
+	background-repeat:			no-repeat;	
+}
+
+.SUICheckboxFocus .Checkmark
+{}
+
+.SUICheckboxChecked .Checkmark
+{
+	background-image:			url('images/checkbox/checked.png');
+}
+
+.SUICheckboxDisabled .Checkmark
+{
+	background-image:			url('images/checkbox/unchecked_disabled.png');
+}
+
+.SUICheckboxDisabledChecked .Checkmark
+{
+	background-image:			url('images/checkbox/checked_disabled.png');
+}

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ItemType>GenericProject</ItemType>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{3929DE13-569B-405B-B761-E2FA4672E95E}</ProjectGuid>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>.</OutputPath>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="build.sh ../../Binary/Debug/" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>.</OutputPath>
+    <CustomCommands>
+      <CustomCommands>
+        <Command type="AfterBuild" command="build.sh ../../Binary/Release/" />
+      </CustomCommands>
+    </CustomCommands>
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="sndk.jsb" />
+    <None Include="javascript\ajax.js" />
+    <None Include="javascript\client.js" />
+    <None Include="javascript\eventhandler.js" />
+    <None Include="javascript\init.js" />
+    <None Include="javascript\page.js" />
+    <None Include="javascript\string.js" />
+    <None Include="javascript\tools.js" />
+    <None Include="javascript\ajax\request.js" />
+    <None Include="javascript\animation\animate.js" />
+    <None Include="javascript\animation\ease.js" />
+    <None Include="javascript\animation\other.js" />
+    <None Include="javascript\animation\scene.js" />
+    <None Include="javascript\sui\builder.js" />
+    <None Include="javascript\sui\button.js" />
+    <None Include="javascript\sui\canvas.js" />
+    <None Include="javascript\sui\checkbox.js" />
+    <None Include="javascript\sui\container.js" />
+    <None Include="javascript\sui\dropbox.js" />
+    <None Include="javascript\sui\extra.js" />
+    <None Include="javascript\sui\helpers.js" />
+    <None Include="javascript\sui\iconview.js" />
+    <None Include="javascript\sui\label.js" />
+    <None Include="javascript\sui\layoutbox.js" />
+    <None Include="javascript\sui\listview.js" />
+    <None Include="javascript\sui\scrollbox.js" />
+    <None Include="javascript\sui\tabview.js" />
+    <None Include="javascript\sui\text.js" />
+    <None Include="javascript\sui\textarea.js" />
+    <None Include="javascript\sui\textbox.js" />
+    <None Include="javascript\sui\upload.js" />
+    <None Include="javascript\widgets\blobmenu.js" />
+    <None Include="javascript\widgets\rotator.js" />
+    <None Include="javascript\prototypes.js" />
+    <None Include="css\sui_button.css" />
+    <None Include="css\sui_checkbox.css" />
+    <None Include="css\sui_dropbox.css" />
+    <None Include="css\sui_iconview.css" />
+    <None Include="css\sui_listivew.css" />
+    <None Include="css\sui_textarea.css" />
+    <None Include="css\sui_textbox.css" />
+    <None Include="css\sui_upload.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="javascript\" />
+    <Folder Include="javascript\ajax\" />
+    <Folder Include="javascript\animation\" />
+    <Folder Include="javascript\sui\" />
+    <Folder Include="javascript\widgets\" />
+    <Folder Include="css\" />
+    <Folder Include="html\" />
+  </ItemGroup>
+</Project>

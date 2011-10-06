@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNDK", "SNDK\SNDK.csproj", "{F104DCB4-3F34-4FE6-95A8-1F48DEA940B9}"
 EndProject
-Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "js", "js\js.mdproj", "{3929DE13-569B-405B-B761-E2FA4672E95E}"
+Project("{9344bdbb-3e7f-41fc-a0dd-8665d75ee146}") = "WEB", "WEB\WEB.mdproj", "{3929DE13-569B-405B-B761-E2FA4672E95E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
