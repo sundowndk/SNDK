@@ -1,9 +1,10 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/css/sui_upload.css">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/build.sh">
     <Files>
       <File FileName="WEB/css/sui_textarea.css" Line="122" Column="1" />
       <File FileName="WEB/css/sui_textbox.css" Line="204" Column="1" />
       <File FileName="WEB/css/sui_upload.css" Line="285" Column="2" />
+      <File FileName="WEB/build.sh" Line="4" Column="2" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,8 +14,10 @@
             <Node name="SNDK.DBI" expanded="True" />
             <Node name="SNDK.Toolbox" expanded="True" />
           </Node>
-          <Node name="WEB" expanded="True" selected="True">
+          <Node name="WEB" expanded="True">
             <Node name="css" expanded="True" />
+            <Node name="javascript" expanded="True" />
+            <Node name="build.sh" selected="True" />
           </Node>
         </State>
       </Pad>

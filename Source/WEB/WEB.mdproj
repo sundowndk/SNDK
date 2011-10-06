@@ -67,6 +67,7 @@
     <None Include="css\sui_textarea.css" />
     <None Include="css\sui_textbox.css" />
     <None Include="css\sui_upload.css" />
+    <None Include="build.sh" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

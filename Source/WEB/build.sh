@@ -1,4 +1,11 @@
 #!/bin/bash
+#
+# Simple build script for sndk.js
+#
+# v1.0 Initial version
+#
+# Usage: build.sh [outputdirectory]
+
 ####################################################
 # INIT                                             #
 ####################################################
@@ -19,7 +26,7 @@ mkdir $OUTPUTDIR
 mkdir "$OUTPUTDIR/js"
 
 ####################################################
-# JS                                              #
+# JS                                               #
 ####################################################
 echo "Bulding JAVASCRIPT..."
 jsbuilder sndk.jsb "$OUTPUTDIR/js/"
@@ -35,7 +42,7 @@ find css -type f -name *.css -exec cat "{}" >> "$CSSFILE"  \;
 cp -rv "css/images/" "$OUTPUTDIR/css/"
 
 ####################################################
-# INCLUDES		                           #
+# INCLUDES		                                   #
 ####################################################
 echo "Bulding INCLUDES..."
 cp -rv "includes/" "$OUTPUTDIR/includes"
