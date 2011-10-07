@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<html>
+	<head>
+		<title>			
+		</title>
+	</head>
+		
+	<link rel="stylesheet" href="../css/sndk.css" type="text/css" />		
+	
+	<script language="JavaScript" type="text/javascript" src="../js/sndk.js" />
+
+	//<link rel="stylesheet" href="../includes/codemirror/lib/codemirror.css" />
+	//<script language="JavaScript" type="text/javascript" src="../includes/codemirror/lib/codemirror.js" />
+	
+	//<link rel="stylesheet" href="../includes/codemirror/mode/css/css.css" />
+	//<script language="JavaScript" type="text/javascript" src="../includes/codemirror/mode/css/css.js" />
+	    			
+	//<script type="text/javascript" src="../includes/tiny_mce/tiny_mce.js" />
+	    			
+
+    			
+	<script language="JavaScript">
+		// CHECKBOX
+		var checkbox = new Array ();
+		checkbox["default"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS"});
+		checkbox["checked"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS", checked: true});
+		checkbox["disabled"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS", disabled: true});
+		checkbox["disabledchecked"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS", disabled: true, checked: true});
+		
+		// BUTTON
+		var button = new Array ();		
+		
+		// DROPBOX
+		var dropbox = new Array ();		
+		
+		// ICONVIEW
+		var iconview = new Array ();
+		
+		// LISTVIEW
+		var listview = new Array ();
+		
+		var columns1 = new Array ();
+		columns1[0] = {title: "", tag: "id", width: "200px", visible: false};
+		columns1[1] = {title: "Navn", tag: "name", width: "200px", visible: true};
+		columns1[2] = {title: "Beskrivelse", tag: "description", width: "200px", visible: true};
+		columns1[3] = {title: "", tag: "parentid", visible: false}
+
+		
+		var items1 = new Array ();
+		items1[0] = {id: "1", name: "Test linje 1", description: "Bare en linje", parentid: ""};
+		items1[1] = {id: "2", name: "Test linje 2", description: "Under linje 1", parentid: "1"};
+		items1[2] = {id: "3", name: "Test linje 3", description: "Under linje 1", parentid: "1"};		
+		items1[3] = {id: "4", name: "Test linje 4", description: "Under linje 7", parentid: "7"};
+		
+		items1[4] = {id: "5", name: "Test linje 5", description: "Bare en linje", parentid: ""};
+		items1[6] = {id: "7", name: "Test linje 7", description: "Under linje 5", parentid: "5"};
+		items1[8] = {id: "9", name: "Test linje 9", description: "Under linje 5", parentid: "5"};		
+				
+		items1[5] = {id: "6", name: "Test linje 6", description: "Bare en linje", parentid: ""};		
+		items1[7] = {id: "8", name: "Test linje 8", description: "Under linje 7", parentid: "7"};
+		items1[9] = {id: "10", name: "Test linje 10", description: "Under linje 7", parentid: "7"};						
+		items1[10] = {id: "11", name: "Test linje 11", description: "Under linje 1", parentid: "1"};						
+
+		
+		listview["default"] = new SNDK.SUI.listview ({appendTo: "LISTVIEWS", treeview: false, treeviewLinkColumns:"0:3", columns: columns1, width: "100%", height: "300px"});
+		listview["default"].setItems (items1);
+		function remove ()
+		{
+			console.log (listview['default'].getItem ());
+		
+			listview['default'].removeItem ();
+		} 
+
+		function up ()
+		{
+			console.log (listview['default'].canItemMove ().up)
+			listview['default'].moveItemUp ();
+		} 
+
+		function down ()
+		{
+			console.log (listview['default'].canItemMove ().down)		
+			listview['default'].moveItemDown ();
+		} 
+	
+		function add ()
+		{
+			var item = {id: "12", name: "Test linje 12", description: "Under linje 1", parentid: "1"};
+		
+			listview['default'].addItem (item);
+		}
+		
+		function update ()
+		{
+			listview['default'].setItems (items1);
+		}
+
+
+		// TEXTAREA
+		var textarea = new Array ();
+		var textareacontent1 = "blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla";
+				
+		textarea["default"] = new SNDK.SUI.textarea ({appendTo: "TEXTAREAS-DEFAULT", value: "This is a test", width: "100%", height: "100%"});
+
+		codemirror_providerconfig = {};
+		codemirror_providerconfig.lineNumbers = true;		
+		codemirror_providerconfig.textWrapping = false;
+		codemirror_providerconfig.enterMode = "keep";		
+		textarea["codemirror"] = new SNDK.SUI.textarea ({appendTo: "TEXTAREAS-CODEMIRROR", value: textareacontent1, width: "100%", height: "100%", provider: "codemirror", providerConfig: codemirror_providerconfig});
+
+		tinymce_providerconfig = {};			
+		tinymce_providerconfig.theme = "advanced";
+		tinymce_providerconfig.plugins = "table,paste";
+		tinymce_providerconfig.theme_advanced_toolbar_location = "top";
+		tinymce_providerconfig.theme_advanced_toolbar_align = "left";
+		tinymce_providerconfig.theme_advanced_buttons1 = "bold,italic,underline,|,justifyleft, justifycenter, justifyright, justifyfull,|,formatselect,removeformat,|,numlist,bullist,|,undo";
+		tinymce_providerconfig.theme_advanced_buttons2 = "";
+		tinymce_providerconfig.theme_advanced_buttons3 = "";
+		tinymce_providerconfig.theme_advanced_blockformats = "h1,h2,h3,h4,h5,h6,blockquote";
+		tinymce_providerconfig.paste_auto_cleanup_on_paste = true;
+		tinymce_providerconfig.paste_remove_spans = true;
+		tinymce_providerconfig.paste_remove_styles = true;
+		tinymce_providerconfig.paste_remove_styles_if_webkit = true;
+		tinymce_providerconfig.paste_strip_class_attributes = "mso";
+		
+		textarea["tinymce"] = new SNDK.SUI.textarea ({appendTo: "TEXTAREAS-TINYMCE", value: textareacontent1, width: "100%", height: "100%", provider: "tinymce", providerConfig: tinymce_providerconfig});				
+		// TEXTBOX
+		var textbox = new Array ();
+		textbox["default"] = new SNDK.SUI.textbox ({appendTo: "TEXTBOXES", width: "600px"});
+		
+		// UPLOAD
+		var upload = new Array ();
+		
+	</script>	
+	
+	<body>	
+		<div id="CHECKBOX" style="font-size: 13px; font-weight: bold;">
+			Checkbox:
+			<div id="CHECKBOXS">
+			</div>
+		</div>
+
+		<div id="BUTTON">
+		</div>
+		
+		<div id="DROPBOX">
+		</div>
+
+		<div id="ICONVIEW">
+		</div>
+
+		<div id="LISTVIEW" style="font-size: 13px; font-weight: bold;">
+			Listview:
+			<div id="LISTVIEWS">
+			</div>			
+			<div onclick="remove ();">DELETE</div>
+			<div onclick="up ();">UP</div>
+			<div onclick="down ();">DOWN</div>			
+			<div onclick="add ();">ADD</div>
+			<div onclick="update ();">UPDATE</div>											
+						
+		</div>
+
+		<div id="TEXTBOX" style="font-size: 13px; font-weight: bold;">
+			Textbox:
+			<div id="TEXTBOXES">
+			</div>			
+		</div>
+		
+		<div id="TEXTAREA" style="font-size: 13px; font-weight: bold;">
+			Textarea:
+			<div id="TEXTAREAS">
+				<div id="TEXTAREAS-DEFAULT" style="height: 200px;">
+				</div>			
+				<div id="TEXTAREAS-TINYMCE" style="height: 200px;">
+				</div>				
+				<div id="TEXTAREAS-CODEMIRROR" style="height: 200px;">
+				</div>
+
+			</div>
+		</div>		
+
+
+		
+		<div id="UPLOAD">
+		</div>
+	</body>
+</html>

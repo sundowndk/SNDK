@@ -1,0 +1,121 @@
+/* --------------------------------------------------------------------------------------------------------------
+Textarea
+-------------------------------------------------------------------------------------------------------------- */
+.SUITextarea
+{
+	margin: 				1px;	
+	padding: 				3px;
+	
+	display: 				inline-block;
+
+	outline:				none;
+	cursor:					default;			
+}
+
+.SUITextareaFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUITextareaDisabled
+{}
+
+.SUITextarea .TopLeft
+{
+	float:					left;
+
+	width:					5px;
+	height:					5px;
+	
+	background-image:			url('images/textarea/top_left.png');	
+}
+
+.SUITextarea .TopCenter
+{
+	float:					left;
+	
+	height:					5px;
+	
+	background-image:			url('images/textarea/top_center.png');	
+}
+
+.SUITextarea .TopRight
+{
+	float:					left;
+
+	width:					5px;
+	height:					5px;
+	
+	background-image:			url('images/textarea/top_right.png');	
+}
+
+.SUITextarea .CenterLeft
+{
+	float:					left;
+
+	width:					5px;
+	
+	background-image:			url('images/textarea/center_left.png');	
+}
+
+.SUITextarea .CenterCenter
+{
+	float:					left;
+
+	background-color:			#f9f9f9;
+}
+
+.SUITextarea .CenterRight
+{
+	float:					left;
+
+	width:					5px;
+	
+	background-image:			url('images/textarea/center_right.png');	
+}
+
+.SUITextarea .BottomLeft
+{
+	float:					left;
+
+	width:					5px;
+	height:					5px;
+	
+	background-image:			url('images/textarea/bottom_left.png');	
+}
+
+.SUITextarea .BottomCenter
+{
+	float:					left;
+
+	height:					5px;
+	
+	background-image:			url('images/textarea/bottom_center.png');	
+}
+
+.SUITextarea .BottomRight
+{
+	float:					left;
+
+	width:					5px;
+	height:					5px;
+	
+	background-image:			url('images/textarea/bottom_right.png');	
+}
+
+.SUITextarea .Provider
+{	
+	margin:					0px;
+	padding:				0px;
+	
+	width: 					0px;
+	height:					0px;
+	
+	background-color:			transparent;
+	
+	border: 				none;	
+	
+	font-size:				14px;
+	font-weight:				bold;
+	text-decoration: 			none;
+}
