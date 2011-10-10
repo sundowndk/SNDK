@@ -10,6 +10,9 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
+          <Node name="SNDK" expanded="True">
+            <Node name="References" expanded="True" />
+          </Node>
           <Node name="WEB" expanded="True" selected="True">
             <Node name="html" expanded="True" />
             <Node name="javascript" expanded="True">
