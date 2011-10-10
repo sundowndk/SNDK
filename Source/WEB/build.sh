@@ -42,6 +42,13 @@ find css -type f -name *.css -exec cat "{}" >> "$CSSFILE"  \;
 cp -rv "css/images/" "$OUTPUTDIR/css/"
 
 ####################################################
+# HTML                                             #
+####################################################
+echo "Bulding HTML..."
+cp -rv "html/" "$OUTPUTDIR/html/"
+
+
+####################################################
 # INCLUDES		                                   #
 ####################################################
 echo "Bulding INCLUDES..."

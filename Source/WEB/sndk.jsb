@@ -1,4 +1,4 @@
-<solution name="SNDK" outputdirectory="../../Binary/">
+<solution name="SNDK" outputdirectory="">	
 	<project name="sndk">
 		<class name="SNDK">	
 			<class name="tools">
@@ -20,11 +20,11 @@
 				<js file="javascript/widgets/blobmenu.js" />
 			</class>			
 			<class name="SUI">
+				<js file="javascript/sui/listview.js" />
 				<js file="javascript/sui/checkbox.js" />
 				<js file="javascript/sui/button.js" />
 				<js file="javascript/sui/dropbox.js" />				
 				<js file="javascript/sui/iconview.js" />
-				<js file="javascript/sui/listview.js" />
 				<js file="javascript/sui/textarea.js" />
 				<js file="javascript/sui/textbox.js" />
 				<js file="javascript/sui/upload.js" />
@@ -32,7 +32,9 @@
 				<js file="javascript/sui/layoutbox.js" />
 				<js file="javascript/sui/label.js" />
 				<js file="javascript/sui/tabview.js" />
-				<js file="javascript/sui/scrollbox.js" />
+				<js file="javascript/sui/text.js" />
+				<js file="javascript/sui/canvas.js" />				
+
 				
 				<class name="builder">
 					<js file="javascript/sui/builder.js" />

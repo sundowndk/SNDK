@@ -1,188 +1,642 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
 		<title>			
 		</title>
+
+		<link rel="stylesheet" href="debug.css" type="text/css">		
+		<link rel="stylesheet" href="../css/sndk.css" type="text/css">
+		<script type="text/javascript" src="../js/sndk.js"></script>
+
+		<link rel="stylesheet" href="../includes/codemirror/lib/codemirror.css">
+		<link rel="stylesheet" href="../includes/codemirror/mode/css/css.css">
+		<script language="JavaScript" type="text/javascript" src="../includes/codemirror/lib/codemirror.js"></script>
+		<script language="JavaScript" type="text/javascript" src="../includes/codemirror/mode/css/css.js"></script>
+
+		<script language="JavaScript" type="text/javascript" src="../includes/tinymce/tiny_mce.js"></script>
+		
+		<meta 	name="viewport" 
+			content="
+        			width = device-width,
+				initial-scale=1.0, 
+				user-scalable=no
+			" 
+		/>
 	</head>
-		
-	<link rel="stylesheet" href="../css/sndk.css" type="text/css" />		
-	
-	<script language="JavaScript" type="text/javascript" src="../js/sndk.js" />
 
-	//<link rel="stylesheet" href="../includes/codemirror/lib/codemirror.css" />
-	//<script language="JavaScript" type="text/javascript" src="../includes/codemirror/lib/codemirror.js" />
-	
-	//<link rel="stylesheet" href="../includes/codemirror/mode/css/css.css" />
-	//<script language="JavaScript" type="text/javascript" src="../includes/codemirror/mode/css/css.js" />
-	    			
-	//<script type="text/javascript" src="../includes/tiny_mce/tiny_mce.js" />
-	    			
-
-    			
 	<script language="JavaScript">
-		// CHECKBOX
-		var checkbox = new Array ();
-		checkbox["default"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS"});
-		checkbox["checked"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS", checked: true});
-		checkbox["disabled"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS", disabled: true});
-		checkbox["disabledchecked"] = new SNDK.SUI.checkbox ({appendTo: "CHECKBOXS", disabled: true, checked: true});
+		var debugUI = new SNDK.SUI.builder.construct ({URL: "debug.xml"})
 		
-		// BUTTON
-		var button = new Array ();		
-		
-		// DROPBOX
-		var dropbox = new Array ();		
-		
-		// ICONVIEW
-		var iconview = new Array ();
-		
-		// LISTVIEW
-		var listview = new Array ();
-		
-		var columns1 = new Array ();
-		columns1[0] = {title: "", tag: "id", width: "200px", visible: false};
-		columns1[1] = {title: "Navn", tag: "name", width: "200px", visible: true};
-		columns1[2] = {title: "Beskrivelse", tag: "description", width: "200px", visible: true};
-		columns1[3] = {title: "", tag: "parentid", visible: false}
+		var debug = 
+		{
+			init : function ()
+			{
+				debug.button ();
+				debug.textbox ();
+				debug.dropbox ();
+				debug.upload ();
+				debug.checkbox ();
+				debug.textarea ();
+				debug.tinymce ();
+				debug.codemirror ();
+				debug.listview ();
+			},
 
-		
-		var items1 = new Array ();
-		items1[0] = {id: "1", name: "Test linje 1", description: "Bare en linje", parentid: ""};
-		items1[1] = {id: "2", name: "Test linje 2", description: "Under linje 1", parentid: "1"};
-		items1[2] = {id: "3", name: "Test linje 3", description: "Under linje 1", parentid: "1"};		
-		items1[3] = {id: "4", name: "Test linje 4", description: "Under linje 7", parentid: "7"};
-		
-		items1[4] = {id: "5", name: "Test linje 5", description: "Bare en linje", parentid: ""};
-		items1[6] = {id: "7", name: "Test linje 7", description: "Under linje 5", parentid: "5"};
-		items1[8] = {id: "9", name: "Test linje 9", description: "Under linje 5", parentid: "5"};		
+			button : function ()
+			{
+				var Test1 = 	function ()
+						{								
+							debugUI["buttonDefault"].setAttribute ("disabled", true);
+							debugUI["buttonDisabled"].setAttribute ("disabled", true);								
+						};
 				
-		items1[5] = {id: "6", name: "Test linje 6", description: "Bare en linje", parentid: ""};		
-		items1[7] = {id: "8", name: "Test linje 8", description: "Under linje 7", parentid: "7"};
-		items1[9] = {id: "10", name: "Test linje 10", description: "Under linje 7", parentid: "7"};						
-		items1[10] = {id: "11", name: "Test linje 11", description: "Under linje 1", parentid: "1"};						
+				var Test2  =	function ()
+						{
+							debugUI["buttonDefault"].setAttribute ("disabled", false);
+							debugUI["buttonDisabled"].setAttribute ("disabled", false);	
+						};			
+							
+				var Test3 =	function ()
+						{
+							debugUI["buttonDefault"].setAttribute ("label", "BLA BLA 1");
+							debugUI["buttonDisabled"].setAttribute ("label", "BLA BLA 2");	
+						};
 
-		
-		listview["default"] = new SNDK.SUI.listview ({appendTo: "LISTVIEWS", treeview: false, treeviewLinkColumns:"0:3", columns: columns1, width: "100%", height: "300px"});
-		listview["default"].setItems (items1);
-		function remove ()
-		{
-			console.log (listview['default'].getItem ());
-		
-			listview['default'].removeItem ();
-		} 
+				var Test4 =	function ()
+						{
+							debugUI["buttonTestButton4"].setAttribute ("disabled", false);
+						};
 
-		function up ()
-		{
-			console.log (listview['default'].canItemMove ().up)
-			listview['default'].moveItemUp ();
-		} 
+				var Test5 =	function ()
+						{
+							debugUI["buttonDefault"].setAttribute ("disabled", false);
+							debugUI["buttonDisabled"].setAttribute ("disabled", true);								
 
-		function down ()
-		{
-			console.log (listview['default'].canItemMove ().down)		
-			listview['default'].moveItemDown ();
-		} 
-	
-		function add ()
-		{
-			var item = {id: "12", name: "Test linje 12", description: "Under linje 1", parentid: "1"};
-		
-			listview['default'].addItem (item);
-		}
-		
-		function update ()
-		{
-			listview['default'].setItems (items1);
-		}
+							debugUI["buttonDefault"].setAttribute ("label", "BUTTON 1");
+							debugUI["buttonDisabled"].setAttribute ("label", "BUTTON 2");	
 
+							debugUI["buttonTestButton4"].setAttribute ("disabled", true);
+						};						
+			
+				debugUI["buttonDefault"].setAttribute ("onClick", Test4);
+			
+				debugUI["buttonTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["buttonTestButton2"].setAttribute ("onClick", Test2);
+				debugUI["buttonTestButton3"].setAttribute ("onClick", Test3);
+				debugUI["buttonTestButton4"].setAttribute ("onClick", Test4);
+				debugUI["buttonTestButton5"].setAttribute ("onClick", Test5);				
+			},
 
-		// TEXTAREA
-		var textarea = new Array ();
-		var textareacontent1 = "blablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablablabla";
+			textbox : function ()
+			{
+				var Test1 = 	function ()
+						{								
+							alert (debugUI["textboxDefault"].getAttribute ("value"));
+						};
 				
-		textarea["default"] = new SNDK.SUI.textarea ({appendTo: "TEXTAREAS-DEFAULT", value: "This is a test", width: "100%", height: "100%"});
+				var Test2 = 	function ()
+						{
+							debugUI["textboxDefault"].setAttribute ("value", "Bla bla bla bla bla bla bla bla");
+							debugUI["textboxDisabled"].setAttribute ("value", "Bla bla bla bla bla bla bla bla");
+							debugUI["textboxReadOnly"].setAttribute ("value", "Bla bla bla bla bla bla bla bla");
+						};			
+							
+				var Test3 =	function ()
+						{
+							debugUI["textboxDefault"].setAttribute ("disabled", true);
+							debugUI["textboxDisabled"].setAttribute ("disabled", true);
+							debugUI["textboxReadOnly"].setAttribute ("disabled", true);
+							debugUI["textboxPassword"].setAttribute ("disabled", true);
+						};
 
-		codemirror_providerconfig = {};
-		codemirror_providerconfig.lineNumbers = true;		
-		codemirror_providerconfig.textWrapping = false;
-		codemirror_providerconfig.enterMode = "keep";		
-		textarea["codemirror"] = new SNDK.SUI.textarea ({appendTo: "TEXTAREAS-CODEMIRROR", value: textareacontent1, width: "100%", height: "100%", provider: "codemirror", providerConfig: codemirror_providerconfig});
+				var Test4 =	function ()
+						{
+							debugUI["textboxDefault"].setAttribute ("disabled", false);
+							debugUI["textboxDisabled"].setAttribute ("disabled", false);
+							debugUI["textboxReadOnly"].setAttribute ("disabled", false);
+							debugUI["textboxPassword"].setAttribute ("disabled", false);
+						};
 
-		tinymce_providerconfig = {};			
-		tinymce_providerconfig.theme = "advanced";
-		tinymce_providerconfig.plugins = "table,paste";
-		tinymce_providerconfig.theme_advanced_toolbar_location = "top";
-		tinymce_providerconfig.theme_advanced_toolbar_align = "left";
-		tinymce_providerconfig.theme_advanced_buttons1 = "bold,italic,underline,|,justifyleft, justifycenter, justifyright, justifyfull,|,formatselect,removeformat,|,numlist,bullist,|,undo";
-		tinymce_providerconfig.theme_advanced_buttons2 = "";
-		tinymce_providerconfig.theme_advanced_buttons3 = "";
-		tinymce_providerconfig.theme_advanced_blockformats = "h1,h2,h3,h4,h5,h6,blockquote";
-		tinymce_providerconfig.paste_auto_cleanup_on_paste = true;
-		tinymce_providerconfig.paste_remove_spans = true;
-		tinymce_providerconfig.paste_remove_styles = true;
-		tinymce_providerconfig.paste_remove_styles_if_webkit = true;
-		tinymce_providerconfig.paste_strip_class_attributes = "mso";
-		
-		textarea["tinymce"] = new SNDK.SUI.textarea ({appendTo: "TEXTAREAS-TINYMCE", value: textareacontent1, width: "100%", height: "100%", provider: "tinymce", providerConfig: tinymce_providerconfig});				
-		// TEXTBOX
-		var textbox = new Array ();
-		textbox["default"] = new SNDK.SUI.textbox ({appendTo: "TEXTBOXES", width: "600px"});
-		
-		// UPLOAD
-		var upload = new Array ();
-		
-	</script>	
-	
-	<body>	
-		<div id="CHECKBOX" style="font-size: 13px; font-weight: bold;">
-			Checkbox:
-			<div id="CHECKBOXS">
-			</div>
-		</div>
+				var Test5 =	function ()
+						{
+							debugUI["textboxDefault"].setAttribute ("readOnly", true);
+							debugUI["textboxDisabled"].setAttribute ("readOnly", true);
+							debugUI["textboxReadOnly"].setAttribute ("readOnly", true);
+							debugUI["textboxPassword"].setAttribute ("readOnly", true);
+						};
 
-		<div id="BUTTON">
-		</div>
-		
-		<div id="DROPBOX">
-		</div>
+				var Test6 =	function ()
+						{
+							debugUI["textboxTestButton6"].setAttribute ("disabled", false);
+						};
+							
+				var Test7 =	function ()
+						{
+							debugUI["textboxDefault"].setAttribute ("value", "This is a test");
+							debugUI["textboxDisabled"].setAttribute ("value", "This is a test");
+							debugUI["textboxReadOnly"].setAttribute ("value", "This is a test");
+							debugUI["textboxPassword"].setAttribute ("value", "qwerty");
 
-		<div id="ICONVIEW">
-		</div>
+							debugUI["textboxDefault"].setAttribute ("readOnly", false);
+							debugUI["textboxDisabled"].setAttribute ("readOnly", false);
+							debugUI["textboxReadOnly"].setAttribute ("readOnly", true);
+							debugUI["textboxPassword"].setAttribute ("readOnly", false);
 
-		<div id="LISTVIEW" style="font-size: 13px; font-weight: bold;">
-			Listview:
-			<div id="LISTVIEWS">
-			</div>			
-			<div onclick="remove ();">DELETE</div>
-			<div onclick="up ();">UP</div>
-			<div onclick="down ();">DOWN</div>			
-			<div onclick="add ();">ADD</div>
-			<div onclick="update ();">UPDATE</div>											
+							debugUI["textboxDefault"].setAttribute ("disabled", false);
+							debugUI["textboxDisabled"].setAttribute ("disabled", true);
+							debugUI["textboxReadOnly"].setAttribute ("disabled", false);
+							debugUI["textboxPassword"].setAttribute ("disabled", false);
+								
+							debugUI["textboxTestButton6"].setAttribute ("disabled", true);
+						};	
+							
+				debugUI["textboxDefault"].setAttribute ("onChange", Test6);							
+			
+				debugUI["textboxTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["textboxTestButton2"].setAttribute ("onClick", Test2);
+				debugUI["textboxTestButton3"].setAttribute ("onClick", Test3);
+				debugUI["textboxTestButton4"].setAttribute ("onClick", Test4);
+				debugUI["textboxTestButton5"].setAttribute ("onClick", Test5);
+				debugUI["textboxTestButton7"].setAttribute ("onClick", Test7);
+			},
+			
+			dropbox : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["dropboxDefault"].setAttribute ("disabled", true);		
+							debugUI["dropboxDisabled"].setAttribute ("disabled", true);							
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["dropboxDefault"].setAttribute ("disabled", false);		
+							debugUI["dropboxDisabled"].setAttribute ("disabled", false);							
+						};			
+							
+				var Test3 =	function ()
+						{
+							alert (debugUI["dropboxDefault"].getAttribute ("selectedItem").value);	
+						};
+
+				var Test4 =	function ()
+						{
+							debugUI["dropboxTestButton4"].setAttribute ("disabled", false);
+						};
+
+				var Test5 =	function ()
+						{
+							debugUI["dropboxDefault"].setAttribute ("disabled", false);		
+							debugUI["dropboxDisabled"].setAttribute ("disabled", true);							
+							debugUI["dropboxDefault"].setAttribute ("selectedItem", 0);
+							debugUI["dropboxDisabled"].setAttribute ("selectedItem", 0);							
+							
+							setTimeout( function ()	{ debugUI["dropboxTestButton4"].setAttribute ("disabled", true); }, 100);							
+						};	
 						
-		</div>
+				debugUI["dropboxDefault"].setAttribute("onChange", Test4);
+						
+				debugUI["dropboxTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["dropboxTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["dropboxTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["dropboxTestButton5"].setAttribute ("onClick", Test5);
+			},
+			
+			upload : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["uploadDefault"].setAttribute ("disabled", true);
+							debugUI["uploadDisabled"].setAttribute ("disabled", true);
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["uploadDefault"].setAttribute ("disabled", false);
+							debugUI["uploadDisabled"].setAttribute ("disabled", false);
+						};			
+							
+				var Test3 =	function ()
+						{
+							debugUI["uploadDefault"].setAttribute ("label", "Bla 1");
+							debugUI["uploadDisabled"].setAttribute ("label", "Bla 2");						
+						};
 
-		<div id="TEXTBOX" style="font-size: 13px; font-weight: bold;">
-			Textbox:
-			<div id="TEXTBOXES">
-			</div>			
-		</div>
+				var Test4 =	function ()
+						{
+							alert (debugUI["uploadDefault"].getAttribute ("value"));
+						};
+
+				var Test5 =	function ()
+						{
+							debugUI["uploadTestButton5"].setAttribute ("disabled", false);
+						};	
+
+				var Test6 =	function ()
+						{
+							debugUI["uploadDefault"].setAttribute ("disabled", false);
+							debugUI["uploadDisabled"].setAttribute ("disabled", true);
+							
+							debugUI["uploadDefault"].setAttribute ("label", "Choose 1");
+							debugUI["uploadDisabled"].setAttribute ("label", "Choose 2");
+							
+							debugUI["uploadTestButton5"].setAttribute ("disabled", true);
+						};	
+						
+				debugUI["uploadDefault"].setAttribute("onChange", Test5);
+						
+				debugUI["uploadTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["uploadTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["uploadTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["uploadTestButton4"].setAttribute ("onClick", Test4);
+				debugUI["uploadTestButton6"].setAttribute ("onClick", Test6);				
+			},	
+			
+			checkbox : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["checkboxDefault"].setAttribute ("disabled", true);
+							debugUI["checkboxDisabled"].setAttribute ("disabled", true);
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["checkboxDefault"].setAttribute ("disabled", false);
+							debugUI["checkboxDisabled"].setAttribute ("disabled", false);
+						};			
+							
+				var Test3 =	function ()
+						{
+							alert (debugUI["checkboxDefault"].getAttribute ("value"));
+						};
+
+				var Test4 =	function ()
+						{
+							debugUI["checkboxTestButton4"].setAttribute ("disabled", false);
+						};
+
+				var Reset =	function ()
+						{
+							debugUI["checkboxDefault"].setAttribute ("disabled", false);
+							debugUI["checkboxDisabled"].setAttribute ("disabled", true);
+							
+							debugUI["checkboxDefault"].setAttribute ("value", false);
+							debugUI["checkboxDisabled"].setAttribute ("value", true);
+							
+							debugUI["checkboxTestButton4"].setAttribute ("disabled", true);
+						};	
+						
+				debugUI["checkboxDefault"].setAttribute("onChange", Test4);
+						
+				debugUI["checkboxTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["checkboxTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["checkboxTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["checkboxTestButton4"].setAttribute ("onClick", Test4);
+				
+				debugUI["checkboxReset"].setAttribute ("onClick", Reset);				
+			},	
+			
+			textarea : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["textareaDefault"].setAttribute ("disabled", true);
+							debugUI["textareaDisabled"].setAttribute ("disabled", true);
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["textareaDefault"].setAttribute ("disabled", false);
+							debugUI["textareaDisabled"].setAttribute ("disabled", false);
+						};			
+							
+				var Test3 =	function ()
+						{
+							alert (debugUI["textareaDefault"].getAttribute ("value"));
+						};
+
+				var Test4 =	function ()
+						{
+							debugUI["textareaDefault"].setAttribute ("value", "BLA BLA BLA BLA BLA");
+							debugUI["textareaDisabled"].setAttribute ("value", "BLA BLA BLA BLA BLA");
+						};
+
+				var Test5 =	function ()
+						{
+							debugUI["textareaTestButton5"].setAttribute ("disabled", false);
+						};
+
+				var Reset =	function ()
+						{
+							debugUI["textareaDefault"].setAttribute ("disabled", false);
+							debugUI["textareaDisabled"].setAttribute ("disabled", true);
+							
+							debugUI["textareaDefault"].setAttribute ("value", "This is a test...");
+							debugUI["textareaDisabled"].setAttribute ("value", "This is a test...");
+							
+							debugUI["textareaTestButton5"].setAttribute ("disabled", true);
+						};	
+						
+				debugUI["textareaDefault"].setAttribute("onChange", Test5);
+						
+				debugUI["textareaTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["textareaTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["textareaTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["textareaTestButton4"].setAttribute ("onClick", Test4);
+				
+				debugUI["textareaReset"].setAttribute ("onClick", Reset);
+			},		
+			
+			tinymce : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["tinymceDefault"].setAttribute ("disabled", true);
+							debugUI["tinymceDisabled"].setAttribute ("disabled", true);
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["tinymceDefault"].setAttribute ("disabled", false);
+							debugUI["tinymceDisabled"].setAttribute ("disabled", false);
+						};			
+							
+				var Test3 =	function ()
+						{
+							alert (debugUI["tinymceDefault"].getAttribute ("value"));
+						};
+
+				var Test4 =	function ()
+						{
+							debugUI["tinymceDefault"].setAttribute ("value", "BLA BLA BLA BLA BLA");
+							debugUI["tinymceDisabled"].setAttribute ("value", "BLA BLA BLA BLA BLA");
+						};
+
+				var Test5 =	function ()
+						{
+							debugUI["tinymceTestButton5"].setAttribute ("disabled", false);
+						};
+
+				var Reset =	function ()
+						{
+							debugUI["tinymceDefault"].setAttribute ("disabled", false);
+							debugUI["tinymceDisabled"].setAttribute ("disabled", true);
+							
+							debugUI["tinymceDefault"].setAttribute ("value", "This is a test...");
+							debugUI["tinymceDisabled"].setAttribute ("value", "This is a test...");
+							
+							debugUI["tinymceTestButton5"].setAttribute ("disabled", true);
+						};	
+						
+				debugUI["tinymceDefault"].setAttribute("onChange", Test5);
+						
+				debugUI["tinymceTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["tinymceTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["tinymceTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["tinymceTestButton4"].setAttribute ("onClick", Test4);
+				
+				debugUI["tinymceReset"].setAttribute ("onClick", Reset);
+			},	
+			
+			codemirror : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["codemirrorDefault"].setAttribute ("disabled", true);
+							debugUI["codemirrorDisabled"].setAttribute ("disabled", true);
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["codemirrorDefault"].setAttribute ("disabled", false);
+							debugUI["codemirrorDisabled"].setAttribute ("disabled", false);
+						};			
+							
+				var Test3 =	function ()
+						{
+							alert (debugUI["codemirrorDefault"].getAttribute ("value"));
+						};
+
+				var Test4 =	function ()
+						{
+							debugUI["codemirrorDefault"].setAttribute ("value", "BLA BLA BLA BLA BLA");
+							debugUI["codemirrorDisabled"].setAttribute ("value", "BLA BLA BLA BLA BLA");
+						};
+
+				var Test5 =	function ()
+						{
+							debugUI["codemirrorTestButton5"].setAttribute ("disabled", false);
+						};
+
+				var Reset =	function ()
+						{
+							debugUI["codemirrorDefault"].setAttribute ("disabled", false);
+							debugUI["codemirrorDisabled"].setAttribute ("disabled", true);
+							
+							debugUI["codemirrorDefault"].setAttribute ("value", "This is a test...");
+							debugUI["codemirrorDisabled"].setAttribute ("value", "This is a test...");
+							
+							setTimeout( function ()	{ debugUI["codemirrorTestButton5"].setAttribute ("disabled", true); }, 100);	
+						};	
+						
+				debugUI["codemirrorDefault"].setAttribute("onChange", Test5);
+						
+				debugUI["codemirrorTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["codemirrorTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["codemirrorTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["codemirrorTestButton4"].setAttribute ("onClick", Test4);
+				
+				debugUI["codemirrorReset"].setAttribute ("onClick", Reset);
+			},	
+			
+			listview : function ()
+			{
+				var Test1 = 	function ()
+						{						
+							debugUI["listviewDefault"].setAttribute ("disabled", true);
+							debugUI["listviewDisabled"].setAttribute ("disabled", true);
+						};
+				
+				var Test2  =	function ()
+						{
+							debugUI["listviewDefault"].setAttribute ("disabled", false);
+							debugUI["listviewDisabled"].setAttribute ("disabled", false);
+						};			
+							
+				var Test3 =	function ()
+						{
+							alert (debugUI["listviewDefault"].getAttribute ("selectedItem"));
+						};
+
+				var Test4 =	function ()
+						{
+							debugUI["listviewDefault"].setAttribute ("selectedItem", 5);
+						};
+
+				var Test5 =	function ()
+						{
+							debugUI["listviewTestButton5"].setAttribute ("disabled", false);
+						};
+						
+				var Test6 = 	function ()
+						{
+							debugUI["listviewDefault"].setAttribute ("treeview", false);
+						}
+
+				var Test7 = 	function ()
+						{
+							debugUI["listviewDefault"].setAttribute ("treeview", true);
+						}
+
+				var Test8 = 	function ()
+						{
+							debugUI["listviewDefault"].setItem ({c1: "7", c2: "Bla bla bla bla", c3: "Bla bla bla bla", c4: "4"});
+						}
+
+				var Test9 = 	function ()
+						{
+							debugUI["listviewDefault"].addItem ({c1: "7", c2: "Bla bla bla bla", c3: "Bla bla bla bla", c4: "4"});
+						}
+
+				var Test10 = 	function ()
+						{
+							debugUI["listviewDefault"].removeItem ();
+						}
+
+
+				var Reset =	function ()
+						{
+							debugUI["listviewDefault"].setAttribute ("disabled", false);
+							debugUI["listviewDisabled"].setAttribute ("disabled", true);
+							
+							debugUI["codemirrorDefault"].setAttribute ("value", "This is a test...");
+							debugUI["codemirrorDisabled"].setAttribute ("value", "This is a test...");
+							
+							setTimeout( function ()	{ debugUI["listviewTestButton5"].setAttribute ("disabled", true); }, 100);	
+						};	
+						
+				debugUI["listviewDefault"].setAttribute("onChange", Test5);
+						
+				debugUI["listviewTestButton1"].setAttribute ("onClick", Test1);
+				debugUI["listviewTestButton2"].setAttribute ("onClick", Test2);		
+				debugUI["listviewTestButton3"].setAttribute ("onClick", Test3);												
+				debugUI["listviewTestButton4"].setAttribute ("onClick", Test4);
+				debugUI["listviewTestButton6"].setAttribute ("onClick", Test6);
+				debugUI["listviewTestButton7"].setAttribute ("onClick", Test7);								
+				debugUI["listviewTestButton8"].setAttribute ("onClick", Test8);
+				debugUI["listviewTestButton9"].setAttribute ("onClick", Test9);
+				debugUI["listviewTestButton10"].setAttribute ("onClick", Test10);
+				
+				debugUI["listviewReset"].setAttribute ("onClick", Reset);
+			},						
+																				
+		};
+
+		debug.init ();
 		
-		<div id="TEXTAREA" style="font-size: 13px; font-weight: bold;">
-			Textarea:
-			<div id="TEXTAREAS">
-				<div id="TEXTAREAS-DEFAULT" style="height: 200px;">
-				</div>			
-				<div id="TEXTAREAS-TINYMCE" style="height: 200px;">
-				</div>				
-				<div id="TEXTAREAS-CODEMIRROR" style="height: 200px;">
-				</div>
-
-			</div>
-		</div>		
-
+//		test.addUIElement (test2)
 
 		
-		<div id="UPLOAD">
+//		var tabview = new SNDK.SUI.tabview ({appendTo: "ui2", width: "100%", height: "100%"})
+//		tabview.addTab ({tag: "tab1", label: "tab1", selected: true})
+//		tabview.addTab ({tag: "tab2", label: "tab2"})
+//		tabview.addTab ({tag: "tab3", label: "tab3"})				
+
+//		var container = new SNDK.SUI.container ({appendTo: "ui2", width: "500px", height: "60%", title: "Bla Bla Bla Bla", canScroll: false})
+		
+//		var layoutbox = new SNDK.SUI.layoutbox ({width: "100%", height: "100%", type: "vertical"});		
+//		layoutbox.addPanel ({tag: "panel1", size: "50%"})
+//		layoutbox.addPanel ({tag: "panel2", size: "*"})		
+//		layoutbox.addPanel ({tag: "panel3", size: "*"})
+//		layoutbox.addPanel ({tag: "panel4", size: "*"})
+//		layoutbox.addPanel ({tag: "panel4", size: "*"})
+		
+//		container.addUIElement (layoutbox);
+		
+//		var textbox = new SNDK.SUI.textbox ({width: "100%"});
+//		var textbox2 = new SNDK.SUI.textbox ({width: "100%"});
+
+//		tabview.getTab ("tab1").addUIElement (textbox);
+//		tabview.getTab ("tab3").addUIElement (textbox2);
+//		layoutbox.getPanel ("panel1").addUIElement (textbox);								
+
+		var providerconfig = {};			
+		providerconfig.theme = "advanced";
+		providerconfig.plugins = "table,paste";
+		providerconfig.theme_advanced_toolbar_location = "top";
+		providerconfig.theme_advanced_toolbar_align = "left";
+		providerconfig.theme_advanced_buttons1 = "bold,italic,underline,|,justifyleft, justifycenter, justifyright, justifyfull,|,formatselect,removeformat,|,numlist,bullist,|,undo";
+		providerconfig.theme_advanced_buttons2 = "";
+		providerconfig.theme_advanced_buttons3 = "";
+		providerconfig.theme_advanced_blockformats = "h1,h2,h3,h4,h5,h6,blockquote";
+		providerconfig.paste_auto_cleanup_on_paste = true;
+		providerconfig.paste_remove_spans = true;
+		providerconfig.paste_remove_styles = true;
+		providerconfig.paste_remove_styles_if_webkit = true;
+		providerconfig.paste_strip_class_attributes = "mso";
+
+
+//		var providerconfig = {};
+//		providerconfig.lineNumbers = true;		
+//		providerconfig.textWrapping = false;
+//		providerconfig.enterMode = "keep";		
+
+//		return sorentoUI.addControl ({type: "textarea", label: options.field["name"] +" :", appendTo: options.appendTo}, {value: options.field["data"], tag: options.field["id"], width: sorentoUI.elementDefaultWidth, height: "400px", provider: "tinymce", providerConfig: providerconfig, onKeyUp: options.onRefresh});
+
+		
+		
+//		var textarea = new SNDK.SUI.textarea ({appendTo: "ui2", width: "100%", height: "100%", provider: "tinymce", value: "sdfdsf", providerConfig: providerconfig});
+
+//		var columns = new Array ();
+//		columns[0] = {tag: "id"};
+//		columns[1] = {label: "Column1", tag: "name", width: "50%", visible: true};	
+//		columns[2] = {label: "Column2", tag: "name", width: "50%", visible: true};	
+
+
+//		columns[1] = {label: "Column1", tag: "c1", width: "30px", visible: true};	
+//		columns[2] = {label: "Column2", tag: "c2", width: "*", visible: true};	
+//		columns[3] = {label: "Column3", tag: "c3", width: "100px", visible: true};			
+//		columns[4] = {label: "Column4", tag: "c4", width: "100px", visible: true};					
+		
+//		var items = new Array ();
+//		items[0] = {c1: "1", c2: "Bla bla bla bla #1", c3: "Lol lol lol lol #1", c4: "La la la la la la #1"};
+//		items[1] = {c1: "2", c2: "Bla bla bla bla #2", c3: "Lol lol lol lol #2", c4: "La la la la la la #2"};
+//		items[2] = {c1: "3", c2: "Bla bla bla bla #3", c3: "Lol lol lol lol #3", c4: "La la la la la la #3"};
+//		items[3] = {c1: "4", c2: "Bla bla bla bla #4", c3: "Lol lol lol lol #4", c4: "La la la la la la #4"};
+//		items[4] = {c1: "5", c2: "Bla bla bla bla #5", c3: "Lol lol lol lol #5", c4: "La la la la la la #5"};
+//		items[5] = {c1: "6", c2: "Bla bla bla bla #6", c3: "Lol lol lol lol #6", c4: "La la la la la la #6"};
+//		items[6] = {c1: "7", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};										
+//		items[7] = {c1: "8", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+//		items[8] = {c1: "9", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+//		items[9] = {c1: "10", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+//		items[10] = {c1: "11", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+//		items[11] = {c1: "12", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+//		items[12] = {c1: "13", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+//		items[13] = {c1: "14", c2: "Bla bla bla bla #7", c3: "Lol lol lol lol #7", c4: "La la la la la la #7"};	
+		
+
+//		var listview = new SNDK.SUI.listview ({appendTo: "ui2", width: "100%", height: "100%", columns: columns, items: items})
+
+//		var items = new Array ();
+//		items[0] = {imageURL: "/console/debugger/images/thumb1.jpg"};
+//		items[1] = {imageURL: "/console/debugger/images/thumb2.jpg"};
+//		items[2] = {imageURL: "/console/debugger/images/thumb3.jpg"};
+//		items[2] = {imageURL: "/console/debugger/images/thumb4.jpg"};
+
+//		var iconview = new SNDK.SUI.iconview ({appendTo: "ui2", width: "100%", height: "100%", items: items});
+		
+//		var textbox = new SNDK.SUI.textbox ({appendTo: "ui2", width: "100%"});
+										
+		SNDK.SUI.init ();
+		
+		
+	</script>
+			
+	<body>	
+		<div id="ui" style="height: 100%;">
 		</div>
+
+
 	</body>
 </html>

@@ -1,13 +1,14 @@
+
 /* --------------------------------------------------------------------------------------------------------------
 Textbox
 -------------------------------------------------------------------------------------------------------------- */
 .SUITextbox
 {
 	margin: 				1px;	
+	padding:				3px;
 
 	display: 				inline-block;
-	
-	outline:				none;
+	outline:				none;	
 }
 
 .SUITextboxFocus
@@ -22,15 +23,12 @@ Textbox
 .SUITextbox .Left
 {
 	float: 					left;
+		
+	width: 					4px;
+	height: 				32px;
 	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/textbox/left.png') no-repeat;
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			0px 0px;
 }
 
 .SUITextboxFocus .Left
@@ -39,19 +37,18 @@ Textbox
 
 .SUITextboxDisabled .Left
 {
-	background: 				transparent url('images/textbox/left_disabled.png') no-repeat;	
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			0px -64px;
 }
 
 .SUITextbox .Center
 {
 	float: 					left;
-
-	margin-top: 				3px;	
-	margin-bottom:				3px;
 	
-	height:					31px;
+	height:					32px;
 	
-	background: 				transparent url('images/textbox/center.png') repeat-x;	
+	background: 				transparent url('images/textbox/background.png') repeat-x;
+	background-position:			0px -32px;
 }
 
 .SUITextboxFocus .Center
@@ -60,7 +57,8 @@ Textbox
 
 .SUITextboxDisabled .Center
 {
-	background: 				transparent url('images/textbox/center_disabled.png') repeat-x;	
+	background: 				transparent url('images/textbox/background.png') repeat-x;
+	background-position:			0px -96px;
 	
 	color:					#aaaaaa;
 }
@@ -68,15 +66,13 @@ Textbox
 .SUITextbox .Right
 {
 	float: 					left;
+			
+	width: 					4px;
+	height: 				32px;
 	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/textbox/right.png') no-repeat;
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			-4px 0px;
+
 }
 
 .SUITextboxFocus .Right
@@ -85,25 +81,27 @@ Textbox
 
 .SUITextboxDisabled .Right
 {
-	background: 				transparent url('images/textbox/right_disabled.png') no-repeat;	
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			-4px -64px;
 }
 
 .SUITextbox .Input
-{
-	margin: 				2px;
-	margin-top: 				7px;
-	margin-left: 				2px;
-	margin-right: 				10px;
+{	
+	margin:					7px 3px 3px 3px;
 
-	border:					none;
-
-width: 0px;
-
+	width: 					0px;
+	
 	background:				transparent;
 	
-	font-family: 				arial;
-	font-size:				14px;
-	font-weight:				bold;
+	border:					none;	
+
+	font-family:				arial;		
+	font-size:				15px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 1px #ffffff;	
+	color:					#444444;
+	
+	outline: 				none;
 }
 
 .SUITextboxFocus .Input
@@ -112,92 +110,8 @@ width: 0px;
 
 .SUITextboxDisabled .Input
 {
+	color:					#aaaaaa;
 	cursor:					default;
 }
 
 
-
-
-.SUITextboxContainer
-{
-	margin: 				1px;	
-
-	display: 				inline-block;
-	
-	outline:				none;
-}
-
-.SUITextboxContainerFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUITextboxControlLeft
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					5px;
-	height: 					31px;
-	background: 				transparent url('images/textbox/left.png') no-repeat;	
-}
-
-.SUITextboxControlLeftDisabled
-{
-	background: 				transparent url('images/textbox/left_disabled.png') no-repeat;	
-}
-
-.SUITextboxControlCenter
-{
-	float: 					left;
-
-	margin-top: 				3px;	
-	margin-bottom:				3px;
-	
-	height:					31px;
-	background: 				transparent url('images/textbox/center.png') repeat-x;	
-}
-
-.SUITextboxControlCenterDisabled
-{
-	background: 				transparent url('images/textbox/center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
-}
-
-.SUITextboxControlRight
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
-	width: 					5px;
-	height: 					31px;
-	
-	background: 				transparent url('images/textbox/right.png') no-repeat;	
-}
-
-.SUITextboxControlRightDisabled
-{
-	background: 				transparent url('images/textbox/right_disabled.png') no-repeat;	
-}
-
-.SUITextboxControlInput
-{	
-	margin: 				2px;
-	margin-top: 7px;
-	margin-left: 2px;
-	margin-right: 2px;
-
-	border:					none;
-
-	background:				transparent;
-	font-family: arial;
-	font-size:				14px;
-	font-weight:			bold;
-}

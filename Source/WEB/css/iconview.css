@@ -1,3 +1,4 @@
+
 /* --------------------------------------------------------------------------------------------------------------
 Iconview
 -------------------------------------------------------------------------------------------------------------- */
@@ -6,9 +7,9 @@ Iconview
 	position: 				relative;
 
 	margin: 				1px;	
+	padding:				3px;
 
-	display: 				inline-block;
-	
+	display: 				inline-block;	
 	outline:				none;
 }
 
@@ -23,14 +24,12 @@ Iconview
 .SUIIconview .TopLeft
 {
 	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-
-	
+		
 	width: 					5px;
 	height: 				5px;
-	background: 				transparent url('images/iconview/top_left.png') no-repeat;		
+	
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			0px 0px;
 }
 
 SUIIconviewFocus .TopLeft
@@ -38,18 +37,18 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .TopLeft
 {
-	background: 				transparent url('images/iconview/top_left_disabled.png') no-repeat;	
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			0px -20px;
 }
 
 .SUIIconview .TopCenter
 {
 	float: 					left;
-
-	margin-top: 				3px;	
-
 	
 	height:					5px;
-	background: 				transparent url('images/iconview/top_center.png') repeat-x;	
+	
+	background: 				transparent url('images/iconview/background1.png') repeat-x;	
+	background-position:			0px -5px;
 }
 
 .SUIIconviewFocus. TopCenter
@@ -57,23 +56,19 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .TopCenter
 {
-	background: 				transparent url('images/iconview/top_center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
+	background: 				transparent url('images/iconview/background1.png') repeat-x;	
+	background-position:			0px -25px;
 }
 
 .SUIIconview .TopRight
 {
 	float: 					left;
-	
-	margin-top: 				3px;
-	margin-right:				3px;
-
-		
+			
 	width: 					5px;
 	height: 				5px;
 	
-	background: 				transparent url('images/iconview/top_right.png') no-repeat;	
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			-5px 0px;
 }
 
 .SUIIconviewFocus .TopRight
@@ -81,19 +76,18 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .TopRight
 {
-	background: 				transparent url('images/iconview/top_right_disabled.png') no-repeat;	
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			-5px -20px;
 }
 
 .SUIIconview .ContentLeft
 {
 	float: 					left;
 	
-	margin-left:				3px;
-
-
 	width: 					5px;
 
-	background: 				transparent url('images/iconview/content_left.png') repeat-y;	
+	background: 				transparent url('images/iconview/background2.png') repeat-y;	
+	background-position:			0px 0px;
 }
 
 .SUIIconviewFocus .ContentLeft
@@ -101,14 +95,15 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled  .ContentLeft
 {
-	background: 				transparent url('images/iconview/content_left_disabled.png') repeat-y;	
+	background: 				transparent url('images/iconview/background2.png') repeat-y;	
+	background-position:			-10px 0px;
 }
 
 .SUIIconview .ContentCenter
 {
 	float: 					left;
 	
-	background: 				#ffffff url('images/iconview/content_center.png') repeat-x;		
+	background-color: 			#ffffff;
 	
 	outline: 				none;
 }
@@ -118,19 +113,17 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .ContentCenter
 {
-	background: 				#ffffff url('images/iconview/content_center_disabled.png') repeat-x;	
+	background: 				#ffffff;
 }
 
 .SUIIconview .ContentRight
 {
 	float: 					left;
 	
-	margin-right:				3px;
-
-		
 	width: 					5px;
 	
-	background: 				transparent url('images/iconview/content_right.png') repeat-y;	
+	background: 				transparent url('images/iconview/background2.png') repeat-y;	
+	background-position:			-5px 0px;
 }
 
 .SUIIconviewFocus .ContentRight
@@ -138,21 +131,19 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .ContentRight
 {
-	background: 				transparent url('images/iconview/content_right_disabled.png') repeat-y;	
+	background: 				transparent url('images/iconview/background2.png') repeat-y;	
+	background-position:			-15px 0px;
 }
 
 .SUIIconview .BottomLeft
 {
 	float: 					left;
 	
-	margin-left:				3px;
-	margin-bottom:				3px;
-
-
 	width: 					5px;
 	height:					5px;	
 	
-	background: 				transparent url('images/iconview/bottom_left.png') no-repeat;	
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			0px -10px;
 }
 
 .SUIIconviewFocus .BottomLeft
@@ -160,18 +151,18 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .BottomLeft
 {
-	background: 				transparent url('images/iconview/bottom_left_disabled.png') no-repeat;	
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			0px -30px;
 }
 
 .SUIIconview .BottomCenter
 {
 	float: 					left;
 	
-	margin-bottom:				3px;
-	
 	height:					5px;
 
-	background: 				transparent url('images/iconview/bottom_center.png') repeat-x;		
+	background: 				transparent url('images/iconview/background1.png') repeat-x;	
+	background-position:			0px -15px;
 }
 
 .SUIIconviewFocus .BottomCenter
@@ -179,121 +170,72 @@ SUIIconviewFocus .TopLeft
 
 .SUIIconviewDisabled .BottomCenter
 {
-	background: 				transparent url('images/iconview/bottom_center_disabled.png') repeat-x;	
+	background: 				transparent url('images/iconview/background1.png') repeat-x;	
+	background-position:			0px -35px;
 }
 
 .SUIIconview .BottomRight
 {
 	float: 					left;
 	
-	margin-right:				3px;
-	margin-bottom:				3px;
-	
-	height: 				5px;
-
-		
+	height: 				5px;		
 	width: 					5px;	
 	
-	background: 				transparent url('images/iconview/bottom_right.png') no-repeat;
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			-5px -10px;
 }
 
 .SUIIconviewFocus .BottomRight
 {}
 
+
+
 .SUIIconviewDisabled .BottomRight
 {
-	background: 				transparent url('images/iconview/bottom_right_disabled.png') no-repeat;
+	background: 				transparent url('images/iconview/background1.png') no-repeat;	
+	background-position:			-5px -30px;
 }
-
-
-
-.SUIIconview .ItemRow
-{	
-	padding-top: 				2px;
-	
-	height:					20px;	
-
-	background:				transparent;
-
-	cursor:					default;	
-}
-
-.SUIIconview .ItemRowSelected
-{
-	background:				#bbbbbb;	
-}
-
-.SUIIconviewFocus .ItemRow
-{}
-
-.SUIIconviewDisabled .ItemRow
-{
-
-	
-}
-
-
-
-.SUIIconviewFocus .ItemRowSelected
-{	
-	background-color:			#86b510;
-}
-
-.SUIIconviewDisabled .ItemRow
-{
-	cursor:					default;
-}
-
-.SUIIconviewDisabled .ItemRowSelected
-{
-	background-color:			#dddddd;
-	cursor:					default;
-}
-
-
-
 
 .SUIIconview .Item
 {
 	float:					left;
 	
-	margin:					6px;
+	margin:					3px;	
+	padding:				4px;
 	
-	padding: 				5px;
+	width:					90px;
+	height:					90px;
 	
-	width:					80px;
-	height:					80px;
-	
-	background: 				transparent url('images/iconview/item.png') no-repeat;
+	background: 				transparent url('images/iconview/background3.png') no-repeat;
+	background-position:			0px 0px;
 }
 
+.SUIIconviewDisabled .Item
+{}
 
 .SUIIconview .ItemSelected
 {
 	float:					left;
 	
-	margin:					6px;
+	margin:					3px;
+	padding:				4px;
 	
-	padding: 				5px;
+	width:					90px;
+	height:					90px;
 	
-	width:					80px;
-	height:					80px;
-	
-	background: 				transparent url('images/iconview/item_selected.png') no-repeat;
-}
-
-.SUIIconview .Image
-{
-	width:					80px;
-	height:					80px;
+	background: 				transparent url('images/iconview/background3.png') no-repeat;
+	background-position:			0px -98px;
 }
 
 .SUIIconviewDisabled .Item
-{
-
-}
+{}
 
 .SUIIconviewDisabled .ItemSelected
-{
+{}
 
+.SUIIconview .Image
+{
+	width:					90px;
+	height:					90px;
 }
+

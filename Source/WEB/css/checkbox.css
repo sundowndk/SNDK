@@ -1,12 +1,13 @@
+
 /* --------------------------------------------------------------------------------------------------------------
 Checkbox
 -------------------------------------------------------------------------------------------------------------- */
 .SUICheckbox
 {
-	margin: 				3px;	
+	margin: 				1px;		
+	padding:				12px;
 
 	display: 				inline-block;
-
 	outline:				none;
 	cursor:					default;			
 }
@@ -26,15 +27,12 @@ Checkbox
 {}
 
 .SUICheckbox .Checkmark
-{
-	margin: 				5px;
-					
-	height: 				19px;	
-	width: 					19px;	
+{					
+	height: 				14px;	
+	width: 					14px;	
 
-	background-image:			url('images/checkbox/unchecked.png');
-	background-position:			center center;
-	background-repeat:			no-repeat;	
+	background: 				transparent url('images/checkbox/background.png') no-repeat;
+	background-position:			0px 0px;
 }
 
 .SUICheckboxFocus .Checkmark
@@ -42,15 +40,18 @@ Checkbox
 
 .SUICheckboxChecked .Checkmark
 {
-	background-image:			url('images/checkbox/checked.png');
+	background: 				transparent url('images/checkbox/background.png') no-repeat;
+	background-position:			-14px 0px;
 }
 
 .SUICheckboxDisabled .Checkmark
 {
-	background-image:			url('images/checkbox/unchecked_disabled.png');
+	background: 				transparent url('images/checkbox/background.png') no-repeat;
+	background-position:			0px -14px;
 }
 
 .SUICheckboxDisabledChecked .Checkmark
 {
-	background-image:			url('images/checkbox/checked_disabled.png');
+	background: 				transparent url('images/checkbox/background.png') no-repeat;
+	background-position:			-14px -14px;
 }

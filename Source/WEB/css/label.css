@@ -1,8 +1,34 @@
 
-<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+/* --------------------------------------------------------------------------------------------------------------
+Label
+-------------------------------------------------------------------------------------------------------------- */
+.SUILabel
+{
+	position: 				relative;
+
+	margin:					3px;
+
+	display: 				inline-block;	
+	outline:				none;
+}
+
+.SUILabelDisabled
+{}
+
+.SUILabel .Text
+{
+	float: 					left;
+		
+	height:					25px;
+		
+	font-family:				arial;		
+	font-size:				14px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 1px #ffffff;		
+			
+	cursor:					default;	
+}
+
+.SUILabelDisabled .Text
+{}
+

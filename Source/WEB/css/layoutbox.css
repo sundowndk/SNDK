@@ -1,8 +1,19 @@
 
-<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+/* --------------------------------------------------------------------------------------------------------------
+Layoutbox
+-------------------------------------------------------------------------------------------------------------- */
+.SUILayoutbox
+{
+	position: 				relative;
+
+	display: 				inline-block;	
+	outline:				none;
+}
+
+.SUILayoutbox .Panel
+{
+	margin:					0px;
+	padding: 5px;
+	background-color:			#ffffff;
+}
+

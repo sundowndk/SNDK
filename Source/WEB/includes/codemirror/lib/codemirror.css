@@ -1,9 +1,9 @@
 .CodeMirror {
   overflow: auto;
-  line-height: 1em;
   height: 100%;
+  line-height: 1em;
   font-family: monospace;
-  _position: relative; /* IE6 hack */
+  font-size: 13px;
 }
 
 .CodeMirror-gutter {
@@ -29,6 +29,10 @@
   border-radius: 0;
   border-width: 0; margin: 0; padding: 0; background: transparent;
   font-family: inherit;
+}
+
+.CodeMirror textarea {
+  font-family: monospace !important;
 }
 
 .CodeMirror-cursor {

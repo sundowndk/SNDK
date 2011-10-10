@@ -1,10 +1,8 @@
 /* --------------------------------------------------------------------------------------------------------------
-Iconview
+Upload
 -------------------------------------------------------------------------------------------------------------- */
-.SUIIconview
+.SUIUpload
 {
-	position: 				relative;
-
 	margin: 				1px;	
 
 	display: 				inline-block;
@@ -12,291 +10,374 @@ Iconview
 	outline:				none;
 }
 
-.SUIIconviewFocus
+.SUIUploadFocus
 {
 	outline:				#aaaaaa dotted 1px;
 }
 
-.SUIIconviewDisabled
+.SUIUploadDisabled
 {}
 
-.SUIIconview .TopLeft
+.SUIUpload .Left
 {
 	float: 					left;
 	
 	margin-top: 				3px;
 	margin-left:				3px;
-
+	margin-bottom:				3px;
 	
 	width: 					5px;
-	height: 				5px;
-	background: 				transparent url('images/iconview/top_left.png') no-repeat;		
+	height: 				31px;
+	
+	background: 				transparent url('images/upload/left.png') no-repeat;	
 }
 
-SUIIconviewFocus .TopLeft
+.SUIUploadFocus .Left
 {}
 
-.SUIIconviewDisabled .TopLeft
+.SUIUploadLeftClicked .Left
 {
-	background: 				transparent url('images/iconview/top_left_disabled.png') no-repeat;	
+	background: 				transparent url('images/upload/left_leftclicked.png') no-repeat;	
 }
 
-.SUIIconview .TopCenter
+.SUIUploadDisabled .Left
+{
+	background: 				transparent url('images/upload/left_disabled.png') no-repeat;	
+}
+
+.SUIUpload .Center
 {
 	float: 					left;
 
-	margin-top: 				3px;	
+	margin-top: 				3px;
+	margin-bottom:				3px;
 
+	padding-top:				8px;
 	
-	height:					5px;
-	background: 				transparent url('images/iconview/top_center.png') repeat-x;	
+	height:					23px;
+	background: 				transparent url('images/upload/center.png') repeat-x;
+	
+	font-size: 				12px;
+	font-weight:				bold;
+	text-align:				center;		
+	text-decoration: 			none;	
+	
+	color:					#555555;
+	
+	cursor:					default;
 }
 
-.SUIIconviewFocus. TopCenter
+.SUIUploadFocus .Center
 {}
 
-.SUIIconviewDisabled .TopCenter
+.SUIUploadLeftClicked .Center
 {
-	background: 				transparent url('images/iconview/top_center_disabled.png') repeat-x;	
+	padding-top:				9px;
+	
+	height:					23px;
+	
+	background: 				transparent url('images/upload/center_leftclicked.png') repeat-x;
+}
+
+.SUIUploadDisabled .Center
+{
+	background: 				transparent url('images/upload/center_disabled.png') repeat-x;	
 	
 	color:					#aaaaaa;
 }
 
-.SUIIconview .TopRight
+.SUIUpload .Right
 {
 	float: 					left;
 	
 	margin-top: 				3px;
 	margin-right:				3px;
-
+	margin-bottom:				3px;
 		
 	width: 					5px;
-	height: 				5px;
+	height: 				31px;
 	
-	background: 				transparent url('images/iconview/top_right.png') no-repeat;	
+	background: 				transparent url('images/upload/right.png') no-repeat;	
 }
 
-.SUIIconviewFocus .TopRight
+.SUIUploadFocus .Right
 {}
 
-.SUIIconviewDisabled .TopRight
+.SUIUploadLeftClicked .Right
 {
-	background: 				transparent url('images/iconview/top_right_disabled.png') no-repeat;	
+	background: 				transparent url('images/upload/right_leftclicked.png') no-repeat;	
 }
 
-.SUIIconview .ContentLeft
+.SUIUploadDisabled .Right
+{
+	background: 				transparent url('images/upload/right_disabled.png') no-repeat;	
+}
+
+.SUIUpload .Text
+{
+	float:					right;
+
+	margin:					11px;		
+	
+	font-size: 				12px;
+	font-weight:				bold;
+	text-align:				center;		
+	text-decoration: 			none;	
+	
+	color:					#555555;
+}
+
+.SUIUploadFocus .Text
+{}
+
+.SUIUploadDisabeld .Text
+{
+	color:					#aaaaaa;
+}
+
+.SUIUpload .Th
+{
+	float: right;
+	margin: 3px;
+
+	width: 32px;
+	height: 31px;	
+	
+	background: 				transparent url('images/upload/throbber.png') no-repeat;		
+}
+
+.SUIUpload .ThrobberAnimation
+{
+	position: 				relative;
+
+	width:					24px;
+	height:					24px;
+
+	background: 				transparent url('images/upload/throbber_animation.gif') no-repeat;		
+}
+
+
+
+
+
+
+.SUIUploadContainer
+{
+	margin: 				1px;	
+
+	display: 				inline-block;
+	
+	outline:				none;
+}
+
+.SUIUploadContainerFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUIUploadControlButtonLeft
 {
 	float: 					left;
 	
+	margin-top: 				3px;
 	margin-left:				3px;
-
-
-	width: 					5px;
-
-	background: 				transparent url('images/iconview/content_left.png') repeat-y;	
-}
-
-.SUIIconviewFocus .ContentLeft
-{}
-
-.SUIIconviewDisabled  .ContentLeft
-{
-	background: 				transparent url('images/iconview/content_left_disabled.png') repeat-y;	
-}
-
-.SUIIconview .ContentCenter
-{
-	float: 					left;
-	
-	background: 				#ffffff url('images/iconview/content_center.png') repeat-x;		
-	
-	outline: 				none;
-}
-
-.SUIIconviewFocus .ContentCenter
-{}
-
-.SUIIconviewDisabled .ContentCenter
-{
-	background: 				#ffffff url('images/iconview/content_center_disabled.png') repeat-x;	
-}
-
-.SUIIconview .ContentRight
-{
-	float: 					left;
-	
-	margin-right:				3px;
-
-		
-	width: 					5px;
-	
-	background: 				transparent url('images/iconview/content_right.png') repeat-y;	
-}
-
-.SUIIconviewFocus .ContentRight
-{}
-
-.SUIIconviewDisabled .ContentRight
-{
-	background: 				transparent url('images/iconview/content_right_disabled.png') repeat-y;	
-}
-
-.SUIIconview .BottomLeft
-{
-	float: 					left;
-	
-	margin-left:				3px;
-	margin-bottom:				3px;
-
-
-	width: 					5px;
-	height:					5px;	
-	
-	background: 				transparent url('images/iconview/bottom_left.png') no-repeat;	
-}
-
-.SUIIconviewFocus .BottomLeft
-{}
-
-.SUIIconviewDisabled .BottomLeft
-{
-	background: 				transparent url('images/iconview/bottom_left_disabled.png') no-repeat;	
-}
-
-.SUIIconview .BottomCenter
-{
-	float: 					left;
-	
 	margin-bottom:				3px;
 	
-	height:					5px;
-
-	background: 				transparent url('images/iconview/bottom_center.png') repeat-x;		
+	width: 					4px;
+	height: 				31px;
+	
+	background: 				transparent url('images/upload/left.png') no-repeat;	
 }
 
-.SUIIconviewFocus .BottomCenter
-{}
-
-.SUIIconviewDisabled .BottomCenter
+.SUIUploadControlButtonLeftFocus
 {
-	background: 				transparent url('images/iconview/bottom_center_disabled.png') repeat-x;	
 }
 
-.SUIIconview .BottomRight
+.SUIUploadControlButtonLeftClicked
+{
+	background: 				transparent url('images/upload/left_clicked.png') no-repeat;	
+}
+
+.SUIUploadControlButtonLeftDisabled
+{
+	background: 				transparent url('images/upload/left_disabled.png') no-repeat;	
+}
+
+.SUIUploadControlButtonCenter
+{
+	float: 					left;
+
+	margin-top: 				3px;
+	margin-bottom:				3px;
+
+	padding-top:				8px;
+	
+	height:					23px;
+	background: 				transparent url('images/upload/center.png') repeat-x;
+	
+	font-size: 				14px;
+	font-weight:				bold;
+	text-align:				center;		
+	text-decoration: 			none;	
+	
+	color:					#555555;
+	
+}
+
+.SUIUploadControlButtonCenterFocus
+{
+}
+
+.SUIUploadControlButtonCenterClicked
+{
+	padding-top:				4px;
+	
+	height:					18px;
+	
+	background: 				transparent url('images/upload/center_clicked.png') repeat-x;	
+}
+
+.SUIUploadControlButtonCenterDisabled
+{
+	background: 				transparent url('images/upload/center_disabled.png') repeat-x;	
+	
+	color:					#aaaaaa;
+}
+
+.SUIUploadControlButtonRight
 {
 	float: 					left;
 	
+	margin-top: 				3px;
 	margin-right:				3px;
 	margin-bottom:				3px;
-	
-	height: 				5px;
-
 		
-	width: 					5px;	
+	width: 					4px;
+	height: 				31px;
 	
-	background: 				transparent url('images/iconview/bottom_right.png') no-repeat;
+	background: 				transparent url('images/upload/right.png') no-repeat;	
 }
 
-.SUIIconviewFocus .BottomRight
+.SUIUploadControlButtonRightFocus
+{
+}
+
+.SUIUploadControlButtonRightClicked
+{
+	background: 				transparent url('images/upload/right_clicked.png') no-repeat;	
+}
+
+.SUIUploadControlButtonRightDisabled
+{
+	background: 				transparent url('images/upload/right_disabled.png') no-repeat;	
+}
+
+.SUIUploadText
+{
+	margin:					7px;		
+	
+	font-size: 				14px;
+	font-weight:				bold;
+	text-align:				center;		
+	text-decoration: 			none;	
+	
+	color:					#555555;
+}
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+/* --------------------------------------------------------------------------------------------------------------
+Checkbox
+-------------------------------------------------------------------------------------------------------------- */
+.SUICheckbox
+{
+	margin: 				3px;	
+
+	display: 				inline-block;
+
+	outline:				none;
+	cursor:					default;			
+}
+
+.SUICheckboxFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUICheckboxDisabled
 {}
 
-.SUIIconviewDisabled .BottomRight
-{
-	background: 				transparent url('images/iconview/bottom_right_disabled.png') no-repeat;
-}
-
-
-
-.SUIIconview .ItemRow
-{	
-	padding-top: 				2px;
-	
-	height:					20px;	
-
-	background:				transparent;
-
-	cursor:					default;	
-}
-
-.SUIIconview .ItemRowSelected
-{
-	background:				#bbbbbb;	
-}
-
-.SUIIconviewFocus .ItemRow
+.SUICheckboxChecked
 {}
 
-.SUIIconviewDisabled .ItemRow
+.SUICheckboxDisabledChecked
+{}
+
+.SUICheckbox .Checkmark
 {
+	margin: 				5px;
+					
+	height: 				19px;	
+	width: 					19px;	
 
-	
+	background-image:			url('images/checkbox/unchecked.png');
+	background-position:			center center;
+	background-repeat:			no-repeat;	
 }
 
+.SUICheckboxFocus .Checkmark
+{}
 
-
-.SUIIconviewFocus .ItemRowSelected
-{	
-	background-color:			#86b510;
-}
-
-.SUIIconviewDisabled .ItemRow
+.SUICheckboxChecked .Checkmark
 {
-	cursor:					default;
+	background-image:			url('images/checkbox/checked.png');
 }
 
-.SUIIconviewDisabled .ItemRowSelected
+.SUICheckboxDisabled .Checkmark
 {
-	background-color:			#dddddd;
-	cursor:					default;
+	background-image:			url('images/checkbox/unchecked_disabled.png');
 }
 
-
-
-
-.SUIIconview .Item
+.SUICheckboxDisabledChecked .Checkmark
 {
-	float:					left;
-	
-	margin:					6px;
-	
-	padding: 				5px;
-	
-	width:					80px;
-	height:					80px;
-	
-	background: 				transparent url('images/iconview/item.png') no-repeat;
+	background-image:			url('images/checkbox/checked_disabled.png');
 }
 
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
 
-.SUIIconview .ItemSelected
-{
-	float:					left;
-	
-	margin:					6px;
-	
-	padding: 				5px;
-	
-	width:					80px;
-	height:					80px;
-	
-	background: 				transparent url('images/iconview/item_selected.png') no-repeat;
-}
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
 
-.SUIIconview .Image
-{
-	width:					80px;
-	height:					80px;
-}
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
 
-.SUIIconviewDisabled .Item
-{
-
-}
-
-.SUIIconviewDisabled .ItemSelected
-{
-
-}
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
 /* --------------------------------------------------------------------------------------------------------------
 Textarea
 -------------------------------------------------------------------------------------------------------------- */
@@ -417,6 +498,209 @@ Textarea
 	font-size:				14px;
 	font-weight:				bold;
 	text-decoration: 			none;
+}
+/* --------------------------------------------------------------------------------------------------------------
+Textbox
+-------------------------------------------------------------------------------------------------------------- */
+.SUITextbox
+{
+	margin: 				1px;	
+
+	display: 				inline-block;
+	
+	outline:				none;
+}
+
+.SUITextboxFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUITextboxDisabled
+{
+}
+
+.SUITextbox .Left
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-left:				3px;
+	margin-bottom:				3px;
+	
+	width: 					5px;
+	height: 				31px;
+	
+	background: 				transparent url('images/textbox/left.png') no-repeat;
+}
+
+.SUITextboxFocus .Left
+{
+}
+
+.SUITextboxDisabled .Left
+{
+	background: 				transparent url('images/textbox/left_disabled.png') no-repeat;	
+}
+
+.SUITextbox .Center
+{
+	float: 					left;
+
+	margin-top: 				3px;	
+	margin-bottom:				3px;
+	
+	height:					31px;
+	
+	background: 				transparent url('images/textbox/center.png') repeat-x;	
+}
+
+.SUITextboxFocus .Center
+{
+}
+
+.SUITextboxDisabled .Center
+{
+	background: 				transparent url('images/textbox/center_disabled.png') repeat-x;	
+	
+	color:					#aaaaaa;
+}
+
+.SUITextbox .Right
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-right:				3px;
+	margin-bottom:				3px;
+		
+	width: 					5px;
+	height: 				31px;
+	
+	background: 				transparent url('images/textbox/right.png') no-repeat;
+}
+
+.SUITextboxFocus .Right
+{
+}
+
+.SUITextboxDisabled .Right
+{
+	background: 				transparent url('images/textbox/right_disabled.png') no-repeat;	
+}
+
+.SUITextbox .Input
+{
+	margin: 				2px;
+	margin-top: 				7px;
+	margin-left: 				2px;
+	margin-right: 				10px;
+
+	border:					none;
+
+width: 0px;
+
+	background:				transparent;
+	
+	font-family: 				arial;
+	font-size:				14px;
+	font-weight:				bold;
+}
+
+.SUITextboxFocus .Input
+{
+}
+
+.SUITextboxDisabled .Input
+{
+	cursor:					default;
+}
+
+
+
+
+.SUITextboxContainer
+{
+	margin: 				1px;	
+
+	display: 				inline-block;
+	
+	outline:				none;
+}
+
+.SUITextboxContainerFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUITextboxControlLeft
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-left:				3px;
+	margin-bottom:				3px;
+	
+	width: 					5px;
+	height: 					31px;
+	background: 				transparent url('images/textbox/left.png') no-repeat;	
+}
+
+.SUITextboxControlLeftDisabled
+{
+	background: 				transparent url('images/textbox/left_disabled.png') no-repeat;	
+}
+
+.SUITextboxControlCenter
+{
+	float: 					left;
+
+	margin-top: 				3px;	
+	margin-bottom:				3px;
+	
+	height:					31px;
+	background: 				transparent url('images/textbox/center.png') repeat-x;	
+}
+
+.SUITextboxControlCenterDisabled
+{
+	background: 				transparent url('images/textbox/center_disabled.png') repeat-x;	
+	
+	color:					#aaaaaa;
+}
+
+.SUITextboxControlRight
+{
+	float: 					left;
+	
+	margin-top: 				3px;
+	margin-right:				3px;
+	margin-bottom:				3px;
+		
+	width: 					5px;
+	height: 					31px;
+	
+	background: 				transparent url('images/textbox/right.png') no-repeat;	
+}
+
+.SUITextboxControlRightDisabled
+{
+	background: 				transparent url('images/textbox/right_disabled.png') no-repeat;	
+}
+
+.SUITextboxControlInput
+{	
+	margin: 				2px;
+	margin-top: 7px;
+	margin-left: 2px;
+	margin-right: 2px;
+
+	border:					none;
+
+	background:				transparent;
+	font-family: arial;
+	font-size:				14px;
+	font-weight:			bold;
 }
 /* --------------------------------------------------------------------------------------------------------------
 Button
@@ -664,369 +948,6 @@ Button
 	background: 				transparent url('images/button/right_disabled.png') no-repeat;	
 }
 /* --------------------------------------------------------------------------------------------------------------
-Checkbox
--------------------------------------------------------------------------------------------------------------- */
-.SUICheckbox
-{
-	margin: 				3px;	
-
-	display: 				inline-block;
-
-	outline:				none;
-	cursor:					default;			
-}
-
-.SUICheckboxFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUICheckboxDisabled
-{}
-
-.SUICheckboxChecked
-{}
-
-.SUICheckboxDisabledChecked
-{}
-
-.SUICheckbox .Checkmark
-{
-	margin: 				5px;
-					
-	height: 				19px;	
-	width: 					19px;	
-
-	background-image:			url('images/checkbox/unchecked.png');
-	background-position:			center center;
-	background-repeat:			no-repeat;	
-}
-
-.SUICheckboxFocus .Checkmark
-{}
-
-.SUICheckboxChecked .Checkmark
-{
-	background-image:			url('images/checkbox/checked.png');
-}
-
-.SUICheckboxDisabled .Checkmark
-{
-	background-image:			url('images/checkbox/unchecked_disabled.png');
-}
-
-.SUICheckboxDisabledChecked .Checkmark
-{
-	background-image:			url('images/checkbox/checked_disabled.png');
-}
-/* --------------------------------------------------------------------------------------------------------------
-Listview
--------------------------------------------------------------------------------------------------------------- */
-.SUIListview
-{
-	position: relative;
-
-	margin: 				1px;	
-
-	display: 				inline-block;
-	
-	outline:				none;
-}
-
-.SUIListviewFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUIListviewDisabled
-{}
-
-.SUIListview .TopLeft
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-
-	
-	width: 					5px;
-	height: 				34px;
-	background: 				transparent url('images/listview/top_left.png') no-repeat;		
-}
-
-SUIListviewFocus .TopLeft
-{}
-
-.SUIListviewDisabled .TopLeft
-{
-	background: 				transparent url('images/listview/top_left_disabled.png') no-repeat;	
-}
-
-.SUIListview .TopCenter
-{
-	float: 					left;
-
-	margin-top: 				3px;	
-
-	
-	height:					34px;
-	background: 				transparent url('images/listview/top_center.png') repeat-x;	
-}
-
-.SUIListviewFocus. TopCenter
-{}
-
-.SUIListviewDisabled .TopCenter
-{
-	background: 				transparent url('images/listview/top_center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
-}
-
-.SUIListview .TopRight
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-right:				3px;
-
-		
-	width: 					5px;
-	height: 				34px;
-	
-	background: 				transparent url('images/listview/top_right.png') no-repeat;	
-}
-
-.SUIListviewFocus .TopRight
-{}
-
-.SUIListviewDisabled .TopRight
-{
-	background: 				transparent url('images/listview/top_right_disabled.png') no-repeat;	
-}
-
-.SUIListview .ContentLeft
-{
-	float: 					left;
-	
-	margin-left:				3px;
-
-
-	width: 					5px;
-
-	background: 				transparent url('images/listview/content_left.png') repeat-y;	
-}
-
-.SUIListviewFocus .ContentLeft
-{}
-
-.SUIListviewDisabled  .ContentLeft
-{
-	background: 				transparent url('images/listview/content_left_disabled.png') repeat-y;	
-}
-
-.SUIListview .ContentCenter
-{
-	float: 					left;
-	
-	background: 				#ffffff url('images/listview/content_center.png') repeat-x;		
-	
-	outline: 				none;
-}
-
-.SUIListviewFocus .ContentCenter
-{}
-
-.SUIListviewDisabled .ContentCenter
-{
-	background: 				#ffffff url('images/listview/content_center_disabled.png') repeat-x;	
-}
-
-.SUIListview .ContentRight
-{
-	float: 					left;
-	
-	margin-right:				3px;
-
-		
-	width: 					5px;
-	
-	background: 				transparent url('images/listview/content_right.png') repeat-y;	
-}
-
-.SUIListviewFocus .ContentRight
-{}
-
-.SUIListviewDisabled .ContentRight
-{
-	background: 				transparent url('images/listview/content_right_disabled.png') repeat-y;	
-}
-
-.SUIListview .BottomLeft
-{
-	float: 					left;
-	
-	margin-left:				3px;
-	margin-bottom:				3px;
-
-
-	width: 					5px;
-	height:					4px;	
-	
-	background: 				transparent url('images/listview/bottom_left.png') no-repeat;	
-}
-
-.SUIListviewFocus .BottomLeft
-{}
-
-.SUIListviewDisabled .BottomLeft
-{
-	background: 				transparent url('images/listview/bottom_left_disabled.png') no-repeat;	
-}
-
-.SUIListview .BottomCenter
-{
-	float: 					left;
-	
-	margin-bottom:				3px;
-	
-	height:					4px;
-
-	background: 				transparent url('images/listview/bottom_center.png') repeat-x;		
-}
-
-.SUIListviewFocus .BottomCenter
-{}
-
-.SUIListviewDisabled .BottomCenter
-{
-	background: 				transparent url('images/listview/bottom_center_disabled.png') repeat-x;	
-}
-
-.SUIListview .BottomRight
-{
-	float: 					left;
-	
-	margin-right:				3px;
-	margin-bottom:				3px;
-	
-	height: 				4px;
-
-		
-	width: 					5px;	
-	
-	background: 				transparent url('images/listview/bottom_right.png') no-repeat;
-}
-
-.SUIListviewFocus .BottomRight
-{}
-
-.SUIListviewDisabled .BottomRight
-{
-	background: 				transparent url('images/listview/bottom_right_disabled.png') no-repeat;
-}
-
-.SUIListview .Header
-{
-	float:					left;
-	
-	margin-left:				4px;
-	margin-top:				8px;
-	margin-right:				4px;
-	
-	font-size:				14px;
-	font-weight:				bold;
-	text-decoration: 			none;	
-	
-	background: 				transparent url('images/listview/header.png') no-repeat;	
-	background-position:			right center;	
-	color:					#555555;
-}
-
-.SUIListviewDisabled .Header
-{
-	background: 				transparent url('images/listview/header_disabled.png') no-repeat;	
-	background-position:			right center;	
-
-	color:					#aaaaaa;
-}
-
-
-
-.SUIListview .ItemRow
-{	
-	padding-top: 				2px;
-	
-	height:					20px;	
-
-	background:				transparent;
-
-	cursor:					default;	
-}
-
-.SUIListview .ItemRowSelected
-{
-	background:				#bbbbbb;	
-}
-
-.SUIListviewFocus .ItemRow
-{}
-
-.SUIListviewDisabled .ItemRow
-{
-
-	
-}
-
-
-
-.SUIListviewFocus .ItemRowSelected
-{	
-	background-color:			#86b510;
-}
-
-.SUIListviewDisabled .ItemRow
-{
-	cursor:					default;
-}
-
-.SUIListviewDisabled .ItemRowSelected
-{
-	background-color:			#dddddd;
-	cursor:					default;
-}
-
-
-
-
-.SUIListview .ItemColumn
-{
-	float:					left;
-	
-	margin-left:				4px;
-	margin-right:				4px;
-	padding-top:				2px;
-	padding-bottom:				2px;
-	
-	
-	font-size:				14px;
-	font-weight:				bold;
-	text-decoration: 			none;	
-
-	background: 				transparent url('images/listview/item.png') repeat-y;
-
-	background-position:			right top;	
-}
-
-.SUIListview .ItemRowSelected .ItemColumn
-{
-	color: #ffffff;
-}
-
-.SUIListviewDisabled .ItemColumn
-{
-	color: #aaaaaa;
-}/* --------------------------------------------------------------------------------------------------------------
 Dropbox
 -------------------------------------------------------------------------------------------------------------- */
 .SUIDropbox
@@ -1379,373 +1300,12 @@ Dropbox
 	
 	z-index: 100;
 }/* --------------------------------------------------------------------------------------------------------------
-Textbox
+Iconview
 -------------------------------------------------------------------------------------------------------------- */
-.SUITextbox
-{
-	margin: 				1px;	
-
-	display: 				inline-block;
-	
-	outline:				none;
-}
-
-.SUITextboxFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUITextboxDisabled
-{
-}
-
-.SUITextbox .Left
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/textbox/left.png') no-repeat;
-}
-
-.SUITextboxFocus .Left
-{
-}
-
-.SUITextboxDisabled .Left
-{
-	background: 				transparent url('images/textbox/left_disabled.png') no-repeat;	
-}
-
-.SUITextbox .Center
-{
-	float: 					left;
-
-	margin-top: 				3px;	
-	margin-bottom:				3px;
-	
-	height:					31px;
-	
-	background: 				transparent url('images/textbox/center.png') repeat-x;	
-}
-
-.SUITextboxFocus .Center
-{
-}
-
-.SUITextboxDisabled .Center
-{
-	background: 				transparent url('images/textbox/center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
-}
-
-.SUITextbox .Right
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/textbox/right.png') no-repeat;
-}
-
-.SUITextboxFocus .Right
-{
-}
-
-.SUITextboxDisabled .Right
-{
-	background: 				transparent url('images/textbox/right_disabled.png') no-repeat;	
-}
-
-.SUITextbox .Input
-{
-	margin: 				2px;
-	margin-top: 				7px;
-	margin-left: 				2px;
-	margin-right: 				10px;
-
-	border:					none;
-
-width: 0px;
-
-	background:				transparent;
-	
-	font-family: 				arial;
-	font-size:				14px;
-	font-weight:				bold;
-}
-
-.SUITextboxFocus .Input
-{
-}
-
-.SUITextboxDisabled .Input
-{
-	cursor:					default;
-}
-
-
-
-
-.SUITextboxContainer
-{
-	margin: 				1px;	
-
-	display: 				inline-block;
-	
-	outline:				none;
-}
-
-.SUITextboxContainerFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUITextboxControlLeft
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					5px;
-	height: 					31px;
-	background: 				transparent url('images/textbox/left.png') no-repeat;	
-}
-
-.SUITextboxControlLeftDisabled
-{
-	background: 				transparent url('images/textbox/left_disabled.png') no-repeat;	
-}
-
-.SUITextboxControlCenter
-{
-	float: 					left;
-
-	margin-top: 				3px;	
-	margin-bottom:				3px;
-	
-	height:					31px;
-	background: 				transparent url('images/textbox/center.png') repeat-x;	
-}
-
-.SUITextboxControlCenterDisabled
-{
-	background: 				transparent url('images/textbox/center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
-}
-
-.SUITextboxControlRight
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
-	width: 					5px;
-	height: 					31px;
-	
-	background: 				transparent url('images/textbox/right.png') no-repeat;	
-}
-
-.SUITextboxControlRightDisabled
-{
-	background: 				transparent url('images/textbox/right_disabled.png') no-repeat;	
-}
-
-.SUITextboxControlInput
-{	
-	margin: 				2px;
-	margin-top: 7px;
-	margin-left: 2px;
-	margin-right: 2px;
-
-	border:					none;
-
-	background:				transparent;
-	font-family: arial;
-	font-size:				14px;
-	font-weight:			bold;
-}
-/* --------------------------------------------------------------------------------------------------------------
-Upload
--------------------------------------------------------------------------------------------------------------- */
-.SUIUpload
-{
-	margin: 				1px;	
-
-	display: 				inline-block;
-	
-	outline:				none;
-}
-
-.SUIUploadFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUIUploadDisabled
-{}
-
-.SUIUpload .Left
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/upload/left.png') no-repeat;	
-}
-
-.SUIUploadFocus .Left
-{}
-
-.SUIUploadLeftClicked .Left
-{
-	background: 				transparent url('images/upload/left_leftclicked.png') no-repeat;	
-}
-
-.SUIUploadDisabled .Left
-{
-	background: 				transparent url('images/upload/left_disabled.png') no-repeat;	
-}
-
-.SUIUpload .Center
-{
-	float: 					left;
-
-	margin-top: 				3px;
-	margin-bottom:				3px;
-
-	padding-top:				8px;
-	
-	height:					23px;
-	background: 				transparent url('images/upload/center.png') repeat-x;
-	
-	font-size: 				12px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
-	
-	color:					#555555;
-	
-	cursor:					default;
-}
-
-.SUIUploadFocus .Center
-{}
-
-.SUIUploadLeftClicked .Center
-{
-	padding-top:				9px;
-	
-	height:					23px;
-	
-	background: 				transparent url('images/upload/center_leftclicked.png') repeat-x;
-}
-
-.SUIUploadDisabled .Center
-{
-	background: 				transparent url('images/upload/center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
-}
-
-.SUIUpload .Right
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/upload/right.png') no-repeat;	
-}
-
-.SUIUploadFocus .Right
-{}
-
-.SUIUploadLeftClicked .Right
-{
-	background: 				transparent url('images/upload/right_leftclicked.png') no-repeat;	
-}
-
-.SUIUploadDisabled .Right
-{
-	background: 				transparent url('images/upload/right_disabled.png') no-repeat;	
-}
-
-.SUIUpload .Text
-{
-	float:					right;
-
-	margin:					11px;		
-	
-	font-size: 				12px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
-	
-	color:					#555555;
-}
-
-.SUIUploadFocus .Text
-{}
-
-.SUIUploadDisabeld .Text
-{
-	color:					#aaaaaa;
-}
-
-.SUIUpload .Th
-{
-	float: right;
-	margin: 3px;
-
-	width: 32px;
-	height: 31px;	
-	
-	background: 				transparent url('images/upload/throbber.png') no-repeat;		
-}
-
-.SUIUpload .ThrobberAnimation
+.SUIIconview
 {
 	position: 				relative;
 
-	width:					24px;
-	height:					24px;
-
-	background: 				transparent url('images/upload/throbber_animation.gif') no-repeat;		
-}
-
-
-
-
-
-
-.SUIUploadContainer
-{
 	margin: 				1px;	
 
 	display: 				inline-block;
@@ -1753,116 +1313,304 @@ Upload
 	outline:				none;
 }
 
-.SUIUploadContainerFocus
+.SUIIconviewFocus
 {
 	outline:				#aaaaaa dotted 1px;
 }
 
-.SUIUploadControlButtonLeft
+.SUIIconviewDisabled
+{}
+
+.SUIIconview .TopLeft
 {
 	float: 					left;
 	
 	margin-top: 				3px;
 	margin-left:				3px;
-	margin-bottom:				3px;
+
 	
-	width: 					4px;
-	height: 				31px;
-	
-	background: 				transparent url('images/upload/left.png') no-repeat;	
+	width: 					5px;
+	height: 				5px;
+	background: 				transparent url('images/iconview/top_left.png') no-repeat;		
 }
 
-.SUIUploadControlButtonLeftFocus
+SUIIconviewFocus .TopLeft
+{}
+
+.SUIIconviewDisabled .TopLeft
 {
+	background: 				transparent url('images/iconview/top_left_disabled.png') no-repeat;	
 }
 
-.SUIUploadControlButtonLeftClicked
-{
-	background: 				transparent url('images/upload/left_clicked.png') no-repeat;	
-}
-
-.SUIUploadControlButtonLeftDisabled
-{
-	background: 				transparent url('images/upload/left_disabled.png') no-repeat;	
-}
-
-.SUIUploadControlButtonCenter
+.SUIIconview .TopCenter
 {
 	float: 					left;
 
-	margin-top: 				3px;
-	margin-bottom:				3px;
+	margin-top: 				3px;	
 
-	padding-top:				8px;
 	
-	height:					23px;
-	background: 				transparent url('images/upload/center.png') repeat-x;
-	
-	font-size: 				14px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
-	
-	color:					#555555;
-	
+	height:					5px;
+	background: 				transparent url('images/iconview/top_center.png') repeat-x;	
 }
 
-.SUIUploadControlButtonCenterFocus
-{
-}
+.SUIIconviewFocus. TopCenter
+{}
 
-.SUIUploadControlButtonCenterClicked
+.SUIIconviewDisabled .TopCenter
 {
-	padding-top:				4px;
-	
-	height:					18px;
-	
-	background: 				transparent url('images/upload/center_clicked.png') repeat-x;	
-}
-
-.SUIUploadControlButtonCenterDisabled
-{
-	background: 				transparent url('images/upload/center_disabled.png') repeat-x;	
+	background: 				transparent url('images/iconview/top_center_disabled.png') repeat-x;	
 	
 	color:					#aaaaaa;
 }
 
-.SUIUploadControlButtonRight
+.SUIIconview .TopRight
 {
 	float: 					left;
 	
 	margin-top: 				3px;
 	margin-right:				3px;
-	margin-bottom:				3px;
+
 		
-	width: 					4px;
-	height: 				31px;
+	width: 					5px;
+	height: 				5px;
 	
-	background: 				transparent url('images/upload/right.png') no-repeat;	
+	background: 				transparent url('images/iconview/top_right.png') no-repeat;	
 }
 
-.SUIUploadControlButtonRightFocus
+.SUIIconviewFocus .TopRight
+{}
+
+.SUIIconviewDisabled .TopRight
 {
+	background: 				transparent url('images/iconview/top_right_disabled.png') no-repeat;	
 }
 
-.SUIUploadControlButtonRightClicked
+.SUIIconview .ContentLeft
 {
-	background: 				transparent url('images/upload/right_clicked.png') no-repeat;	
-}
-
-.SUIUploadControlButtonRightDisabled
-{
-	background: 				transparent url('images/upload/right_disabled.png') no-repeat;	
-}
-
-.SUIUploadText
-{
-	margin:					7px;		
+	float: 					left;
 	
-	font-size: 				14px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
-	
-	color:					#555555;
+	margin-left:				3px;
+
+
+	width: 					5px;
+
+	background: 				transparent url('images/iconview/content_left.png') repeat-y;	
 }
+
+.SUIIconviewFocus .ContentLeft
+{}
+
+.SUIIconviewDisabled  .ContentLeft
+{
+	background: 				transparent url('images/iconview/content_left_disabled.png') repeat-y;	
+}
+
+.SUIIconview .ContentCenter
+{
+	float: 					left;
+	
+	background: 				#ffffff url('images/iconview/content_center.png') repeat-x;		
+	
+	outline: 				none;
+}
+
+.SUIIconviewFocus .ContentCenter
+{}
+
+.SUIIconviewDisabled .ContentCenter
+{
+	background: 				#ffffff url('images/iconview/content_center_disabled.png') repeat-x;	
+}
+
+.SUIIconview .ContentRight
+{
+	float: 					left;
+	
+	margin-right:				3px;
+
+		
+	width: 					5px;
+	
+	background: 				transparent url('images/iconview/content_right.png') repeat-y;	
+}
+
+.SUIIconviewFocus .ContentRight
+{}
+
+.SUIIconviewDisabled .ContentRight
+{
+	background: 				transparent url('images/iconview/content_right_disabled.png') repeat-y;	
+}
+
+.SUIIconview .BottomLeft
+{
+	float: 					left;
+	
+	margin-left:				3px;
+	margin-bottom:				3px;
+
+
+	width: 					5px;
+	height:					5px;	
+	
+	background: 				transparent url('images/iconview/bottom_left.png') no-repeat;	
+}
+
+.SUIIconviewFocus .BottomLeft
+{}
+
+.SUIIconviewDisabled .BottomLeft
+{
+	background: 				transparent url('images/iconview/bottom_left_disabled.png') no-repeat;	
+}
+
+.SUIIconview .BottomCenter
+{
+	float: 					left;
+	
+	margin-bottom:				3px;
+	
+	height:					5px;
+
+	background: 				transparent url('images/iconview/bottom_center.png') repeat-x;		
+}
+
+.SUIIconviewFocus .BottomCenter
+{}
+
+.SUIIconviewDisabled .BottomCenter
+{
+	background: 				transparent url('images/iconview/bottom_center_disabled.png') repeat-x;	
+}
+
+.SUIIconview .BottomRight
+{
+	float: 					left;
+	
+	margin-right:				3px;
+	margin-bottom:				3px;
+	
+	height: 				5px;
+
+		
+	width: 					5px;	
+	
+	background: 				transparent url('images/iconview/bottom_right.png') no-repeat;
+}
+
+.SUIIconviewFocus .BottomRight
+{}
+
+.SUIIconviewDisabled .BottomRight
+{
+	background: 				transparent url('images/iconview/bottom_right_disabled.png') no-repeat;
+}
+
+
+
+.SUIIconview .ItemRow
+{	
+	padding-top: 				2px;
+	
+	height:					20px;	
+
+	background:				transparent;
+
+	cursor:					default;	
+}
+
+.SUIIconview .ItemRowSelected
+{
+	background:				#bbbbbb;	
+}
+
+.SUIIconviewFocus .ItemRow
+{}
+
+.SUIIconviewDisabled .ItemRow
+{
+
+	
+}
+
+
+
+.SUIIconviewFocus .ItemRowSelected
+{	
+	background-color:			#86b510;
+}
+
+.SUIIconviewDisabled .ItemRow
+{
+	cursor:					default;
+}
+
+.SUIIconviewDisabled .ItemRowSelected
+{
+	background-color:			#dddddd;
+	cursor:					default;
+}
+
+
+
+
+.SUIIconview .Item
+{
+	float:					left;
+	
+	margin:					6px;
+	
+	padding: 				5px;
+	
+	width:					80px;
+	height:					80px;
+	
+	background: 				transparent url('images/iconview/item.png') no-repeat;
+}
+
+
+.SUIIconview .ItemSelected
+{
+	float:					left;
+	
+	margin:					6px;
+	
+	padding: 				5px;
+	
+	width:					80px;
+	height:					80px;
+	
+	background: 				transparent url('images/iconview/item_selected.png') no-repeat;
+}
+
+.SUIIconview .Image
+{
+	width:					80px;
+	height:					80px;
+}
+
+.SUIIconviewDisabled .Item
+{
+
+}
+
+.SUIIconviewDisabled .ItemSelected
+{
+
+}
+
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>
+
+<html>
+	<head>
+		<title></title>
+	</head>
+	<body>
+	</body>
+</html>

@@ -1,9 +1,12 @@
+
+
 /* --------------------------------------------------------------------------------------------------------------
 Upload
 -------------------------------------------------------------------------------------------------------------- */
 .SUIUpload
 {
 	margin: 				1px;	
+	padding:				3px;
 
 	display: 				inline-block;
 	
@@ -18,268 +21,173 @@ Upload
 .SUIUploadDisabled
 {}
 
-.SUIUpload .Left
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					5px;
-	height: 				31px;
-	
-	background: 				transparent url('images/upload/left.png') no-repeat;	
-}
-
-.SUIUploadFocus .Left
+.SUIUploadLeftClicked
 {}
 
-.SUIUploadLeftClicked .Left
-{
-	background: 				transparent url('images/upload/left_leftclicked.png') no-repeat;	
-}
-
-.SUIUploadDisabled .Left
-{
-	background: 				transparent url('images/upload/left_disabled.png') no-repeat;	
-}
-
-.SUIUpload .Center
+.SUIUpload .ButtonLeft
 {
 	float: 					left;
+	
+	width: 					6px;
+	height: 				32px;
+	
+	background: 				transparent url('images/upload/background.png') no-repeat;	
+	background-position:			0px -64px;
+}
 
-	margin-top: 				3px;
-	margin-bottom:				3px;
+.SUIUploadFocus .ButtonLeft
+{}
 
+.SUIUploadLeftClicked .ButtonLeft
+{
+	background-position:			0px -256px;
+}
+
+.SUIUploadDisabled .ButtonLeft
+{
+	background-position:			0px -192px;
+}
+
+
+.SUIUpload .ButtonCenter
+{
+	float: 					left;
+	
+	padding-top:				7px;
+	
+	width: 					90px;
+	height: 				25px;
+	
+	background: 				transparent url('images/upload/background.png') repeat-x;	
+	background-position:			0px -96px;
+	
+	font-family:				verdana;		
+	font-size:				13px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 0px #444444;		
+	text-align:				center;
+	
+	color:					#fff;
+}
+
+.SUIUploadFocus .ButtonCenter
+{}
+
+.SUIUploadLeftClicked .ButtonCenter
+{
 	padding-top:				8px;
 	
-	height:					23px;
-	background: 				transparent url('images/upload/center.png') repeat-x;
+	height:					24px;
+
+	background-position:			0px -288px;
+}
+
+.SUIUploadDisabled .ButtonCenter
+{
+	background-position:			0px -224px;
 	
-	font-size: 				12px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
-	
-	color:					#555555;
+	text-shadow: 				1px 1px 0px #fff;	
+	color:					#777;
 	
 	cursor:					default;
 }
 
-.SUIUploadFocus .Center
-{}
-
-.SUIUploadLeftClicked .Center
-{
-	padding-top:				9px;
-	
-	height:					23px;
-	
-	background: 				transparent url('images/upload/center_leftclicked.png') repeat-x;
-}
-
-.SUIUploadDisabled .Center
-{
-	background: 				transparent url('images/upload/center_disabled.png') repeat-x;	
-	
-	color:					#aaaaaa;
-}
-
-.SUIUpload .Right
+.SUIUpload .ButtonRight
 {
 	float: 					left;
 	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
-	width: 					5px;
-	height: 				31px;
+	width: 					6px;
+	height: 				32px;
 	
-	background: 				transparent url('images/upload/right.png') no-repeat;	
+	background: 				transparent url('images/upload/background.png') no-repeat;	
+	background-position:			-6px -64px;
 }
 
-.SUIUploadFocus .Right
+.SUIUploadFocus .ButtonRight
 {}
 
-.SUIUploadLeftClicked .Right
+.SUIUploadLeftClicked .ButtonRight
 {
-	background: 				transparent url('images/upload/right_leftclicked.png') no-repeat;	
+	background-position:			-6px -256px;
 }
 
-.SUIUploadDisabled .Right
+.SUIUploadDisabled .ButtonRight
 {
-	background: 				transparent url('images/upload/right_disabled.png') no-repeat;	
+	background-position:			-6px -192px;
 }
 
-.SUIUpload .Text
+.SUIUpload .TextLeft
 {
-	float:					right;
-
-	margin:					11px;		
+	float: 					left;
 	
-	font-size: 				12px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
+	width: 					4px;
+	height: 				32px;
 	
-	color:					#555555;
+	background: 				transparent url('images/upload/background.png') no-repeat;	
+	background-position:			0px 0px;
 }
 
-.SUIUploadFocus .Text
+.SUIUploadFocus .TextLeft
 {}
 
-.SUIUploadDisabeld .Text
+.SUIUploadDisabled .TextLeft
 {
-	color:					#aaaaaa;
+	background: 				transparent url('images/upload/background.png') no-repeat;
+	background-position:			0px -128px;
 }
 
-.SUIUpload .Th
+.SUIUpload .TextCenter
 {
-	float: right;
-	margin: 3px;
+	float: 					left;
 
-	width: 32px;
-	height: 31px;	
+	padding-top:				8px;	
+
 	
-	background: 				transparent url('images/upload/throbber.png') no-repeat;		
-}
-
-.SUIUpload .ThrobberAnimation
-{
-	position: 				relative;
-
-	width:					24px;
 	height:					24px;
 
-	background: 				transparent url('images/upload/throbber_animation.gif') no-repeat;		
-}
-
-
-
-
-
-
-.SUIUploadContainer
-{
-	margin: 				1px;	
-
-	display: 				inline-block;
+	background: 				transparent url('images/upload/background.png') repeat-x;	
+	background-position:			0px -32px;
 	
-	outline:				none;
-}
-
-.SUIUploadContainerFocus
-{
-	outline:				#aaaaaa dotted 1px;
-}
-
-.SUIUploadControlButtonLeft
-{
-	float: 					left;
-	
-	margin-top: 				3px;
-	margin-left:				3px;
-	margin-bottom:				3px;
-	
-	width: 					4px;
-	height: 				31px;
-	
-	background: 				transparent url('images/upload/left.png') no-repeat;	
-}
-
-.SUIUploadControlButtonLeftFocus
-{
-}
-
-.SUIUploadControlButtonLeftClicked
-{
-	background: 				transparent url('images/upload/left_clicked.png') no-repeat;	
-}
-
-.SUIUploadControlButtonLeftDisabled
-{
-	background: 				transparent url('images/upload/left_disabled.png') no-repeat;	
-}
-
-.SUIUploadControlButtonCenter
-{
-	float: 					left;
-
-	margin-top: 				3px;
-	margin-bottom:				3px;
-
-	padding-top:				8px;
-	
-	height:					23px;
-	background: 				transparent url('images/upload/center.png') repeat-x;
-	
-	font-size: 				14px;
-	font-weight:				bold;
-	text-align:				center;		
+	font-family:				arial;		
+	font-size:				15px;
 	text-decoration: 			none;	
-	
-	color:					#555555;
-	
+	text-shadow: 				1px 1px 1px #ffffff;	
+	color:					#444;
+		
+	white-space:				nowrap;
+	overflow:				hidden;
+	cursor:					default;
 }
 
-.SUIUploadControlButtonCenterFocus
-{
-}
+.SUIUploadFocus .TextCenter
+{}
 
-.SUIUploadControlButtonCenterClicked
+.SUIUploadDisabled .TextCenter
 {
-	padding-top:				4px;
-	
-	height:					18px;
-	
-	background: 				transparent url('images/upload/center_clicked.png') repeat-x;	
-}
+	background: 				transparent url('images/upload/background.png') repeat-x;
+	background-position:			0px -160px;
 
-.SUIUploadControlButtonCenterDisabled
-{
-	background: 				transparent url('images/upload/center_disabled.png') repeat-x;	
-	
 	color:					#aaaaaa;
 }
 
-.SUIUploadControlButtonRight
+.SUIUpload .TextRight
 {
 	float: 					left;
 	
-	margin-top: 				3px;
-	margin-right:				3px;
-	margin-bottom:				3px;
-		
 	width: 					4px;
-	height: 				31px;
+	height: 				32px;
 	
-	background: 				transparent url('images/upload/right.png') no-repeat;	
+	background: 				transparent url('images/upload/background.png') no-repeat;	
+	background-position:			-4px 0px;
 }
 
-.SUIUploadControlButtonRightFocus
+.SUIUploadFocus .TextRight
+{}
+
+.SUIUploadDisabled .TextRight
 {
+	background: 				transparent url('images/upload/background.png') no-repeat;
+	background-position:			-4px -128px;
 }
 
-.SUIUploadControlButtonRightClicked
-{
-	background: 				transparent url('images/upload/right_clicked.png') no-repeat;	
-}
 
-.SUIUploadControlButtonRightDisabled
-{
-	background: 				transparent url('images/upload/right_disabled.png') no-repeat;	
-}
-
-.SUIUploadText
-{
-	margin:					7px;		
-	
-	font-size: 				14px;
-	font-weight:				bold;
-	text-align:				center;		
-	text-decoration: 			none;	
-	
-	color:					#555555;
-}

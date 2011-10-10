@@ -1,8 +1,128 @@
+/* --------------------------------------------------------------------------------------------------------------
+Container
+-------------------------------------------------------------------------------------------------------------- */
+.SUIContainer
+{
+	position: 				relative;
 
-<html>
-	<head>
-		<title></title>
-	</head>
-	<body>
-	</body>
-</html>
+	margin: 				1px;	
+	padding:				3px;
+
+	display: 				inline-block;	
+	outline:				none;
+}
+
+.SUIContainer .Title
+{
+	float:					left;
+
+	margin-top:				15px;
+		
+	font-family:				arial;		
+	font-size:				15px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 1px #ffffff;
+}
+
+.SUIContainer .Icon
+{
+	float:					left;
+	
+	margin-top:				5px;
+	margin-left:				10px;
+	margin-right:				10px;
+}
+
+.SUIContainer .TopLeft
+{
+	float: 					left;
+		
+	width: 					5px;
+	height: 				48px;
+	
+	background: 				transparent url('images/container/background1.png') no-repeat;	
+	background-position:			0px 0px;
+}
+
+.SUIContainer .TopCenter
+{
+	float: 					left;
+		
+	height:					48px;
+	
+	background: 				transparent url('images/container/background1.png') repeat-x;	
+	background-position:			0px -48px;			
+}
+
+.SUIContainer .TopRight
+{
+	float: 					left;
+			
+	width: 					5px;
+	height: 				48px;
+	
+	background: 				transparent url('images/container/background1.png') no-repeat;	
+	background-position:			-5px 0px;
+}
+
+.SUIContainer .ContentLeft
+{
+	float: 					left;
+	
+	width: 					5px;
+
+	background: 				transparent url('images/container/background2.png') repeat-y;	
+	background-position:			0px 0px;
+}
+
+.SUIContainer .ContentCenter
+{
+	float: 					left;
+	
+	background-color: 			#ffffff;
+	
+	outline: 				none;
+}
+
+.SUIContainer .ContentRight
+{
+	float: 					left;
+	
+	width: 					5px;
+	
+	background: 				transparent url('images/container/background2.png') repeat-y;	
+	background-position:			-5px 0px;
+}
+
+.SUIContainer .BottomLeft
+{
+	float: 					left;
+	
+	width: 					5px;
+	height:					5px;	
+	
+	background: 				transparent url('images/container/background1.png') no-repeat;	
+	background-position:			0px -96px;
+}
+
+.SUIContainer .BottomCenter
+{
+	float: 					left;
+	
+	height:					5px;
+
+	background: 				transparent url('images/container/background1.png') repeat-x;	
+	background-position:			0px -101px;
+}
+
+.SUIContainer .BottomRight
+{
+	float: 					left;
+	
+	height: 				5px;		
+	width: 					5px;	
+	
+	background: 				transparent url('images/container/background1.png') no-repeat;	
+	background-position:			-5px -96px;
+}
+

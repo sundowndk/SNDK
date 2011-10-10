@@ -12,7 +12,7 @@
     <OutputPath>.</OutputPath>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="build.sh ../../Binary/Debug/" />
+        <Command type="AfterBuild" command="build.sh bin/Debug/html/" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -20,7 +20,7 @@
     <OutputPath>.</OutputPath>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="build.sh ../../Binary/Release/" />
+        <Command type="AfterBuild" command="build.sh bin/Release/html/" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
@@ -59,15 +59,25 @@
     <None Include="javascript\widgets\blobmenu.js" />
     <None Include="javascript\widgets\rotator.js" />
     <None Include="javascript\prototypes.js" />
-    <None Include="css\sui_button.css" />
-    <None Include="css\sui_checkbox.css" />
-    <None Include="css\sui_dropbox.css" />
-    <None Include="css\sui_iconview.css" />
-    <None Include="css\sui_listivew.css" />
-    <None Include="css\sui_textarea.css" />
-    <None Include="css\sui_textbox.css" />
-    <None Include="css\sui_upload.css" />
     <None Include="build.sh" />
+    <None Include="css\button.css" />
+    <None Include="css\button_small.css" />
+    <None Include="css\checkbox.css" />
+    <None Include="css\container.css" />
+    <None Include="css\dropbox.css" />
+    <None Include="css\iconview.css" />
+    <None Include="css\label.css" />
+    <None Include="css\layoutbox.css" />
+    <None Include="css\listview.css" />
+    <None Include="css\listview_noborder.css" />
+    <None Include="css\tabview.css" />
+    <None Include="css\textarea.css" />
+    <None Include="css\textbox.css" />
+    <None Include="css\upload.css" />
+    <None Include="html\debug.css" />
+    <None Include="html\debug.html" />
+    <None Include="html\debug.xml" />
+    <None Include="css\container_modal.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />
