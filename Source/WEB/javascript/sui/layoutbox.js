@@ -244,19 +244,6 @@ layoutbox : function (attributes)
 					case "dynamic":
 					{
 						dynamics[dynamics.length] = index;
-						if (_attributes.type == "horizontal")
-						{	
-							size = Math.floor ((height.container - combinedsize) / dynamics.length);
-						}
-						else if (_attributes.type == "vertical")
-						{
-							size = Math.floor ((width.container - combinedsize) / dynamics.length);
-						}									
-						
-						for (index in dynamics)
-						{
-							_attributes.panels[dynamics[index]]._attributes.calculatedSize = size;	
-						}
 
 						continue;
 					}						
@@ -264,6 +251,20 @@ layoutbox : function (attributes)
 
 				_attributes.panels[index]._attributes.calculatedSize = size;											
 			}
+			
+			if (_attributes.type == "horizontal")
+			{	
+				dynamicsize = Math.floor ((height.container - combinedsize) / dynamics.length);
+			}
+			else if (_attributes.type == "vertical")
+			{
+				dynamicsize = Math.floor ((width.container - combinedsize) / dynamics.length);
+			}				
+											
+			for (index in dynamics)
+			{
+				_attributes.panels[dynamics[index]]._attributes.calculatedSize = dynamicsize;	
+			}		
 						
 			for (index in _attributes.panels)
 			{
