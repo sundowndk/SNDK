@@ -1,14 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/html/debug.css">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/html/debug.xml">
     <Files>
-      <File FileName="WEB/build.sh" Line="21" Column="53" />
-      <File FileName="WEB/sndk.jsb" Line="57" Column="23" />
+      <File FileName="WEB/build.sh" Line="35" Column="1" />
       <File FileName="WEB/html/debug.html" Line="1" Column="1" />
-      <File FileName="WEB/html/debug.css" Line="8" Column="1" />
+      <File FileName="WEB/html/debug.css" Line="4" Column="2" />
+      <File FileName="WEB/javascript/sui/builder.js" Line="64" Column="2" />
+      <File FileName="WEB/html/debug.xml" Line="319" Column="23" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
-        <State expanded="True" selected="True" />
+        <State expanded="True">
+          <Node name="WEB" expanded="True" selected="True">
+            <Node name="html" expanded="True" />
+            <Node name="javascript" expanded="True">
+              <Node name="sui" expanded="True" />
+            </Node>
+          </Node>
+        </State>
       </Pad>
       <Pad Id="ClassPad">
         <State expanded="True" selected="True">
@@ -23,7 +31,7 @@
   <MonoDevelop.Ide.DebuggingService>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

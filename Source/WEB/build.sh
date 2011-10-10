@@ -1,57 +1,59 @@
 #!/bin/bash
 #
-# Simple build script for sndk.js
-#
-# v1.0 Initial version
-#
 # Usage: build.sh [outputdirectory]
 
 ####################################################
 # INIT                                             #
 ####################################################
 BASEDIR=$(dirname "$1")
-OUTPUTDIR="$1/sndk"
+OUTPUTDIR="$1"
 
 ####################################################
 # CLEAN                                            #
 ####################################################
 echo "Cleaning previous build..."
-rm $OUTPUTDIR -r
+rm "$OUTPUTDIR/html/sndk/" -r
 
 ####################################################
 # SETUP                                            #
 ####################################################
 echo "Setting up build structur..."
-mkdir $OUTPUTDIR
-mkdir "$OUTPUTDIR/js"
+mkdir "$OUTPUTDIR/html/sndk/"
+mkdir "$OUTPUTDIR/html/sndk/css"
+mkdir "$OUTPUTDIR/html/sndk/html"
+mkdir "$OUTPUTDIR/html/sndk/js"
+mkdir "$OUTPUTDIR/html/sndk/includes"
 
 ####################################################
 # JS                                               #
 ####################################################
-echo "Bulding JAVASCRIPT..."
-jsbuilder sndk.jsb "$OUTPUTDIR/js/"
+echo "Building JAVASCRIPT..."
+jsbuilder sndk.jsb "$OUTPUTDIR/html/sndk/js/"
 
 ####################################################
 # CSS                                              #
 ####################################################
 echo "Bulding CSS..."
-mkdir "$OUTPUTDIR/css"
-CSSFILE="$OUTPUTDIR/css/sndk.css"
+CSSFILE="$OUTPUTDIR/html/sndk/css/sndk.css"
 touch "$CSSFILE"
 find css -type f -name *.css -exec cat "{}" >> "$CSSFILE"  \;
-cp -rv "css/images/" "$OUTPUTDIR/css/"
+cp -rv "css/images/" "$OUTPUTDIR/html/sndk/css/"
 
 ####################################################
 # HTML                                             #
 ####################################################
-echo "Bulding HTML..."
-cp -rv "html/" "$OUTPUTDIR/html/"
-
+echo "Building HTML..."
+for file in html/*; do
+echo $file
+    cp -rv $file "$OUTPUTDIR/html/sndk/html/"
+done
 
 ####################################################
 # INCLUDES		                                   #
 ####################################################
 echo "Bulding INCLUDES..."
-cp -rv "includes/" "$OUTPUTDIR/includes"
-
+for file in includes/*; do
+echo $file
+    cp -rv $file "$OUTPUTDIR/html/sndk/includes/"
+done
 

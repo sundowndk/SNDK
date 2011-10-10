@@ -12,7 +12,7 @@
     <OutputPath>.</OutputPath>
     <CustomCommands>
       <CustomCommands>
-        <Command type="AfterBuild" command="build.sh bin/Debug/html/" />
+        <Command type="AfterBuild" command="build.sh bin/Debug" />
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
