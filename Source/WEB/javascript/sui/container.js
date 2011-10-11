@@ -7,26 +7,17 @@
 // .getAttribute (string)
 // .setAttribute (string, string)
 //	
-// 	id 		get
-//	tag		get/set
-//	stylesheet	get/set
-//	width		get/set
-//	height		get/set
-//	appendTo	get/set
-//	managed		get/set
-//	canScroll	get/set
-//	title		get/set
-//	icon		get/set
+// 		id 				get
+//		tag				get/set
+//		stylesheet		get/set
+//		width			get/set
+//		height			get/set
+//		appendTo		get/set
+//		managed			get/set
+//		canScroll		get/set
+//		title			get/set
+//		icon			get/set
 //
-// CHANGELOG:
-//
-// v1.01:
-//	- Added managed mode.
-//	- Fixed percentage width/height calculations.
-//
-// v1.00:
-//	- Initial release.
-
 /**
  * @constructor
  */
@@ -195,7 +186,7 @@ container : function (attributes)
 				
 		// Width
 		if (!_attributes.width) 
-			_attributes.width = "100px";				
+			_attributes.width = "100%";				
 			
 		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
@@ -210,7 +201,7 @@ container : function (attributes)
 		
 		// Height
 		if (!_attributes.height) 
-			_attributes.height = "100px";				
+			_attributes.height = "100%";				
 			
 		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{
