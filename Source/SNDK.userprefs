@@ -1,30 +1,21 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/javascript/sui/layoutbox.js">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/javascript/sui/container.js">
     <Files>
-      <File FileName="WEB/build.sh" Line="2" Column="2" />
-      <File FileName="WEB/html/debug.html" Line="1" Column="1" />
-      <File FileName="WEB/html/debug.css" Line="4" Column="2" />
-      <File FileName="WEB/javascript/sui/builder.js" Line="64" Column="2" />
-      <File FileName="WEB/html/debug.xml" Line="319" Column="23" />
-      <File FileName="WEB/javascript/sui/layoutbox.js" Line="263" Column="6" />
+      <File FileName="WEB/javascript/sui/label.js" Line="150" Column="1" />
+      <File FileName="WEB/javascript/sui/textbox.js" Line="8" Column="1" />
+      <File FileName="WEB/javascript/sui/builder.js" Line="190" Column="8" />
+      <File FileName="WEB/javascript/sui/container.js" Line="204" Column="30" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-<<<<<<< HEAD
           <Node name="WEB" expanded="True">
-            <Node name="css" expanded="True">
-              <Node name="iconview.css" selected="True" />
-            </Node>
-=======
-          <Node name="SNDK" expanded="True">
-            <Node name="References" expanded="True" />
-          </Node>
-          <Node name="WEB" expanded="True" selected="True">
->>>>>>> b6a23a365d7bfbfaac24a00a42784dc41f2cee56
+            <Node name="css" expanded="True" />
             <Node name="html" expanded="True" />
             <Node name="javascript" expanded="True">
-              <Node name="sui" expanded="True" />
+              <Node name="sui" expanded="True">
+                <Node name="container.js" selected="True" />
+              </Node>
             </Node>
           </Node>
         </State>
