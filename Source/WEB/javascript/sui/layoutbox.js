@@ -132,7 +132,7 @@ layoutbox : function (attributes)
 	
 		// Width
 		if (!_attributes.width) 
-			_attributes.width = "100px";				
+			_attributes.width = "100%";				
 			
 		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
@@ -147,7 +147,7 @@ layoutbox : function (attributes)
 		
 		// Height
 		if (!_attributes.height) 
-			_attributes.height = "100px";
+			_attributes.height = "100%";
 			
 		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{

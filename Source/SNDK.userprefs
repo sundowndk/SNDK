@@ -1,16 +1,20 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/html/debug.xml">
+  <MonoDevelop.Ide.Workbench ActiveDocument="WEB/javascript/sui/layoutbox.js">
     <Files>
-      <File FileName="WEB/build.sh" Line="35" Column="1" />
+      <File FileName="WEB/build.sh" Line="2" Column="2" />
       <File FileName="WEB/html/debug.html" Line="1" Column="1" />
       <File FileName="WEB/html/debug.css" Line="4" Column="2" />
       <File FileName="WEB/javascript/sui/builder.js" Line="64" Column="2" />
       <File FileName="WEB/html/debug.xml" Line="319" Column="23" />
+      <File FileName="WEB/javascript/sui/layoutbox.js" Line="263" Column="6" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="WEB" expanded="True" selected="True">
+          <Node name="WEB" expanded="True">
+            <Node name="css" expanded="True">
+              <Node name="iconview.css" selected="True" />
+            </Node>
             <Node name="html" expanded="True" />
             <Node name="javascript" expanded="True">
               <Node name="sui" expanded="True" />
