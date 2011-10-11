@@ -186,6 +186,8 @@ construct : function (attributes)
 						case "label":
 						{
 							elements[attributes.tag] = new SNDK.SUI.label (attributes);
+							Parent.addUIElement (elements[attributes.tag]);			
+							
 							break;
 						}						
 						

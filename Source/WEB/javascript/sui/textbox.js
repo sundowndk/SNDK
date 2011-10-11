@@ -5,38 +5,25 @@
 // .getAttribute (string)
 // .setAttribute (string, string)
 //	
-// 	id 		get
-//	tag		get/set
-//	name		get/set
-//	stylesheet	get/set
-//	appendTo	get/set
-//	managed		get/set
-//	width		get/set
-//	height		get
-//	disabled	get/set
-//	autoComplete	get/set
-//	readOnly	get/set
-//	focus		get/set
-//	password	get/set
-//	onFocus		get/set
-//	onBlur		get/set
-//	onChange	get/set
-//	onKeyUp		get/set
-//	value		get/set
+// 		id 				get
+//		tag				get/set
+//		name			get/set
+//		stylesheet		get/set
+//		appendTo		get/set
+//		managed			get/set
+//		width			get/set
+//		height			get
+//		disabled		get/set
+//		autoComplete	get/set
+//		readOnly		get/set
+//		focus			get/set
+//		password		get/set
+//		onFocus			get/set
+//		onBlur			get/set
+//		onChange		get/set
+//		onKeyUp			get/set
+//		value			get/set
 //
-// CHANGELOG:
-//
-// v1.02:
-//	- Added managed mode.
-//	- Added a cache for offent read variables.
-//	- Fixed width calculations AGAIN. Now percentages should work correctly.
-//
-// v1.01: 
-//	- Fixed width calculation. Now works with percentage.
-//	- Code cleanup.
-//
-// v1.00:
-//	- Initial release.
 /**
  * @constructor
  */
@@ -45,9 +32,9 @@ textbox : function (attributes)
 	var _elements = new Array ();
 	var _attributes = attributes;
 			
-	var _temp = 	{ initialized: false,
-			  cache: new Array ()
-			}
+	var _temp = { initialized: false,
+			  	  cache: new Array ()
+				};
 			
 	_attributes.id = SNDK.tools.newGuid ()	
 					

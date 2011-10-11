@@ -11,10 +11,17 @@
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
+<<<<<<< HEAD
           <Node name="WEB" expanded="True">
             <Node name="css" expanded="True">
               <Node name="iconview.css" selected="True" />
             </Node>
+=======
+          <Node name="SNDK" expanded="True">
+            <Node name="References" expanded="True" />
+          </Node>
+          <Node name="WEB" expanded="True" selected="True">
+>>>>>>> b6a23a365d7bfbfaac24a00a42784dc41f2cee56
             <Node name="html" expanded="True" />
             <Node name="javascript" expanded="True">
               <Node name="sui" expanded="True" />
