@@ -305,7 +305,7 @@ listview : function (attributes)
 		
 		// Width
 		if (!_attributes.width) 
-			_attributes.width = "100px";				
+			_attributes.width = "100%";				
 			
 		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
@@ -320,7 +320,7 @@ listview : function (attributes)
 		
 		// Height
 		if (!_attributes.height) 
-			_attributes.height = "100px";				
+			_attributes.height = "100%";				
 			
 		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{
@@ -424,9 +424,27 @@ listview : function (attributes)
 		{
 			var index2 = temp.length;
 			temp[index2] = new Array ();
+			
+//			for (bla1 in _attributes.columns)
+	//		{
+		//		console.log (_attributes.columns[bla1].tag);
+			
+//			}
+	
+			
+			
 			for (index3 in array[index])
 			{
 				temp[index2][index3] = array[index][index3];
+				
+				if (typeof(temp[index2][index3]) == "object")
+				{
+					temp[index2][index3] = "BLA"
+				
+				}
+				
+				//console.log (typeof(temp[index2][index3]))
+				
 			}			
 		}
 
