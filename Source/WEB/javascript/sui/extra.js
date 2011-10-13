@@ -72,7 +72,8 @@ addInit : function (obj)
 			{
 				try
 				{
-				if (obj._temp.initalized != true)
+				
+				if (obj._temp.initialized != true)
 				{
 
 					if (typeof (obj._attributes.appendTo) == "string")
@@ -80,13 +81,14 @@ addInit : function (obj)
 						obj._attributes.appendTo = document.getElementById (obj._attributes.appendTo);
 					}
 
-//					console.log (obj)
+					//console.log (obj._temp.initialized)									
 					obj._attributes.appendTo.appendChild (obj._elements["container"])
 
 
 					obj._init ();
 					
-					obj._temp.initialized = true;
+					obj._temp.initialized = true;			
+					
 				}
 				}
 				catch (e)

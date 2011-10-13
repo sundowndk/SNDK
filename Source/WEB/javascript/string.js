@@ -27,4 +27,26 @@ isNullOrEmpty : function (value)
         return false;
     }
     return true;
+},
+
+/**
+ * Checks whether a string contains a given character.
+ * @param {string} s The string to test.
+ * @param {string} ss The substring to test for.
+ * @return {boolean} True if {@code s} contains {@code ss}.
+ */
+contains : function (s, ss) 
+{
+	return s.indexOf(ss) != -1;
+},
+
+trimEnd : function (s, ss)
+{	
+	if (s.substr (s.length - ss.length, ss.length) == ss)
+	{
+		return s.substr (0, s.length - ss.length);
+	}
+	
+	return s;
 }
+

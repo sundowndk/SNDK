@@ -344,7 +344,7 @@ listview : function (attributes)
 		}
 		else
 		{
-			_attributes.items = derefArray (_attributes.items);
+			_attributes.items = derefItems (_attributes.items);
 		}
 		
 		// treeview
@@ -417,6 +417,60 @@ listview : function (attributes)
 		}						
 	}		
 
+	function derefItems (array)
+	{
+		var temp = new Array ();
+		
+		for (index in array)
+		{
+			var index2 = temp.length;						
+			temp[index2] = derefItem (array[index])							
+		}
+			
+		return temp;				
+	}
+
+	function derefItem (item)
+	{
+		var temp = new Array ();
+		
+		for (index in item)
+		{				
+			var column = null;
+			for (bla2 in _attributes.columns)
+			{
+				if (_attributes.columns[bla2].tag == index)
+				{
+					column = _attributes.columns[bla2];					
+				}
+			}
+				
+			if (column == null)
+			{
+				continue;				
+			}
+																			
+			if (typeof(item[index]) == "object")
+			{
+					var test = "";
+					for (bla1 in item[index])
+					{
+						test += item[index][bla1][column.condense] +", ";						
+					}
+					
+					test = SNDK.string.trimEnd (test, ", ");
+								
+					temp[index] = test;				
+			}
+			else				
+			{
+				temp[index] = item[index];
+			}							
+		}	
+		
+		return temp;		
+	}
+
 	function derefArray (array)
 	{
 		var temp = new Array ();
@@ -424,23 +478,55 @@ listview : function (attributes)
 		{
 			var index2 = temp.length;
 			temp[index2] = new Array ();
-			
-//			for (bla1 in _attributes.columns)
-	//		{
-		//		console.log (_attributes.columns[bla1].tag);
-			
+	
+//			columnnames = "";
+							
+//			for (bla3 in _attributes.columns)
+//			{
+//				columnnames += _attributes.columns[bla3].tag +";;";							
 //			}
 	
 			
 			
 			for (index3 in array[index])
 			{
-				temp[index2][index3] = array[index][index3];
 				
-				if (typeof(temp[index2][index3]) == "object")
+				var column = null;
+				for (bla2 in _attributes.columns)
 				{
-					temp[index2][index3] = "BLA"
+					if (_attributes.columns[bla2].tag == index3)
+					{
+						column = _attributes.columns[bla2];					
+					}
+				}
 				
+				if (column == null)
+				{
+					continue;				
+				}
+				
+				//console.log (column)
+																
+				if (typeof(array[index][index3]) == "object")
+				{
+				
+				
+					var test = "";
+					for (bla1 in array[index][index3])
+					{
+						test += array[index][index3][bla1][column.condense] +", ";
+						//console.log (array[index][index3][bla1])					
+					}
+					
+					test = SNDK.string.trimEnd (test, ", ");
+				
+					//var test = array[index][index3]
+					temp[index2][index3] = test;
+				
+				}
+				else				
+				{
+					temp[index2][index3] = array[index][index3];				
 				}
 				
 				//console.log (typeof(temp[index2][index3]))
@@ -1404,16 +1490,16 @@ listview : function (attributes)
 	function functionSetItem (item, row)
 	{
 		if (_temp.initialized)
-		{
+		{					
 			if (row != null)
 			{			
-				_attributes.items [_element.rows[row].itemIndex] = item;
+				_attributes.items [_element.rows[row].itemIndex] = derefItem (item);
 				_temp.isDirty = true;
 				refresh ();								
 			}
 			else
 			{		
-				_attributes.items [_elements.rows[_temp.selectedRow].itemIndex] = item;
+				_attributes.items [_elements.rows[_temp.selectedRow].itemIndex] = derefItem(item);
 				_temp.isDirty = true;
 				refresh ();
 			}		
@@ -1437,7 +1523,7 @@ listview : function (attributes)
 	{
 		if (items != null)
 		{
-			_attributes.items = derefArray (items);		
+			_attributes.items = derefItems (items);		
 			
 			if (_temp.initialized)
 			{
