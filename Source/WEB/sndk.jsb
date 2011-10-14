@@ -34,7 +34,6 @@
 				<js file="javascript/sui/tabview.js" />
 				<js file="javascript/sui/text.js" />
 				<js file="javascript/sui/canvas.js" />				
-
 				
 				<class name="builder">
 					<js file="javascript/sui/builder.js" />

@@ -905,13 +905,13 @@ listview : function (attributes)
 	{		
 		if (_temp.initialized)
 		{
-			var newitem = new Array ();
-			for (index in item)
-			{
-				newitem[index] = item[index];
-			}
+	//		var newitem = new Array ();
+	//		for (index in item)
+	//		{
+	//			newitem[index] = item[index];
+	//		}
 			
-			_attributes.items[_attributes.items.length] = newitem;
+			_attributes.items[_attributes.items.length] = derefItem (item);
 			_temp.isDirty = true;
 			refresh ();
 			eventOnChange ();		
@@ -919,13 +919,13 @@ listview : function (attributes)
 		else
 		{
 
-			var newitem = new Array ();
-			for (index in item)
-			{
-				newitem[index] = item[index];
-			}
+		//	var newitem = new Array ();
+		//	for (index in item)
+		//	{
+		//		newitem[index] = item[index];
+		//	}
 			
-			_attributes.items[_attributes.items.length] = newitem;
+			_attributes.items[_attributes.items.length] = derefItem (item);
 		}
 	
 	// TODO: fix this
