@@ -193,7 +193,7 @@ namespace SNDK.DBI
 			// If no available ConnectionThread was found, lets make a new.
 			if (result == null)
 			{
-				Console.WriteLine ("New ConnectionThread: "+ this._pool.Count);
+//				Console.WriteLine ("New ConnectionThread: "+ this._pool.Count);
 				
 				switch (this._databaseconnector)
 				{

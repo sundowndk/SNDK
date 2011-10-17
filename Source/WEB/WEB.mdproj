@@ -24,6 +24,9 @@
       </CustomCommands>
     </CustomCommands>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
+    <OutputPath>.\</OutputPath>
+  </PropertyGroup>
   <ItemGroup>
     <None Include="sndk.jsb" />
     <None Include="javascript\ajax.js" />

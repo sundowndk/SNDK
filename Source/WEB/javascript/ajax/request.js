@@ -81,7 +81,7 @@ request : function (application, applicationparam, applicationdatafield, request
 		_data = new Array();						
 	
 		var xmldoc = _xmlhttp.responseXML;
-		var root = xmldoc.getElementsByTagName ('variables').item(0);				
+		var root = xmldoc.getElementsByTagName ('ajax').item(0);				
 		
 		parseResponsRecursive (root.childNodes, _data);
 		
@@ -99,16 +99,36 @@ request : function (application, applicationparam, applicationdatafield, request
 
 			switch (node.attributes.getNamedItem ("type").value)
 			{
+				case "object":
+				{
+					var list = new Array();
+				
+					for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
+					{
+					console.log (node.childNodes[index2]);
+					var hashtable = new Array ();
+					var node2 = node.childNodes[index2];
+						
+						parseResponsRecursive (node.childNodes[index2], hashtable);
+						
+						list[list.length] = hashtable;
+					} 
+																								
+					Data[node.tagName] = list;					
+					break;
+				}
+								
+			
 				case "string":
 				{
-					if (node.firstChild != null)
-					{
+					//if (node.firstChild != null)
+					//{
 						Data[node.tagName] = node.childNodes[0].nodeValue;
-					}
-					else
-					{
-						Data[node.tagName] = "";
-					}
+					//}
+					//else
+					//{
+					//	Data[node.tagName] = "";
+					//}
 
 					break;
 				}

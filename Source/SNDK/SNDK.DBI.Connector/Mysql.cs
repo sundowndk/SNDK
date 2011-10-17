@@ -100,19 +100,22 @@ namespace SNDK.DBI.Connector
 			Query.ConnectionThread.DbCommand = dbconnection.CreateCommand ();			
 			Query.ConnectionThread.DbCommand.CommandText = QueryString;
 			
-//			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");			
+			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");			
 
 			try
 			{
-//				if (usenonquery.Success)
-//				{
-//					Query.affectedrows = Query.ConnectionThread.DbCommand.ExecuteNonQuery ();
-//				}
-//				else
-//				{
-				Console.WriteLine ("using: "+ Query.ConnectionThread._id);
+				if (usenonquery.Success)
+				{
+					Query.affectedrows = Query.ConnectionThread.DbCommand.ExecuteNonQuery ();
+				}
+				else
+				{
+//				Console.WriteLine ("using: "+ Query.ConnectionThread._id);
+//				Query.ConnectionThread.DbCommand.ExecuteReader ();
+				
 					Query.rows = Query.ConnectionThread.DbCommand.ExecuteReader ();
-//				}
+//				Console.WriteLine ("BLA BLA BLA:"+ Query.rows.RecordsAffected);
+				}
 				
 				
 				success = true;

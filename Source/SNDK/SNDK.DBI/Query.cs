@@ -303,7 +303,7 @@ namespace SNDK.DBI
 			this._datareaderactive = false;
 			
 			this._connectionthread.Ready = true;
-			Console.WriteLine ("Dispose: "+ this._connectionthread._id.ToString ());
+//			Console.WriteLine ("Dispose: "+ this._connectionthread._id.ToString ());
 		}
 		#endregion
 	}
