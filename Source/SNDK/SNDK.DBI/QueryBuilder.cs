@@ -184,7 +184,7 @@ namespace SNDK.DBI
 					#endregion
 				}
 
-//				if (this._type != SNDK.Enums.QueryBuilderType.Insert)
+//				if (this._type != Toolbox.Enums.QueryBuilderType.Insert)
 //				{
 					if (this._wheres.Count > 0)
 					{

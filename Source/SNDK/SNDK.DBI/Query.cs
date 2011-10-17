@@ -39,7 +39,7 @@ namespace SNDK.DBI
 		private IDbConnection _dbconnection;
 		private bool _dbconnectionactive;
 		private bool _datareaderactive;
-		public Connection.ConnectionThread _thread;
+		private ConnectionThread _connectionthread;
 		private bool _success;
 		#endregion
 
@@ -83,6 +83,19 @@ namespace SNDK.DBI
 			{
 				this._dbconnectionactive = true;
 				this._dbconnection = value;
+			}
+		}
+		
+		internal ConnectionThread ConnectionThread
+		{
+			get
+			{
+				return this._connectionthread;
+			}
+			
+			set
+			{
+				this._connectionthread = value;
 			}
 		}
 		#endregion
@@ -269,50 +282,28 @@ namespace SNDK.DBI
 
 		public void Dispose ()
 		{				
-//			if (this._success == true) 
-//			{
-//				if (this._datareaderactive)
-//				{
 			try
 			{
-
-
-					this._rows.Close();
+				this._rows.Close ();
 				this._rows.Dispose ();
 				this._rows = null;
-				
 			}
-			catch
+			catch (Exception Exception)
 			{
-
+				Console.WriteLine ("Dispose Error");				
 			}
-//				}
-				
-//				if (_dbconnectionactive)
-//				{
-//			try
-//			{
-			this._thread._ready = true;
+									
+			if (this._connectionthread.DbCommand != null)
+			{
+				this._connectionthread.DbCommand.Dispose ();
+				this._connectionthread.DbCommand = null;
+			}
+						
+			this._dbconnectionactive = false;
+			this._datareaderactive = false;
 			
-			if (this._thread._dbcommand != null)
-			{
-				this._thread._dbcommand.Dispose ();
-				this._thread._dbcommand = null;
-			}
-				
-				
-//				this._dbconnection.Close();
-//					this._dbconnection = null;
-//			}
-//			catch
-//			{
-
-//			}
-//				}
-
-				this._dbconnectionactive = false;
-				this._datareaderactive = false;
-//			}
+			this._connectionthread.Ready = true;
+			Console.WriteLine ("Dispose: "+ this._connectionthread._id.ToString ());
 		}
 		#endregion
 	}

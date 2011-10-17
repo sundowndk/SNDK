@@ -34,67 +34,22 @@ namespace SNDK.DBI
 {
 	public class Connection
 	{
+		public static readonly object _lock = new object();		
+		
 		#region Private Fields
 		private SNDK.Enums.DatabaseConnector _databaseconnector;
-
 		private string _hostname;
 		private string _database;
 		private string _username;
 		private string _password;
-
-		public IDbConnection _test;
-		
-		public List<ConnectionThread> _threads;
-		
 		private bool _connected;
 		private bool _debugmode;
+		private List<ConnectionThread> _pool;		
+		
+		public IDbConnection _test;				
 		#endregion
 		
-		public class ConnectionThread
-		{
-			public bool _ready;
-			public IDbConnection _dbconnection;
-			public IDbCommand _dbcommand;
-			
-			public ConnectionThread ()
-			{
-				this._ready = true;
-			}
-		}
-
 		#region Internal Fields
-		public ConnectionThread GetConnection ()
-		{
-			ConnectionThread result = null;		
-			
-//			Console.WriteLine ("");
-//			Console.Write ("Find connection");
-			foreach (ConnectionThread connectionthread in this._threads)
-			{
-//				Console.Write (".");
-				if (connectionthread._ready)
-				{
-//					Console.Write ("Found!");
-					result = connectionthread;
-					break;
-				}
-			}
-			
-			if (result == null)
-			{
-				switch (this._databaseconnector)
-				{
-					case SNDK.Enums.DatabaseConnector.Mysql:
-						result = new ConnectionThread ();
-						result._dbconnection = SNDK.DBI.Connector.Mysql.Connect (this);
-						this._threads.Add (result);
-						break;
-				}
-			}
-			
-			return result;
-		}
-		
 		internal string Hostname
 		{
 			get
@@ -138,9 +93,9 @@ namespace SNDK.DBI
 			{
 				this._connected = value;
 			}
-		}
+		}	
 		#endregion
-
+		
 		#region Public Fields
 		public bool DebugMode
 		{
@@ -156,20 +111,17 @@ namespace SNDK.DBI
 		#endregion
 		
 		#region Constructor
-		public Connection (SNDK.Enums.DatabaseConnector DatabaseConnector, string Hostname, string Database, string Username, string Password)
+		public Connection (Enums.DatabaseConnector DatabaseConnector, string Hostname, string Database, string Username, string Password)
 		{
-			this._databaseconnector = DatabaseConnector;
-			this._hostname = Hostname;
-			this._database = Database;
-			this._username = Username;
-			this._password = Password;
-			this._connected = false;
-			this._debugmode = false;
-			
-			this._threads = new List<ConnectionThread> ();
+			Initalize (DatabaseConnector, Hostname, Database, Username, Password, false);
 		}
 
-		public Connection (SNDK.Enums.DatabaseConnector DatabaseConnector, string Hostname, string Database, string Username, string Password, bool DebugMode)
+		public Connection (Enums.DatabaseConnector DatabaseConnector, string Hostname, string Database, string Username, string Password, bool DebugMode)
+		{
+			Initalize (DatabaseConnector, Hostname, Database, Username, Password, DebugMode);
+		}
+		
+		private void Initalize (Enums.DatabaseConnector DatabaseConnector, string Hostname, string Database, string Username, string Password, bool DebugMode)
 		{
 			this._databaseconnector = DatabaseConnector;
 			this._hostname = Hostname;
@@ -179,7 +131,7 @@ namespace SNDK.DBI
 			this._connected = false;
 			this._debugmode = DebugMode;
 			
-			this._threads = new List<ConnectionThread> ();
+			this._pool = new List<ConnectionThread> ();
 		}
 		#endregion
 
@@ -188,38 +140,77 @@ namespace SNDK.DBI
 		{
 			switch (this._databaseconnector)
 			{
-				case SNDK.Enums.DatabaseConnector.Mysql:
+				case Enums.DatabaseConnector.Mysql:
+				{
 					ConnectionThread thread = new ConnectionThread ();
-					thread._dbconnection = SNDK.DBI.Connector.Mysql.Connect (this);
-					this._threads.Add (thread);
+					thread.DbConnection = Connector.Mysql.Connect (this);
+					this._pool.Add (thread);
 					break;
-
-				case SNDK.Enums.DatabaseConnector.Mssql:
-					SNDK.DBI.Connector.Mssql.Connect (this);
-					break;
-
+				}
 			}
 
 			return this._connected;
 		}
 
-		public SNDK.DBI.Query Query (string QueryString)
+		public Query Query (string QueryString)
 		{
-			SNDK.DBI.Query query = new SNDK.DBI.Query ();
+			Query query = new Query ();
 
 			switch (this._databaseconnector)
 			{
-				case SNDK.Enums.DatabaseConnector.Mysql:
-					SNDK.DBI.Connector.Mysql.Query2 (QueryString, this, query);
+				case Enums.DatabaseConnector.Mysql:
+				{					
+					Connector.Mysql.Query (QueryString, this, query);
 					break;
-
-				case SNDK.Enums.DatabaseConnector.Mssql:
-					SNDK.DBI.Connector.Mssql.Query (QueryString, this, query);
-					break;
+				}
 			}
 
 			return query;
 		}
+		#endregion
+		
+		#region Internal Methods		
+		internal ConnectionThread GetConnectionThread ()
+		{			
+			ConnectionThread result = null;		
+						
+			lock (_lock)
+			{
+			// Search for an available ConnectionThread.
+			foreach (ConnectionThread connectionthread in this._pool)
+			{					
+				if (connectionthread.Ready)
+				{
+					if (connectionthread.DbCommand == null)
+					{
+						connectionthread.Ready = false;
+						result = connectionthread;
+						break;
+					}
+				}
+			}
+			
+			// If no available ConnectionThread was found, lets make a new.
+			if (result == null)
+			{
+				Console.WriteLine ("New ConnectionThread: "+ this._pool.Count);
+				
+				switch (this._databaseconnector)
+				{
+					// New MySQL connector
+					case SNDK.Enums.DatabaseConnector.Mysql:
+					{
+						result = new ConnectionThread ();
+						result.DbConnection = SNDK.DBI.Connector.Mysql.Connect (this);												
+						this._pool.Add (result);						
+						break;                     
+					}
+				}
+			}
+			}
+							
+			return result;
+		}			
 		#endregion
 	}
 }

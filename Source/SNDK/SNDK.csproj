@@ -87,7 +87,6 @@
     <Compile Include="SNDK.Google.Geocode\Cache.cs" />
     <Compile Include="SNDK.Threads\ExtendedBackgroundWorker.cs" />
     <Compile Include="SNDK.Threads\ThreadsSingleInstanceApp.cs" />
-    <Compile Include="SNDK.Toolbox\Arg.cs" />
     <Compile Include="SNDK.Toolbox\CSVReader.cs" />
     <Compile Include="SNDK.Toolbox\Exceptions.cs" />
     <Compile Include="SNDK.Toolbox\Tools.cs" />
@@ -98,6 +97,10 @@
     <Compile Include="SNDK\Crypto.cs" />
     <Compile Include="SNDK\Serializer.cs" />
     <Compile Include="SNDK\IO.cs" />
+    <Compile Include="SNDK\Config.cs" />
+    <Compile Include="SNDK.DBI\ConnectionThread.cs" />
+    <Compile Include="SNDK.Strings\Exceptions.cs" />
+    <Compile Include="SNDK\Arg.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -108,6 +111,7 @@
     <Folder Include="SNDK.Threads\" />
     <Folder Include="SNDK.Toolbox\" />
     <Folder Include="SNDK\" />
+    <Folder Include="SNDK.Strings\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />

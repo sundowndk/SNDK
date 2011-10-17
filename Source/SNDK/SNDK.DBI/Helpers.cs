@@ -79,7 +79,7 @@ namespace SNDK.DBI
 			qb.Table (TableName);
 			qb.Columns ("id");
 			qb.AddWhere ("id", "=", Guid);
-
+					
 			Query query = DbConnection.Query (qb.QueryString);
 			if (query.Success)
 			{

@@ -54,79 +54,91 @@ namespace SNDK.DBI.Connector
 			return result;
 		}
 
-		internal static bool Query (string QueryString, SNDK.DBI.Connection Connection, SNDK.DBI.Query Query)
-		{
-			bool success = false;
-			MySqlConnection dbconnection = (MySqlConnection)Connect (Connection);
-			
-			
-			IDbCommand dbcommand = dbconnection.CreateCommand ();
-
-			dbcommand.CommandText = QueryString;
-			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");
-			try
-			{
-				if (usenonquery.Success)
-				{
-					Query.affectedrows = dbcommand.ExecuteNonQuery ();
-					Query.dbconnection = dbconnection;
-				}
-				else
-				{
-					Query.rows = dbcommand.ExecuteReader ();
-					Query.dbconnection = dbconnection;
-				}
-				success = true;
-			}
-			catch
-			{
-				if (Connection.DebugMode)
-				{
-					throw new Exception ("Error in querystring: "+ QueryString);
-				}
-			}
-
-			return success;
-		}
-		
-		internal static bool Query2 (string QueryString, SNDK.DBI.Connection Test, SNDK.DBI.Query Query)
-		{
-			bool success = false;
-			Connection.ConnectionThread thread = Test.GetConnection ();
-			thread._ready = false;
-			MySqlConnection dbconnection = (MySqlConnection)thread._dbconnection;
-			Query._thread = thread;
-			
-//			MySqlConnection dbconnection = (MySqlConnection)Test.GetConnection ();
+//		internal static bool Query (string QueryString, Toolbox.DBI.Connection Connection, Toolbox.DBI.Query Query)
+//		{
+//			bool success = false;
+//			MySqlConnection dbconnection = (MySqlConnection)Connect (Connection);
+//			
+//			
 //			IDbCommand dbcommand = dbconnection.CreateCommand ();
-			thread._dbcommand = dbconnection.CreateCommand ();
-			
-			thread._dbcommand.CommandText = QueryString;
-			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");
-			try
-			{
-				if (usenonquery.Success)
-				{
-					Query.affectedrows = thread._dbcommand.ExecuteNonQuery ();
+//
+//			dbcommand.CommandText = QueryString;
+//			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");
+//			try
+//			{
+//				if (usenonquery.Success)
+//				{
+//					Query.affectedrows = dbcommand.ExecuteNonQuery ();
 //					Query.dbconnection = dbconnection;
-				}
-				else
-				{
-					Query.rows = thread._dbcommand.ExecuteReader ();
+//				}
+//				else
+//				{
+//					Query.rows = dbcommand.ExecuteReader ();
 //					Query.dbconnection = dbconnection;
-				}
-				success = true;
-			}
-			catch (Exception e)
-			{
-				Console.WriteLine (e.Message);
-				Environment.Exit (0);
-				
+//				}
+//				success = true;
+//			}
+//			catch
+//			{
 //				if (Connection.DebugMode)
 //				{
 //					throw new Exception ("Error in querystring: "+ QueryString);
 //				}
+//			}
+//
+//			return success;
+//		}
+		
+		internal static bool Query (string QueryString, Connection Connection, Query Query)
+		{
+			bool success = false;
+			
+			Query.ConnectionThread = Connection.GetConnectionThread ();
+			
+			MySqlConnection dbconnection = (MySqlConnection)Query.ConnectionThread.DbConnection;
+					
+			Query.ConnectionThread.DbCommand = dbconnection.CreateCommand ();			
+			Query.ConnectionThread.DbCommand.CommandText = QueryString;
+			
+//			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");			
+
+			try
+			{
+//				if (usenonquery.Success)
+//				{
+//					Query.affectedrows = Query.ConnectionThread.DbCommand.ExecuteNonQuery ();
+//				}
+//				else
+//				{
+				Console.WriteLine ("using: "+ Query.ConnectionThread._id);
+					Query.rows = Query.ConnectionThread.DbCommand.ExecuteReader ();
+//				}
+				
+				
+				success = true;
 			}
+			catch (Exception Exception)
+			{
+//				Console.WriteLine (Query.ConnectionThread._id);
+				Console.WriteLine (Exception);
+				Environment.Exit (0);
+				if (Connection.DebugMode)
+				{
+					throw new Exception ("Error in querystring: "+ QueryString);
+				}				
+			}
+			
+//			}
+//			catch (Exception e)
+//			{
+//				Console.WriteLine (e);
+//				Environment.Exit (0);
+//				
+////				if (Connection.DebugMode)
+////				{
+////					throw new Exception ("Error in querystring: "+ QueryString);
+////				}
+//			}
 
 			return success;
 		}
