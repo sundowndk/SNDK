@@ -85,6 +85,8 @@ request : function (application, applicationparam, applicationdatafield, request
 		
 		parseResponsRecursive (root.childNodes, _data);
 		
+		console.log (_data);
+		
 		if (_data["success"] == "false")
 		{
 			throw _data["exception"];
@@ -101,34 +103,36 @@ request : function (application, applicationparam, applicationdatafield, request
 			{
 				case "object":
 				{
+				
 					var list = new Array();
 				
-					for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
-					{
-					console.log (node.childNodes[index2]);
+					//for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
+					//{
+					
 					var hashtable = new Array ();
-					var node2 = node.childNodes[index2];
+					//var node2 = node.childNodes[index2];
+					//console.log (node2)
 						
-						parseResponsRecursive (node.childNodes[index2], hashtable);
+					parseResponsRecursive (node.childNodes, hashtable);
 						
-						list[list.length] = hashtable;
-					} 
+					list[list.length] = hashtable;
+					//} 
 																								
-					Data[node.tagName] = list;					
+					Data[node.tagName] = hashtable;					
 					break;
 				}
 								
 			
 				case "string":
 				{
-					//if (node.firstChild != null)
-					//{
+					if (node.firstChild != null)
+					{
 						Data[node.tagName] = node.childNodes[0].nodeValue;
-					//}
-					//else
-					//{
-					//	Data[node.tagName] = "";
-					//}
+					}
+					else
+					{
+						Data[node.tagName] = "";
+					}
 
 					break;
 				}
