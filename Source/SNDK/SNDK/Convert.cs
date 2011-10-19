@@ -85,7 +85,7 @@ namespace SNDK
 		{
 			foreach (string key in Data.Keys)
 			{
-//				Console.WriteLine (key +" "+ Data[key]);
+//				Console.WriteLine (key +" "+ Data[key] +" "+Data[key].GetType ().Name.ToLower ());
 
 				switch (Data[key].GetType ().Name.ToLower ())
 				{
@@ -102,20 +102,50 @@ namespace SNDK
 
 						break;
 					}
+					
+				case "guid":
+				{
+						XmlElement element = XmlDocument.CreateElement ("", key, "");
+						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+						type.Value = "string";
+						element.Attributes.Append (type);
+					
+						element.AppendChild (XmlDocument.CreateCDataSection (((Guid)Data[key]).ToString ()));
 
-//					case "boolean":
-//					{
-//						XmlElement element = XmlDocument.CreateElement ("", key, "");
-//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-//						type.Value = "boolean";
-//						element.Attributes.Append (type);
-//
-//						element.AppendChild (XmlDocument.CreateCDataSection (Data[key].ToString ().ToLower ()));
-//
-//						ParentElement.AppendChild (element);
-//
-//						break;
-//					}
+						ParentElement.AppendChild (element);
+
+						break;					
+				}
+
+				case "int32":
+				{
+						XmlElement element = XmlDocument.CreateElement ("", key, "");
+						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+						type.Value = "string";
+						element.Attributes.Append (type);
+					
+						element.AppendChild (XmlDocument.CreateCDataSection (((int)Data[key]).ToString ()));
+
+						ParentElement.AppendChild (element);
+
+						break;					
+				}
+
+					
+					
+					case "boolean":
+					{
+						XmlElement element = XmlDocument.CreateElement ("", key, "");
+						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+						type.Value = "boolean";
+						element.Attributes.Append (type);
+														
+						element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)Data[key]).ToString ()));
+
+						ParentElement.AppendChild (element);
+
+						break;					
+					}
 
 					case "hashtable":
 					{
@@ -154,9 +184,10 @@ namespace SNDK
 
 					default:
 					{
+					
 						XmlElement element = XmlDocument.CreateElement ("", key, "");
 						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "string";
+						type.Value = "object";
 						element.Attributes.Append (type);
 
 						try

@@ -85,9 +85,8 @@ request : function (application, applicationparam, applicationdatafield, request
 		
 		parseResponsRecursive (root.childNodes, _data);
 		
-		console.log (_data);
 		
-		if (_data["success"] == "false")
+		if (_data["success"] == false)
 		{
 			throw _data["exception"];
 		}			
@@ -104,12 +103,12 @@ request : function (application, applicationparam, applicationdatafield, request
 				case "object":
 				{
 				
-					var list = new Array();
+					var list = {};
 				
 					//for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
 					//{
 					
-					var hashtable = new Array ();
+					var hashtable = {};
 					//var node2 = node.childNodes[index2];
 					//console.log (node2)
 						
@@ -137,10 +136,26 @@ request : function (application, applicationparam, applicationdatafield, request
 					break;
 				}
 				
-//				case "boolean":
-//				{
-//					break;
-//				}
+				case "boolean":
+				{				
+					if (node.firstChild != null)
+					{
+						if (node.childNodes[0].nodeValue == "1")
+						{						
+							Data[node.tagName] = true;
+						}
+						else
+						{
+							Data[node.tagName] = false;
+						}
+					}
+					else
+					{
+						Data[node.tagName] = false;
+					}
+				
+					break;
+				}
 				
 				case "hashtable":
 				{
@@ -184,11 +199,11 @@ request : function (application, applicationparam, applicationdatafield, request
 			// Create XML document.
 			var xmldata = "";					
 			//xmldata += "<?xml version='1.0' encoding='ISO-8859-1'?>";
-			xmldata += "<variables>\n";			
+			xmldata += "<ajax>\n";			
 			
 			xmldata = parseRequestRecursive (xmldata, data);			
 						
-			xmldata += "</variables>\n";			
+			xmldata += "</ajax>\n";			
 
 			// We can eithet request by using GET or POST.			
 			if (_requestmethod == "GET")
@@ -305,27 +320,51 @@ request : function (application, applicationparam, applicationdatafield, request
 					break;
 				}
 				
-//				case "boolean":
-//				{					
-//					break;
-//				}
+				case "boolean":
+				{					
+					document += "<"+ index +" type=\"boolean\">\n";
+					document += "<![CDATA[";
+					if (data[index] == true)
+					{
+						document += "1";
+					}
+					else
+					{
+						document += "0";
+					}
+					
+					document += "]]>\n";
+					document += "</"+ index +">\n";				
+
+					break;
+				}
 				
 				case "object":
 				{
 					if (data[index].constructor == Array)
 					{
-						document += "<"+ index +" type=\"list\">\n";	
-						for (var index2 in data[index]) 
-						{
-							document += "<item>\n";						
-							document = parseRequestRecursive (document, data[index][index2]);
-							document += "</item>\n";						
-						}
-						document += "</"+ index +">\n";					
+
+						//if (data[index].length > 0)
+						//{
+							document += "<"+ index +" type=\"list\">\n";	
+							for (var index2 in data[index]) 
+							{
+								document += "<item>\n";						
+								document = parseRequestRecursive (document, data[index][index2]);
+								document += "</item>\n";						
+							}
+							document += "</"+ index +">\n";					
+						//}
+						//else
+//						{
+	//						document += "<"+ index +" type=\"object\">\n";
+		//					document = parseRequestRecursive (document, data[index]);
+			//				document += "</"+ index +">\n";						
+				//		}
 					}
 					else if (data[index].constructor == Object)
 					{
-						document += "<"+ index +" type=\"hashtable\">\n";
+						document += "<"+ index +" type=\"object\">\n";
 						document = parseRequestRecursive (document, data[index]);
 						document += "</"+ index +">\n";	
 					}
