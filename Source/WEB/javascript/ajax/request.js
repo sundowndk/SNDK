@@ -307,6 +307,7 @@ request : function (application, applicationparam, applicationdatafield, request
 	{	
 		for (var index in data)
 		{
+		 
 			switch (typeof(data[index]))
 			{
 				case "string":
@@ -320,6 +321,18 @@ request : function (application, applicationparam, applicationdatafield, request
 					break;
 				}
 				
+				case "number":
+				{
+					document += "<"+ index +" type=\"string\">\n";
+					document += "<![CDATA[";
+					document += data[index];
+					document += "]]>\n";
+					document += "</"+ index +">\n";				
+					
+					break;
+				}
+				
+								
 				case "boolean":
 				{					
 					document += "<"+ index +" type=\"boolean\">\n";

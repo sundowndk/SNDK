@@ -84,9 +84,7 @@ namespace SNDK
 		private static void HashtableToXMLParser (XmlDocument XmlDocument, XmlElement ParentElement, Hashtable Data)
 		{
 			foreach (string key in Data.Keys)
-			{
-//				Console.WriteLine (key +" "+ Data[key] +" "+Data[key].GetType ().Name.ToLower ());
-
+			{				
 				switch (Data[key].GetType ().Name.ToLower ())
 				{
 					case "string":
@@ -103,8 +101,8 @@ namespace SNDK
 						break;
 					}
 					
-				case "guid":
-				{
+					case "guid":
+					{
 						XmlElement element = XmlDocument.CreateElement ("", key, "");
 						XmlAttribute type = XmlDocument.CreateAttribute ("type");
 						type.Value = "string";
@@ -115,10 +113,10 @@ namespace SNDK
 						ParentElement.AppendChild (element);
 
 						break;					
-				}
+					}
 
-				case "int32":
-				{
+					case "int32":
+					{
 						XmlElement element = XmlDocument.CreateElement ("", key, "");
 						XmlAttribute type = XmlDocument.CreateAttribute ("type");
 						type.Value = "string";
@@ -129,9 +127,7 @@ namespace SNDK
 						ParentElement.AppendChild (element);
 
 						break;					
-				}
-
-					
+					}					
 					
 					case "boolean":
 					{
@@ -184,34 +180,57 @@ namespace SNDK
 
 					default:
 					{
-					
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "object";
-						element.Attributes.Append (type);
-
-						try
+						switch (Data[key].GetType ().BaseType.Name.ToLower ())
 						{
-							element.AppendChild (XmlDocument.CreateCDataSection (Data[key].ToString().ToLower ()));
-						}
-						catch
-						{
-							element.AppendChild (XmlDocument.CreateCDataSection (string.Empty));
-						}
+							case "enum":
+							{
+								XmlElement element = XmlDocument.CreateElement ("", key, "");
+								XmlAttribute type = XmlDocument.CreateAttribute ("type");
+								type.Value = "string";
+								element.Attributes.Append (type);
+								
+								
+								
+								element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.EnumToString ((Enum)Data[key])));
 
-						ParentElement.AppendChild (element);
+								ParentElement.AppendChild (element);
+								
+								break;
+							}
+								
+							default:
+							{
+								XmlElement element = XmlDocument.CreateElement ("", key, "");
+								XmlAttribute type = XmlDocument.CreateAttribute ("type");
+								type.Value = "object";
+								element.Attributes.Append (type);
 
+								try
+								{
+									element.AppendChild (XmlDocument.CreateCDataSection (Data[key].ToString().ToLower ()));
+								}
+								catch
+								{
+									element.AppendChild (XmlDocument.CreateCDataSection (string.Empty));
+								}
+
+								ParentElement.AppendChild (element);								
+
+								break;
+							}
+						}
+						
 						break;
 					}
 				}
 			}
 		}
 
-		public static Hashtable XmlDocumentToHashtabel (XmlDocument Value)
+		public static Hashtable XmlDocumentToHashtable (XmlDocument xmlDocument)
 		{
 			Hashtable result = new Hashtable ();
 
-			XMLToHashtabelParser (Value.DocumentElement.ChildNodes, result);		
+			XMLToHashtableParser (xmlDocument.DocumentElement.ChildNodes, result);		
 
 			return result;
 		}		
@@ -231,7 +250,7 @@ namespace SNDK
 //			
 //		}
 
-		public static void XMLToHashtabelParser (XmlNodeList Nodes, Hashtable Item)
+		public static void XMLToHashtableParser (XmlNodeList Nodes, Hashtable Item)
 		{
 			foreach (XmlNode node in Nodes)
 			{
@@ -242,16 +261,17 @@ namespace SNDK
 						Item.Add(node.Name, node.InnerText);
 						break;
 					}
-
-//					case "boolean":
-//					{
-//						break;
-//					}
+						
+					case "boolean":
+					{
+						Item.Add (node.Name, SNDK.Convert.IntToBool (int.Parse (node.InnerText)));
+						break;
+					}
 
 					case "hashtable":
 					{
 						Hashtable hashtable = new Hashtable ();
-						XMLToHashtabelParser (node.ChildNodes, hashtable);
+						XMLToHashtableParser (node.ChildNodes, hashtable);
 						Item.Add (node.Name, hashtable);
 
 						break;
@@ -263,7 +283,7 @@ namespace SNDK
 						foreach (XmlNode node2 in node.ChildNodes)
 						{
 							Hashtable hashtable = new Hashtable ();
-							XMLToHashtabelParser (node2.ChildNodes, hashtable);
+							XMLToHashtableParser (node2.ChildNodes, hashtable);
 
 							list.Add (hashtable);
 						}
@@ -318,6 +338,16 @@ namespace SNDK
 			return (T)Enum.Parse (typeof(T), value, true);
 		}
 				
+		public static string EnumToString (Enum value)
+		{
+			return value.ToString ();
+		}
+		
+		public static int EnumToInt (object enumeration)
+		{
+			return (int)enumeration;
+		}
+		
 		public static T IntToEnum<T> (int Value)
 		{
 			return (T)Enum.ToObject (typeof (T), Value);
