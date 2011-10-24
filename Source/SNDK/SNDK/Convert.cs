@@ -82,172 +82,434 @@ namespace SNDK
 //			return result;
 //		}
 		
+		private static XmlElement HashtableToXMLParser2 (XmlDocument xmlDocument, string name, object data)
+		{
+			XmlElement element = xmlDocument.CreateElement ("", name, "");
+			XmlAttribute type = xmlDocument.CreateAttribute ("type");
+			element.Attributes.Append (type);
+			
+			switch (data.GetType ().Name.ToLower ())
+			{
+				case "string":
+				{
+					type.Value = "string";					
+					element.AppendChild (xmlDocument.CreateCDataSection ((string)data));
+					break;
+				}
+					
+				case "guid":
+				{
+					type.Value = "string";					
+					element.AppendChild (xmlDocument.CreateCDataSection (((Guid)data).ToString ()));
+					break;					
+				}		
+					
+				case "int32":
+				{
+					type.Value = "string";					
+					element.AppendChild (xmlDocument.CreateCDataSection (((int)data).ToString ()));
+					break;					
+				}		
+					
+				case "boolean":
+				{
+					type.Value = "boolean";
+					element.AppendChild (xmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)data).ToString ()));
+					break;					
+				}	
+					
+				case "hashtable":
+				{
+					type.Value = "hashtable";
+					HashtableToXMLParser (xmlDocument, element, (Hashtable)data);
+					break;
+				}		
+					
+				case "list`1":
+				{
+					type.Value = "list";
+					
+					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)data.GetType ().GetMethod("GetEnumerator").Invoke (data, null);
+					while (enumerator.MoveNext ())
+					{						
+						element.AppendChild (HashtableToXMLParser2 (xmlDocument, "item", enumerator.Current));
+					}
+					
+					break;
+				}					
+					
+				default:
+				{
+					switch (data.GetType ().BaseType.Name.ToLower ())
+					{
+						case "enum":
+						{
+							type.Value = "string";
+							element.AppendChild (xmlDocument.CreateCDataSection (SNDK.Convert.EnumToString ((Enum)data)));
+							break;
+						}
+								
+						default:
+						{
+							type.Value = "object";
+
+							try
+							{
+								element.AppendChild (xmlDocument.CreateCDataSection (data.ToString().ToLower ()));
+							}
+							catch
+							{
+								element.AppendChild (xmlDocument.CreateCDataSection (string.Empty));
+							}
+
+							break;
+						}
+					}
+						
+					break;
+				}
+			}
+			
+			return element;
+		}
+				
 		private static void HashtableToXMLParser (XmlDocument XmlDocument, XmlElement ParentElement, Hashtable Data)
 		{
 			foreach (string key in Data.Keys)
 			{				
-				switch (Data[key].GetType ().Name.ToLower ())
-				{
-					case "string":
-					{
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "string";
-						element.Attributes.Append (type);
-
-						element.AppendChild (XmlDocument.CreateCDataSection ((string)Data[key]));
-
-						ParentElement.AppendChild (element);
-
-						break;
-					}
+				
+				ParentElement.AppendChild (HashtableToXMLParser2 (XmlDocument, key, Data[key]));
 					
-					case "guid":
-					{
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "string";
-						element.Attributes.Append (type);
-					
-						element.AppendChild (XmlDocument.CreateCDataSection (((Guid)Data[key]).ToString ()));
-
-						ParentElement.AppendChild (element);
-
-						break;					
-					}
-
-					case "int32":
-					{
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "string";
-						element.Attributes.Append (type);
-					
-						element.AppendChild (XmlDocument.CreateCDataSection (((int)Data[key]).ToString ()));
-
-						ParentElement.AppendChild (element);
-
-						break;					
-					}					
-					
-					case "boolean":
-					{
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "boolean";
-						element.Attributes.Append (type);
-														
-						element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)Data[key]).ToString ()));
-
-						ParentElement.AppendChild (element);
-
-						break;					
-					}
-
-					case "hashtable":
-					{
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "hashtable";
-						element.Attributes.Append (type);
-
-						HashtableToXMLParser (XmlDocument, element, (Hashtable)Data[key]);
-
-						ParentElement.AppendChild (element);
-
-						break;
-					}
-
-					case "list`1":
-					{
-						XmlElement element = XmlDocument.CreateElement ("", key, "");
-						XmlAttribute type = XmlDocument.CreateAttribute ("type");
-						type.Value = "list";
-						element.Attributes.Append (type);
-					
-					
-					// Get IEnumerator of Object.
-					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)Data[key].GetType ().GetMethod("GetEnumerator").Invoke (Data[key], null);
-
-					// Enumerate objects inside Object.
-					while (enumerator.MoveNext ())
-					{					
-								HashtableToXMLParser (XmlDocument, ParentElement, enumerator.Current);
-					}
-					
-//						foreach (object d in ((List<Hashtable>)Data[key]))
-//						{
-//							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
-
-					
-
-//							element.AppendChild (element2);
-//						}
-					
-					
-//					Console.WriteLine (Data[key].GetType ().GetGenericArguments ()[0].ToString ());
-
-//						foreach (Hashtable data in ((List<Hashtable>)Data[key]))
-//						{
-//							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+//				switch (Data[key].GetType ().Name.ToLower ())
+//				{
+//					case "string":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "string";
+//						element.Attributes.Append (type);
 //
-//							HashtableToXMLParser (XmlDocument, element2, data);
+//						element.AppendChild (XmlDocument.CreateCDataSection ((string)Data[key]));
 //
-//							element.AppendChild (element2);
+//						ParentElement.AppendChild (element);
+//
+//						break;
+//					}
+					
+//					case "guid":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "string";
+//						element.Attributes.Append (type);
+//					
+//						element.AppendChild (XmlDocument.CreateCDataSection (((Guid)Data[key]).ToString ()));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;					
+//					}
+
+//					case "int32":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "string";
+//						element.Attributes.Append (type);
+//					
+//						element.AppendChild (XmlDocument.CreateCDataSection (((int)Data[key]).ToString ()));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;					
+//					}					
+					
+//					case "boolean":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "boolean";
+//						element.Attributes.Append (type);
+//														
+//						element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)Data[key]).ToString ()));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;					
+//					}
+
+//					case "hashtable":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "hashtable";
+//						element.Attributes.Append (type);
+//
+//						HashtableToXMLParser (XmlDocument, element, (Hashtable)Data[key]);
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;
+//					}
+
+//					case "list`1":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "list";
+//						element.Attributes.Append (type);
+//					
+//					
+//						// Get IEnumerator of Object.
+////						System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)Data[key].GetType ().GetMethod("GetEnumerator").Invoke (Data[key], null);
+//
+//						// Enumerate objects inside Object.
+////						while (enumerator.MoveNext ())
+////						{					
+////							HashtableToXMLParser (XmlDocument, ParentElement, enumerator.Current);
+////						}
+//					
+////						foreach (object d in ((List<Hashtable>)Data[key]))
+////						{
+////							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+//
+//					
+//
+////							element.AppendChild (element2);
+////						}
+//					
+//					
+////					Console.WriteLine (Data[key].GetType ().GetGenericArguments ()[0].ToString ());
+//
+////						foreach (Hashtable data in ((List<Hashtable>)Data[key]))
+////						{
+////							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+////
+////							HashtableToXMLParser (XmlDocument, element2, data);
+////
+////							element.AppendChild (element2);
+////						}
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;
+//					}
+
+//					default:
+//					{
+//						switch (Data[key].GetType ().BaseType.Name.ToLower ())
+//						{
+//							case "enum":
+//							{
+//								XmlElement element = XmlDocument.CreateElement ("", key, "");
+//								XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//								type.Value = "string";
+//								element.Attributes.Append (type);
+//								
+//								
+//								
+//								element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.EnumToString ((Enum)Data[key])));
+//
+//								ParentElement.AppendChild (element);
+//								
+//								break;
+//							}
+//								
+//							default:
+//							{
+//								XmlElement element = XmlDocument.CreateElement ("", key, "");
+//								XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//								type.Value = "object";
+//								element.Attributes.Append (type);
+//
+//								try
+//								{
+//									element.AppendChild (XmlDocument.CreateCDataSection (Data[key].ToString().ToLower ()));
+//								}
+//								catch
+//								{
+//									element.AppendChild (XmlDocument.CreateCDataSection (string.Empty));
+//								}
+//
+//								ParentElement.AppendChild (element);								
+//
+//								break;
+//							}
 //						}
-
-						ParentElement.AppendChild (element);
-
-						break;
-					}
-
-					default:
-					{
-						switch (Data[key].GetType ().BaseType.Name.ToLower ())
-						{
-							case "enum":
-							{
-								XmlElement element = XmlDocument.CreateElement ("", key, "");
-								XmlAttribute type = XmlDocument.CreateAttribute ("type");
-								type.Value = "string";
-								element.Attributes.Append (type);
-								
-								
-								
-								element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.EnumToString ((Enum)Data[key])));
-
-								ParentElement.AppendChild (element);
-								
-								break;
-							}
-								
-							default:
-							{
-								XmlElement element = XmlDocument.CreateElement ("", key, "");
-								XmlAttribute type = XmlDocument.CreateAttribute ("type");
-								type.Value = "object";
-								element.Attributes.Append (type);
-
-								try
-								{
-									element.AppendChild (XmlDocument.CreateCDataSection (Data[key].ToString().ToLower ()));
-								}
-								catch
-								{
-									element.AppendChild (XmlDocument.CreateCDataSection (string.Empty));
-								}
-
-								ParentElement.AppendChild (element);								
-
-								break;
-							}
-						}
-						
-						break;
-					}
-				}
+//						
+//						break;
+//					}
+//				}
 			}
-		}
+		}		
+		
+		
+//		private static void HashtableToXMLParser (XmlDocument XmlDocument, XmlElement ParentElement, Hashtable Data)
+//		{
+//			foreach (string key in Data.Keys)
+//			{				
+//				switch (Data[key].GetType ().Name.ToLower ())
+//				{
+//					case "string":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "string";
+//						element.Attributes.Append (type);
+//
+//						element.AppendChild (XmlDocument.CreateCDataSection ((string)Data[key]));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;
+//					}
+//					
+//					case "guid":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "string";
+//						element.Attributes.Append (type);
+//					
+//						element.AppendChild (XmlDocument.CreateCDataSection (((Guid)Data[key]).ToString ()));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;					
+//					}
+//
+//					case "int32":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "string";
+//						element.Attributes.Append (type);
+//					
+//						element.AppendChild (XmlDocument.CreateCDataSection (((int)Data[key]).ToString ()));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;					
+//					}					
+//					
+//					case "boolean":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "boolean";
+//						element.Attributes.Append (type);
+//														
+//						element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)Data[key]).ToString ()));
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;					
+//					}
+//
+//					case "hashtable":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "hashtable";
+//						element.Attributes.Append (type);
+//
+//						HashtableToXMLParser (XmlDocument, element, (Hashtable)Data[key]);
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;
+//					}
+//
+//					case "list`1":
+//					{
+//						XmlElement element = XmlDocument.CreateElement ("", key, "");
+//						XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//						type.Value = "list";
+//						element.Attributes.Append (type);
+//					
+//					
+//					// Get IEnumerator of Object.
+//					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)Data[key].GetType ().GetMethod("GetEnumerator").Invoke (Data[key], null);
+//
+//					// Enumerate objects inside Object.
+//					while (enumerator.MoveNext ())
+//					{					
+//								HashtableToXMLParser (XmlDocument, ParentElement, enumerator.Current);
+//					}
+//					
+////						foreach (object d in ((List<Hashtable>)Data[key]))
+////						{
+////							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+//
+//					
+//
+////							element.AppendChild (element2);
+////						}
+//					
+//					
+////					Console.WriteLine (Data[key].GetType ().GetGenericArguments ()[0].ToString ());
+//
+////						foreach (Hashtable data in ((List<Hashtable>)Data[key]))
+////						{
+////							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+////
+////							HashtableToXMLParser (XmlDocument, element2, data);
+////
+////							element.AppendChild (element2);
+////						}
+//
+//						ParentElement.AppendChild (element);
+//
+//						break;
+//					}
+//
+//					default:
+//					{
+//						switch (Data[key].GetType ().BaseType.Name.ToLower ())
+//						{
+//							case "enum":
+//							{
+//								XmlElement element = XmlDocument.CreateElement ("", key, "");
+//								XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//								type.Value = "string";
+//								element.Attributes.Append (type);
+//								
+//								
+//								
+//								element.AppendChild (XmlDocument.CreateCDataSection (SNDK.Convert.EnumToString ((Enum)Data[key])));
+//
+//								ParentElement.AppendChild (element);
+//								
+//								break;
+//							}
+//								
+//							default:
+//							{
+//								XmlElement element = XmlDocument.CreateElement ("", key, "");
+//								XmlAttribute type = XmlDocument.CreateAttribute ("type");
+//								type.Value = "object";
+//								element.Attributes.Append (type);
+//
+//								try
+//								{
+//									element.AppendChild (XmlDocument.CreateCDataSection (Data[key].ToString().ToLower ()));
+//								}
+//								catch
+//								{
+//									element.AppendChild (XmlDocument.CreateCDataSection (string.Empty));
+//								}
+//
+//								ParentElement.AppendChild (element);								
+//
+//								break;
+//							}
+//						}
+//						
+//						break;
+//					}
+//				}
+//			}
+//		}
 
 		public static Hashtable XmlDocumentToHashtable (XmlDocument xmlDocument)
 		{
