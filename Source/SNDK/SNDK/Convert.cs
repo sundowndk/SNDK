@@ -27,6 +27,7 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -163,15 +164,37 @@ namespace SNDK
 						XmlAttribute type = XmlDocument.CreateAttribute ("type");
 						type.Value = "list";
 						element.Attributes.Append (type);
+					
+					
+					// Get IEnumerator of Object.
+					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)Data[key].GetType ().GetMethod("GetEnumerator").Invoke (Data[key], null);
 
-						foreach (Hashtable data in ((List<Hashtable>)Data[key]))
-						{
-							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+					// Enumerate objects inside Object.
+					while (enumerator.MoveNext ())
+					{					
+								HashtableToXMLParser (XmlDocument, ParentElement, enumerator.Current);
+					}
+					
+//						foreach (object d in ((List<Hashtable>)Data[key]))
+//						{
+//							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
 
-							HashtableToXMLParser (XmlDocument, element2, data);
+					
 
-							element.AppendChild (element2);
-						}
+//							element.AppendChild (element2);
+//						}
+					
+					
+//					Console.WriteLine (Data[key].GetType ().GetGenericArguments ()[0].ToString ());
+
+//						foreach (Hashtable data in ((List<Hashtable>)Data[key]))
+//						{
+//							XmlElement element2 = XmlDocument.CreateElement("", "item", "");
+//
+//							HashtableToXMLParser (XmlDocument, element2, data);
+//
+//							element.AppendChild (element2);
+//						}
 
 						ParentElement.AppendChild (element);
 
