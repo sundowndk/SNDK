@@ -174,7 +174,7 @@ request : function (application, applicationparam, applicationdatafield, request
 				
 					for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
 					{
-						var hashtable = new Array ();
+						var hashtable = {};
 						var node2 = node.childNodes[index2];
 						
 						parseResponsRecursive (node2.childNodes, hashtable);

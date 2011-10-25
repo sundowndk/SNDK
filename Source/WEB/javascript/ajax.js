@@ -94,6 +94,7 @@ Ajax : function (application, applicationparam, applicationdatafield, requestmet
 	
 	function parseResponsRecursive (Nodes, Data)
 	{
+	
 		for (var index = 0, len = Nodes.length; index < len; index++)
 		{
 			var node = Nodes.item(index);
@@ -135,8 +136,8 @@ Ajax : function (application, applicationparam, applicationdatafield, requestmet
 					var list = new Array();
 				
 					for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
-					{
-						var hashtable = new Array ();
+					{					
+						var hashtable = {};
 						var node2 = node.childNodes[index2];
 						
 						parseResponsRecursive (node2.childNodes, hashtable);

@@ -81,8 +81,37 @@ namespace SNDK
 //
 //			return result;
 //		}
+
+				
+		public static XmlDocument ToXmlDocument (object value)
+		{
+			return ToXmlDocument (value, "root");
+		}
 		
-		private static XmlElement HashtableToXMLParser2 (XmlDocument xmlDocument, string name, object data)
+		public static XmlDocument ToXmlDocument (object value, string rootName)
+		{
+			XmlDocument xmldocument = new XmlDocument ();
+
+			XmlElement root = xmldocument.CreateElement ("", rootName, "");
+			xmldocument.AppendChild (root);
+			
+			switch (value.GetType ().Name.ToLower ())
+			{
+				case "hashtable":
+				{
+					foreach (string key in ((Hashtable)value).Keys)
+					{																		
+						root.AppendChild (ToXmlDocument (xmldocument, key, ((Hashtable)value)[key] ));
+					}
+					
+					break;
+				}
+			}
+
+			return xmldocument;
+		}
+		
+		private static XmlElement ToXmlDocument (XmlDocument xmlDocument, string name, object data)
 		{
 			XmlElement element = xmlDocument.CreateElement ("", name, "");
 			XmlAttribute type = xmlDocument.CreateAttribute ("type");
@@ -132,7 +161,25 @@ namespace SNDK
 					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)data.GetType ().GetMethod("GetEnumerator").Invoke (data, null);
 					while (enumerator.MoveNext ())
 					{						
-						element.AppendChild (HashtableToXMLParser2 (xmlDocument, "item", enumerator.Current));
+						if (enumerator.Current.GetType ().GetMethod ("ToXmlDocument") != null)
+						{
+							
+							
+//							((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement;
+							
+//							XmlElement sublement = (XmlElement)xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true);
+
+							element.AppendChild (xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true));
+							
+//							((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement.ChildNodes
+							
+//							foreach (XmlNode node in ((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement.ChildNodes)
+//							{
+//								element.AppendChild (xmlDocument.ImportNode (node, true));
+//							}							
+						}
+						
+//						element.AppendChild (HashtableToXMLParser2 (xmlDocument, "item", enumerator.Current));
 					}
 					
 					break;
@@ -178,7 +225,7 @@ namespace SNDK
 			foreach (string key in Data.Keys)
 			{				
 				
-				ParentElement.AppendChild (HashtableToXMLParser2 (XmlDocument, key, Data[key]));
+//				ParentElement.AppendChild (HashtableToXMLParser2 (XmlDocument, key, Data[key]));
 					
 //				switch (Data[key].GetType ().Name.ToLower ())
 //				{
@@ -510,6 +557,62 @@ namespace SNDK
 //				}
 //			}
 //		}
+		
+		public static object FromXmlDocument (XmlDocument xmlDocument)
+		{			
+			return FromXmlDocument (xmlDocument.DocumentElement.ChildNodes);		
+		}
+		
+		private static object FromXmlDocument (XmlNodeList Nodes)
+		{
+			Hashtable result = new Hashtable ();
+			
+			foreach (XmlNode node in Nodes)
+			{
+				switch (node.Attributes["type"].Value.ToString().ToLower())
+				{
+					case "string":
+					{
+						result.Add (node.Name, node.InnerText);
+						break;
+					}
+						
+					case "boolean":
+					{
+						result.Add (node.Name, SNDK.Convert.IntToBool (int.Parse (node.InnerText)));
+						break;
+					}
+
+					case "hashtable":
+					{
+						result.Add (node.Name, FromXmlDocument (node.ChildNodes));
+						break;
+					}
+
+					case "list":
+					{
+						List<XmlDocument> list = new List<XmlDocument>();
+						foreach (XmlNode node2 in node.ChildNodes)
+						{
+							XmlDocument test = new XmlDocument ();
+							test.AppendChild (test.ImportNode (node2, true));
+							
+							list.Add (test);
+//							Hashtable hashtable = new Hashtable ();
+//							XMLToHashtableParser (node2.ChildNodes, hashtable);
+//
+//							list.Add (hashtable);
+						}
+						result.Add (node.Name, list);
+
+						break;
+					}
+				}
+			}
+			
+			return result;
+		}
+		
 
 		public static Hashtable XmlDocumentToHashtable (XmlDocument xmlDocument)
 		{
