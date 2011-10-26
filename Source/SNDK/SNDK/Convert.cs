@@ -155,7 +155,7 @@ namespace SNDK
 				}		
 					
 				case "list`1":
-				{
+				{					
 					type.Value = "list";
 					
 					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)data.GetType ().GetMethod("GetEnumerator").Invoke (data, null);
@@ -163,20 +163,14 @@ namespace SNDK
 					{						
 						if (enumerator.Current.GetType ().GetMethod ("ToXmlDocument") != null)
 						{
-							
-							
-//							((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement;
-							
-//							XmlElement sublement = (XmlElement)xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true);
-
 							element.AppendChild (xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true));
+						}
+						else
+						{			
+							XmlElement element2 = xmlDocument.CreateElement ("", enumerator.Current.GetType ().ToString ().ToLower (), "");
 							
-//							((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement.ChildNodes
-							
-//							foreach (XmlNode node in ((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement.ChildNodes)
-//							{
-//								element.AppendChild (xmlDocument.ImportNode (node, true));
-//							}							
+							element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+							element.AppendChild (element2);							
 						}
 						
 //						element.AppendChild (HashtableToXMLParser2 (xmlDocument, "item", enumerator.Current));
@@ -562,7 +556,7 @@ namespace SNDK
 		{			
 			return FromXmlDocument (xmlDocument.DocumentElement.ChildNodes);		
 		}
-		
+						
 		private static object FromXmlDocument (XmlNodeList Nodes)
 		{
 			Hashtable result = new Hashtable ();
