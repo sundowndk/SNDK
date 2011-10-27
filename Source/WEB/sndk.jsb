@@ -49,6 +49,7 @@
 			<class name="string">
 				<js file="javascript/string.js" />
 			</class>
+			<js file="javascript/include.js" />
 		</class>		
 		<js file="javascript/prototypes.js" />
 		<js file="javascript/client.js" />

@@ -36,6 +36,68 @@ namespace SNDK
 	public class Convert
 	{	
 		#region Public Static Methods
+		
+		public static List<T> StringToList<T> (string value)
+		{
+			return StringToList<T> (value, ";");
+		}
+		
+		public static List<T> StringToList<T> (string value, string delimiter)
+		{
+			List<T> result = new List<T> ();
+					
+//			Console.WriteLine (typeof (T).FullName.ToLower ());
+//			Console.WriteLine (typeof (int).FullName.ToLower ());
+
+			foreach (string split in value.Split (delimiter.ToCharArray (), StringSplitOptions.RemoveEmptyEntries))
+			{
+				switch (typeof (T).FullName.ToLower ())
+				{
+					case "system.string":
+					{
+						result.Add ((T)System.Convert.ChangeType (split, typeof (T)));	
+						break;
+					}
+						
+					case "system.int32":
+					{
+						result.Add ((T)System.Convert.ChangeType (split, typeof (T)));
+						break;
+					}
+						
+					case "system.guid":
+					{
+						result.Add ((T)System.Convert.ChangeType (new Guid (split), typeof (T)));
+						break;
+					}
+				}
+			}
+			
+			return result;
+		}
+		
+		
+		
+		public static string ListToString<T> (T list)
+		{
+			return ListToString (list, ";");
+		}
+		
+		public static string ListToString<T> (T list, string delimiter)
+		{
+			string result = string.Empty;
+			
+			System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)list.GetType ().GetMethod("GetEnumerator").Invoke (list, null);
+			
+			while (enumerator.MoveNext ())
+			{
+				result += enumerator.Current.ToString () + delimiter;
+			}				
+			
+			return result.TrimEnd (delimiter.ToCharArray ());			
+		}
+		
+		
 		public static XmlDocument HashtabelToXmlDocument (Hashtable Value)
 		{
 			return HashtabelToXmlDocument (Value, "root");

@@ -25,7 +25,7 @@
     </CustomCommands>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
-    <OutputPath>.\</OutputPath>
+    <OutputPath>.</OutputPath>
   </PropertyGroup>
   <ItemGroup>
     <None Include="sndk.jsb" />
@@ -81,6 +81,7 @@
     <None Include="html\debug.html" />
     <None Include="html\debug.xml" />
     <None Include="css\container_modal.css" />
+    <None Include="javascript\include.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />
