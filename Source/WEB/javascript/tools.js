@@ -86,9 +86,16 @@ getElementPosition : function (obj, onlyparent)
 // ------------------------------------	
 trimEnd : function (string, character)
 {	
+	try
+	{
 	if (string.substr (string.length-1, 1) == character)
 	{
 		return string.substr (0, string.length - character.length);
+	}
+	}
+	catch (error)
+	{
+	
 	}
 	
 	return string;
