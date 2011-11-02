@@ -290,7 +290,7 @@ namespace SNDK.DBI
 			}
 			catch (Exception Exception)
 			{
-				Console.WriteLine ("Dispose Error");				
+//				Console.WriteLine ("Dispose Error");				
 			}
 									
 			if (this._connectionthread.DbCommand != null)

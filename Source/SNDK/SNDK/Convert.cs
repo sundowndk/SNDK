@@ -94,7 +94,8 @@ namespace SNDK
 				result += enumerator.Current.ToString () + delimiter;
 			}				
 			
-			return result.TrimEnd (delimiter.ToCharArray ());			
+			return result;
+//			return result.TrimEnd (delimiter.ToCharArray ());			
 		}
 		
 		
@@ -201,6 +202,13 @@ namespace SNDK
 					element.AppendChild (xmlDocument.CreateCDataSection (((int)data).ToString ()));
 					break;					
 				}		
+					
+				case "decimal":
+				{
+					type.Value = "string";					
+					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString ()));
+					break;					
+				}							
 					
 				case "boolean":
 				{

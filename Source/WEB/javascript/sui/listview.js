@@ -251,15 +251,22 @@ listview : function (attributes)
 				{
 					_elements["container"].className = _attributes.stylesheet;
 				}						
-			}
-			
-	
+			}				
 		}
 		
+		if (_temp.isDirty)
+			{
 		setDimensions ();
+		}
 
 		if (_temp.initialized)
 		{
+			if (_temp.isDirty)
+			{
+				setTimeout 
+				( 
+					function () 
+					{
 				// Remove all current rows.
 				_elements["contentcenter"].innerHTML = " ";				
 				_elements["rows"] = new Array ();
@@ -271,7 +278,13 @@ listview : function (attributes)
 				setSelectedRow (_temp.selectedRow);
 				
 				_temp.isDirty = false;	
+
+					 
+					}, 
+					
+					0);	
 			
+			}			
 		}
 	}
 	

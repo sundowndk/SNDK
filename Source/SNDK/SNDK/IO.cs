@@ -156,6 +156,11 @@ namespace SNDK
 
 			return result;
 		}
+		
+		public static List<string> ReadTextFile (string filename)
+		{
+			return ReadTextFile (filename, Encoding.Default);
+		}
 
 		public static List<string> ReadTextFile (string Filename, Encoding Encoding)
 		{
