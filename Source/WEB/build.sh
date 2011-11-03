@@ -36,7 +36,14 @@ jsbuilder sndk.jsb "$OUTPUTDIR/html/sndk/js/"
 echo "Bulding CSS..."
 CSSFILE="$OUTPUTDIR/html/sndk/css/sndk.css"
 touch "$CSSFILE"
-find css -type f -name *.css -exec cat "{}" >> "$CSSFILE"  \;
+#find css -type f -name *.css -exec cat "{}" >> "$CSSFILE"  \;
+
+find css -type f -name '*.css' | sort | while read filename; do
+    cat "$filename"
+done > $CSSFILE
+
+
+
 cp -rv "css/images/" "$OUTPUTDIR/html/sndk/css/"
 
 ####################################################

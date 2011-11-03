@@ -66,22 +66,23 @@
     <None Include="css\button.css" />
     <None Include="css\button_small.css" />
     <None Include="css\checkbox.css" />
-    <None Include="css\container.css" />
     <None Include="css\dropbox.css" />
     <None Include="css\iconview.css" />
     <None Include="css\label.css" />
-    <None Include="css\layoutbox.css" />
-    <None Include="css\listview.css" />
     <None Include="css\listview_noborder.css" />
-    <None Include="css\tabview.css" />
     <None Include="css\textarea.css" />
     <None Include="css\textbox.css" />
-    <None Include="css\upload.css" />
     <None Include="html\debug.css" />
     <None Include="html\debug.html" />
     <None Include="html\debug.xml" />
     <None Include="css\container_modal.css" />
     <None Include="javascript\include.js" />
+    <None Include="css\20_upload.css" />
+    <None Include="css\10_container.css" />
+    <None Include="css\30_tabview.css" />
+    <None Include="css\40_listview.css" />
+    <None Include="css\50_layoutbox.css" />
+    <None Include="css\60_layoutbox_noborder.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

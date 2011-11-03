@@ -1,0 +1,19 @@
+/* --------------------------------------------------------------------------------------------------------------
+Layoutbox
+-------------------------------------------------------------------------------------------------------------- */
+.SUILayoutboxNoBorder
+{
+	position: 				relative;
+
+	display: 				inline-block;	
+	outline:				none;
+}
+
+.SUILayoutboxNoBorder .Panel
+{
+	margin:					0px;
+	padding: 				0px;
+	background-color:		#ffffff;
+}
+
+
