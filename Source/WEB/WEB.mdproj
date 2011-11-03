@@ -79,10 +79,10 @@
     <None Include="javascript\include.js" />
     <None Include="css\20_upload.css" />
     <None Include="css\10_container.css" />
-    <None Include="css\30_tabview.css" />
-    <None Include="css\40_listview.css" />
     <None Include="css\50_layoutbox.css" />
     <None Include="css\60_layoutbox_noborder.css" />
+    <None Include="css\30_tabview.css" />
+    <None Include="css\40_listview.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />
