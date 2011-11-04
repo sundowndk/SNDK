@@ -1,17 +1,43 @@
 construct : function (attributes)
 {
-	var xmlhttp = SNDK.tools.getXmlHttpObject ();
-	xmlhttp.open ("GET", attributes.URL + "?"+ Math.random(), false);
+	var xmldoc;
+
+	if (attributes.URL)
+	{
+		var xmlhttp = SNDK.tools.getXmlHttpObject ();
+		xmlhttp.open ("GET", attributes.URL + "?"+ Math.random(), false);
 									
-	xmlhttp.send (null);		
+		xmlhttp.send (null);		
+		xmldoc = xmlhttp.responseXML;
+	}
+	else if (attributes.XML)
+	{
+		xmldoc = SNDK.tools.getXmlDocFromString (attributes.XML)
 	
-	var xmldoc = xmlhttp.responseXML;
+//		if (window.DOMParser)
+//  		{
+  			//var parser = new DOMParser ();
+  			//xmldoc = parser.parseFromString (attributes.xml, "text/xml");
+  		//}
+		//else // Internet Explorer
+  		//{
+//  			xmldoc = new ActiveXObject ("Microsoft.XMLDOM");
+  			//xmldoc.async = "false";
+  			//xmldoc.loadXML (attributes.xml);
+  		//} 		
+	}
+	else
+	{
+		throw "Neither URL or xml was given.";
+	}
+
+	
 	var root = xmldoc.getElementsByTagName ('sui').item(0);	
 	
 	if (root == null)
 	{
-		throw "No SUI definition was found in the document";
-	}
+		throw "No SUI definition was found in the xml.";
+	}	
 			
 	var elements = new Array ();
 

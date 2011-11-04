@@ -24,6 +24,8 @@ derefArray : function (array)
 },
 
 
+
+
 getXmlDocFromString : function (xml)
 {
 	xmldoc = null;
@@ -58,6 +60,7 @@ getXmlHttpObject : function ()
 	}	
 	return null;
 },
+
 
 
 // ------------------------------------

@@ -68,6 +68,9 @@ dropbox : function (attributes)
 	this.selectItemByValue = functionSelectItemByValue;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;	
+	
+	this.setSelectedItemByTitle = functionSelectItemByTitle;
+	this.setSelectedItemByValue = functionSelectItemByValue;
 
 	// Construct
 	construct ();
@@ -706,9 +709,16 @@ dropbox : function (attributes)
 				break;
 			}
 
-			case "selectedItem":
-			{				
-				setSelectedItem (value);
+			case "selectedItemByValue":
+			{							
+				for (index in _attributes.items)
+				{				
+					if (_attributes.items[index].value == value)
+					{
+						setSelectedItem (index);
+						break;
+					}
+				}
 				break;
 			}			
 					
