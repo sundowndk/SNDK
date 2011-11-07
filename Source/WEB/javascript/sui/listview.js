@@ -97,6 +97,7 @@ listview : function (attributes)
 	this.getAttribute = functionGetAttribute;
 
 	this.addItem = functionAddItem;
+	this.addItems = functionAddItems;
 	this.removeItem = functionRemoveItem;	
 
 	this.setItem = functionSetItem;
@@ -385,6 +386,17 @@ listview : function (attributes)
 			throw "When control is in treeview mode, treeviewLinkColumns needs to be specified.";
 		}
 
+		// unique
+		if (!_attributes.unique) 
+		{
+			_attributes.unique = false;
+		}
+		else
+		{
+			_attributes.uniqueColumn = _attributes.unique;
+			_attributes.unique = true;			
+		}
+		
 		// selectedRow
 		if (!_attributes.selectedRow) 
 			_attributes.selectedRow -1;
@@ -900,6 +912,23 @@ listview : function (attributes)
 	}
 
 		
+	function addItem (item)
+	{
+		if (_attributes.unique)
+		{					
+			for (index in _attributes.items)
+			{
+				if (_attributes.items[index][_attributes.uniqueColumn] == item[_attributes.uniqueColumn])
+				{
+					return;
+				}
+			}		
+		}
+			
+		_attributes.items[_attributes.items.length] = derefItem (item);
+		_temp.isDirty = true;
+	}	
+	
 	// ------------------------------------
 	// Public functions
 	// ------------------------------------						
@@ -911,11 +940,31 @@ listview : function (attributes)
 		refresh ();
 	}	
 		
+
+	// ------------------------------------
+	// addItems
+	// ------------------------------------								
+	function functionAddItems (items)
+	{
+		for (index in items)
+		{
+			addItem (items[index]);
+		}
+
+		if (_temp.initialized)
+		{
+			refresh ();
+			eventOnChange ();
+		}		
+	}
+		
 	// ------------------------------------
 	// addItem
 	// ------------------------------------						
 	function functionAddItem (item)
 	{		
+		addItem (item);
+			
 		if (_temp.initialized)
 		{
 	//		var newitem = new Array ();
@@ -924,22 +973,16 @@ listview : function (attributes)
 	//			newitem[index] = item[index];
 	//		}
 			
-			_attributes.items[_attributes.items.length] = derefItem (item);
-			_temp.isDirty = true;
+//			_attributes.items[_attributes.items.length] = derefItem (item);
+			
+			
 			refresh ();
 			eventOnChange ();		
 		}
-		else
-		{
-
-		//	var newitem = new Array ();
-		//	for (index in item)
-		//	{
-		//		newitem[index] = item[index];
-		//	}
-			
-			_attributes.items[_attributes.items.length] = derefItem (item);
-		}
+//		else
+//		{			
+//			_attributes.items[_attributes.items.length] = derefItem (item);
+//		}
 	
 	// TODO: fix this
 //		var newitem = new Array ();	
