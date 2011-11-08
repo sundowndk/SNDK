@@ -457,6 +457,100 @@ listview : function (attributes)
 
 	function derefItem (item)
 	{
+		var result = new Array ();
+		
+		for (key in item)
+		{				
+			var column = null;
+			var condense;
+			var value;
+						
+			for (index2 in _attributes.columns)			
+			{
+				if (_attributes.columns[index2].condense != null)
+				{	
+					if (key == _attributes.columns[index2].condense.split (":")[0])
+					{						
+						column = _attributes.columns[index2].tag;
+						condense = _attributes.columns[index2].condense.split (":")[1];						
+						break;
+					}
+				}
+				else if (_attributes.columns[index2].tag == key)
+				{									
+					column = _attributes.columns[index2].tag;					
+					break;
+				}				
+			}
+
+			if (column == null)
+			{			
+				continue;
+			}
+				
+			if (typeof(item[key]) == "object")
+			{
+				value = "";
+				for (index2 in item[key])
+				{
+					value += item[key][index2][condense] +", ";						
+				}
+					
+				value = SNDK.string.trimEnd (value, ", ");
+			}
+			else				
+			{
+				value = item[key];				
+			}										
+			
+			result[column] = value;
+		}
+						
+		return result;		
+	}
+
+	function derefItem2 (item)
+	{
+		var result = new Array ();
+		
+		for (index in item)
+		{				
+			var column;
+			var value;
+			
+			if (_attributes.columns[index] =! null)
+			{
+				if (_attributes.columns[index].condense != null)
+				{
+					if (typeof(item[index]) == "object")
+					{
+						column = _attributes.columns[index].condense.split (":")[0];
+						condense = _attributes.columns[index].condense.split (":")[1];
+					
+						value = "";
+						for (index2 in item[index])
+						{
+							value += item[index][index2][condense] +", ";						
+						}
+					
+						value = SNDK.string.trimEnd (value, ", ");
+					}
+					else
+					{
+						column = index;
+						value = item[index];																				
+					}
+				}				
+				
+				result[column] = value;
+			}
+		}
+						
+		return result;		
+	}
+
+	function derefItemold (item)
+	{
 		var temp = new Array ();
 		
 		for (index in item)
@@ -464,9 +558,16 @@ listview : function (attributes)
 			var column = null;
 			for (bla2 in _attributes.columns)
 			{
+				if (_attributes.columns[bla2].condense != null)
+				{
+					column = _attributes.columns[bla2].condense.split (":")[0];
+					break;
+				}
+			
 				if (_attributes.columns[bla2].tag == index)
 				{
-					column = _attributes.columns[bla2];					
+					column = _attributes.columns[bla2];
+					break;
 				}
 			}
 				
@@ -480,7 +581,7 @@ listview : function (attributes)
 					var test = "";
 					for (bla1 in item[index])
 					{
-						test += item[index][bla1][column.condense] +", ";						
+						test += item[index][bla1][column.condense.split (":")[1]] +", ";						
 					}
 					
 					test = SNDK.string.trimEnd (test, ", ");

@@ -238,6 +238,16 @@ namespace SNDK.DBI
 			return 0;
 		}
 		
+		public DateTime GetDateTime (int Column)
+		{
+			if (!this._rows.IsDBNull (Column))
+			{
+				return DateTime.Parse (this._rows.GetString (Column));
+			} 
+			
+			return DateTime.Now;
+		}
+		
 		public decimal GetDecimal (int Column)
 		{		
 			if (!this._rows.IsDBNull (Column))
