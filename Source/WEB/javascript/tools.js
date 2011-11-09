@@ -91,7 +91,7 @@ trimEnd : function (string, character)
 {	
 	try
 	{
-	if (string.substr (string.length-1, 1) == character)
+	if (string.substr (string.length - character.length, character.length) == character)
 	{
 		return string.substr (0, string.length - character.length);
 	}
