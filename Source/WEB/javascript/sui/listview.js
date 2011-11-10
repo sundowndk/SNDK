@@ -458,7 +458,7 @@ listview : function (attributes)
 	function derefItem (item)
 	{
 		var result = new Array ();
-		
+							
 		for (key in item)
 		{				
 			var column = null;
@@ -554,7 +554,7 @@ listview : function (attributes)
 		var temp = new Array ();
 		
 		for (index in item)
-		{				
+		{						
 			var column = null;
 			for (bla2 in _attributes.columns)
 			{
@@ -1025,6 +1025,7 @@ listview : function (attributes)
 				}
 			}		
 		}
+		
 			
 		_attributes.items[_attributes.items.length] = derefItem (item);
 		_temp.isDirty = true;
