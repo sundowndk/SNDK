@@ -364,6 +364,9 @@ listview : function (attributes)
 		// treeview
 		if (!_attributes.treeview) 
 			_attributes.treeview = false;		
+			
+		if (!_attributes.treeviewRootValue) 
+			_attributes.treeviewRootValue = "";					
 		
 		// treeviewLinkColumns
 		if (_attributes.treeviewLinkColumns)
@@ -824,16 +827,18 @@ listview : function (attributes)
 			{		
 				// TODO: Needs to be cleaned.
 				var test =_attributes.items[index][_temp.treeviewChildColumn];
-				if (test == "")
+				
+				if (test == _attributes.treeviewRootValue)
 				{
 					test = null;
 				}
+								
 				if (test == options.treeviewMatchValue)
 				{
 					drawRow ({itemIndex: index, indentDepth: indentdepth});
 					
 					drawRows ({treeviewMatchValue: _attributes.items[index][_temp.treeviewParentColumn], indentDepth: indentdepth});
-				}
+				}				
 			}
 		}	
 	}	
