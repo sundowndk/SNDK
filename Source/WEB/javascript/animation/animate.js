@@ -89,8 +89,8 @@ animate: function(options)
 		for (index in _temp.animators)
 		{
 			// TODO: Fix for prototype, should be removed when SNDK.LightBox is ready.
-			try
-			{		
+	//		try
+//			{		
 				var animator = _temp.animators[index];
 				var increase = eval('SNDK.animation.ease.' + animator.ease.toLowerCase () + '(0,' + _temp.frame + ',' + animator.begin + ',' + animator.change + ',' + _temp.totalframes + ');');
 
@@ -103,9 +103,9 @@ animate: function(options)
 	
 					SNDK.tools.setOpacity(_temp.element, increase);
 				}
-			}
-			catch (error)
-			{}
+		//	}
+			//catch (error)
+			//{}
 		}
 
 		if (_temp.frame <= _temp.totalframes)
@@ -164,6 +164,133 @@ animate: function(options)
 
 			_temp.animators[_temp.animators.length] = animator;
 		}
+		
+		// RIGHT
+		if (_options.right != null)
+		{
+			var animator = new Array();
+
+			if (_options.right.begin != null)
+			{
+				animator.begin = parseFloat(_options.right.begin);
+			}
+			else
+			{
+				if (_temp.element.style.right != '')
+				{
+					animator.begin = parseInt(_temp.element.style.right);
+				}
+				else
+				{
+					animator.begin = parseInt (_temp.element.offsetRight);
+					animator.begin -= parseInt (SNDK.tools.getStyle (_temp.element, "margin-right"));
+				}
+			}
+
+			animator.end = parseFloat(_options.right.end);
+			animator.change = parseFloat(animator.end) - parseFloat(animator.begin);
+			animator.ease = (_options.right.ease);
+			animator.unit = 'px';
+			animator.dom = 'right';
+
+			_temp.animators[_temp.animators.length] = animator;
+		}		
+		
+		// MARGINLEFT
+		if (_options.marginLeft != null)
+		{
+			var animator = new Array();
+
+			if (_options.marginLeft.begin != null)
+			{
+				animator.begin = parseFloat(_options.marginLeft.begin);
+			}
+			else
+			{
+				if (_temp.element.style.marginLeft != '')
+				{
+					animator.begin = parseInt(_temp.element.style.marginLeft);
+				}
+				else
+				{
+					animator.begin = parseInt (_temp.element.offsetLeft);
+					animator.begin -= parseInt (SNDK.tools.getStyle (_temp.element, "margin-left"));
+				}
+			}
+
+			animator.end = parseFloat(_options.marginLeft.end);
+			animator.change = parseFloat(animator.end) - parseFloat(animator.begin);
+			animator.ease = (_options.marginLeft.ease);
+			animator.unit = 'px';
+			animator.dom = 'marginLeft';
+
+			_temp.animators[_temp.animators.length] = animator;
+		}		
+		
+		// MARGINRIGHT
+		if (_options.marginRight != null)
+		{
+			var animator = new Array();
+			
+			if (_options.marginRight.begin != null)
+			{
+				animator.begin = parseFloat(_options.marginRight.begin);
+			}
+			else
+			{
+				
+				if (_temp.element.style.marginRight != '')
+				{
+					animator.begin = parseInt(_temp.element.style.marginRight);
+				}
+				else
+				{
+					animator.begin = parseInt (_temp.element.offsetRight);
+					animator.begin -= parseInt (SNDK.tools.getStyle (_temp.element, "margin-right"));
+				}
+			}
+			
+			
+			animator.end = parseFloat(_options.marginRight.end);
+			animator.change = parseFloat(animator.end) - parseFloat(animator.begin);
+			animator.ease = (_options.marginRight.ease);
+			animator.unit = 'px';
+			animator.dom = 'marginRight';
+
+			_temp.animators[_temp.animators.length] = animator;
+		}			
+		
+		// PADDINGRIGHT
+		if (_options.paddingRight != null)
+		{
+			var animator = new Array();
+
+			if (_options.paddingRight.begin != null)
+			{
+				animator.begin = parseFloat(_options.paddingRight.begin);
+			}
+			else
+			{
+				if (_temp.element.style.paddingRight != '')
+				{
+					animator.begin = parseInt(_temp.element.style.paddingRight);
+				}
+				else
+				{
+					//animator.begin = 0;
+					animator.begin = parseInt (SNDK.tools.getStyle (_temp.element, "padding-right"));
+				}
+			}
+					
+
+			animator.end = parseFloat(_options.paddingRight.end);
+			animator.change = parseFloat(animator.end) - parseFloat(animator.begin);
+			animator.ease = (_options.paddingRight.ease);
+			animator.unit = 'px';
+			animator.dom = 'paddingRight';
+
+			_temp.animators[_temp.animators.length] = animator;
+		}			
 
 		// TOP
 		if (_options.top != null)
