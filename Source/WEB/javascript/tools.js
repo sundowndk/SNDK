@@ -5,6 +5,40 @@ randomNumber : function (begin, end)
 },
 
 
+getXML : function (URL)
+{
+	var xmlhttp = SNDK.tools.getXmlHttpObject ();
+	xmlhttp.open ("GET", URL + "?"+ Math.random(), false);
+									
+	xmlhttp.send (null);		
+	xmldoc = xmlhttp.responseXML;
+	
+	return xmldoc;
+},
+
+setURL : function (url, frame)
+{
+	if (frame == null)
+	{
+		var oldurl = document.location.href;
+		if (url == oldurl)
+		{
+			document.location.reload(true);
+		}
+		else
+		{			
+			document.location.href = url;
+		}
+				
+//				alert(document.location.href)				
+//				window.location.href = url; 
+	}
+	else
+	{
+		parent.frames[frame].location = url;
+	}		
+},
+
 derefArray : function (array)
 {
 	var temp = new Array ();
@@ -24,6 +58,21 @@ derefArray : function (array)
 },
 
 
+stopPropogation : function (e) 
+{
+	if (e)
+	{
+		e.cancelBubble = true;
+	}
+//	if (e && e.stopPropogation)
+//	{
+ //		e.stopPropogation ();
+ //	} 
+//	else if (window.event && window.event.cancelBubble)
+//	{
+ // 		window.event.cancelBubble = true;
+  //	}  	
+},
 
 
 getXmlDocFromString : function (xml)

@@ -83,6 +83,7 @@
     <None Include="css\60_layoutbox_noborder.css" />
     <None Include="css\30_tabview.css" />
     <None Include="css\40_listview.css" />
+    <None Include="javascript\cookie.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

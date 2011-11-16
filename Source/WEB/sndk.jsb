@@ -1,6 +1,9 @@
 <solution name="SNDK" outputdirectory="">	
 	<project name="sndk">
 		<class name="SNDK">	
+			<class name="cookie">	
+				<js file="javascript/cookie.js" />
+			</class>		
 			<class name="tools">
 				<js file="javascript/tools.js" />
 			</class>			
@@ -50,7 +53,7 @@
 				<js file="javascript/string.js" />
 			</class>
 			<js file="javascript/include.js" />
-		</class>		
+		</class>	
 		<js file="javascript/prototypes.js" />
 		<js file="javascript/client.js" />
 		<js file="javascript/eventhandler.js" />	
