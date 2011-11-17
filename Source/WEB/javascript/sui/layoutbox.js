@@ -336,6 +336,7 @@ layoutbox : function (attributes)
 
 		// Functions						
 		this.addUIElement = functionAddUIElement;
+		this.getContentElement = functionGetContentElement;	
 		this.setAttribute = functionSetAttribute;
 		this.getAttribute = functionGetAttribute;
 
@@ -392,6 +393,11 @@ layoutbox : function (attributes)
 		 	element.setAttribute ("managed", true);
 		 	element.setAttribute ("appendTo", _elements["container"]);					
 		}	
+		
+		function functionGetContentElement ()
+		{
+			return _elements["container"];		
+		}
 		
 		// ------------------------------------
 		// getAttribute

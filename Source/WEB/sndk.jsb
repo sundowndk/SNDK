@@ -21,6 +21,7 @@
 			<class name="widgets">
 				<js file="javascript/widgets/rotator.js" />
 				<js file="javascript/widgets/blobmenu.js" />
+				<js file="javascript/widgets/simplamenu.js" />
 			</class>			
 			<class name="SUI">
 				<js file="javascript/sui/listview.js" />

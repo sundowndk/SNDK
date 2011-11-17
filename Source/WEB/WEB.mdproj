@@ -84,6 +84,7 @@
     <None Include="css\30_tabview.css" />
     <None Include="css\40_listview.css" />
     <None Include="javascript\cookie.js" />
+    <None Include="javascript\widgets\simplamenu.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />
