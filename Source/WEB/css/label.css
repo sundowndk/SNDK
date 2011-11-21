@@ -6,7 +6,7 @@ Label
 {
 	position: 				relative;
 
-	margin:					3px;
+	margin-top:				10px;
 
 	display: 				inline-block;	
 	outline:				none;
@@ -21,10 +21,14 @@ Label
 		
 	height:					25px;
 		
-	font-family:				arial;		
+
 	font-size:				14px;
-	text-decoration: 			none;	
-	text-shadow: 				1px 1px 1px #ffffff;		
+	text-decoration: 		none;	
+	text-shadow: 			1px 1px 1px #eeeeee;		
+	
+	
+	
+	color:					#222222;
 			
 	cursor:					default;	
 }

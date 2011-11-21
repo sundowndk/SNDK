@@ -127,7 +127,7 @@ label : function (attributes)
 
 		// Stylesheet
 		if (!_attributes.stylesheet)
-			_attributes.stylesheet = "SUITextbox";		
+			_attributes.stylesheet = "SUILabel";		
 
 		// Managed
 		if (!_attributes.managed)		
