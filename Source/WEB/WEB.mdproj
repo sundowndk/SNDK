@@ -75,7 +75,6 @@
     <None Include="html\debug.css" />
     <None Include="html\debug.html" />
     <None Include="html\debug.xml" />
-    <None Include="css\container_modal.css" />
     <None Include="javascript\include.js" />
     <None Include="css\20_upload.css" />
     <None Include="css\10_container.css" />
@@ -86,6 +85,8 @@
     <None Include="javascript\cookie.js" />
     <None Include="javascript\widgets\simplamenu.js" />
     <None Include="css\90_label_white.css" />
+    <None Include="css\11_container_modal.css" />
+    <None Include="css\text.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

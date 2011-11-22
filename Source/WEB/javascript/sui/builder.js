@@ -329,7 +329,8 @@ construct : function (attributes)
 						
 						case "text":
 						{
-							elements[attributes.tag] = new SNDK.SUI.text (attributes);
+							eelements[attributes.tag] = new SNDK.SUI.text (attributes);
+							Parent.addUIElement (elements[attributes.tag]);			
 							break;
 						}											
 

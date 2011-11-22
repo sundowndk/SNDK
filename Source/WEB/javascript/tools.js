@@ -16,6 +16,11 @@ getXML : function (URL)
 	return xmldoc;
 },
 
+reloadURL : function ()
+{
+	document.location.reload (true);
+},
+
 setURL : function (url, frame)
 {
 	if (frame == null)
