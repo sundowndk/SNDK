@@ -163,13 +163,13 @@ namespace SNDK
 				case "hashtable":
 				{
 					foreach (string key in ((Hashtable)value).Keys)
-					{																		
+					{																							
 						root.AppendChild (ToXmlDocument (xmldocument, key, ((Hashtable)value)[key] ));
 					}
 					
 					break;
 				}
-			}
+			}				
 
 			return xmldocument;
 		}
@@ -219,6 +219,8 @@ namespace SNDK
 					
 				case "boolean":
 				{
+					Console.WriteLine ((bool)data);
+					Console.WriteLine (SNDK.Convert.BoolToInt ((bool)data).ToString ());
 					type.Value = "boolean";
 					element.AppendChild (xmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)data).ToString ()));
 					break;					
@@ -849,7 +851,7 @@ namespace SNDK
 		}
 
 		public static int BoolToInt (bool Value)
-		{
+		{					
 			if (Value == true)
 			{
 				return 1;

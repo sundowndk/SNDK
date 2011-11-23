@@ -85,8 +85,9 @@
     <None Include="javascript\cookie.js" />
     <None Include="javascript\widgets\simplamenu.js" />
     <None Include="css\90_label_white.css" />
-    <None Include="css\11_container_modal.css" />
     <None Include="css\text.css" />
+    <None Include="css\13_container_modal.css" />
+    <None Include="css\11_container_noborder.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />
