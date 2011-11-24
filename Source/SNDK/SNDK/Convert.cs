@@ -158,14 +158,25 @@ namespace SNDK
 			XmlElement root = xmldocument.CreateElement ("", rootName, "");
 			xmldocument.AppendChild (root);
 			
+//			root.AppendChild (ToXmlDocument (xmldocument, "top", value ));
+//			root.AppendChild (ToXmlDocument (xmldocument, key, ((Hashtable)value)[key] ));			
+			
 			switch (value.GetType ().Name.ToLower ())
 			{
 				case "hashtable":
-				{
+				{					
 					foreach (string key in ((Hashtable)value).Keys)
-					{																							
-						root.AppendChild (ToXmlDocument (xmldocument, key, ((Hashtable)value)[key] ));
+					{													
+						root.AppendChild (ToXmlDocument (xmldocument, key, ((Hashtable)value)[key] ));				
 					}
+					
+					break;
+				}
+					
+				default:
+				{
+					root.AppendChild (ToXmlDocument (xmldocument, "value", value ));	
+//					ToXmlDocument (xmldocument, "value", value );
 					
 					break;
 				}
@@ -175,15 +186,15 @@ namespace SNDK
 		}
 		
 		private static XmlElement ToXmlDocument (XmlDocument xmlDocument, string name, object data)
-		{
-			XmlElement element = xmlDocument.CreateElement ("", name, "");
+		{			
+			XmlElement element;
 			XmlAttribute type = xmlDocument.CreateAttribute ("type");
-			element.Attributes.Append (type);
 			
 			switch (data.GetType ().Name.ToLower ())
 			{
 				case "string":
 				{
+					element = xmlDocument.CreateElement ("", name, "");	
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection ((string)data));
 					break;
@@ -191,6 +202,7 @@ namespace SNDK
 					
 				case "guid":
 				{
+					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((Guid)data).ToString ()));
 					break;					
@@ -198,6 +210,7 @@ namespace SNDK
 					
 				case "int32":
 				{
+					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((int)data).ToString ()));
 					break;					
@@ -205,6 +218,7 @@ namespace SNDK
 					
 				case "decimal":
 				{
+					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString ()));
 					break;					
@@ -212,6 +226,7 @@ namespace SNDK
 					
 				case "datetime":
 				{
+					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((DateTime)data).ToString ()));
 					break;					
@@ -219,8 +234,7 @@ namespace SNDK
 					
 				case "boolean":
 				{
-					Console.WriteLine ((bool)data);
-					Console.WriteLine (SNDK.Convert.BoolToInt ((bool)data).ToString ());
+					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "boolean";
 					element.AppendChild (xmlDocument.CreateCDataSection (SNDK.Convert.BoolToInt ((bool)data).ToString ()));
 					break;					
@@ -228,14 +242,29 @@ namespace SNDK
 					
 				case "hashtable":
 				{
+					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "hashtable";
-					HashtableToXMLParser (xmlDocument, element, (Hashtable)data);
+					
+					foreach (string key in ((Hashtable)data).Keys)
+					{																			
+						element.AppendChild (ToXmlDocument (xmlDocument, key, ((Hashtable)data)[key] ));
+					}
+					
 					break;
 				}		
 					
 				case "list`1":
 				{					
-					type.Value = "list";
+					if (name == "value")
+					{
+						element = xmlDocument.CreateElement ("", data.GetType ().GetGenericArguments ()[0].ToString ().ToLower () +"s", "");
+					}
+					else
+					{
+						element = xmlDocument.CreateElement ("", name, "");
+					}
+					
+					type.Value = "list";					
 					
 					System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)data.GetType ().GetMethod("GetEnumerator").Invoke (data, null);
 					while (enumerator.MoveNext ())
@@ -251,8 +280,6 @@ namespace SNDK
 							element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
 							element.AppendChild (element2);							
 						}
-						
-//						element.AppendChild (HashtableToXMLParser2 (xmlDocument, "item", enumerator.Current));
 					}
 					
 					break;
@@ -263,7 +290,8 @@ namespace SNDK
 					switch (data.GetType ().BaseType.Name.ToLower ())
 					{
 						case "enum":
-						{
+						{							
+							element = xmlDocument.CreateElement ("", name, "");
 							type.Value = "string";
 							element.AppendChild (xmlDocument.CreateCDataSection (SNDK.Convert.EnumToString ((Enum)data)));
 							break;
@@ -271,16 +299,31 @@ namespace SNDK
 								
 						default:
 						{
+							element = xmlDocument.CreateElement ("", data.GetType ().FullName.ToLower (), "");
 							type.Value = "object";
+							
+							if (data.GetType ().GetMethod ("ToXmlDocument") != null)
+							{
+								// Call ToXMLDocument on all objects inside Object, and import nodes into XmlDocument.
+								foreach (XmlNode node in ((XmlDocument)data.GetType ().GetMethod ("ToXmlDocument").Invoke (data, null)).DocumentElement.ChildNodes)
+								{
+									element.AppendChild (xmlDocument.ImportNode (node, true));
+								}
+							}
+							else
+							{
+								// TODO: Objects without the ToXmlDocument method will be skipped.
+								break;
+							}							
 
-							try
-							{
-								element.AppendChild (xmlDocument.CreateCDataSection (data.ToString().ToLower ()));
-							}
-							catch
-							{
-								element.AppendChild (xmlDocument.CreateCDataSection (string.Empty));
-							}
+//							try
+//							{
+//								element.AppendChild (xmlDocument.CreateCDataSection (data.ToString().ToLower ()));
+//							}
+//							catch
+//							{
+//								element.AppendChild (xmlDocument.CreateCDataSection (string.Empty));
+//							}
 
 							break;
 						}
@@ -289,6 +332,9 @@ namespace SNDK
 					break;
 				}
 			}
+			
+			element.Attributes.Append (type);
+
 			
 			return element;
 		}

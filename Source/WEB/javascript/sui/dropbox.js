@@ -2,7 +2,7 @@
 // dropbox ([attributes])
 // -------------------------------------------------------------------------------------------------------------------------
 //
-// .addItem ({title, value})
+// .addItem ({label, value})
 //
 // .getAttribute (string)
 // .setAttribute (string, string)
