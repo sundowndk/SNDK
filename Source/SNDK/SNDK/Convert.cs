@@ -299,7 +299,16 @@ namespace SNDK
 								
 						default:
 						{
-							element = xmlDocument.CreateElement ("", data.GetType ().FullName.ToLower (), "");
+							if (name == "value")
+							{
+								element = xmlDocument.CreateElement ("", data.GetType ().FullName.ToLower (), "");
+							}
+							else
+							{
+								element = xmlDocument.CreateElement ("", name, "");
+							}							
+//							element = xmlDocument.CreateElement ("", data.GetType ().FullName.ToLower (), "");
+//							element = xmlDocument.CreateElement ("", name, "");
 							type.Value = "object";
 							
 							if (data.GetType ().GetMethod ("ToXmlDocument") != null)
