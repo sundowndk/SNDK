@@ -271,7 +271,16 @@ namespace SNDK
 					{						
 						if (enumerator.Current.GetType ().GetMethod ("ToXmlDocument") != null)
 						{
-							element.AppendChild (xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true));
+							XmlAttribute t = xmlDocument.CreateAttribute ("type");
+							t.Value = "object";
+							
+							XmlElement e = (XmlElement)xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true);
+							
+							e.Attributes.Append (t);
+							
+							element.AppendChild (e);
+							
+//							element.AppendChild (xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true));
 						}
 						else
 						{			
@@ -696,7 +705,7 @@ namespace SNDK
 			Hashtable result = new Hashtable ();
 			
 			foreach (XmlNode node in Nodes)
-			{
+			{Console.WriteLine (node.Name);
 				switch (node.Attributes["type"].Value.ToString().ToLower())
 				{
 					case "string":
@@ -714,6 +723,17 @@ namespace SNDK
 					case "hashtable":
 					{
 						result.Add (node.Name, FromXmlDocument (node.ChildNodes));
+						break;
+					}
+						
+					case "object":
+					{						
+						XmlDocument test = new XmlDocument ();
+						test.AppendChild (test.ImportNode (node, true));
+							
+						
+						
+						result.Add (node.Name, test);
 						break;
 					}
 
@@ -742,14 +762,14 @@ namespace SNDK
 		}
 		
 
-		public static Hashtable XmlDocumentToHashtable (XmlDocument xmlDocument)
-		{
-			Hashtable result = new Hashtable ();
-
-			XMLToHashtableParser (xmlDocument.DocumentElement.ChildNodes, result);		
-
-			return result;
-		}		
+//		public static Hashtable XmlDocumentToHashtable (XmlDocument xmlDocument)
+//		{
+//			Hashtable result = new Hashtable ();
+//
+//			XMLToHashtableParser (xmlDocument.DocumentElement.ChildNodes, result);		
+//
+//			return result;
+//		}		
 		
 //		public static Hashtable XMLToHashtabel (string XML)
 //		{
@@ -766,50 +786,50 @@ namespace SNDK
 //			
 //		}
 
-		public static void XMLToHashtableParser (XmlNodeList Nodes, Hashtable Item)
-		{
-			foreach (XmlNode node in Nodes)
-			{
-				switch (node.Attributes["type"].Value.ToString().ToLower())
-				{
-					case "string":
-					{
-						Item.Add(node.Name, node.InnerText);
-						break;
-					}
-						
-					case "boolean":
-					{
-						Item.Add (node.Name, SNDK.Convert.IntToBool (int.Parse (node.InnerText)));
-						break;
-					}
-
-					case "hashtable":
-					{
-						Hashtable hashtable = new Hashtable ();
-						XMLToHashtableParser (node.ChildNodes, hashtable);
-						Item.Add (node.Name, hashtable);
-
-						break;
-					}
-
-					case "list":
-					{
-						List<Hashtable> list = new List<Hashtable>();
-						foreach (XmlNode node2 in node.ChildNodes)
-						{
-							Hashtable hashtable = new Hashtable ();
-							XMLToHashtableParser (node2.ChildNodes, hashtable);
-
-							list.Add (hashtable);
-						}
-						Item.Add (node.Name, list);
-
-						break;
-					}
-				}
-			}
-		}		
+//		public static void XMLToHashtableParser (XmlNodeList Nodes, Hashtable Item)
+//		{
+//			foreach (XmlNode node in Nodes)
+//			{
+//				switch (node.Attributes["type"].Value.ToString().ToLower())
+//				{
+//					case "string":
+//					{
+//						Item.Add(node.Name, node.InnerText);
+//						break;
+//					}
+//						
+//					case "boolean":
+//					{
+//						Item.Add (node.Name, SNDK.Convert.IntToBool (int.Parse (node.InnerText)));
+//						break;
+//					}
+//
+//					case "hashtable":
+//					{
+//						Hashtable hashtable = new Hashtable ();
+//						XMLToHashtableParser (node.ChildNodes, hashtable);
+//						Item.Add (node.Name, hashtable);
+//
+//						break;
+//					}
+//
+//					case "list":
+//					{
+//						List<Hashtable> list = new List<Hashtable>();
+//						foreach (XmlNode node2 in node.ChildNodes)
+//						{
+//							Hashtable hashtable = new Hashtable ();
+//							XMLToHashtableParser (node2.ChildNodes, hashtable);
+//
+//							list.Add (hashtable);
+//						}
+//						Item.Add (node.Name, list);
+//
+//						break;
+//					}
+//				}
+//			}
+//		}		
 		
 		
 		public static bool StringToBool (string Value)

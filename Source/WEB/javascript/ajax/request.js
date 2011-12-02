@@ -116,7 +116,8 @@ request : function (application, applicationparam, applicationdatafield, request
 						
 					list[list.length] = hashtable;
 					//} 
-																								
+						
+																				
 					Data[node.tagName] = hashtable;					
 					break;
 				}
@@ -181,6 +182,7 @@ request : function (application, applicationparam, applicationdatafield, request
 						
 						list[list.length] = hashtable;
 					} 
+					
 																								
 					Data[node.tagName] = list;
 									
@@ -353,7 +355,7 @@ request : function (application, applicationparam, applicationdatafield, request
 				}
 				
 				case "object":
-				{
+				{				
 					if (data[index].constructor == Array)
 					{
 
