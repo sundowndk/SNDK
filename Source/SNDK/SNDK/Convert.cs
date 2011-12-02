@@ -730,9 +730,7 @@ namespace SNDK
 					{						
 						XmlDocument test = new XmlDocument ();
 						test.AppendChild (test.ImportNode (node, true));
-							
-						
-						
+																			
 						result.Add (node.Name, test);
 						break;
 					}
