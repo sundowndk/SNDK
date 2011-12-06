@@ -284,10 +284,30 @@ namespace SNDK
 						}
 						else
 						{			
-							XmlElement element2 = xmlDocument.CreateElement ("", enumerator.Current.GetType ().ToString ().ToLower (), "");
+							switch (enumerator.Current.GetType ().ToString ().ToLower ())
+							{
+								case "hashtable":
+								{
+//									XmlElement element2 = xmlDocument.CreateElement ("", enumerator.Current.GetType ().ToString ().ToLower (), "");
 							
-							element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
-							element.AppendChild (element2);							
+//									element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+									element.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+									
+									break;
+								}
+									
+								default:
+								{
+//									XmlElement element2 = xmlDocument.CreateElement ("", enumerator.Current.GetType ().ToString ().ToLower (), "");
+							
+//									element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+//									element.AppendChild (element2);							
+									element.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+
+									break;
+								}
+							}
+							
 						}
 					}
 					
