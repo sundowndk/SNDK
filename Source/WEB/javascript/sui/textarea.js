@@ -115,7 +115,7 @@ textarea : function (attributes)
 
 				_elements["provider"].onfocus = eventOnFocus;
 				_elements["provider"].onblur = eventOnBlur;
-				_elements["provider"].onkeyup = eventOnKeyUp;
+				_elements["provider"].onkeyup = eventOnChange;
 				_elements["provider"].onchange = eventOnChange;
 				_elements["provider"].value = _attributes.value;
 				
@@ -1046,7 +1046,7 @@ if (_temp.providerInitialized)
 	function eventOnChange ()
 	{
 		if (_temp.initialized)
-		{
+		{		
 			getValue ();
 			
 			if (_attributes.onChange != null)
