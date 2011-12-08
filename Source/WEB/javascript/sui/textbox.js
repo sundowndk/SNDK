@@ -582,6 +582,10 @@ textbox : function (attributes)
 			{
 				_attributes[attribute] = value;
 				refresh ();
+				if (_temp.initialized)
+				{
+					eventOnChange ();
+				}
 				break;
 			}
 					
