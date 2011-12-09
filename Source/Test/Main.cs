@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Xml;
 using SNDK;
 using SNDK.DBI;
 
@@ -11,20 +12,31 @@ namespace Test
 		{
 			
 			List<string> test1 = new List<string> ();
-			test1.Add ("LINE1");
-			test1.Add ("LINE2");
+			test1.Add ("string1");
+			test1.Add ("string2");
+			test1.Add ("string3");
 			
-			List<Guid> test2 = new List<Guid> ();
-			test2.Add (Guid.NewGuid ());
-			test2.Add (Guid.NewGuid ());
-			test2.Add (Guid.NewGuid ());
-			test2.Add (Guid.NewGuid ());
-
-			List<int> test3 = new List<int> ();
-			test3.Add (1);
-			test3.Add (2);
-			test3.Add (3);
-			test3.Add (4);
+			Console.WriteLine (SNDK.Convert.ToXmlDocument (test1).OuterXml);
+			
+			
+			
+ 			
+			
+//			List<string> test1 = new List<string> ();
+//			test1.Add ("LINE1");
+//			test1.Add ("LINE2");
+//			
+//			List<Guid> test2 = new List<Guid> ();
+//			test2.Add (Guid.NewGuid ());
+//			test2.Add (Guid.NewGuid ());
+//			test2.Add (Guid.NewGuid ());
+//			test2.Add (Guid.NewGuid ());
+//
+//			List<int> test3 = new List<int> ();
+//			test3.Add (1);
+//			test3.Add (2);
+//			test3.Add (3);
+//			test3.Add (4);
 
 			
 //			Console.WriteLine (SNDK.Convert.ListToString (test2));
@@ -33,10 +45,10 @@ namespace Test
 			
 //			Console.WriteLine ();
 			
-			foreach (int guid in SNDK.Convert.StringToList<int> (SNDK.Convert.ListToString (test3)))
-			{
-				Console.WriteLine (guid);
-			}
+//			foreach (int guid in SNDK.Convert.StringToList<int> (SNDK.Convert.ListToString (test3)))
+//			{
+//				Console.WriteLine (guid);
+//			}
 			
 			
 			

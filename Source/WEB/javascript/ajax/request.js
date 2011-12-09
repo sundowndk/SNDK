@@ -83,6 +83,8 @@ request : function (application, applicationparam, applicationdatafield, request
 		var xmldoc = _xmlhttp.responseXML;
 		var root = xmldoc.getElementsByTagName ('ajax').item(0);				
 		
+		
+		
 		parseResponsRecursive (root.childNodes, _data);
 		
 		
@@ -93,11 +95,12 @@ request : function (application, applicationparam, applicationdatafield, request
 	}
 	
 	function parseResponsRecursive (Nodes, Data)
-	{
+	{		
 		for (var index = 0, len = Nodes.length; index < len; index++)
 		{
 			var node = Nodes.item(index);
-
+						
+			//console.log (node.tagName)
 			switch (node.attributes.getNamedItem ("type").value)
 			{
 				case "object":
@@ -178,7 +181,12 @@ request : function (application, applicationparam, applicationdatafield, request
 						var hashtable = {};
 						var node2 = node.childNodes[index2];
 						
+						//console.log (node2.childNodes)
+						
 						parseResponsRecursive (node2.childNodes, hashtable);
+						//parseResponsRecursive (node2, hashtable);
+						
+						
 						
 						list[list.length] = hashtable;
 					} 

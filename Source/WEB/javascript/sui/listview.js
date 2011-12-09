@@ -472,12 +472,20 @@ listview : function (attributes)
 			{
 				if (_attributes.columns[index2].condense != null)
 				{	
-					if (key == _attributes.columns[index2].condense.split (":")[0])
-					{						
-						column = _attributes.columns[index2].tag;
-						condense = _attributes.columns[index2].condense.split (":")[1];						
-						break;
+					if (_attributes.columns[index2].tag == key)
+					{
+					column = column = _attributes.columns[index2].tag;
+					condense = _attributes.columns[index2].condense;
+					break;
 					}
+				//console.log (key +" "+ _attributes.columns[index2].condense.split (":")[0])
+				//if (key == _attributes.columns[index2].condense.split (":")[0])
+				//	{						
+					
+				//		column = _attributes.columns[index2].tag;
+				//		condense = _attributes.columns[index2].condense.split (":")[1];						
+				//		break;
+				//	}
 				}
 				else if (_attributes.columns[index2].tag == key)
 				{									
@@ -490,21 +498,23 @@ listview : function (attributes)
 			{			
 				continue;
 			}
-				
+							
 			if (typeof(item[key]) == "object")
 			{
 				value = "";
 				for (index2 in item[key])
-				{
-					value += item[key][index2][condense] +", ";						
-				}
+				{									
+					value += item[key][index2]["value"] +", ";
+				}				
 					
-				value = SNDK.string.trimEnd (value, ", ");
+				value = SNDK.string.trimEnd (value, ", ");							
 			}
 			else				
 			{
 				value = item[key];				
 			}										
+								
+			//console.log (column +" "+ value)			
 			
 			result[column] = value;
 		}

@@ -283,8 +283,10 @@ namespace SNDK
 //							element.AppendChild (xmlDocument.ImportNode (((XmlDocument)enumerator.Current.GetType ().GetMethod ("ToXmlDocument").Invoke (enumerator.Current, null)).DocumentElement, true));
 						}
 						else
-						{			
-							switch (enumerator.Current.GetType ().ToString ().ToLower ())
+						{	
+//							data.GetType ().Name.ToLower ()
+//							Console.WriteLine (enumerator.Current.GetType ().ToString ().ToLower ());
+							switch (enumerator.Current.GetType ().Name.ToLower ())
 							{
 								case "hashtable":
 								{
@@ -298,11 +300,11 @@ namespace SNDK
 									
 								default:
 								{
-//									XmlElement element2 = xmlDocument.CreateElement ("", enumerator.Current.GetType ().ToString ().ToLower (), "");
+									XmlElement element2 = xmlDocument.CreateElement ("", enumerator.Current.GetType ().ToString ().ToLower (), "");
 							
-//									element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
-//									element.AppendChild (element2);							
-									element.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+									element2.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
+									element.AppendChild (element2);							
+//									element.AppendChild (ToXmlDocument (xmlDocument, "value", enumerator.Current));
 
 									break;
 								}
