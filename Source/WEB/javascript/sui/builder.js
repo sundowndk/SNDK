@@ -328,8 +328,8 @@ construct : function (attributes)
 						}	
 						
 						case "text":
-						{
-							eelements[attributes.tag] = new SNDK.SUI.text (attributes);
+						{						
+							elements[attributes.tag] = new SNDK.SUI.text (attributes);
 							Parent.addUIElement (elements[attributes.tag]);			
 							break;
 						}											

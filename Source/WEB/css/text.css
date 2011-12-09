@@ -5,7 +5,7 @@ Text
 {
 	position: 				relative;
 
-	margin:					10px;	
+	margin:					5px;	
 
 	display: 				inline-block;	
 	outline:				none;
@@ -23,7 +23,7 @@ Text
 	text-shadow: 			1px 1px 1px #eeeeee;		
 	line-height:			23px;
 		
-	color:					#222222;
+	color:					#555;
 			
 	cursor:					default;	
 }
