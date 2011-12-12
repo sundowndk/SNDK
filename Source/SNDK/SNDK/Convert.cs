@@ -727,7 +727,7 @@ namespace SNDK
 			Hashtable result = new Hashtable ();
 			
 			foreach (XmlNode node in Nodes)
-			{Console.WriteLine (node.Name);
+			{
 				switch (node.Attributes["type"].Value.ToString().ToLower())
 				{
 					case "string":
