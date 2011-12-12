@@ -470,6 +470,64 @@ listview : function (attributes)
 						
 			for (index2 in _attributes.columns)			
 			{
+				var c = _attributes.columns[index2];
+				if (c.condense != null)
+				{	
+					if (c.tag == key)
+					{
+						column = column = c.tag;
+						condense = c.condense;
+						break;
+					}
+				}
+				else if (c.tag == key)
+				{									
+					column = c.tag;
+					break;
+				}				
+			}
+
+			if (column == null)
+			{			
+				continue;
+			}
+							
+			if (typeof(item[key]) == "object")
+			{
+				value = "";
+				for (index2 in item[key])
+				{									
+					value += item[key][index2]["value"] +", ";
+				}				
+					
+				value = SNDK.string.trimEnd (value, ", ");							
+			}
+			else				
+			{
+				value = item[key];				
+			}										
+								
+			//console.log (column +" "+ value)			
+			
+			result[column] = value;
+		}
+						
+		return result;		
+	}	
+	
+
+	function derefItem_a (item)
+	{
+		var result = new Array ();
+							
+		for (key in item)
+		{				
+			var column = null;
+			var condense;
+			var value;
+						
+			for (index2 in _attributes.columns)			
+			{
 				if (_attributes.columns[index2].condense != null)
 				{	
 					if (_attributes.columns[index2].tag == key)
