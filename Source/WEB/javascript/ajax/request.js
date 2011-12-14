@@ -107,7 +107,7 @@ request : function (application, applicationparam, applicationdatafield, request
 				case "object":
 				{
 				
-					var list = {};
+					//var list = {};
 				
 					//for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
 					//{
@@ -118,7 +118,7 @@ request : function (application, applicationparam, applicationdatafield, request
 						
 					parseResponsRecursive (node.childNodes, hashtable);
 						
-					list[list.length] = hashtable;
+					//list[list.length] = hashtable;
 					//} 
 						
 																				
@@ -189,7 +189,8 @@ request : function (application, applicationparam, applicationdatafield, request
 						
 						
 						
-						list[list.length] = hashtable;
+						list[index2] = hashtable;
+						//list[list.length] = hashtable;
 						//list[index2] = hashtable;
 					} 
 					
