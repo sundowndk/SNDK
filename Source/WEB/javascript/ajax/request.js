@@ -47,7 +47,7 @@ request : function (application, applicationparam, applicationdatafield, request
 		}
 					
 		_xmlhttp.onreadystatechange = function ()
-		{									
+		{			
 			if (_xmlhttp.readyState == 2 && _event_onsent != null)
 			{
 				_onsent ();
@@ -59,14 +59,14 @@ request : function (application, applicationparam, applicationdatafield, request
 			}			
 
 			if (_xmlhttp.readyState == 4 && _event_onloaded != null)
-			{			
+			{														
 				if (_asynchronous)
-				{
+				{				
 					parseRespons ();
 				}
 				
 				if (_event_onloaded != null)
-				{
+				{						
 					_event_onloaded (_data);
 				}
 			}						
@@ -420,7 +420,7 @@ request : function (application, applicationparam, applicationdatafield, request
 	
 		
 	function valueOnLoaded (value)
-	{
+	{	
 		_event_onloaded = value;
 	}
 
