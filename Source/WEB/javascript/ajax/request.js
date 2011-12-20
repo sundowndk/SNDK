@@ -47,7 +47,7 @@ request : function (application, applicationparam, applicationdatafield, request
 		}
 					
 		_xmlhttp.onreadystatechange = function ()
-		{									
+		{			
 			if (_xmlhttp.readyState == 2 && _event_onsent != null)
 			{
 				_onsent ();
@@ -59,14 +59,14 @@ request : function (application, applicationparam, applicationdatafield, request
 			}			
 
 			if (_xmlhttp.readyState == 4 && _event_onloaded != null)
-			{			
+			{														
 				if (_asynchronous)
-				{
+				{				
 					parseRespons ();
 				}
 				
 				if (_event_onloaded != null)
-				{
+				{						
 					_event_onloaded (_data);
 				}
 			}						
@@ -96,7 +96,8 @@ request : function (application, applicationparam, applicationdatafield, request
 	
 	function parseResponsRecursive (Nodes, Data)
 	{		
-		for (var index = 0, len = Nodes.length; index < len; index++)
+		var len = Nodes.length;		
+		for (var index = 0; index < len; index++)
 		{
 			var node = Nodes.item(index);
 						
@@ -106,7 +107,7 @@ request : function (application, applicationparam, applicationdatafield, request
 				case "object":
 				{
 				
-					var list = {};
+					//var list = {};
 				
 					//for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
 					//{
@@ -117,7 +118,7 @@ request : function (application, applicationparam, applicationdatafield, request
 						
 					parseResponsRecursive (node.childNodes, hashtable);
 						
-					list[list.length] = hashtable;
+					//list[list.length] = hashtable;
 					//} 
 						
 																				
@@ -175,8 +176,8 @@ request : function (application, applicationparam, applicationdatafield, request
 				case "list":
 				{
 					var list = new Array();
-				
-					for (var index2 = 0, len2 = node.childNodes.length; index2 < len2; index2++)
+					var len2 = node.childNodes.length;
+					for (var index2 = 0; index2 < len2; index2++)
 					{
 						var hashtable = {};
 						var node2 = node.childNodes[index2];
@@ -188,7 +189,9 @@ request : function (application, applicationparam, applicationdatafield, request
 						
 						
 						
-						list[list.length] = hashtable;
+						list[index2] = hashtable;
+						//list[list.length] = hashtable;
+						//list[index2] = hashtable;
 					} 
 					
 																								
@@ -417,7 +420,7 @@ request : function (application, applicationparam, applicationdatafield, request
 	
 		
 	function valueOnLoaded (value)
-	{
+	{	
 		_event_onloaded = value;
 	}
 

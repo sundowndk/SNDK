@@ -641,6 +641,7 @@ opacityChange : function (element, opacity)
 				else
 				{
 					element = document.createElement (type);
+					
 				}
 			}
 			else

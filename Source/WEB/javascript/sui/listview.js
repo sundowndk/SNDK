@@ -264,16 +264,19 @@ listview : function (attributes)
 		{
 			if (_temp.isDirty)
 			{
-				setTimeout 
-				( 
-					function () 
+			
+				var redr = 					function () 
 					{
 				// Remove all current rows.
 				_elements["contentcenter"].innerHTML = " ";				
 				_elements["rows"] = new Array ();
 				
 				// Redraw all rows.
+								
+				_elements["contentcenter"].style.display ="none";
 				drawRows ({treeviewMatchValue: null});		
+				_elements["contentcenter"].style.display ="block";
+				
 				
 				// Redraw selected row.
 				setSelectedRow (_temp.selectedRow);
@@ -281,7 +284,10 @@ listview : function (attributes)
 				_temp.isDirty = false;	
 
 					 
-					}, 
+					}
+			
+				setTimeout 
+				(redr , 
 					
 					0);	
 			
@@ -459,6 +465,64 @@ listview : function (attributes)
 	}
 
 	function derefItem (item)
+	{
+		var result = new Array ();
+							
+		for (key in item)
+		{				
+			var column = null;
+			var condense;
+			var value;
+						
+			for (index2 in _attributes.columns)			
+			{
+				var c = _attributes.columns[index2];
+				if (c.condense != null)
+				{	
+					if (c.tag == key)
+					{
+						column = column = c.tag;
+						condense = c.condense;
+						break;
+					}
+				}
+				else if (c.tag == key)
+				{									
+					column = c.tag;
+					break;
+				}				
+			}
+
+			if (column == null)
+			{			
+				continue;
+			}
+							
+			if (typeof(item[key]) == "object")
+			{
+				value = "";
+				for (index2 in item[key])
+				{									
+					value += item[key][index2]["value"] +", ";
+				}				
+					
+				value = SNDK.string.trimEnd (value, ", ");							
+			}
+			else				
+			{
+				value = item[key];				
+			}										
+								
+			//console.log (column +" "+ value)			
+			
+			result[column] = value;
+		}
+						
+		return result;		
+	}	
+	
+
+	function derefItem_a (item)
 	{
 		var result = new Array ();
 							
@@ -812,7 +876,9 @@ listview : function (attributes)
 		if (!_attributes.treeview)
 		{
 			// Draw rows for normal view.
-			for (index in _attributes.items)
+			// for (index in _attributes.items)
+			var len = _attributes.items.length;
+			for (var index = 0; index < len; index++)			
 			{
 				drawRow ({itemIndex: index, indentDepth: indentdepth});
 			}					
@@ -834,7 +900,10 @@ listview : function (attributes)
 			indentdepth++;
 
 			for (index in _attributes.items)
+			//var len = _attributes.items.length;
+			//for (var index = 0; index <= len; index++)			
 			{		
+			//console.log (index);
 				// TODO: Needs to be cleaned.
 				var test =_attributes.items[index][_temp.treeviewChildColumn];
 				
@@ -857,6 +926,75 @@ listview : function (attributes)
 	// drawRow
 	// ------------------------------------	
 	function drawRow (options)
+	{
+		var row = _elements["rows"].length;
+		var roww;
+	
+		//_elements["contentcenter"].innerHTML += '<div class="ItemRow" id="'+ _attributes.id +'_'+ row +'" > </div>';
+			document.createDocumentFragment ()
+		var t2 = document.createDocumentFragment ()
+		
+		roww = new Array ();
+		//_elements["rows"][row][0] = document.getElementById (_attributes.id +'_'+ row);
+		//_elements["rows"][row][0] = SNDK.tools.newElement ("div", {className: "ItemRow", id: _attributes.id +"_"+ row, appendTo: _elements["contentcenter"]});		
+		roww[0] = SNDK.tools.newElement ("div", {className: "ItemRow", id: _attributes.id +"_"+ row, appendTo: t2});		
+		roww["itemIndex"] = options.itemIndex;
+		roww["indentDepth"] = options.indentDepth;
+		roww[0].style.overflow = "hidden";
+		roww[0].style.width = "100%";
+		roww[0].onmousedown = eventOnRowClick;
+
+		SNDK.tools.textSelectionDisable (roww[0]);
+
+		for (column in _attributes.columns)
+		{				
+			if (_attributes.columns[column].visible)
+			{
+				//_elements["rows"][row][column + 1] = SNDK.tools.newElement ("div", {className: "ItemColumn", id: _attributes.id +"_"+ row +"_"+ column, appendTo: _elements["rows"][row][0]});
+				var t = SNDK.tools.newElement ("div", {className: "ItemColumn", id: _attributes.id +"_"+ row +"_"+ column, appendTo: roww[0]});
+				
+				var content = "";
+
+				if (_attributes.treeview)
+				{
+					if (column == 1)
+					{
+						content += "<span style='padding-left: "+ (options.indentDepth * 20) +"px;'> </span>";
+					}
+				}
+				
+				if (_attributes.columns[column].tag != null)
+				{
+					content += _attributes.items[options.itemIndex][_attributes.columns[column].tag];
+				}
+				else
+				{
+					content += _attributes.items[options.itemIndex][column];					
+				}
+								
+//				_elements["rows"][row][column + 1].innerHTML = content;			
+//				_elements["rows"][row][column + 1].style.width = _attributes.columns[column].calculatedWidth - 10 +"px";
+//				_elements["rows"][row][column + 1].style.overflow = "hidden";
+//				_elements["rows"][row][column + 1].style.whiteSpace = "nowrap";
+				
+				t.innerHTML = content;			
+				
+				t.style.width = _attributes.columns[column].calculatedWidth - 10 +"px";
+				t.style.overflow = "hidden";
+				t.style.whiteSpace = "nowrap";
+				
+				
+				//_elements["rows"][row][column + 1] = t;
+				
+			}
+		}
+		
+		_elements["rows"][row] = roww;
+		
+		_elements["contentcenter"].appendChild (t2);
+	}	
+	
+	function drawRowOLD (options)
 	{
 		var row = _elements["rows"].length;
 	
