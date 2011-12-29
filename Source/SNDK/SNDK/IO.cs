@@ -294,6 +294,80 @@ namespace SNDK
 			}
 				return response;
 		}
+		
+		public static string FetchURLAsString (string Url)
+		{
+			return FetchURLAsString (Url, Encoding.UTF8);
+		}
+		
+		public static string FetchURLAsString (string Url, Encoding Encoding)
+		{
+			string page = null;
+		
+			string responseContent;
+			HttpWebRequest request = (HttpWebRequest)WebRequest.Create(Url);
+			request.Method = "GET";
+			request.KeepAlive = true;
+			request.Proxy = null;
+
+			using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+			{
+				using (Stream responseStream = response.GetResponseStream())
+				{					
+//					using (StreamReader sr = new StreamReader(responseStream, System.Text.Encoding.GetEncoding ("ISO-8859-15")))
+						using (StreamReader sr = new StreamReader(responseStream, Encoding))
+						responseContent = sr.ReadToEnd();
+				}
+			}
+
+			page = responseContent;
+
+			return page;
+		}		
+		
+		
+//		public static string GetURL (string Url)
+//		{
+//			// used to build entire input
+//			StringBuilder sb  = new StringBuilder();
+//
+//			// used on each read operation
+//			byte[]        buf = new byte[8192];
+//
+//			// prepare the web page we will be asking for
+//			HttpWebRequest  request  = (HttpWebRequest)
+//				WebRequest.Create(Url);
+//
+//			// execute the request
+//			HttpWebResponse response = (HttpWebResponse)
+//				request.GetResponse();
+//
+//			// we will read data via the response stream
+//			Stream resStream = response.GetResponseStream();
+//
+//			string tempString = null;
+//			int    count      = 0;
+//
+//			do
+//			{
+//				// fill the buffer with data
+//				count = resStream.Read (buf, 0, buf.Length);
+//
+//				// make sure we read some data
+//				if (count != 0)
+//				{
+//					// translate from bytes to ASCII text
+//					tempString = Encoding.ASCII.GetString(buf, 0, count);
+//
+//					// continue building the string
+//					sb.Append(tempString);
+//				}
+//			}
+//			while (count > 0); // any more data to read?
+//						
+//			// print out page source
+//			return sb.ToString ();
+//		}
 
 		public static void DownloadToFile (string Url, string Filename)
 		{
