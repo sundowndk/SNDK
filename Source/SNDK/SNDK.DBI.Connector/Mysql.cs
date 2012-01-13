@@ -95,13 +95,15 @@ namespace SNDK.DBI.Connector
 			
 			Query.ConnectionThread = Connection.GetConnectionThread ();
 			
-			MySqlConnection dbconnection = (MySqlConnection)Query.ConnectionThread.DbConnection;
+			MySqlConnection dbconnection = (MySqlConnection)Query.ConnectionThread.DbConnection;			
 					
 			Query.ConnectionThread.DbCommand = dbconnection.CreateCommand ();			
 			Query.ConnectionThread.DbCommand.CommandText = QueryString;
 			
 			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");			
-
+			
+		retry:
+			
 			try
 			{
 				if (usenonquery.Success)
@@ -120,11 +122,29 @@ namespace SNDK.DBI.Connector
 				
 				success = true;
 			}
+			catch (MySql.Data.MySqlClient.MySqlException Exception)
+			{
+				#region HANDLE CONNECTION FAILURE
+				if (Exception.GetBaseException () is  System.IO.EndOfStreamException)
+				{
+//					Console.WriteLine ("CONNECTION FAILED");					
+					Connection.ReConnect ();							
+					goto retry;
+				}
+				#endregion
+			}			
 			catch (Exception Exception)
 			{
+				
 //				Console.WriteLine (Query.ConnectionThread._id);
+				
+					
+				
+								
 				Console.WriteLine (Exception);
-				Environment.Exit (0);
+				
+				
+//				Environment.Exit (0);
 				if (Connection.DebugMode)
 				{
 					throw new Exception ("Error in querystring: "+ QueryString);

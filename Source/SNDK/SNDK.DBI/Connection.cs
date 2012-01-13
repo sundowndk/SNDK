@@ -169,7 +169,24 @@ namespace SNDK.DBI
 		}
 		#endregion
 		
-		#region Internal Methods		
+		#region Internal Methods				
+		internal void ReConnect ()
+		{
+			switch (this._databaseconnector)
+			{
+			    case Enums.DatabaseConnector.Mysql:
+			    { 
+				
+				foreach (ConnectionThread thread in this._pool)
+				{
+//					Console.WriteLine ("RECONNECTING");
+					thread.DbConnection = Connector.Mysql.Connect (this);
+				}
+					break;
+				}
+			}
+		}
+		
 		internal ConnectionThread GetConnectionThread ()
 		{			
 			ConnectionThread result = null;		
