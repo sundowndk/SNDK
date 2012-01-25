@@ -144,7 +144,14 @@ namespace SNDK
 //
 //			return result;
 //		}
-
+		
+		
+		public static XmlDocument XmlNodeToXmlDocument (XmlNode XmlNode)
+		{
+			XmlDocument result = new XmlDocument ();
+			result.AppendChild (result.ImportNode (XmlNode, true));			
+			return result;
+		}
 				
 		public static XmlDocument ToXmlDocument (object value)
 		{
