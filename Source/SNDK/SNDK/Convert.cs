@@ -145,6 +145,12 @@ namespace SNDK
 //			return result;
 //		}
 		
+		public static XmlDocument StringToXmlDocument (string XML)
+		{
+			XmlDocument result = new XmlDocument ();
+			result.Load (new StringReader (XML));
+			return result;
+		}
 		
 		public static XmlDocument XmlNodeToXmlDocument (XmlNode XmlNode)
 		{
