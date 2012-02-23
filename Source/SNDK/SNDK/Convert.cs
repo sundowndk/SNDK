@@ -229,13 +229,21 @@ namespace SNDK
 					break;					
 				}		
 					
+				case "int64":
+				{
+					element = xmlDocument.CreateElement ("", name, "");
+					type.Value = "string";					
+					element.AppendChild (xmlDocument.CreateCDataSection (((long)data).ToString ()));
+					break;					
+				}												
+					
 				case "decimal":
 				{
 					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString ()));
 					break;					
-				}		
+				}						
 					
 				case "datetime":
 				{
