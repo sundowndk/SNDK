@@ -592,13 +592,11 @@ opacityChange : function (element, opacity)
 		object = element;
 	}
 
-
 	object.style.opacity = (opacity / 100);
 	object.style.MozOpacity = (opacity / 100);
 	object.style.KhtmlOpacity = (opacity / 100);
 	object.style.filter = "alpha(opacity=" + opacity + ")";
 },
-
 
 // ------------------------------------
 // newElement

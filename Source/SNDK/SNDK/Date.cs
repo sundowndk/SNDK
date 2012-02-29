@@ -31,15 +31,27 @@ namespace SNDK
 	public static class Date
 	{
 		#region Public Static Methods
-		public static DateTime GetStartOfMonth (int Year, SNDK.Enums.Month Month)
+		
+		public static DateTime GetStartOfMonth (int Year, int Month)
 		{
-			return new DateTime (Year, System.Convert.ToInt32 (Month), 1, 0, 0, 0, 0);
+			return new DateTime (Year, Month, 1, 0, 0, 0, 0);
 		}
 
-		public static DateTime GetEndOfMonth (int Year, SNDK.Enums.Month Month)
+		public static DateTime GetEndOfMonth (int Year, int Month)
 		{
-			return new DateTime (Year, System.Convert.ToInt32 (Month), DateTime.DaysInMonth (Year, System.Convert.ToInt32 (Month)), 0, 0, 0, 0);
+			return new DateTime (Year, System.Convert.ToInt32 (Month), DateTime.DaysInMonth (Year, Month), 23, 59, 59, 999);
 		}
+		
+		
+//		public static DateTime GetStartOfMonth (int Year, SNDK.Enums.Month Month)
+//		{
+//			return new DateTime (Year, System.Convert.ToInt32 (Month), 1, 0, 0, 0, 0);
+//		}
+//
+//		public static DateTime GetEndOfMonth (int Year, SNDK.Enums.Month Month)
+//		{
+//			return new DateTime (Year, System.Convert.ToInt32 (Month), DateTime.DaysInMonth (Year, System.Convert.ToInt32 (Month)), 23, 59, 59, 999);
+//		}
 
 		public static DateTime GetStartOfQuarter (int Year, SNDK.Enums.Quarter Quarter)
 		{
@@ -66,16 +78,16 @@ namespace SNDK
 			switch (Quarter)
 			{
 				case SNDK.Enums.Quarter.First:
-					return new DateTime (Year, 3, DateTime.DaysInMonth (Year, 3), 0, 0, 0, 0);
+					return new DateTime (Year, 3, DateTime.DaysInMonth (Year, 3), 23, 59, 59, 999);
 
 				case SNDK.Enums.Quarter.Second:
-					return new DateTime (Year, 6, DateTime.DaysInMonth (Year, 6), 0, 0, 0, 0);
+					return new DateTime (Year, 6, DateTime.DaysInMonth (Year, 6), 23, 59, 59, 999);
 
 				case SNDK.Enums.Quarter.Third:
-					return new DateTime (Year, 9, DateTime.DaysInMonth (Year, 9), 0, 0, 0, 0);
+					return new DateTime (Year, 9, DateTime.DaysInMonth (Year, 9), 23, 59, 59, 999);
 
 				case SNDK.Enums.Quarter.Fourth:
-					return new DateTime (Year, 12, DateTime.DaysInMonth (Year, 12), 0, 0, 0, 0);
+					return new DateTime (Year, 12, DateTime.DaysInMonth (Year, 12), 23, 59, 59, 999);
 			}
 
 			return DateTime.Now;
