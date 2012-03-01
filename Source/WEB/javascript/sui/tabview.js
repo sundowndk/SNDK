@@ -340,6 +340,11 @@ tabview : function (attributes)
 			_attributes.tabs[tab]._elements["container"].style.display = "block";
 						
 			_temp.selectedTab = tab;
+			
+			for (index in _attributes.tabs[_temp.selectedTab]._temp.uiElements)
+			{		
+				_attributes.tabs[_temp.selectedTab]._temp.uiElements[index].refresh ();
+			}	
 		}
 	}	
 						

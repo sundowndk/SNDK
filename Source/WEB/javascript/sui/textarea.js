@@ -15,15 +15,6 @@
 //	managed		get/set
 //	value		get/set
 //
-// CHANGELOG:
-//
-// v1.01:
-//	- Added managed mode.
-//	- Fixed dimension calculations, percentage should be correct now.
-//	- Fixed TINYMCE provider now resizes correctly.
-//
-// v1.00:
-//	- Initial release.
 /**
  * @constructor
  */
@@ -33,12 +24,12 @@ textarea : function (attributes)
 	var _elements = new Array ();			
 	var _attributes = attributes;	
 
-	var _temp = 	{ initialized: false,
-			  providerInitialized: false,
-			  pageSizeX: 0,
-			  pageSizeY: 0,
-			  cache: new Array ()
-			};
+	var _temp =	{ 	initialized: false,
+			  		providerInitialized: false,
+			  		pageSizeX: 0,
+			  		pageSizeY: 0,
+			  		cache: new Array ()
+				};
 														
 	_attributes.id = SNDK.tools.newGuid ()	
 					
@@ -108,11 +99,10 @@ textarea : function (attributes)
 				_elements["area"] = SNDK.tools.newElement ("div", {className: "Area", appendTo: _elements["centercenter"]});
 				_elements["provider"] = SNDK.tools.newElement ("textarea", {className: "Provider", appendTo: _elements["area"]});
 				_elements["provider"].style.resize = "none";
-				_elements["provider"].name = _attributes.name;
-				//_elements["area"].style.overflow = "hidden";
+				_elements["provider"].name = _attributes.name;				
 				_elements["provider"].style.width = "100%";
 				_elements["provider"].style.height = "100%";
-
+				
 				_elements["provider"].onfocus = eventOnFocus;
 				_elements["provider"].onblur = eventOnBlur;
 				_elements["provider"].onkeyup = eventOnChange;
@@ -131,9 +121,9 @@ textarea : function (attributes)
 				_attributes.providerConfig.onChange = eventOnChange;
 				
 				_attributes.providerConfig.onKeyEvent = 	function (editor, event) 
-									{
-										eventOnKeyUp (event);
-									}
+															{
+																eventOnKeyUp (event);
+															}
 				
 				_attributes.providerConfig.value = _attributes.value;
 			
@@ -149,27 +139,25 @@ textarea : function (attributes)
 				_elements["area"] = SNDK.tools.newElement ("div", {appendTo: _elements["centercenter"], id: _temp.tinymceId});
 		
 				_attributes.providerConfig.init_instance_callback =	function (editor) 
-											{
-												tinymce.dom.Event.add (editor.getWin (), 'focus', eventOnFocus); 																	
-												tinymce.dom.Event.add (editor.getWin (), 'blur', eventOnBlur);
-											};							
+																	{
+																		tinymce.dom.Event.add (editor.getWin (), 'focus', eventOnFocus); 																	
+																		tinymce.dom.Event.add (editor.getWin (), 'blur', eventOnBlur);
+																	};							
 																					
 				_elements["provider"] = new tinymce.Editor(_temp.tinymceId, _attributes.providerConfig);							
 				
 				_elements["provider"].render ();
 				_elements["provider"].onInit.add (	function () 
-									{ 
-										_elements["provider"].setContent (_attributes.value);
-										_temp.providerInitialized = true;
-									}
-								);
+													{ 
+														_elements["provider"].setContent (_attributes.value);
+														_temp.providerInitialized = true;
+													});
 								
 				_elements["provider"].onChange.add (eventOnChange);
 				_elements["provider"].onKeyUp.add (	function (editor, event) 
-									{
-										eventOnKeyUp (event);
-										
-									});
+													{
+														eventOnKeyUp (event);										
+													});
 											
 				break;
 			}
@@ -187,10 +175,51 @@ textarea : function (attributes)
 		if (_temp.initialized)
 		{			
 			if (_attributes.disabled)
-			{				
+			{			
+				_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Disabled";			
+			
+				switch (_attributes.provider)
+				{
+					case "default":
+					{
+						_elements["provider"].disabled = true;
+						break;
+					}
+				
+					case "codemirror":
+					{					
+						_elements["provider"].setOption ("readOnly", true);
+						break;
+					}
+		
+					case "tinymce":
+					{
+						break;
+					}
+				}				
 			}			
 			else
 			{
+				switch (_attributes.provider)
+				{
+					case "default":
+					{
+						_elements["provider"].disabled = false;
+						break;
+					}
+				
+					case "codemirror":
+					{					
+						_elements["provider"].setOption ("readOnly", false);
+						break;
+					}
+		
+					case "tinymce":
+					{
+						break;
+					}
+				}				
+								
 				if (_attributes.focus)
 				{
 					_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Focus";
@@ -201,9 +230,7 @@ textarea : function (attributes)
 				}
 			}		
 		}
-		
-
-		
+				
 		setDimensions ();
 	}
 
@@ -315,99 +342,93 @@ textarea : function (attributes)
 	// ------------------------------------
 	function setDimensions ()
 	{
-			var width = {};	
-			var height = {};
-			var combinedheightofchildren = 0;
+		var width = {};	
+		var height = {};
+		var combinedheightofchildren = 0;
 
-			if (!_attributes.managed && _attributes.widthType != "pixel")
-			{					
-				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
-			}
-			else
-			{			
-				if (_attributes.managed && _attributes.widthType == "percent")
-				{
-
-					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
-				}
-				else
-				{
-					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
-				}			
-			}	
-
-			if (!_attributes.managed && _attributes.heightType != "pixel")
-			{					
-				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
-			}
-			else
-			{			
-				if (_attributes.managed && _attributes.heightType == "percent")
-				{
-					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
-				}
-				else
-				{
-					height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
-				}			
-			}	
-			
-			width.topCenter = width.container - _temp.cache.containerWidth;
-			width.centerCenter = width.container - _temp.cache.containerWidth;
-			width.bottomCenter = width.container - _temp.cache.containerWidth;
-			width.area = width.container - _temp.cache.containerWidth;
-			
-			height.centerLeft = height.container - _temp.cache.containerHeight;
-			height.centerCenter = height.container - _temp.cache.containerHeight;
-			height.centerRight = height.container - _temp.cache.containerHeight;
-			height.area = height.container - _temp.cache.containerHeight;
-			
-			_elements["container"].style.width = width.container +"px";				
-			
-			_elements["topcenter"].style.width = width.topCenter +"px";
-			_elements["centercenter"].style.width = width.centerCenter +"px";
-			_elements["bottomcenter"].style.width = width.bottomCenter +"px";	
-			
-
-
-
-			_elements["container"].style.height = height.container +"px"; 	
-			
-			_elements["centerleft"].style.height = height.centerLeft +"px";
-			_elements["centercenter"].style.height = height.centerCenter +"px";
-			_elements["centerright"].style.height = height.centerRight +"px";									
-			
-			_elements["area"].style.width = width.area +"px";
-			_elements["area"].style.height = height.area +"px";
-			
-if (_temp.providerInitialized)
-		{
-		switch (_attributes.provider)
-		{
-			case "codemirror":
-			{
-				setTimeout (	function () 
-				{
-					_elements["provider"].refresh ();			
-				}, 10);
-				break;
-			}
-			
-			case "tinymce":
-			{
-				document.getElementById(_temp.tinymceId +'_tbl').style.width = width.area + "px";
-				document.getElementById(_temp.tinymceId +'_tbl').style.height = height.area +"px";
-				
-				//alert ("test"+ document.getElementById(_temp.tinymceId +'_tbl'))
-			
-				_elements["provider"].execCommand ("mceRepaint");
-				break;
-			}
+		if (!_attributes.managed && _attributes.widthType != "pixel")
+		{					
+			width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
 		}
+		else
+		{			
+			if (_attributes.managed && _attributes.widthType == "percent")
+			{
+
+				width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+			}
+			else
+			{
+				width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
+			}			
+		}	
+
+		if (!_attributes.managed && _attributes.heightType != "pixel")
+		{					
+			height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
+		}
+		else
+		{			
+			if (_attributes.managed && _attributes.heightType == "percent")
+			{
+				height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+			}
+			else
+			{
+				height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
+			}			
+		}	
+		
+		width.topCenter = width.container - _temp.cache.containerWidth;
+		width.centerCenter = width.container - _temp.cache.containerWidth;
+		width.bottomCenter = width.container - _temp.cache.containerWidth;
+		width.area = width.container - _temp.cache.containerWidth;
+		
+		height.centerLeft = height.container - _temp.cache.containerHeight;
+		height.centerCenter = height.container - _temp.cache.containerHeight;
+		height.centerRight = height.container - _temp.cache.containerHeight;
+		height.area = height.container - _temp.cache.containerHeight;
+		
+		_elements["container"].style.width = width.container +"px";				
+		
+		_elements["topcenter"].style.width = width.topCenter +"px";
+		_elements["centercenter"].style.width = width.centerCenter +"px";
+		_elements["bottomcenter"].style.width = width.bottomCenter +"px";	
+
+		_elements["container"].style.height = height.container +"px"; 	
+		
+		_elements["centerleft"].style.height = height.centerLeft +"px";
+		_elements["centercenter"].style.height = height.centerCenter +"px";
+		_elements["centerright"].style.height = height.centerRight +"px";									
+		
+		_elements["area"].style.width = width.area +"px";
+		_elements["area"].style.height = height.area +"px";
+		
+		if (_temp.providerInitialized)
+		{
+			switch (_attributes.provider)
+			{
+				case "codemirror":
+				{
+//					setTimeout (	function () 
+//									{								
+										_elements["provider"].getScrollerElement().style.height = height.area +"px";
+										_elements["provider"].refresh ();			
+//									}, 10);
+					break;
+				}
+		
+				case "tinymce":
+				{
+					document.getElementById(_temp.tinymceId +'_tbl').style.width = width.area + "px";
+					document.getElementById(_temp.tinymceId +'_tbl').style.height = height.area +"px";										
+					_elements["provider"].execCommand ("mceRepaint");
+					break;
+				}
+			}
 		}									
 	}
-	
-	
+		
 	function setDimensions2 ()
 	{		
 		// Get padding dimensions of container.
@@ -635,8 +656,6 @@ if (_temp.providerInitialized)
 	
 	function setValue ()
 	{
-	
-
 		switch (_attributes.provider)
 		{
 			case "default":

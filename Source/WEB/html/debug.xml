@@ -234,7 +234,7 @@
 						</panel>
 					</layoutbox>								
 				</tab>
-				<tab label="TinyMCE" canScroll="true">
+				<tab label="TinyMCE" canScroll="true" selected="true">
 					<layoutbox type="vertical" width="100%" height="200px">
 						<panel size="*">
 							<textarea tag="tinymceDefault" width="100%" height="100%" value="This is a test...">
@@ -274,7 +274,7 @@
 						</panel>
 					</layoutbox>									
 				</tab>
-				<tab label="CodeMirror" canScroll="true">
+				<tab label="CodeMirror" canScroll="true" >
 					<layoutbox type="vertical" width="100%" height="200px">
 						<panel size="*">
 							<textarea tag="codemirrorDefault" width="100%" height="100%" value="This is test...">
@@ -314,7 +314,7 @@
 						</panel>
 					</layoutbox>												
 				</tab>
-				<tab label="Listview"  selected="true" canScroll="true">
+				<tab label="Listview" canScroll="true">
 					<layoutbox type="vertical" width="100%" height="200px">
 						<panel size="*">
 							<listview tag="listviewDefault" width="100%" height="100%" treeview="false" treeviewLinkColumns="c1:c4">
