@@ -88,6 +88,9 @@
     <None Include="css\text.css" />
     <None Include="css\13_container_modal.css" />
     <None Include="css\11_container_noborder.css" />
+    <None Include="html\debug2.html" />
+    <None Include="javascript\sui\field.js" />
+    <None Include="html\debug2.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

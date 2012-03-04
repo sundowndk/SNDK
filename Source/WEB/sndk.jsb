@@ -37,7 +37,9 @@
 				<js file="javascript/sui/label.js" />
 				<js file="javascript/sui/tabview.js" />
 				<js file="javascript/sui/text.js" />
-				<js file="javascript/sui/canvas.js" />				
+				<js file="javascript/sui/canvas.js" />			
+				<js file="javascript/sui/field.js" />
+					
 				
 				<class name="builder">
 					<js file="javascript/sui/builder.js" />
