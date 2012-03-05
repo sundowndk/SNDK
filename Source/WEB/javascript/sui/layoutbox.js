@@ -391,7 +391,9 @@ layoutbox : function (attributes)
 		 	_temp.uiElements[count] = element;
  	
 		 	element.setAttribute ("managed", true);
-		 	element.setAttribute ("appendTo", _elements["container"]);					
+		 	element.setAttribute ("appendTo", _elements["container"]);
+		 	
+		  SNDK.SUI.refresh ();		 			 	 
 		}	
 		
 		function functionGetContentElement ()

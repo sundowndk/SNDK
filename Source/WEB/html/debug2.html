@@ -28,28 +28,51 @@
 		var debugUI = new SNDK.SUI.builder.construct ({URL: "debug2.xml"})
 						
 		var debug = 
-		{		
+		{	
+			field : null,
+		
 			init : function ()
 			{
-				var field = new SNDK.SUI.field ({tag: "test", type: "string", width: "100%", height: "100%"});
+				debug.field = new SNDK.SUI.field ({tag: "test", type: "string", width: "100%", height: "100%"});
 				
 						
-				debugUI["fieldbox"].getPanel ("field").addUIElement (field);
+				debugUI["fieldbox"].getPanel ("field").addUIElement (debug.field);
 		
-				field.setAttribute ("disabled", true)
+				debug.field.setAttribute ("value", "TEST VALUE");
 		
+				debugUI["tester"].setAttribute ("onClick", debug.getContent);
+		
+			},
+		
+			getContent : function ()
+			{
+				alert ("CONTENT:"+ debug.field.getAttribute ("value"));
 			}
+		
+		
 		}
 		
-		debug.init ();
-		
 		SNDK.SUI.init ();
+		
+	setTimeout (	
+		function () 
+				{ 
+debug.init ();
+
+		}, 1000);
+		
+		
+		
+		
+		
 		
 		
 	</script>
 			
 	<body>	
 		<div id="ui" style="height: 100%;">
+		</div>
+		<div id="suistageing" style="display: none;">
 		</div>
 	</body>
 </html>

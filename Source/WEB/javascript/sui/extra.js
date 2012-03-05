@@ -52,6 +52,7 @@ init : function ()
 				window.triggerEvent ("SUIINIT");	
 				SNDK.SUI.refresh ();
 				SNDK.SUI.running = true;
+				SNDK.SUI.initalized = true;
 				
 				var test = function ()
 				{
@@ -69,37 +70,50 @@ init : function ()
 addInit : function (obj)
 {
 	var init = 	function ()
-			{
-				try
-				{
-				
-				if (obj._temp.initialized != true)
-				{
-
-					if (typeof (obj._attributes.appendTo) == "string")
+				{				
+					try
 					{
-						obj._attributes.appendTo = document.getElementById (obj._attributes.appendTo);
+						
+						if (obj._temp.initialized != true)
+						{
+						
+//	try
+//	{
+							if (obj._attributes.appendTo == null)
+							{
+								obj._attributes.appendTo = document.getElementById ("suistageing");
+							}
+	
+							if (typeof (obj._attributes.appendTo) == "string")
+							{
+								obj._attributes.appendTo = document.getElementById (obj._attributes.appendTo);
+							}
+
+							//console.log (obj._temp.initialized)									
+							obj._attributes.appendTo.appendChild (obj._elements["container"])
+							
+//	}
+//	catch (e)
+//	{}
+					
+
+							obj._init ();
+					
+							obj._temp.initialized = true;			
+
+					
+						}
 					}
-
-					//console.log (obj._temp.initialized)									
-					obj._attributes.appendTo.appendChild (obj._elements["container"])
-
-
-					obj._init ();
-					
-					obj._temp.initialized = true;			
-					
+					catch (e)
+					{
+						console.log (e)
+					}
 				}
-				}
-				catch (e)
-				{
-					console.log (e)
-				}
-			}
+
 
 	if (SNDK.SUI.initalized)
 	{
-		init ();
+		init ();		
 		SNDK.SUI.refresh ();
 	}
 	else

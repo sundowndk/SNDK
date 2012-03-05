@@ -2,6 +2,28 @@
 // field ([attributes])
 // -------------------------------------------------------------------------------------------------------------------------
 //
+// Methods:
+//
+//	refresh ()
+//	getAttribute (attribute)
+//	setAttribute (attribute, value)
+//
+// Attributes:
+//		
+//	id			get
+//	tag 		get/set
+//	name 		get/set
+//	width		get/set
+//	height		get/set
+//	appendTo	get/set
+//	managed		get/set
+//	disabled	get/set
+//	focus		get/set
+//	onFocus		get/set
+//	onBlur		get/set
+//	onChange	get/set
+//	onKeyUp		get/set
+//	value		get/set
 
 /**
  * @constructor
@@ -44,7 +66,7 @@ field : function (attributes)
 	// ------------------------------------	
 	function construct ()
 	{		
-		_elements["container"] = new SNDK.SUI.layoutbox ({width: _attributes.width, height: _attributes.height, type: "vertical"});		
+		_elements["container"] = new SNDK.SUI.layoutbox ({width: _attributes.width, height: _attributes.height, type: "vertical", stylesheet: "SUILayoutboxNoBorder"});		
 		_elements["container"].addPanel ({tag: "containerpanel", size: "*"});
 			
 		switch (_attributes.type)
@@ -56,7 +78,7 @@ field : function (attributes)
 				break;
 			}		
 			
-			case "textarea":
+			case "text":
 			{
 				var providerconfig = {};			
 				providerconfig.theme = "advanced";
@@ -96,7 +118,7 @@ field : function (attributes)
 					break;
 				}
 				
-				case "textarea":
+				case "text":
 				{
 					_elements["content"].setAttribute ("disabled", true);
 					break;	
@@ -113,7 +135,7 @@ field : function (attributes)
 					break;
 				}
 				
-				case "textarea":
+				case "text":
 				{
 					_elements["content"].setAttribute ("disabled", false);
 					break;					
@@ -169,6 +191,36 @@ field : function (attributes)
 			{
 				return _elements["container"].getAttribute ("managed");
 			}
+			
+			case "focus":
+			{
+				return _elements["content"].getAttribute ("focus");
+			}
+
+			case "onFocus":
+			{
+				return _elements["content"].getAttribute ("onFocus");
+			}
+
+			case "onBlur":
+			{
+				return _elements["content"].getAttribute ("onBlur");
+			}
+
+			case "onChange":
+			{
+				return _elements["content"].getAttribute ("onChange");
+			}
+
+			case "onKeyUp":
+			{
+				return _elements["content"].getAttribute ("onKeyUp");
+			}
+
+			case "value":
+			{
+				return _elements["content"].getAttribute ("value");
+			}			
 
 			default:
 			{
