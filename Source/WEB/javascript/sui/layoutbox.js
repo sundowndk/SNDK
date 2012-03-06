@@ -393,7 +393,7 @@ layoutbox : function (attributes)
 		 	element.setAttribute ("managed", true);
 		 	element.setAttribute ("appendTo", _elements["container"]);
 		 	
-		  SNDK.SUI.refresh ();		 			 	 
+		//  SNDK.SUI.refresh ();		 			 	 
 		}	
 		
 		function functionGetContentElement ()

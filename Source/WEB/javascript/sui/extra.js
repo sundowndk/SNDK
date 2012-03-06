@@ -79,19 +79,21 @@ addInit : function (obj)
 						
 //	try
 //	{
-							if (obj._attributes.appendTo == null)
-							{
-								obj._attributes.appendTo = document.getElementById ("suistageing");
-							}
-	
-							if (typeof (obj._attributes.appendTo) == "string")
-							{
-								obj._attributes.appendTo = document.getElementById (obj._attributes.appendTo);
-							}
 
-							//console.log (obj._temp.initialized)									
-							obj._attributes.appendTo.appendChild (obj._elements["container"])
+								if (obj._attributes.appendTo == null)
+								{
+									obj._attributes.appendTo = document.getElementById ("suistageing");
+								}
+	
+								if (typeof (obj._attributes.appendTo) == "string")
+								{
+									obj._attributes.appendTo = document.getElementById (obj._attributes.appendTo);
+								}
+
+											
+								obj._attributes.appendTo.appendChild (obj._elements["container"])
 							
+							//console.log (obj._attributes.appendTo)
 //	}
 //	catch (e)
 //	{}
@@ -113,8 +115,11 @@ addInit : function (obj)
 
 	if (SNDK.SUI.initalized)
 	{
-		init ();		
-		SNDK.SUI.refresh ();
+//		init ();		
+//8		SNDK.SUI.refresh ();
+//console.log ("late")
+		window.addEvent (window, 'SUIINIT', init);
+		//SNDK.SUI.init ();
 	}
 	else
 	{
