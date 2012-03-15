@@ -4,12 +4,12 @@
 		<title>			
 		</title>
 
-		<link rel="stylesheet" href="debug.css" type="text/css">		
-		<link rel="stylesheet" href="../css/sndk.css" type="text/css">
+		<link rel="stylesheet" href="debug.css" type="text/css" />		
+		<link rel="stylesheet" href="../css/sndk.css" type="text/css" />
 		<script type="text/javascript" src="../js/sndk.js"></script>
 
-		<link rel="stylesheet" href="../includes/codemirror/lib/codemirror.css">
-		<link rel="stylesheet" href="../includes/codemirror/mode/css/css.css">
+		<link rel="stylesheet" href="../includes/codemirror/lib/codemirror.css" />
+		<link rel="stylesheet" href="../includes/codemirror/mode/css/css.css" />
 		<script language="JavaScript" type="text/javascript" src="../includes/codemirror/lib/codemirror.js"></script>
 		<script language="JavaScript" type="text/javascript" src="../includes/codemirror/mode/css/css.js"></script>
 
@@ -25,7 +25,7 @@
 	</head>
 
 	<script language="JavaScript">
-		var debugUI = new SNDK.SUI.builder.construct ({URL: "debug2.xml"})
+	//	
 						
 		var debug = 
 		{	
@@ -33,7 +33,9 @@
 		
 			init : function ()
 			{
-				debug.field = new SNDK.SUI.field ({tag: "test", type: "string", width: "100%", height: "100%"});
+				var debugUI = new SNDK.SUI.builder.construct ({URL: "debug2.xml"})
+		
+				debug.field = new SNDK.SUI.field ({tag: "test", type: "text", width: "100%", height: "100%"});
 				
 						
 				debugUI["fieldbox"].getPanel ("field").addUIElement (debug.field);
@@ -44,6 +46,22 @@
 		
 				SNDK.SUI.init ();
 		
+				//SNDK.SUI.redraw ();
+			},
+		
+			init2 : function ()
+			{
+				//var test = new SNDK.SUI.textbox ({appendTo: "ui"});
+		
+				debug.field = new SNDK.SUI.field ({tag: "test", type: "text", width: "100%", height: "100%", appendTo: "ui"});
+										
+				//debug.field.setAttribute ("value", "TEST VALUE");
+		
+				
+		
+				SNDK.SUI.init ();
+		
+				//SNDK.SUI.redraw ();
 			},
 		
 			getContent : function ()
@@ -51,17 +69,20 @@
 				alert ("CONTENT:"+ debug.field.getAttribute ("value"));
 			}
 		
-		
 		}
+	
+		//SNDK.SUI.init ();
 		
-		SNDK.SUI.init ();
+		//debug.init ();
+		
+	
 		
 	setTimeout (	
 		function () 
 				{ 
-debug.init ();
+				debug.init ();
 
-		}, 1000);
+				}, 1000);
 		
 		
 		
@@ -74,7 +95,7 @@ debug.init ();
 	<body>	
 		<div id="ui" style="height: 100%;">
 		</div>
-		<div id="suistageing" style="display: none;">
+		<div id="suis1tageing" style="display: none;">
 		</div>
 	</body>
 </html>

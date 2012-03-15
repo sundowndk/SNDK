@@ -67,6 +67,12 @@ init : function ()
 	window.onDomReady (init);
 },
 
+redraw : function ()
+{
+	window.triggerEvent ("SUIINIT");	
+	SNDK.SUI.refresh ();	
+},
+
 addInit : function (obj)
 {
 	var init = 	function ()

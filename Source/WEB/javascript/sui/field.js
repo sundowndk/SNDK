@@ -66,7 +66,7 @@ field : function (attributes)
 	// ------------------------------------	
 	function construct ()
 	{		
-		_elements["container"] = new SNDK.SUI.layoutbox ({width: _attributes.width, height: _attributes.height, type: "vertical", stylesheet: "SUILayoutboxNoBorder"});		
+		_elements["container"] = new SNDK.SUI.layoutbox ({width: _attributes.width, height: _attributes.height, type: "vertical", stylesheet: "SUILayoutboxNoBorder", appendTo: _attributes.appendTo});		
 		_elements["container"].addPanel ({tag: "containerpanel", size: "*"});
 			
 		switch (_attributes.type)

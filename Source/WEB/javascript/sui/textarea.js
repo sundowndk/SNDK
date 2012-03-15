@@ -61,6 +61,9 @@ textarea : function (attributes)
 	function init ()
 	{
 		updateCache ();
+		
+		_elements["provider"].render ();
+		//_elements["provider"].execCommand ("mceRepaint");
 	}
 	
 	// ------------------------------------
@@ -144,7 +147,14 @@ textarea : function (attributes)
 																		tinymce.dom.Event.add (editor.getWin (), 'blur', eventOnBlur);
 																	};							
 																					
-				_elements["provider"] = new tinymce.Editor(_temp.tinymceId, _attributes.providerConfig);							
+				_elements["provider"] = new tinymce.Editor(_temp.tinymceId, _attributes.providerConfig);
+				
+				//tinyMCE.execCommand('mceAddControl', false, _temp.tinymceId);
+				//console.log (tinyMCE.get (_temp.tinymceId))
+				
+				//_elements["provider"] =  tinyMCE.getInstanceById (_temp.tinymceId);
+				
+				console.log (_elements["provider"]);
 				
 				_elements["provider"].render ();
 				_elements["provider"].onInit.add (	function () 
