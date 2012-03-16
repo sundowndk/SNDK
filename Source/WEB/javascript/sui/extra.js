@@ -1,46 +1,11 @@
 initalized : false,
 
+
+initialized : false,
+strapped : false,
+domReady : false,
+
 previousOrientation : 0,
-
-checkOrientation : function()
-{
-
-    if(window.orientation !== SNDK.SUI.previousOrientation){
-	SNDK.SUI.previousOrientation = window.orientation;
-
-//	alert (SNDK.SUI.previousOrientation +" "+ screen.width)
-
-//	window.addEvent (window, 'resize', SNDK.SUI.refresh);	
-
-    }
-},
-
-
-// ------------------------------------
-// refresh
-// ------------------------------------	
-refresh : function ()
-{
-	var refresh = 	function ()
-			{
-				window.triggerEvent ("SUIREFRESH");
-
-//				setTimeout (	function () 
-//				{	
-//					window.triggerEvent ("SUIREFRESH");
-//			
-//				}, 100);
-			}
-
-	try
-	{
-		refresh ();
-	}
-	catch (error)
-	{	
-		window.onDomReady (refresh);
-	}	
-},
 
 // ------------------------------------
 // init
@@ -48,31 +13,34 @@ refresh : function ()
 init : function ()
 {
 	var init = 	function ()
-			{
-				window.triggerEvent ("SUIINIT");	
-				SNDK.SUI.refresh ();
-				SNDK.SUI.running = true;
-				SNDK.SUI.initalized = true;
-				
-				var test = function ()
 				{
-					SNDK.SUI.refresh ();	
-				}
+					window.triggerEvent ("SUIINIT");
+					SNDK.SUI.refresh ();
 				
-				window.addEvent (window, 'orientationchange', SNDK.SUI.checkOrientation)
+					window.addEvent (window, 'orientationchange', SNDK.SUI.checkOrientation)			
+					window.addEvent (window, 'resize', SNDK.SUI.refresh);	
 				
-				window.addEvent (window, 'resize', SNDK.SUI.refresh);	
-			}
-			
-	window.onDomReady (init);
+					SNDK.SUI.initialized = true;
+					SNDK.SUI.domReady = true;
+				};
+	
+	if (!SNDK.SUI.strapped)
+	{
+		window.onDomReady (init);
+		SNDK.SUI.strapped = true;
+	}						
+	else
+	{
+		if (SNDK.SUI.domReady)
+		{
+			init ();
+		}
+	}
 },
 
-redraw : function ()
-{
-	window.triggerEvent ("SUIINIT");	
-	SNDK.SUI.refresh ();	
-},
-
+// ------------------------------------
+// addInit
+// ------------------------------------	
 addInit : function (obj)
 {
 	var init = 	function ()
@@ -86,10 +54,10 @@ addInit : function (obj)
 //	try
 //	{
 
-								if (obj._attributes.appendTo == null)
-								{
-									obj._attributes.appendTo = document.getElementById ("suistageing");
-								}
+//								if (obj._attributes.appendTo == null)
+//								{
+//									obj._attributes.appendTo = document.getElementById ("suistageing");
+//								}
 	
 								if (typeof (obj._attributes.appendTo) == "string")
 								{
@@ -118,17 +86,48 @@ addInit : function (obj)
 					}
 				}
 
+		window.addEvent (window, 'SUIINIT', init);
+},
 
-	if (SNDK.SUI.initalized)
+// ------------------------------------
+// redraw
+// ------------------------------------	
+redraw : function ()
+{
+	if (SNDK.SUI.initialized)
 	{
-//		init ();		
-//8		SNDK.SUI.refresh ();
-//console.log ("late")
-		window.addEvent (window, 'SUIINIT', init);
-		//SNDK.SUI.init ();
+		window.triggerEvent ("SUIINIT");	
+		SNDK.SUI.refresh ();	
 	}
-	else
+},
+
+// ------------------------------------
+// refresh
+// ------------------------------------	
+refresh : function ()
+{
+	var refresh = 	function ()
+					{
+						window.triggerEvent ("SUIREFRESH");
+					};
+
+	try
 	{
-		window.addEvent (window, 'SUIINIT', init);
+		refresh ();
 	}
+	catch (error)
+	{	
+		window.onDomReady (refresh);
+	}	
+},
+
+// ------------------------------------
+// checkOrientation
+// ------------------------------------	
+checkOrientation : function ()
+{
+    if (window.orientation !== SNDK.SUI.previousOrientation)
+    {
+		SNDK.SUI.previousOrientation = window.orientation;
+    }
 }

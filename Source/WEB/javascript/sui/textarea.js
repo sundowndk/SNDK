@@ -62,8 +62,26 @@ textarea : function (attributes)
 	{
 		updateCache ();
 		
-		_elements["provider"].render ();
-		//_elements["provider"].execCommand ("mceRepaint");
+		switch (_attributes.provider)
+		{
+			case "default":
+			{				
+				break;
+			}
+			
+			case "codemirror":
+			{
+				break;
+			}
+			
+			case "tinymce":
+			{		
+				if (SNDK.SUI.domReady)
+				{
+					_elements["provider"].render ();		
+				}
+			}
+		}
 	}
 	
 	// ------------------------------------
@@ -154,7 +172,7 @@ textarea : function (attributes)
 				
 				//_elements["provider"] =  tinyMCE.getInstanceById (_temp.tinymceId);
 				
-				console.log (_elements["provider"]);
+				//console.log (_elements["provider"]);
 				
 				_elements["provider"].render ();
 				_elements["provider"].onInit.add (	function () 

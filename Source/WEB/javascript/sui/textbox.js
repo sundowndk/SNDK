@@ -321,8 +321,7 @@ textbox : function (attributes)
 	// refresh
 	// ------------------------------------				
 	function functionRefresh ()
-	{
-	console.log ("bla"+ _temp.initialized)		
+	{	
 		refresh ();
 	}		
 				

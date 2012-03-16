@@ -33,20 +33,20 @@
 		
 			init : function ()
 			{
-				var debugUI = new SNDK.SUI.builder.construct ({URL: "debug2.xml"})
+				
 		
 				debug.field = new SNDK.SUI.field ({tag: "test", type: "text", width: "100%", height: "100%"});
 				
-						
+				debug.field.setAttribute ("value", "TEST VALUE");
+		
 				debugUI["fieldbox"].getPanel ("field").addUIElement (debug.field);
 		
-				debug.field.setAttribute ("value", "TEST VALUE");
+		
 		
 				debugUI["tester"].setAttribute ("onClick", debug.getContent);
 		
-				SNDK.SUI.init ();
-		
-				//SNDK.SUI.redraw ();
+				
+				SNDK.SUI.redraw ();
 			},
 		
 			init2 : function ()
@@ -61,7 +61,7 @@
 		
 				SNDK.SUI.init ();
 		
-				//SNDK.SUI.redraw ();
+				SNDK.SUI.redraw ();
 			},
 		
 			getContent : function ()
@@ -70,6 +70,11 @@
 			}
 		
 		}
+		
+		var debugUI = new SNDK.SUI.builder.construct ({URL: "debug2.xml"})
+		
+		SNDK.SUI.init ();		
+		
 	
 		//SNDK.SUI.init ();
 		

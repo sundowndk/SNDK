@@ -146,7 +146,7 @@ canvas : function (attributes)
 			var width = 0;
 			var height = 0;
 			var combinedheightofchildren = 0;
-			
+						
 			if (_attributes.widthType == "percent")
 			{
 				width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
