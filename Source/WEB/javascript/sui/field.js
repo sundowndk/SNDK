@@ -74,6 +74,7 @@ field : function (attributes)
 			case "string":
 			{
 				_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "100%"});
+				_elements["content"].setAttribute ("value", _attributes.value);
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 				break;
 			}		
@@ -95,12 +96,12 @@ field : function (attributes)
 				providerconfig.paste_remove_styles_if_webkit = true;
 				providerconfig.paste_strip_class_attributes = "mso";		
 			
-				_elements["content"] = new SNDK.SUI.textarea ({tag: _attributes.tag, width: "100%", height: "100%", provider: "tinymce", providerConfig: providerconfig})
+				_elements["content"] = new SNDK.SUI.textarea ({tag: _attributes.tag, width: "100%", height: "100%", provider: "tinymce", providerConfig: providerconfig})				
+				_elements["content"].setAttribute ("value", _attributes.value);
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 				break;
 			}		
-		}
-		
+		}					
 	}	
 		
 	// ------------------------------------

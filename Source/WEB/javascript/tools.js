@@ -1,3 +1,47 @@
+derefItem : function (array)
+{
+	var result;
+
+
+
+	if (array.constructor == Array)
+	{
+		result = new Array ();
+	}
+	
+	if (array.constructor == Object)
+	{
+		result = {};
+	}
+	
+	for (index in array)
+	{
+		switch (typeof(array[index]))
+		{
+			case "object":
+			{				
+				if (array[index].constructor == Array)
+				{					
+					result[index] = SNDK.tools.derefItem (array[index]);
+				}
+				else if (array.constructor == Object)
+				{					
+					result[index] = SNDK.tools.derefItem (array[index]);
+				}
+				
+				break;
+			}
+			
+			default: 
+			{
+				result[index] = array[index];
+				break;
+			}
+		}
+	}
+
+	return result;
+},	
 
 randomNumber : function (begin, end)
 {
