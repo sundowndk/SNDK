@@ -40,6 +40,7 @@ field : function (attributes)
 	this.refresh = functionRefresh;	
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;
+	this.dispose = functionDispose;
 
 	// Construct
 	construct ();
@@ -49,6 +50,7 @@ field : function (attributes)
 	this._elements = _elements["container"]._elements;
 	this._temp = _elements["container"]._temp;	
 	this._init = _elements["container"]._init;	
+	
 		
 	// ------------------------------------
 	// Private functions
@@ -103,6 +105,28 @@ field : function (attributes)
 			}		
 		}					
 	}	
+		
+	function functionDispose ()
+	{
+		switch (_attributes.type)
+		{
+			case "string":
+			{
+				break;
+			}		
+			
+			case "text":
+			{
+				
+			
+				
+			
+				_elements["content"].dispose ();
+				break;
+			}		
+		}					
+	
+	}
 		
 	// ------------------------------------
 	// refresh

@@ -45,6 +45,7 @@ textarea : function (attributes)
 	this.refresh = functionRefresh;	
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
+	this.dispose = functionDispose;
 	
 	// Construct
 	construct ();
@@ -78,6 +79,7 @@ textarea : function (attributes)
 			{		
 				if (SNDK.SUI.domReady)
 				{
+				console.log ("bla")
 					_elements["provider"].render ();		
 				}
 			}
@@ -193,6 +195,11 @@ textarea : function (attributes)
 		
 		// Hook events		
 		window.addEvent (window, 'SUIREFRESH', refresh);																																			
+	}
+			
+	function functionDispose ()
+	{	
+		tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);
 	}
 			
 	// ------------------------------------

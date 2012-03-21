@@ -46,10 +46,12 @@ textbox : function (attributes)
 	this._temp = _temp;	
 	this._init = init;	
 	
+	
 	// Functions
 	this.refresh = functionRefresh;	
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
+	this.dispose = functionDispose;
 		
 	// Construct
 	construct ();
@@ -109,6 +111,12 @@ textbox : function (attributes)
 		
 		window.addEvent (window, 'SUIREFRESH', refresh);						
 	}		
+		
+	function functionDispose ()
+	{
+		
+	
+	}
 		
 	// ------------------------------------
 	// refresh
