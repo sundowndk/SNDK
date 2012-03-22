@@ -79,8 +79,10 @@ textarea : function (attributes)
 			{		
 				if (SNDK.SUI.domReady)
 				{
-				console.log ("bla")
+				
 					_elements["provider"].render ();		
+					
+					refresh ();
 				}
 			}
 		}
@@ -161,6 +163,8 @@ textarea : function (attributes)
 				_temp.tinymceId = SNDK.tools.newGuid ();
 				_elements["area"] = SNDK.tools.newElement ("div", {appendTo: _elements["centercenter"], id: _temp.tinymceId});
 		
+//				_attributes.providerConfig.width = "100%";
+//				_attributes.providerConfig.height = "100%";
 				_attributes.providerConfig.init_instance_callback =	function (editor) 
 																	{
 																		tinymce.dom.Event.add (editor.getWin (), 'focus', eventOnFocus); 																	
@@ -250,7 +254,7 @@ textarea : function (attributes)
 					}
 		
 					case "tinymce":
-					{
+					{						
 						break;
 					}
 				}				
@@ -456,7 +460,14 @@ textarea : function (attributes)
 					case "tinymce":
 					{
 						document.getElementById(_temp.tinymceId +'_tbl').style.width = width.area + "px";
-						document.getElementById(_temp.tinymceId +'_tbl').style.height = height.area +"px";										
+						document.getElementById(_temp.tinymceId +'_tbl').style.height = height.area +"px";	
+						
+						document.getElementById(_temp.tinymceId +'_ifr').style.width = width.area + "px";
+						document.getElementById(_temp.tinymceId +'_ifr').style.height = height.area - 28 +"px";	
+						
+						
+						
+																	
 						_elements["provider"].execCommand ("mceRepaint");
 						break;
 					}

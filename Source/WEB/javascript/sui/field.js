@@ -35,6 +35,8 @@ field : function (attributes)
 	var _elements = new Array ();	
 	var _temp = 	{ initialized: false,
 					};
+					
+	setAttributes ();
 	
 	// Functions		
 	this.refresh = functionRefresh;	
@@ -168,6 +170,16 @@ field : function (attributes)
 			}
 		}
 	}
+	
+	// ------------------------------------
+	// setAttributes
+	// ------------------------------------		
+	function setAttributes ()
+	{	
+		// Value
+		if (!_attributes.value)
+			_attributes.value = "";	
+	}	
 	
 	// ------------------------------------
 	// Public functions
