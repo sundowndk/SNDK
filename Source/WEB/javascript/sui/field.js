@@ -246,12 +246,20 @@ field : function (attributes)
 
 			case "onChange":
 			{
-				return _elements["content"].getAttribute ("onChange");
-			}
-
-			case "onKeyUp":
-			{
-				return _elements["content"].getAttribute ("onKeyUp");
+				switch (_attributes.type)
+				{
+					case "string":
+					{
+						return _elements["content"].getAttribute ("onKeyUp");
+						break;					
+					}
+					
+					case "text":
+					{
+						return _elements["content"].getAttribute ("onKeyUp");
+						break;
+					}
+				}								
 			}
 
 			case "value":
@@ -342,13 +350,22 @@ field : function (attributes)
 
 			case "onChange":
 			{
-				_elements["content"].setAttribute ("onChange", value);
-				break;
-			}
-
-			case "onKeyUp":
-			{
-				_elements["content"].setAttribute ("onKeyUp", value);
+				switch (_attributes.type)
+				{
+					case "string":
+					{						
+						_elements["content"].setAttribute ("onKeyUp", value);
+						break;					
+					}
+					
+					case "text":
+					{
+						_elements["content"].setAttribute ("onChange", value);
+						_elements["content"].setAttribute ("onKeyUp", value);
+						break;
+					}
+				}								
+							
 				break;
 			}
 
