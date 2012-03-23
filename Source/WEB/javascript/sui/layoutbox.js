@@ -291,6 +291,24 @@ layoutbox : function (attributes)
 				e.style.height = dimensions.height +"px";
 				e.style.cssFloat = dimensions.cssfloat;
 				
+				var combinedheightofchildren = 0;
+						
+				if (panel._attributes.canScroll)
+				{
+					for (index in panel._temp.uiElements)
+					{		
+						if (panel._temp.uiElements[index]._attributes.heightType == "pixel")
+						{									
+							combinedheightofchildren += parseInt (panel._temp.uiElements[index]._attributes.height);
+						}
+					}						
+				
+					if (combinedheightofchildren > dimensions.height)
+					{
+						dimensions.width = dimensions.width - window.scrollbarWidth;
+					}													
+				}					
+				
 				for (index in panel._temp.uiElements)
 				{
 					if (panel._temp.uiElements[index]._attributes.widthType == "percent")
@@ -349,6 +367,16 @@ layoutbox : function (attributes)
 		function construct ()
 		{
 			_elements["container"] = SNDK.tools.newElement ("div", {className: "Panel", appendTo: _attributes.appendTo});
+									
+			if (_attributes.canScroll)
+			{
+			
+				_elements["container"].style.overflow = "auto";		
+			}		
+			else
+			{
+				//_elements["container"].style.overflow = "hidden";		
+			}
 		}
 		
 		// ------------------------------------

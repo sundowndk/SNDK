@@ -334,17 +334,20 @@ tabview : function (attributes)
 			{
 				_elements["tabbuttons"][_temp.selectedTab].className = "TabButton";
 				_attributes.tabs[_temp.selectedTab]._elements["container"].style.display = "none";
+				
+				//SNDK.tools. changeOpacityByObject (_attributes.tabs[_temp.selectedTab]._elements["container"], 0);
 			}
 						
 			_elements["tabbuttons"][tab].className = "TabButton TabButtonSelected";
 			_attributes.tabs[tab]._elements["container"].style.display = "block";
+			//SNDK.tools. changeOpacityByObject (_attributes.tabs[tab]._elements["container"], 100);
 						
 			_temp.selectedTab = tab;
 			
-			for (index in _attributes.tabs[_temp.selectedTab]._temp.uiElements)
-			{		
-				_attributes.tabs[_temp.selectedTab]._temp.uiElements[index].refresh ();
-			}	
+			//for (index in _attributes.tabs[_temp.selectedTab]._temp.uiElements)
+			//{		
+				//_attributes.tabs[_temp.selectedTab]._temp.uiElements[index].refresh ();
+			//}	
 		}
 	}	
 						
