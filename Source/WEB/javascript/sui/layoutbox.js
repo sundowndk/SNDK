@@ -308,9 +308,13 @@ layoutbox : function (attributes)
 						dimensions.width = dimensions.width - window.scrollbarWidth;
 					}													
 				}					
-				
+											
 				for (index in panel._temp.uiElements)
 				{
+					//console.log (panel._elements["container"].scrollTop)
+									
+					var scroll = panel._elements["container"].scrollTop;
+				
 					if (panel._temp.uiElements[index]._attributes.widthType == "percent")
 					{
 						panel._temp.uiElements[index]._attributes.managedWidth = (dimensions.width * panel._temp.uiElements[index]._attributes.width) / 100;
@@ -322,6 +326,8 @@ layoutbox : function (attributes)
 					}
 				
 					panel._temp.uiElements[index].refresh ();
+					
+					panel._elements["container"].scrollTop = scroll;
 				}								
 			}		
 		}

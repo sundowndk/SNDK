@@ -695,7 +695,10 @@ textarea : function (attributes)
 			
 			case "tinymce":
 			{
-				_attributes.value = _elements["provider"].getContent ();
+				if (_temp.providerInitialized)
+				{
+					_attributes.value = _elements["provider"].getContent ();
+				}
 				break;
 			}
 		}

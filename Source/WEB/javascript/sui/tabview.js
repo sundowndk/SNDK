@@ -342,12 +342,12 @@ tabview : function (attributes)
 			_attributes.tabs[tab]._elements["container"].style.display = "block";
 			//SNDK.tools. changeOpacityByObject (_attributes.tabs[tab]._elements["container"], 100);
 						
-			_temp.selectedTab = tab;
+			_temp.selectedTab = tab;									
 			
-			//for (index in _attributes.tabs[_temp.selectedTab]._temp.uiElements)
-			//{		
-				//_attributes.tabs[_temp.selectedTab]._temp.uiElements[index].refresh ();
-			//}	
+			for (index in _attributes.tabs[_temp.selectedTab]._temp.uiElements)
+			{		
+				_attributes.tabs[_temp.selectedTab]._temp.uiElements[index].refresh ();
+			}	
 		}
 	}	
 						
