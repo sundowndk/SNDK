@@ -53,35 +53,114 @@ namespace SNDK.DBI.Connector
 			return result;
 		}
 
-		internal static bool Query (string QueryString, SNDK.DBI.Connection Connection, SNDK.DBI.Query Query)
+//		internal static bool Query (string QueryString, Toolbox.DBI.Connection Connection, Toolbox.DBI.Query Query)
+//		{
+//			bool success = false;
+//			MySqlConnection dbconnection = (MySqlConnection)Connect (Connection);
+//			
+//			
+//			IDbCommand dbcommand = dbconnection.CreateCommand ();
+//
+//			dbcommand.CommandText = QueryString;
+//			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");
+//			try
+//			{
+//				if (usenonquery.Success)
+//				{
+//					Query.affectedrows = dbcommand.ExecuteNonQuery ();
+//					Query.dbconnection = dbconnection;
+//				}
+//				else
+//				{
+//					Query.rows = dbcommand.ExecuteReader ();
+//					Query.dbconnection = dbconnection;
+//				}
+//				success = true;
+//			}
+//			catch
+//			{
+//				if (Connection.DebugMode)
+//				{
+//					throw new Exception ("Error in querystring: "+ QueryString);
+//				}
+//			}
+//
+//			return success;
+//		}
+		
+		internal static bool Query (string QueryString, Connection Connection, Query Query)
 		{
 			bool success = false;
-			SqlConnection dbconnection = (SqlConnection)Connect (Connection);
-			IDbCommand dbcommand = dbconnection.CreateCommand ();
-
-			dbcommand.CommandText = QueryString;
-			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");
+			
+			Query.ConnectionThread = Connection.GetConnectionThread ();
+			
+			SqlConnection dbconnection = (SqlConnection)Query.ConnectionThread.DbConnection;			
+					
+			Query.ConnectionThread.DbCommand = dbconnection.CreateCommand ();			
+			Query.ConnectionThread.DbCommand.CommandText = QueryString;
+			
+			Match usenonquery = Regex.Match (QueryString, @"^UPDATE|^DELETE|^INSERT");			
+			
+		retry:
+			
 			try
 			{
 				if (usenonquery.Success)
 				{
-					Query.affectedrows = dbcommand.ExecuteNonQuery ();
-					Query.dbconnection = dbconnection;
+					Query.affectedrows = Query.ConnectionThread.DbCommand.ExecuteNonQuery ();
 				}
 				else
 				{
-					Query.rows = dbcommand.ExecuteReader ();
-					Query.dbconnection = dbconnection;
+//				Console.WriteLine ("using: "+ Query.ConnectionThread._id);
+//				Query.ConnectionThread.DbCommand.ExecuteReader ();
+				
+					Query.rows = Query.ConnectionThread.DbCommand.ExecuteReader ();
+//				Console.WriteLine ("BLA BLA BLA:"+ Query.rows.RecordsAffected);
 				}
+				
+				
 				success = true;
 			}
-			catch
+			catch (System.Data.SqlClient.SqlException Exception)
 			{
+				#region HANDLE CONNECTION FAILURE
+				if (Exception.GetBaseException () is  System.IO.EndOfStreamException)
+				{
+//					Console.WriteLine ("CONNECTION FAILED");					
+					Connection.ReConnect ();							
+					goto retry;
+				}
+				#endregion
+			}			
+			catch (Exception Exception)
+			{
+				
+//				Console.WriteLine (Query.ConnectionThread._id);
+				
+					
+				
+								
+				Console.WriteLine (Exception);
+				
+				
+//				Environment.Exit (0);
 				if (Connection.DebugMode)
 				{
 					throw new Exception ("Error in querystring: "+ QueryString);
-				}
+				}				
 			}
+			
+//			}
+//			catch (Exception e)
+//			{
+//				Console.WriteLine (e);
+//				Environment.Exit (0);
+//				
+////				if (Connection.DebugMode)
+////				{
+////					throw new Exception ("Error in querystring: "+ QueryString);
+////				}
+//			}
 
 			return success;
 		}

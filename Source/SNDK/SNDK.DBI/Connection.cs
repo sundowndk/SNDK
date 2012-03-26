@@ -147,6 +147,14 @@ namespace SNDK.DBI
 					this._pool.Add (thread);
 					break;
 				}
+					
+				case Enums.DatabaseConnector.Mssql:
+				{
+					ConnectionThread thread = new ConnectionThread ();
+					thread.DbConnection = Connector.Mssql.Connect (this);
+					this._pool.Add (thread);
+					break;
+				}
 			}
 
 			return this._connected;
@@ -161,6 +169,12 @@ namespace SNDK.DBI
 				case Enums.DatabaseConnector.Mysql:
 				{					
 					Connector.Mysql.Query (QueryString, this, query);
+					break;
+				}
+					
+				case Enums.DatabaseConnector.Mssql:
+				{					
+					Connector.Mssql.Query (QueryString, this, query);
 					break;
 				}
 			}
@@ -181,6 +195,17 @@ namespace SNDK.DBI
 				{
 //					Console.WriteLine ("RECONNECTING");
 					thread.DbConnection = Connector.Mysql.Connect (this);
+				}
+					break;
+				}
+					
+				case Enums.DatabaseConnector.Mssql:
+				{ 
+				
+				foreach (ConnectionThread thread in this._pool)
+				{
+//					Console.WriteLine ("RECONNECTING");
+					thread.DbConnection = Connector.Mssql.Connect (this);
 				}
 					break;
 				}
@@ -219,6 +244,14 @@ namespace SNDK.DBI
 					{
 						result = new ConnectionThread ();
 						result.DbConnection = SNDK.DBI.Connector.Mysql.Connect (this);												
+						this._pool.Add (result);						
+						break;                     
+					}
+							
+						case SNDK.Enums.DatabaseConnector.Mssql:
+					{
+						result = new ConnectionThread ();
+						result.DbConnection = SNDK.DBI.Connector.Mssql.Connect (this);												
 						this._pool.Add (result);						
 						break;                     
 					}
