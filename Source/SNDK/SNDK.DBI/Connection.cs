@@ -50,7 +50,7 @@ namespace SNDK.DBI
 		#endregion
 		
 		#region Internal Fields
-		internal string Hostname
+		public string Hostname
 		{
 			get
 			{
@@ -58,7 +58,7 @@ namespace SNDK.DBI
 			}
 		}
 
-		internal string Database
+		public string Database
 		{
 			get
 			{
@@ -66,7 +66,7 @@ namespace SNDK.DBI
 			}
 		}
 
-		internal string Username
+		public string Username
 		{
 			get
 			{

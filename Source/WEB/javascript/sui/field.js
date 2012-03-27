@@ -90,7 +90,7 @@ field : function (attributes)
 				providerconfig.plugins = "table,paste";
 				providerconfig.theme_advanced_toolbar_location = "top";
 				providerconfig.theme_advanced_toolbar_align = "left";
-				providerconfig.theme_advanced_buttons1 = "bold,italic,underline,|,justifyleft, justifycenter, justifyright, justifyfull,|,formatselect,removeformat,|,numlist,bullist,|,undo";
+				providerconfig.theme_advanced_buttons1 = "bold,italic,underline,|,justifyleft, justifycenter, justifyright, justifyfull,|,formatselect,removeformat,|,numlist,bullist,|,undo,|,link,unlink";
 				providerconfig.theme_advanced_buttons2 = "";
 				providerconfig.theme_advanced_buttons3 = "";
 				providerconfig.theme_advanced_blockformats = "h1,h2,h3,h4,h5,h6,blockquote";
@@ -99,6 +99,13 @@ field : function (attributes)
 				providerconfig.paste_remove_styles = true;
 				providerconfig.paste_remove_styles_if_webkit = true;
 				providerconfig.paste_strip_class_attributes = "mso";		
+				providerconfig.convert_urls = false;
+								
+				providerconfig.execcommand_callback = 	function (id, element, command, ui, value) 
+														{   
+															return sConsole.tinymce.execcommand_callback ({id: id, element: element, command: command, ui: ui, value: value, callback: sCMS.modal.tinymce.link});
+														};
+				
 			
 				_elements["content"] = new SNDK.SUI.textarea ({tag: _attributes.tag, width: "100%", height: "100%", provider: "tinymce", providerConfig: providerconfig})				
 				_elements["content"].setAttribute ("value", _attributes.value);
