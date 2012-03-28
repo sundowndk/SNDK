@@ -242,7 +242,8 @@ namespace SNDK.DBI
 		{
 			if (!this._rows.IsDBNull (Column))
 			{
-				return DateTime.Parse (this._rows.GetString (Column));
+				return this._rows.GetDateTime (Column);	
+//				return DateTime.Parse (this._rows.GetString (Column));
 			} 
 			
 			return DateTime.Now;
