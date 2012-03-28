@@ -91,6 +91,8 @@
     <None Include="html\debug2.html" />
     <None Include="javascript\sui\field.js" />
     <None Include="html\debug2.xml" />
+    <None Include="css\70_htmlview.css" />
+    <None Include="javascript\sui\htmlview.js" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

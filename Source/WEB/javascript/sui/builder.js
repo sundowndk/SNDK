@@ -327,6 +327,15 @@ construct : function (attributes)
 							break;
 						}	
 						
+						case "htmlview":
+						{													
+							elements[attributes.tag] = new SNDK.SUI.htmlview (attributes);
+							Parent.addUIElement (elements[attributes.tag]);
+							
+							break;
+						}	
+												
+						
 						case "text":
 						{						
 							elements[attributes.tag] = new SNDK.SUI.text (attributes);
