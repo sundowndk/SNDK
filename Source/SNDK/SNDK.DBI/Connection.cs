@@ -174,6 +174,7 @@ namespace SNDK.DBI
 					
 				case Enums.DatabaseConnector.Mssql:
 				{					
+					Console.WriteLine (QueryString);
 					Connector.Mssql.Query (QueryString, this, query);
 					break;
 				}

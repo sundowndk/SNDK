@@ -126,7 +126,7 @@ namespace SNDK.DBI.Connector
 				#region HANDLE CONNECTION FAILURE
 				if (Exception.GetBaseException () is  System.IO.EndOfStreamException)
 				{
-//					Console.WriteLine ("CONNECTION FAILED");					
+					Console.WriteLine ("CONNECTION FAILED");					
 					Connection.ReConnect ();							
 					goto retry;
 				}
