@@ -93,6 +93,10 @@
     <None Include="html\debug2.xml" />
     <None Include="css\70_htmlview.css" />
     <None Include="javascript\sui\htmlview.js" />
+    <None Include="html\debug3.html" />
+    <None Include="html\debug3.xml" />
+    <None Include="javascript\sui\image.js" />
+    <None Include="css\80_image.css" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="javascript\" />

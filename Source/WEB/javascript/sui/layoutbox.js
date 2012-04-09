@@ -215,6 +215,11 @@ layoutbox : function (attributes)
 
 			for (index in _attributes.panels)
 			{
+				if (_attributes.panels[index]._attributes.hidden)
+				{
+					continue;
+				}
+				
 				var size = 0;
 				var panel = _attributes.panels[index];
 								
@@ -268,6 +273,11 @@ layoutbox : function (attributes)
 						
 			for (index in _attributes.panels)
 			{
+				if (_attributes.panels[index]._attributes.hidden)
+				{
+					continue;
+				}
+			
 				var panel = _attributes.panels[index];
 				var dimensions = {};
 				
@@ -373,6 +383,12 @@ layoutbox : function (attributes)
 		function construct ()
 		{
 			_elements["container"] = SNDK.tools.newElement ("div", {className: "Panel", appendTo: _attributes.appendTo});
+			
+			
+			if (_attributes.hidden)
+			{
+				_elements["container"].style.display = "none";
+			}
 									
 			if (_attributes.canScroll)
 			{
@@ -390,6 +406,9 @@ layoutbox : function (attributes)
 		// ------------------------------------																
 		function setAttributes ()
 		{
+			if (!_attributes.hidden) 
+				_attributes.hidden = false;
+				
 			if (!_attributes.size) 
 				_attributes.size = "*";	
 

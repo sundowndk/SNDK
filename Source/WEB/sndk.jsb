@@ -39,6 +39,9 @@
 				<js file="javascript/sui/text.js" />
 				<js file="javascript/sui/canvas.js" />			
 				<js file="javascript/sui/htmlview.js" />			
+				<js file="javascript/sui/image.js" />
+						
+						
 				<js file="javascript/sui/field.js" />
 					
 				

@@ -676,7 +676,7 @@ opacityChange : function (element, opacity)
 						id = SNDK.tools.newGuid ();
 					}
 					
-					tempelement.innerHTML = "<iframe name='"+ id +"' id='"+ id +"'></iframe>";
+					tempelement.innerHTML = "<iframe name='"+ id +"' id='"+ id +"' style='width: 100%; height: 100%; border: none;'></iframe>";
 					document.body.appendChild (tempelement);
 					element = document.getElementById (id);
 				}
@@ -726,19 +726,32 @@ opacityChange : function (element, opacity)
 			
 			if (options.width != null)
 			{
-				element.style.width = options.width;
+				if (type != "iframe")
+				{						
+					element.style.width = options.width;
+				}
+				else
+				{
+					tempelement.style.width = options.width;
+				}
 			}
 			
 			if (options.height != null)
 			{
-				element.style.height = options.height;
+				if (type != "iframe")
+				{						
+					element.style.height = options.height;
+				}
+				else
+				{	
+					tempelement.style.height = options.height;
+				} 
 			}			
 
 			if (options.onLoad != null)
 			{
 				element.onload = options.onLoad;
 			}			
-			
 
 			if (options.name != null)
 			{
@@ -787,6 +800,17 @@ opacityChange : function (element, opacity)
 			{
 				element.value = options.value;
 			}
+			
+			if (options.method != null)
+			{
+				element.method = options.method;
+			}
+			
+			if (options.enctype != null)
+			{
+				element.enctype = options.enctype;
+			}
+			
 
 			if (options.appendTo != null)
 			{

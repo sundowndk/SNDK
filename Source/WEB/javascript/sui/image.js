@@ -1,5 +1,5 @@
 // -------------------------------------------------------------------------------------------------------------------------
-// htmlview ([attributes])
+// image ([attributes])
 // -------------------------------------------------------------------------------------------------------------------------
 //
 //	.addItem (item) 
@@ -57,7 +57,7 @@
 /**
  * @constructor
  */
-htmlview : function (attributes)
+image : function (attributes)
 {
 	var _elements = new Array ();
 	var _attributes = attributes;	
@@ -98,13 +98,13 @@ htmlview : function (attributes)
 		
 		if (_attributes.url != null)
 		{
-			//var test = '<object width="100%" height="100%" id="foo" name="foo" type="text/html" data="http://www.w3schools.com/"></object>';
+			var test = '<object width="100%" height="100%" id="foo" name="foo" type="text/html" data="http://www.w3schools.com/"></object>';
 		
-			_elements["render"].data = _attributes.url;
+			_elements["contentcenter"].innerHTML = test;
 		}
 		else
 		{
-			_elements["render"].data = _attributes.content;
+			_elements["contentcenter"].innerHTML = _attributes.content;
 		}
 	}
 	
@@ -141,9 +141,6 @@ htmlview : function (attributes)
 		// ContentCenter
 		_elements["contentcenter"] = SNDK.tools.newElement ("div", "ContentCenter", null, _elements["content"]);		
 		_elements["contentcenter"].style.overflow = "hidden";
-		
-		// Content
-		_elements["render"] = SNDK.tools.newElement ("iframe", {name: _attributes.name, width: "100%", height: "100%", appendTo: _elements["contentcenter"]});		
 																										
 		// ContentRight
 		_elements["contentright"] = SNDK.tools.newElement ("div", "ContentRight", null, _elements["content"]);
@@ -164,8 +161,7 @@ htmlview : function (attributes)
 		// Hook Events
 		_elements["contentcenter"].onfocus = eventOnFocus;
 		_elements["contentcenter"].onblur = eventOnBlur;
-		_elements["render"].onload = eventOnLoad;
-						
+				
 		window.addEvent (window, 'SUIREFRESH', refresh);			
 	}	
 		
@@ -228,10 +224,6 @@ htmlview : function (attributes)
 		// Stylesheet
 		if (!_attributes.stylesheet)
 			_attributes.stylesheet = "SUIHTMLView";
-				
-		// Name
-		if (!_attributes.name) 
-			_attributes.name = "";									
 				
 		// Managed
 		if (!_attributes.managed) 
@@ -526,12 +518,6 @@ htmlview : function (attributes)
 				setContent (value);
 				break;
 			}
-			
-			case "onLoad":
-			{
-				_attributes[attribute] = value;
-				break;
-			}
 								
 			default:
 			{
@@ -582,15 +568,4 @@ htmlview : function (attributes)
 			}	
 		}
 	}
-	
-	// ------------------------------------
-	// onLoad
-	// ------------------------------------							
-	function eventOnLoad ()
-	{
-		if (_attributes.onLoad != null)
-		{
-			setTimeout( function ()	{ _attributes.onLoad (); }, 1);
-		}			
-	}	
 }
