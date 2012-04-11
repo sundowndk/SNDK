@@ -96,16 +96,16 @@ image : function (attributes)
 	{	
 		updateCache ();
 		
-		if (_attributes.url != null)
-		{
-			var test = '<object width="100%" height="100%" id="foo" name="foo" type="text/html" data="http://www.w3schools.com/"></object>';
-		
-			_elements["contentcenter"].innerHTML = test;
-		}
-		else
-		{
-			_elements["contentcenter"].innerHTML = _attributes.content;
-		}
+//		if (_attributes.url != null)
+//		{
+//			var test = '<object width="100%" height="100%" id="foo" name="foo" type="text/html" data="http://www.w3schools.com/"></object>';
+//		
+//			_elements["contentcenter"].innerHTML = test;
+//		}
+//		else
+//		{
+//			_elements["contentcenter"].innerHTML = _attributes.content;
+//		}
 	}
 	
 	// ------------------------------------
@@ -134,14 +134,18 @@ image : function (attributes)
 		// Content
 		_elements["content"] = SNDK.tools.newElement ("div", null, null, _elements["container"]);
 		_elements["content"].style.clear = "both";			
-			
+						
 		// ContentLeft
 		_elements["contentleft"] = SNDK.tools.newElement ("div", "ContentLeft", null, _elements["content"]);
 					
 		// ContentCenter
 		_elements["contentcenter"] = SNDK.tools.newElement ("div", "ContentCenter", null, _elements["content"]);		
 		_elements["contentcenter"].style.overflow = "hidden";
-																										
+		
+		// Render
+		_elements["render"] = SNDK.tools.newElement ("img", {className: "Render", width: "100%", appendTo: _elements["contentcenter"]});						
+		_elements["render"].src = _attributes.source;
+		
 		// ContentRight
 		_elements["contentright"] = SNDK.tools.newElement ("div", "ContentRight", null, _elements["content"]);
 		
@@ -184,17 +188,7 @@ image : function (attributes)
 			} 
 			else
 			{			
-				_elements["contentcenter"].setAttribute("tabIndex", 0);
-				
-				if (_attributes.focus)
-				{
-					_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Focus";
-					setFocus ();
-				}
-				else
-				{
-					_elements["container"].className = _attributes.stylesheet;
-				}						
+				_elements["container"].className = _attributes.stylesheet;
 			}	
 		}		
 
@@ -223,7 +217,7 @@ image : function (attributes)
 	{				
 		// Stylesheet
 		if (!_attributes.stylesheet)
-			_attributes.stylesheet = "SUIHTMLView";
+			_attributes.stylesheet = "SUIImage";
 				
 		// Managed
 		if (!_attributes.managed) 
@@ -266,6 +260,10 @@ image : function (attributes)
 		// Content
 		if (!_attributes.content)
 			_attributes.content = "";			
+			
+		// Source
+		if (!_attributes.source)
+			_attributes.source = "";
 	}	
 	
 	// ------------------------------------
@@ -342,33 +340,36 @@ image : function (attributes)
 		setTimeout ( function () { _elements["contentcenter"].focus (); }, 2);	
 	}		
 	
+	
+	
+	
 	// ------------------------------------
-	// setContent
+	// setSource
 	// ------------------------------------				
-	function setContent (content)
+	function setSource (source)
 	{
 		if (_temp.initialized)
 		{
-			_elements["contentcenter"].innerHTML = content;
+			_elements["render"].src = source;
 		}
 		else
 		{
-			_attributes.content = content;
+			_attributes.source = source;
 		}
 	}		
 	
 	// ------------------------------------
-	// getContent
+	// getSource
 	// ------------------------------------				
-	function getContent ()
+	function getSource ()
 	{
 		if (_temp.initialized)
 		{
-			return _elements["contentcenter"].innerHTML;
+			return _elements["render"].src;
 		}
 		else
 		{
-			return _attributes.content;
+			return _attributes.source;
 		}
 	}		
 		
@@ -438,9 +439,9 @@ image : function (attributes)
 				return _attributes[attribute];			
 			}
 			
-			case "content":
+			case "source":
 			{
-				return getContent ();
+				return getSource ();
 			}
 								
 			default:
@@ -513,9 +514,9 @@ image : function (attributes)
 				break;
 			}
 			
-			case "content":
+			case "source":
 			{
-				setContent (value);
+				setSource (value);
 				break;
 			}
 								

@@ -334,6 +334,14 @@ construct : function (attributes)
 							
 							break;
 						}	
+						
+						case "image":
+						{													
+							elements[attributes.tag] = new SNDK.SUI.image (attributes);
+							Parent.addUIElement (elements[attributes.tag]);
+							
+							break;
+						}							
 												
 						
 						case "text":

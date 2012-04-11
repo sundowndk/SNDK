@@ -12,7 +12,7 @@ Image
 	outline:				none;
 }
 
-.SUIImage
+.SUIImageFocus
 {
 	outline:				#aaaaaa dotted 1px;
 }
@@ -20,7 +20,7 @@ Image
 .SUIImageDisabled
 {}
 
-.SUIHTMLView .TopLeft
+.SUIImage .TopLeft
 {
 	float: 					left;
 		
@@ -193,6 +193,11 @@ Image
 {
 	background: 				transparent url('images/image/background1.png') no-repeat;	
 	background-position:			-5px -30px;
+}
+
+.SUIImage .Render
+{	
+
 }
 
 .SUIImage .Item

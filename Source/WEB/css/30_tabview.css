@@ -69,7 +69,7 @@ Tabview
 	background: 				transparent url('images/tabview/background.png') repeat-x;
 	background-position:			0px -28px;
 	
-	font-family:				verdana;		
+	font-family:				arial;		
 	font-size:				13px;
 	text-decoration: 			none;	
 	text-shadow: 				1px 1px 0px #fff;		
@@ -90,7 +90,7 @@ Tabview
 	background: 				transparent url('images/tabview/background.png') repeat-x;
 	background-position:			0px -88px;
 	
-	font-family:				verdana;		
+	font-family:				arial;		
 	font-size:				13px;
 	text-decoration: 			none;	
 	text-shadow: 				1px 1px 0px #444444;		

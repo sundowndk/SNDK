@@ -101,7 +101,7 @@ namespace SNDK
 //			process.StartInfo.FileName = exec;
 			process.StartInfo.UseShellExecute = false;
 			process.StartInfo.RedirectStandardOutput = true;
-			process.StartInfo.FileName = "file";
+			process.StartInfo.FileName = "/usr/bin/file";
 			process.StartInfo.Arguments = "--mime-type -F ';' "+ Filename;
 			process.Start ();
 

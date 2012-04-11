@@ -10,18 +10,20 @@ namespace Test
 	{
 		public static void Main (string[] args)
 		{
-			
-			List<string> test1 = new List<string> ();
-			test1.Add ("string1");
-			test1.Add ("string2");
-			test1.Add ("string3");
-			
-			Console.WriteLine (SNDK.Convert.ToXmlDocument (test1).OuterXml);
+			Console.WriteLine (SNDK.IO.GetMimeType ("/home/rvp/Skrivebord/test.png"));
 			
 			
-			
- 			
-			
+//			List<string> test1 = new List<string> ();
+//			test1.Add ("string1");
+//			test1.Add ("string2");
+//			test1.Add ("string3");
+//			
+//			Console.WriteLine (SNDK.Convert.ToXmlDocument (test1).OuterXml);
+//			
+//			
+//			
+// 			
+//			
 //			List<string> test1 = new List<string> ();
 //			test1.Add ("LINE1");
 //			test1.Add ("LINE2");
