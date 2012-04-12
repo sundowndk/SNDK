@@ -370,14 +370,8 @@ htmlview : function (attributes)
 	// ------------------------------------				
 	function getContent ()
 	{
-		if (_temp.initialized)
-		{
-			return _elements["contentcenter"].innerHTML;
-		}
-		else
-		{
-			return _attributes.content;
-		}
+		//return _elements["render"];
+		return document.getElementById (_attributes.name).contentWindow;
 	}		
 		
 	// ------------------------------------
