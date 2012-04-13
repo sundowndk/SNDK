@@ -128,6 +128,7 @@ upload : function (attributes)
 		_elements["input"] = SNDK.tools.newElement ("input", {name: attributes.name, type: "file", appendTo: _elements["legacy"]});
 		_elements["input"].style.position = "absolute";		
 		_elements["input"].style.fontSize = "23px";	
+		//_elements["input"].accept =  "image/jpeg,image/gif";
 		
 		SNDK.tools.changeOpacityByObject (_elements["input"], 0);
 
