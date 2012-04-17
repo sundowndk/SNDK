@@ -43,6 +43,79 @@ field : function (attributes)
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;
 	this.dispose = functionDispose;
+	
+	
+	var liststring =
+	{
+		add : function ()
+		{
+			var onDone =	function (string)
+							{
+								if (string != null)
+								{
+									_elements["content"].addItem (string);
+									
+								}
+							};
+							
+			sCMS.modal.edit.fieldString ({onDone: onDone});			
+		},
+		
+		edit : function ()
+		{
+			var onDone =	function (string)
+							{
+								if (string != null)
+								{
+									_elements["content"].setItem (string);
+									
+								}
+							};
+							
+			sCMS.modal.edit.fieldString ({string: _elements["content"].getItem (), onDone: onDone});
+		},
+		
+		remove : function ()
+		{
+			_elements["content"].removeItem ();
+		},
+		
+		onChange : function ()
+		{
+			if (_elements["content"].getItem () != null)
+			{
+				_elements["edit"].setAttribute ("disabled", false);
+				_elements["remove"].setAttribute ("disabled", false);
+			}
+			else
+			{
+				_elements["edit"].setAttribute ("disabled", true);
+				_elements["remove"].setAttribute ("disabled", true);
+			}
+			
+			if (_attributes.onChange != null)
+			{
+				setTimeout( function ()	{ _attributes.onChange (); }, 1);
+			}
+		}
+	};	
+	
+	var link =
+	{
+		choose : function ()
+		{
+			var onDone =	function (result)
+							{							
+								if (result != null)
+								{																					
+									var page = sCMS.page.load (result.id);													
+									_elements["content"].setAttribute ("value", page.path);
+								}
+							};
+	
+			sCMS.modal.chooser.page ({onDone: onDone});									
+		}
+	}
 
 	// Construct
 	construct ();
@@ -83,6 +156,40 @@ field : function (attributes)
 				break;
 			}		
 			
+			case "liststring":
+			{
+				// LAYOUT1
+				_elements["layout1"] = new SNDK.SUI.layoutbox ({width: _attributes.width, height: _attributes.height, type: "vertical", stylesheet: "SUILayoutboxNoBorder"});
+				_elements["layout1"].addPanel ({tag: "panel1", size: "*"});
+				_elements["layout1"].addPanel ({tag: "panel2", size: "100px"});				
+				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["layout1"]);		
+				
+				// CONTENT
+				var columns = new Array ();
+				columns[0] = {tag: "value", label: "", width: "250px", visible: "true"};
+
+				_elements["content"] = new SNDK.SUI.listview ({tag: _attributes.tag, width: "100%", height: "100%", columns: columns});
+				_elements["content"].setAttribute ("onChange", liststring.onChange);																				
+				_elements["layout1"].getPanel ("panel1").addUIElement (_elements["content"]);	
+				
+				// ADD
+				_elements["add"] = new SNDK.SUI.button ({label: "Add", stylesheet: "SUIButtonSmall"});
+				_elements["add"].setAttribute ("onClick", liststring.add)				
+				_elements["layout1"].getPanel ("panel2").addUIElement (_elements["add"]);
+				
+				// EDIT
+				_elements["edit"] = new SNDK.SUI.button ({label: "Edit", stylesheet: "SUIButtonSmall", disabled: true});
+				_elements["edit"].setAttribute ("onClick", liststring.edit)
+				_elements["layout1"].getPanel ("panel2").addUIElement (_elements["edit"]);
+				
+				// REMOVE
+				_elements["remove"] = new SNDK.SUI.button ({label: "Remove", stylesheet: "SUIButtonSmall", disabled: true});
+				_elements["remove"].setAttribute ("onClick", liststring.remove)
+				_elements["layout1"].getPanel ("panel2").addUIElement (_elements["remove"]);
+				
+				break;
+			}
+			
 			case "text":
 			{
 				var providerconfig = {};			
@@ -112,6 +219,19 @@ field : function (attributes)
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 				break;
 			}		
+			
+			case "link":
+			{
+				_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "90%"});
+				_elements["content"].setAttribute ("value", _attributes.value);
+				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
+				
+				_elements["choose"] = new SNDK.SUI.button ({label: "Choose", width: "10%"});
+				_elements["choose"].setAttribute ("onClick", link.choose);				
+				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["choose"]);		
+				
+				break;
+			}
 		}					
 	}	
 		
@@ -126,10 +246,6 @@ field : function (attributes)
 			
 			case "text":
 			{
-				
-			
-				
-			
 				_elements["content"].dispose ();
 				break;
 			}		
@@ -152,6 +268,12 @@ field : function (attributes)
 					break;
 				}
 				
+				case "liststring":
+				{
+					return
+					break;
+				}
+				
 				case "text":
 				{
 					_elements["content"].setAttribute ("disabled", true);
@@ -166,6 +288,12 @@ field : function (attributes)
 				case "string":
 				{
 					_elements["content"].setAttribute ("disabled", false);
+					break;
+				}
+				
+				case "liststring":
+				{
+					return
 					break;
 				}
 				
@@ -261,22 +389,66 @@ field : function (attributes)
 						break;					
 					}
 					
+					case "liststring":
+					{
+						return _attributes[attribute];
+						break;
+					}
+					
 					case "text":
 					{
 						return _elements["content"].getAttribute ("onKeyUp");
 						break;
+					}
+					
+					case "link":
+					{
+						return _elements["content"].getAttribute ("onKeyUp");
+						break;					
 					}
 				}								
 			}
 
 			case "value":
 			{
-				return _elements["content"].getAttribute ("value");
+				switch (_attributes.type)
+				{
+					case "string":
+					{
+						return _elements["content"].getAttribute ("value");
+						break;
+					}
+					
+					case "liststring":
+					{						
+						var items = _elements["content"].getItems ();
+						var result = "";
+						for (index in items)
+						{
+							result += items[index].value +"\n";
+						}
+					
+						return result;
+						break;
+					}
+					
+					case "text":
+					{
+						return _elements["content"].getAttribute ("value");
+						break;
+					}
+					
+					case "link":
+					{
+						return _elements["content"].getAttribute ("value");
+						break;
+					}
+				}				
 			}			
 
 			default:
-			{
-				throw "No attribute with the name '"+ attribute +"' exist in this object";
+			{			
+				throw "No attribute with the name '"+ attribute +"' exist in this object. (GET)";
 			}
 		}
 	}
@@ -365,11 +537,23 @@ field : function (attributes)
 						break;					
 					}
 					
+					case "liststring":
+					{
+						_attributes[attribute] = value;
+						break;
+					}
+					
 					case "text":
 					{
 						_elements["content"].setAttribute ("onChange", value);
 						_elements["content"].setAttribute ("onKeyUp", value);
 						break;
+					}
+					
+					case "link":
+					{						
+						_elements["content"].setAttribute ("onKeyUp", value);
+						break;					
 					}
 				}								
 							
@@ -378,13 +562,48 @@ field : function (attributes)
 
 			case "value":
 			{
-				_elements["content"].setAttribute ("value", value);
+				switch (_attributes.type)
+				{
+					case "string":
+					{
+						_elements["content"].setAttribute ("value", value);
+						break;
+					}
+					
+					case "liststring":
+					{
+						var split = value.split ("\n");
+						for (index in split)
+						{
+							if (split[index] != "")
+							{
+								var item = {};
+								item.value = split[index];
+								_elements["content"].addItem (item);
+							}						
+						}
+						break;
+					}
+					
+					case "text":
+					{
+						_elements["content"].setAttribute ("value", value);
+						break;
+					}
+					
+					case "link":
+					{
+						_elements["content"].setAttribute ("value", value);
+						break;
+					}
+				}
+				
 				break;
 			}			
 					
 			default:
 			{
-				throw "No attribute with the name '"+ attribute +"' exist in this object";
+				throw "No attribute with the name '"+ attribute +"' exist in this object. (SET)";
 			}
 		}	
 	}										
