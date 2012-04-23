@@ -104,6 +104,7 @@ listview : function (attributes)
 	this.getItem = functionGetItem;	
 	this.setItems = functionSetItems;
 	this.getItems = functionGetItems;
+	this.getItemRow = functionGetItemRow;
 
 
 //	this.removeAllItems = functionRemoveAllItems;
@@ -1287,12 +1288,18 @@ listview : function (attributes)
 			row = _temp.selectedRow;
 		}
 
+		var from;
+		var to;
+
 		if (!_attributes.treeview)
 		{
 			if (row > 0)
 			{
 				moveItem (row, row - 1);
 				setSelectedRow (row - 1);
+				
+				from = row;
+				to = row -1;
 			}		
 		}
 		else
@@ -1304,6 +1311,10 @@ listview : function (attributes)
 				{	
 					moveItem (row, row - 1);
 					setSelectedRow (row - 1);		
+					
+					from = row;
+					to = row - 1;
+
 				}
 				else
 				{
@@ -1315,6 +1326,10 @@ listview : function (attributes)
 							var row2 = index;
 							moveItem (row1, row2);
 							setSelectedRow (row2);
+							
+							from = row1;
+							to = row2;
+							
 							break;				
 						}
 						else if (_elements.rows[index].indentDepth < _elements.rows[row].indentDepth)
@@ -1324,7 +1339,13 @@ listview : function (attributes)
 					}				
 				}								
 			}
-		}				
+		}	
+		
+		var result = new Array ();
+		result[0] = from;
+		result[1] = to;
+		
+		return result;			
 	}
 	
 	// ------------------------------------
@@ -1336,6 +1357,9 @@ listview : function (attributes)
 		{
 			row = _temp.selectedRow;
 		}
+		
+		var from;
+		var to;
 
 		if (!_attributes.treeview)
 		{
@@ -1343,6 +1367,9 @@ listview : function (attributes)
 			{
 				moveItem (row, row + 1);
 				setSelectedRow (row + 1);
+				
+				from = row;
+				to = row + 1;
 			}
 		}
 		else
@@ -1353,6 +1380,9 @@ listview : function (attributes)
 				{	
 					moveItem (row, row + 1);
 					setSelectedRow (row + getNumberOfRowChildren (row + 1) + 1);
+					
+					from = row;
+					to = row + 1;
 				}
 				else
 				{
@@ -1390,10 +1420,19 @@ listview : function (attributes)
 					{					
 						moveItem (row1, row2);
 						setSelectedRow (row3);				
+						
+						from = row1;
+						to = row3; 
 					}
 				}				
 			}
 		}
+		
+		var result = new Array ();
+		result[0] = from;
+		result[1] = to;
+		
+		return result;
 	}
 	
 	// ------------------------------------
@@ -1488,6 +1527,14 @@ listview : function (attributes)
 				
 		return result;
 	}
+		
+	
+	function functionGetItemRow ()
+	{
+		return _temp.selectedRow;
+	
+	}
+	
 	
 	// ------------------------------------
 	// getAttribute
@@ -1777,8 +1824,8 @@ listview : function (attributes)
 		if (_temp.initialized)
 		{
 			if (row != null)
-			{			
-				return _attributes.items [_element.rows[row].itemIndex];
+			{					
+				return _attributes.items [_elements.rows[row].itemIndex];
 			}
 			else
 			{
