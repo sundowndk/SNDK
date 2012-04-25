@@ -31,6 +31,7 @@ using System.Text;
 using System.Collections.Generic;	
 using System.Text.RegularExpressions;
 
+using Mono.Unix;
 
 
 namespace SNDK
@@ -38,6 +39,33 @@ namespace SNDK
 	public static class IO
 	{
 		#region Public Static Methods
+		
+		public static void CreateSymlink (string SourcePath, string DestinationPath)
+		{
+			UnixFileInfo fileinfo = new UnixFileInfo (SourcePath);						
+			fileinfo.CreateSymbolicLink (DestinationPath);
+		}
+		
+		public static void RemoveSymlink (string Path)
+		{
+			try
+			{
+				if (File.Exists (Path))
+				{
+					File.Delete (Path);
+				}
+				
+				if (Directory.Exists (Path))
+				{
+					Directory.Delete (Path);
+				}
+			}
+			catch 
+			{
+				
+			}
+		}
+		
 		public static List<string> GetFilesRecursive (string Path)
 		{
 			List<string> result = new List<string> ();
