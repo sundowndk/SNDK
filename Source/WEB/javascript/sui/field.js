@@ -116,6 +116,67 @@ field : function (attributes)
 			sCMS.modal.chooser.page ({onDone: onDone});									
 		}
 	}
+	
+	var image = 
+	{
+		value : null,
+		onChangeValue : null,
+		
+		set : function (value)
+		{
+			if (value != "00000000-0000-0000-0000-000000000000")
+			{
+				image.value = sorentoLib.media.load (value);				
+				_elements["content"].setAttribute ("source", "/console/cache/thumbnails/"+ image.value.id +"_large.jpg");
+			}
+			else
+			{			
+				image.value = null;
+				_elements["content"].setAttribute ("source", "");
+			}
+			
+			image.onChange ();
+		},
+		
+		get : function ()
+		{
+			var result = "00000000-0000-0000-0000-000000000000";
+		
+			if (image.value != null)
+			{
+				result = image.value.id;
+			}
+			
+			return result;
+		},
+		
+		clear : function ()
+		{
+			image.set ("00000000-0000-0000-0000-000000000000");
+		},
+	
+		upload : function ()
+		{
+			var onDone =	function (media)
+							{
+								if (media != null)
+								{		
+									image.set (media.id);																																											
+									
+								};
+							};
+				
+			sConsole.modal.chooser.media ({type: "image", subType: "upload", path: "/media/scms/%%FILENAME%%%%EXTENSION%%", onDone: onDone});
+		},
+		
+		onChange : function ()
+		{		
+			if (image.onChangeValue != null)
+			{			
+				setTimeout( function ()	{ image.onChangeValue (); }, 1);
+			}		
+		}
+	}
 
 	// Construct
 	construct ();
@@ -232,6 +293,33 @@ field : function (attributes)
 				
 				break;
 			}
+			
+			case "image":
+			{
+				// LAYOUT1
+				_elements["layout1"] = new SNDK.SUI.layoutbox ({width: _attributes.width, height: _attributes.height, type: "horizontal", stylesheet: "SUILayoutboxNoBorder"});
+				_elements["layout1"].addPanel ({tag: "panel1", size: "190px"});
+				_elements["layout1"].addPanel ({tag: "panel2", size: "*"});				
+				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["layout1"]);		
+								
+				// CONTENT
+				_elements["content"] = new SNDK.SUI.image ({tag: _attributes.tag, width: "190px", height: "190px", columns: columns});
+				//_elements["content"].setAttribute ("onChange", image.onChange);				
+				_elements["layout1"].getPanel ("panel1").addUIElement (_elements["content"]);	
+				
+				// CLEAR
+				_elements["clear"] = new SNDK.SUI.button ({label: "Clear", width: "95px", stylesheet: "SUIButtonSmall"});
+				_elements["clear"].setAttribute ("onClick", image.clear)
+				_elements["layout1"].getPanel ("panel2").addUIElement (_elements["clear"]);
+				
+				// UPLOAD
+				_elements["upload"] = new SNDK.SUI.button ({label: "Upload", width: "95px", stylesheet: "SUIButtonSmall"});
+				_elements["upload"].setAttribute ("onClick", image.upload)
+				_elements["layout1"].getPanel ("panel2").addUIElement (_elements["upload"]);
+				
+				
+				break;
+			}
 		}					
 	}	
 		
@@ -301,6 +389,12 @@ field : function (attributes)
 				{
 					_elements["content"].setAttribute ("disabled", false);
 					break;					
+				}
+				
+				case "image":
+				{
+					return
+					break;
 				}
 			}
 		}
@@ -406,6 +500,12 @@ field : function (attributes)
 						return _elements["content"].getAttribute ("onKeyUp");
 						break;					
 					}
+					
+					case "image":
+					{
+						return image.onChangeValue;
+					
+					}
 				}								
 			}
 
@@ -441,6 +541,12 @@ field : function (attributes)
 					case "link":
 					{
 						return _elements["content"].getAttribute ("value");
+						break;
+					}
+					
+					case "image":
+					{				
+						return image.get ();		
 						break;
 					}
 				}				
@@ -555,6 +661,12 @@ field : function (attributes)
 						_elements["content"].setAttribute ("onKeyUp", value);
 						break;					
 					}
+					
+					case "image":
+					{
+						image.onChangeValue = value;
+						break;
+					}
 				}								
 							
 				break;
@@ -594,6 +706,12 @@ field : function (attributes)
 					case "link":
 					{
 						_elements["content"].setAttribute ("value", value);
+						break;
+					}
+					
+					case "image":
+					{
+						image.set (value);
 						break;
 					}
 				}
