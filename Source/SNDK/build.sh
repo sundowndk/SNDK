@@ -12,38 +12,38 @@ OUTPUTDIR="$1"
 # CLEAN                                            #
 ####################################################
 echo "Cleaning previous build..."
-rm "$OUTPUTDIR/www/" -r
+rm "$OUTPUTDIR/" -r
 
 ####################################################
 # SETUP                                            #
 ####################################################
-mkdir "$OUTPUTDIR/www/"
-mkdir "$OUTPUTDIR/www/sndk/"
+mkdir "$OUTPUTDIR/"
+mkdir "$OUTPUTDIR/sndk/"
 
 ####################################################
 # CSS                                              #
 ####################################################
 echo "Bulding 'css'..."
-mkdir "$OUTPUTDIR/www/sndk/css"
-CSSFILE="$OUTPUTDIR/www/sndk/css/sndk.css"
+mkdir "$OUTPUTDIR/sndk/css"
+CSSFILE="$OUTPUTDIR/sndk/css/sndk.css"
 touch "$CSSFILE"
-find css -type f -name '*.css' | sort | while read filename; do
+find resources/css -type f -name '*.css' | sort | while read filename; do
     cat "$filename"
 done > $CSSFILE
 
-cp -rv "resources/css/images/" "$OUTPUTDIR/www/sndk/css/"
+cp -rv "resources/css/images/" "$OUTPUTDIR/sndk/css/"
 
 ####################################################
 # INCLUDES                                         #
 ####################################################
 echo "Copying 'includes'..."
 for file in resources/includes*; do
-    cp -rv $file "$OUTPUTDIR/www/sndk/"
+    cp -rv $file "$OUTPUTDIR/sndk/"
 done
 
 ####################################################
 # JAVASCRIPT                                       #
 ####################################################
 echo "Building 'javascript'..."
-mkdir "$OUTPUTDIR/www/sndk/js"
-jsbuilder javascript.jsb "$OUTPUTDIR/www/sndk/js/"
+mkdir "$OUTPUTDIR/sndk/js"
+jsbuilder javascript.jsb "$OUTPUTDIR/sndk/js/"
