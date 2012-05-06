@@ -1,0 +1,107 @@
+
+/* --------------------------------------------------------------------------------------------------------------
+Button
+-------------------------------------------------------------------------------------------------------------- */
+.SUIButton
+{
+	margin: 				1px;	
+	
+	padding:				3px;
+
+	font-family:				arial;		
+	font-size:				13px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 0px #444444;		
+	text-align:				center;
+
+	display: 				inline-block;	
+	outline:				none;	
+}
+
+.SUIButtonFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUIButtonDisabled
+{
+}
+
+.SUIButtonLeftClicked
+{
+}
+
+.SUIButton .Left
+{
+	float: 					left;
+		
+	width: 					6px;
+	height: 				32px;
+	
+	background: 				transparent url('images/button/background.png') no-repeat;
+	background-position:			0px 0px;
+}
+
+.SUIButtonLeftClicked .Left
+{
+	background-position:			0px -64px;
+}
+
+.SUIButtonDisabled .Left
+{
+	background-position:			0px -128px;
+}
+
+.SUIButton .Center
+{
+	float: 					left;
+
+	padding-top:				7px;
+	
+	height:					25px;
+	
+	background: 				transparent url('images/button/background.png') repeat-x;
+	background-position:			0px -32px;	
+		
+	color:					#ffffff;	
+	cursor:					default;	
+}
+
+.SUIButtonLeftClicked .Center
+{
+	padding-top:				8px;
+	
+	height:					24px;
+	
+	background-position:			0px -96px;
+}
+
+.SUIButtonDisabled .Center
+{
+	background-position:			0px -160px;
+	
+	text-shadow: 				1px 1px 0px #fff;	
+	color:					#777;
+}
+
+.SUIButton .Right
+{
+	float: 					left;
+		
+	width: 					6px;
+	height: 				32px;
+	
+	background: 				transparent url('images/button/background.png') no-repeat;
+	background-position:			-6px 0px;
+}
+
+.SUIButtonLeftClicked .Right
+{
+	background-position:			-6px -64px;
+}
+
+.SUIButtonDisabled .Right
+{
+	background-position:			-6px -128px;
+}
+

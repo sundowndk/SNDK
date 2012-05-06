@@ -1,0 +1,115 @@
+/* --------------------------------------------------------------------------------------------------------------
+ContainerNoBorder
+-------------------------------------------------------------------------------------------------------------- */
+.SUIContainerNoBorder
+{
+	position: 					relative;
+
+	margin: 					0px;	
+	padding:					0px;
+
+	display: 					inline-block;	
+	outline:					none;
+}
+
+.SUIContainerNoBorder .Title
+{
+	float:						left;
+
+	margin-top:					15px;
+		
+	font-family:				arial;		
+	font-size:					15px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 1px #ffffff;
+}
+
+.SUIContainerNoBorder .Icon
+{
+	float:						left;
+	
+	margin-top:					5px;
+	margin-left:				10px;
+	margin-right:				10px;
+}
+
+.SUIContainerNoBorder .TopLeft
+{
+	float: 						left;
+		
+	width:	 					5px;
+	height: 					48px;
+	
+	background: 				transparent url('images/containernoborder/background1.png') no-repeat;	
+	background-position:		0px 0px;
+}
+
+.SUIContainerNoBorder .TopCenter
+{
+	float: 						left;
+		
+	height:						48px;
+	
+	background: 				transparent url('images/containernoborder/background1.png') repeat-x;	
+	background-position:		0px -48px;			
+}
+
+.SUIContainerNoBorder .TopRight
+{
+	float: 						left;
+			
+	width: 						5px;
+	height: 					48px;
+	
+	background: 				transparent url('images/containernoborder/background1.png') no-repeat;	
+	background-position:		-5px 0px;
+}
+
+.SUIContainerNoBorder .ContentLeft
+{
+	float: 						left;
+	
+	width: 						5px;
+
+}
+
+.SUIContainerNoBorder .ContentCenter
+{
+	float: 						left;
+	
+	background-color: 			transparent;
+	
+	outline: 					none;
+}
+
+.SUIContainerNoBorder .ContentRight
+{
+	float: 						left;
+	
+	width: 						5px;
+	
+}
+
+.SUIContainerNoBorder .BottomLeft
+{
+	float: 						left;
+	
+	width: 						5px;
+	height:						5px;		
+}
+
+.SUIContainerNoBorder .BottomCenter
+{
+	float: 						left;
+	
+	height:						5px;
+}
+
+.SUIContainerNoBorder .BottomRight
+{
+	float: 						left;
+	
+	height: 					5px;		
+	width: 						5px;		
+}
+

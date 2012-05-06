@@ -1,0 +1,242 @@
+
+/* --------------------------------------------------------------------------------------------------------------
+HTMLView
+-------------------------------------------------------------------------------------------------------------- */
+.SUIHTMLView
+{
+	position: 				relative;
+
+	margin: 				1px;	
+	padding:				3px;
+
+	display: 				inline-block;	
+	outline:				none;
+}
+
+.SUIHTMLViewFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUIHTMLViewDisabled
+{}
+
+.SUIHTMLView .TopLeft
+{
+	float: 					left;
+		
+	width: 					5px;
+	height: 				5px;
+	
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			0px 0px;
+}
+
+.SUIHTMLViewFocus .TopLeft
+{}
+
+.SUIHTMLViewDisabled .TopLeft
+{
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			0px -20px;
+}
+
+.SUIHTMLView .TopCenter
+{
+	float: 					left;
+	
+	height:					5px;
+	
+	background: 				transparent url('images/htmlview/background1.png') repeat-x;	
+	background-position:			0px -5px;
+}
+
+.SUIHTMLViewFocus. TopCenter
+{}
+
+.SUIHTMLViewDisabled .TopCenter
+{
+	background: 				transparent url('images/htmlview/background1.png') repeat-x;	
+	background-position:			0px -25px;
+}
+
+.SUIHTMLView .TopRight
+{
+	float: 					left;
+			
+	width: 					5px;
+	height: 				5px;
+	
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			-5px 0px;
+}
+
+.SUIHTMLViewFocus .TopRight
+{}
+
+.SUIHTMLViewDisabled .TopRight
+{
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			-5px -20px;
+}
+
+.SUIHTMLView .ContentLeft
+{
+	float: 					left;
+	
+	width: 					5px;
+
+	background: 				transparent url('images/htmlview/background2.png') repeat-y;	
+	background-position:			0px 0px;
+}
+
+.SUIHTMLViewFocus .ContentLeft
+{}
+
+.SUIHTMLViewDisabled  .ContentLeft
+{
+	background: 				transparent url('images/htmlview/background2.png') repeat-y;	
+	background-position:			-10px 0px;
+}
+
+.SUIHTMLView .ContentCenter
+{
+	float: 					left;
+	
+	background-color: 			#ffffff;
+	
+	outline: 				none;
+}
+
+.SUIHTMLViewFocus .ContentCenter
+{}
+
+.SUIHTMLViewDisabled .ContentCenter
+{
+	background: 				#ffffff;
+}
+
+.SUIHTMLView .ContentRight
+{
+	float: 					left;
+	
+	width: 					5px;
+	
+	background: 				transparent url('images/htmlview/background2.png') repeat-y;	
+	background-position:			-5px 0px;
+}
+
+.SUIHTMLViewFocus .ContentRight
+{}
+
+.SUIHTMLViewDisabled .ContentRight
+{
+	background: 				transparent url('images/htmlview/background2.png') repeat-y;	
+	background-position:			-15px 0px;
+}
+
+.SUIHTMLView .BottomLeft
+{
+	float: 					left;
+	
+	width: 					5px;
+	height:					5px;	
+	
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			0px -10px;
+}
+
+.SUIHTMLViewFocus .BottomLeft
+{}
+
+.SUIHTMLViewDisabled .BottomLeft
+{
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			0px -30px;
+}
+
+.SUIHTMLView .BottomCenter
+{
+	float: 					left;
+	
+	height:					5px;
+
+	background: 				transparent url('images/htmlview/background1.png') repeat-x;	
+	background-position:			0px -15px;
+}
+
+.SUIHTMLViewFocus .BottomCenter
+{}
+
+.SUIHTMLViewDisabled .BottomCenter
+{
+	background: 				transparent url('images/htmlview/background1.png') repeat-x;	
+	background-position:			0px -35px;
+}
+
+.SUIHTMLView .BottomRight
+{
+	float: 					left;
+	
+	height: 				5px;		
+	width: 					5px;	
+	
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			-5px -10px;
+}
+
+.SUIHTMLViewFocus .BottomRight
+{}
+
+
+
+.SUIHTMLViewDisabled .BottomRight
+{
+	background: 				transparent url('images/htmlview/background1.png') no-repeat;	
+	background-position:			-5px -30px;
+}
+
+.SUIHTMLView .Item
+{
+	float:					left;
+	
+	margin:					3px;	
+	padding:				4px;
+	
+	width:					90px;
+	height:					90px;
+	
+	background: 				transparent url('images/htmlview/background3.png') no-repeat;
+	background-position:			0px 0px;
+}
+
+.SUIHTMLViewDisabled .Item
+{}
+
+.SUIHTMLView .ItemSelected
+{
+	float:					left;
+	
+	margin:					3px;
+	padding:				4px;
+	
+	width:					90px;
+	height:					90px;
+	
+	background: 				transparent url('images/htmlview/background3.png') no-repeat;
+	background-position:			0px -98px;
+}
+
+.SUIHTMLViewDisabled .Item
+{}
+
+.SUIHTMLViewDisabled .ItemSelected
+{}
+
+.SUIHTMLView .Image
+{
+	width:					90px;
+	height:					90px;
+}
+
+

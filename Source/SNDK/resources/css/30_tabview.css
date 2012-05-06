@@ -1,0 +1,215 @@
+
+/* --------------------------------------------------------------------------------------------------------------
+Tabview
+-------------------------------------------------------------------------------------------------------------- */
+.SUITabview
+{
+	position: 				relative;
+
+	display: 				inline-block;			
+}
+
+.SUITabview .Tabs
+{
+	height: 				32px;
+}
+
+.SUITabview .Tab
+{
+	
+}
+
+.SUITabview .TabButton
+{
+	float: 					left;
+	
+	margin-right:				3px;	
+	
+	cursor:					pointer;
+}
+
+.SUITabview .TabButtonSelected
+{
+	float: 					left;
+	
+}
+
+.SUITabview .TabButton .Left
+{
+	float:					left;
+
+	width:					4px;
+	height:					28px;
+
+	background: 				transparent url('images/tabview/background.png') no-repeat;
+	background-position:			0px 0px;
+}
+
+.SUITabview .TabButtonSelected .Left
+{
+	float:					left;
+
+	width:					4px;
+	height:					32px;
+
+	background: 				transparent url('images/tabview/background.png') no-repeat;
+	background-position:			0px -56px;
+}
+
+
+.SUITabview .TabButton .Center
+{
+	float:					left;
+	
+	padding-top:				4px;
+	
+	width:					100px;
+	height:					24px;	
+	
+	background: 				transparent url('images/tabview/background.png') repeat-x;
+	background-position:			0px -28px;
+	
+	font-family:				arial;		
+	font-size:				13px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 0px #fff;		
+	text-align:				center;
+	
+	color:					#777;
+}
+
+.SUITabview .TabButtonSelected .Center
+{
+	float:					left;
+	
+	padding-top:				6px;
+	
+	width:					100px;
+	height:					26px;	
+	
+	background: 				transparent url('images/tabview/background.png') repeat-x;
+	background-position:			0px -88px;
+	
+	font-family:				arial;		
+	font-size:				13px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 0px #444444;		
+	text-align:				center;
+	color:	#fff;
+}
+
+
+.SUITabview .TabButton .Right
+{
+	float:					left;
+	
+	width:					4px;
+	
+	height:					28px;	
+	background: 				transparent url('images/tabview/background.png') no-repeat;
+	background-position:			-4px 0px;
+}
+
+.SUITabview .TabButtonSelected .Right
+{
+	float:					left;
+	
+	width:					4px;
+	
+	height:					32px;	
+	background: 				transparent url('images/tabview/background.png') no-repeat;
+	background-position:			-4px -56px;
+}
+
+
+.SUITabview .TopLeft
+{
+	float: 					left;
+	
+	width:					0px;
+	height:					10px;	
+			
+	background: 				none;
+}
+
+.SUITabview .TopCenter
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+.SUITabview .TopRight
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+.SUITabview .ContentLeft
+{
+	float: 					left;
+			
+	width:					0px;
+	height:					0px;	
+
+	background: 				none;
+}
+
+.SUITabview .ContentCenter
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+.SUITabview .ContentRight
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+.SUITabview .BottomLeft
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+.SUITabview .BottomCenter
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+.SUITabview .BottomRight
+{
+	float: 					left;
+
+	width:					0px;
+	height:					0px;	
+			
+	background: 				none;
+}
+
+

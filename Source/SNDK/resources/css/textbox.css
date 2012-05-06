@@ -1,0 +1,117 @@
+
+/* --------------------------------------------------------------------------------------------------------------
+Textbox
+-------------------------------------------------------------------------------------------------------------- */
+.SUITextbox
+{
+	margin: 				1px;	
+	padding:				3px;
+
+	display: 				inline-block;
+	outline:				none;	
+}
+
+.SUITextboxFocus
+{
+	outline:				#aaaaaa dotted 1px;
+}
+
+.SUITextboxDisabled
+{
+}
+
+.SUITextbox .Left
+{
+	float: 					left;
+		
+	width: 					4px;
+	height: 				32px;
+	
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			0px 0px;
+}
+
+.SUITextboxFocus .Left
+{
+}
+
+.SUITextboxDisabled .Left
+{
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			0px -64px;
+}
+
+.SUITextbox .Center
+{
+	float: 					left;
+	
+	height:					32px;
+	
+	background: 				transparent url('images/textbox/background.png') repeat-x;
+	background-position:			0px -32px;
+}
+
+.SUITextboxFocus .Center
+{
+}
+
+.SUITextboxDisabled .Center
+{
+	background: 				transparent url('images/textbox/background.png') repeat-x;
+	background-position:			0px -96px;
+	
+	color:					#aaaaaa;
+}
+
+.SUITextbox .Right
+{
+	float: 					left;
+			
+	width: 					4px;
+	height: 				32px;
+	
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			-4px 0px;
+
+}
+
+.SUITextboxFocus .Right
+{
+}
+
+.SUITextboxDisabled .Right
+{
+	background: 				transparent url('images/textbox/background.png') no-repeat;
+	background-position:			-4px -64px;
+}
+
+.SUITextbox .Input
+{	
+	margin:					7px 3px 3px 3px;
+
+	width: 					0px;
+	
+	background:				transparent;
+	
+	border:					none;	
+
+	font-family:				arial;		
+	font-size:				15px;
+	text-decoration: 			none;	
+	text-shadow: 				1px 1px 1px #ffffff;	
+	color:					#444444;
+	
+	outline: 				none;
+}
+
+.SUITextboxFocus .Input
+{
+}
+
+.SUITextboxDisabled .Input
+{
+	color:					#aaaaaa;
+	cursor:					default;
+}
+
+
