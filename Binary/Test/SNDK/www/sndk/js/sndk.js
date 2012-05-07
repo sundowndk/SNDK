@@ -12353,6 +12353,11 @@ var SNDK =
 					{
 						return _attributes[attribute];			
 					}
+					
+					case "hidden":
+					{
+						return _attributes[attribute];
+					}
 		
 					default:
 					{
@@ -12437,6 +12442,12 @@ var SNDK =
 						}
 						
 						break;
+					}
+					
+					case "hidden":
+					{
+						_attributes[attribute] = value;
+						SNDK.SUI.refresh ();
 					}
 							
 					default:
@@ -15633,8 +15644,7 @@ var SNDK =
 						_elements["upload"] = new SNDK.SUI.button ({label: "Upload", width: "95px", stylesheet: "SUIButtonSmall"});
 						_elements["upload"].setAttribute ("onClick", image.upload)
 						_elements["layout1"].getPanel ("panel2").addUIElement (_elements["upload"]);
-						
-						
+									
 						break;
 					}
 				}					

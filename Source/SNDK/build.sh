@@ -12,12 +12,12 @@ OUTPUTDIR="$1"
 # CLEAN                                            #
 ####################################################
 echo "Cleaning previous build..."
-rm "$OUTPUTDIR/" -r
+rm "$OUTPUTDIR/sndk/" -r
+rm "$OUTPUTDIR/sndk"
 
 ####################################################
 # SETUP                                            #
 ####################################################
-mkdir "$OUTPUTDIR/"
 mkdir "$OUTPUTDIR/sndk/"
 
 ####################################################

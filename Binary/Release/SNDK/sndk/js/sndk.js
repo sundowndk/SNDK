@@ -12153,6 +12153,7 @@ var SNDK =
 				this.getContentElement = functionGetContentElement;	
 				this.setAttribute = functionSetAttribute;
 				this.getAttribute = functionGetAttribute;
+				this.refresh = functionRefresh ();
 		
 				// Initialize
 				construct ();
@@ -12179,6 +12180,18 @@ var SNDK =
 					{
 						//_elements["container"].style.overflow = "hidden";		
 					}
+				}
+				
+				function refresh ()
+				{
+					if (_attributes.hidden)
+					{
+						_elements["container"].style.display = "none";
+					}
+					else
+					{
+						_elements["container"].style.display = "block";
+					}	
 				}
 				
 				// ------------------------------------
@@ -12245,6 +12258,11 @@ var SNDK =
 						{
 							return _attributes[attribute];
 						}
+						
+						case "hidden":
+						{
+							return _attributes[attribute];				
+						}
 				
 						default:
 						{
@@ -12265,6 +12283,13 @@ var SNDK =
 							_attributes[attribute] = value;
 							break;
 						}
+						
+						case "hidden":
+						{
+							_attributes[attribute] = value;				
+							refresh ();
+							break;
+						}
 				
 						default:
 						{
@@ -12281,6 +12306,7 @@ var SNDK =
 			{
 				var count = _attributes.panels.length;
 				attributes.appendTo = _elements["container"];
+				attributes.parent = this;
 		
 				_attributes.panels[count] = new newPanel (attributes);
 											
@@ -12353,7 +12379,7 @@ var SNDK =
 					{
 						return _attributes[attribute];			
 					}
-		
+				
 					default:
 					{
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
@@ -12438,7 +12464,7 @@ var SNDK =
 						
 						break;
 					}
-							
+										
 					default:
 					{
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
@@ -15633,8 +15659,7 @@ var SNDK =
 						_elements["upload"] = new SNDK.SUI.button ({label: "Upload", width: "95px", stylesheet: "SUIButtonSmall"});
 						_elements["upload"].setAttribute ("onClick", image.upload)
 						_elements["layout1"].getPanel ("panel2").addUIElement (_elements["upload"]);
-						
-						
+									
 						break;
 					}
 				}					
