@@ -256,10 +256,10 @@ listview : function (attributes)
 			}				
 		}
 		
-		if (_temp.isDirty)
-			{
+		//if (_temp.isDirty)
+		//	{
 		setDimensions ();
-		}
+		//}
 
 		if (_temp.initialized)
 		{

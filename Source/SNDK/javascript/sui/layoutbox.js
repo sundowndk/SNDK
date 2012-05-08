@@ -410,7 +410,7 @@ layoutbox : function (attributes)
 			}
 			else
 			{
-				_elements["container"].style.display = "block";
+				_elements["container"].style.display = "block";							
 			}	
 		}
 		

@@ -3762,10 +3762,10 @@ var SNDK =
 					}				
 				}
 				
-				if (_temp.isDirty)
-					{
+				//if (_temp.isDirty)
+				//	{
 				setDimensions ();
-				}
+				//}
 		
 				if (_temp.initialized)
 				{
@@ -12190,7 +12190,7 @@ var SNDK =
 					}
 					else
 					{
-						_elements["container"].style.display = "block";
+						_elements["container"].style.display = "block";							
 					}	
 				}
 				
@@ -15509,7 +15509,7 @@ var SNDK =
 										};
 									};
 						
-					sConsole.modal.chooser.media ({type: "image", subType: "upload", path: "/media/scms/%%FILENAME%%%%EXTENSION%%", onDone: onDone});
+					sConsole.modal.chooser.media ({type: "image", subType: "upload", path: "/media/scms/%%FILENAME%%%%EXTENSION%%", mediatransformations: _attributes.options.mediatransformationids, onDone: onDone});
 				},
 				
 				onChange : function ()
@@ -15747,9 +15747,17 @@ var SNDK =
 			// ------------------------------------		
 			function setAttributes ()
 			{	
-				// Value
+				// VALUE
 				if (!_attributes.value)
 					_attributes.value = "";	
+					
+				// OPTIONS
+				if (!_attributes.options)
+					_attributes.options = new Array ();
+					
+				// OPTIONS.MEDIATRANSFORMATIONIDS
+				if (!_attributes.options.mediatransformationids)
+					_attributes.options.mediatransformationids = "";
 			}	
 			
 			// ------------------------------------
@@ -16379,7 +16387,7 @@ var SNDK =
 						
 						case "hashtable":
 						{
-							var hashtable = {};
+							var hashtable = new Array ();
 							
 							parseResponsRecursive (node.childNodes, hashtable);
 							
@@ -16584,17 +16592,55 @@ var SNDK =
 						{				
 							if (data[index].constructor == Array)
 							{
-		
-								//if (data[index].length > 0)
-								//{
-									document += "<"+ index +" type=\"list\">\n";	
-									for (var index2 in data[index]) 
+								
+								var islist = true;
+								for (index2 in data[index])
+								{
+									if (isNaN (index2))
 									{
-										document += "<item>\n";						
-										document = parseRequestRecursive (document, data[index][index2]);
-										document += "</item>\n";						
+										islist = false;
 									}
-									document += "</"+ index +">\n";					
+								}
+		
+								if (islist)
+								{
+										document += "<"+ index +" type=\"list\">\n";	
+										for (var index2 in data[index]) 
+										{
+											document += "<item>\n";						
+											document = parseRequestRecursive (document, data[index][index2]);
+											document += "</item>\n";						
+										}
+										document += "</"+ index +">\n";											
+								
+								}
+								else
+								{
+								document += "<"+ index +" type=\"hashtable\">\n";	
+										for (var index2 in data[index]) 
+										{
+											
+											document = parseRequestRecursive (document, data[index]);									
+										}
+										document += "</"+ index +">\n";																											
+								
+								}
+								
+																																					
+		
+		
+								
+		//							document += "<"+ index +" type=\"list\">\n";	
+		//							for (var index2 in data[index]) 
+		//							{
+		//								document += "<item>\n";						
+		//								document = parseRequestRecursive (document, data[index][index2]);
+		//								document += "</item>\n";						
+		//							}
+		//							document += "</"+ index +">\n";					
+									
+									
+									
 								//}
 								//else
 		//						{

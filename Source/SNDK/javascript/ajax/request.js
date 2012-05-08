@@ -164,7 +164,7 @@ request : function (application, applicationparam, applicationdatafield, request
 				
 				case "hashtable":
 				{
-					var hashtable = {};
+					var hashtable = new Array ();
 					
 					parseResponsRecursive (node.childNodes, hashtable);
 					
@@ -369,17 +369,55 @@ request : function (application, applicationparam, applicationdatafield, request
 				{				
 					if (data[index].constructor == Array)
 					{
-
-						//if (data[index].length > 0)
-						//{
-							document += "<"+ index +" type=\"list\">\n";	
-							for (var index2 in data[index]) 
+						
+						var islist = true;
+						for (index2 in data[index])
+						{
+							if (isNaN (index2))
 							{
-								document += "<item>\n";						
-								document = parseRequestRecursive (document, data[index][index2]);
-								document += "</item>\n";						
+								islist = false;
 							}
-							document += "</"+ index +">\n";					
+						}
+
+						if (islist)
+						{
+								document += "<"+ index +" type=\"list\">\n";	
+								for (var index2 in data[index]) 
+								{
+									document += "<item>\n";						
+									document = parseRequestRecursive (document, data[index][index2]);
+									document += "</item>\n";						
+								}
+								document += "</"+ index +">\n";											
+						
+						}
+						else
+						{
+						document += "<"+ index +" type=\"hashtable\">\n";	
+								for (var index2 in data[index]) 
+								{
+									
+									document = parseRequestRecursive (document, data[index]);									
+								}
+								document += "</"+ index +">\n";																											
+						
+						}
+						
+																																			
+
+
+						
+//							document += "<"+ index +" type=\"list\">\n";	
+//							for (var index2 in data[index]) 
+//							{
+//								document += "<item>\n";						
+//								document = parseRequestRecursive (document, data[index][index2]);
+//								document += "</item>\n";						
+//							}
+//							document += "</"+ index +">\n";					
+							
+							
+							
 						//}
 						//else
 //						{
