@@ -498,8 +498,8 @@ listview : function (attributes)
 			{			
 				continue;
 			}
-							
-			if (typeof(item[key]) == "object")
+						
+			if ((typeof(item[key]) == "object") && (column.visible == true))
 			{
 				value = "";
 				for (index2 in item[key])
