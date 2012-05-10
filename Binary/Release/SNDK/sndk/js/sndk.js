@@ -15387,7 +15387,23 @@ var SNDK =
 			this.getAttribute = functionGetAttribute;
 			this.dispose = functionDispose;
 			
+			// ------------------------------------
+			// STRING
+			// ------------------------------------		
+			var string =
+			{
+				onChange : function ()
+				{
+					if (_attributes.onChange != null)
+					{
+						setTimeout( function ()	{ _attributes.onChange (); }, 1);
+					}
+				}	
+			}
 			
+			// ------------------------------------
+			// LISTSTRING
+			// ------------------------------------		
 			var liststring =
 			{
 				add : function ()
@@ -15443,6 +15459,23 @@ var SNDK =
 				}
 			};	
 			
+			// ------------------------------------
+			// TEXT
+			// ------------------------------------		
+			var text =
+			{
+				onChange : function ()
+				{
+					if (_attributes.onChange != null)
+					{
+						setTimeout( function ()	{ _attributes.onChange (); }, 1);
+					}
+				}
+			}
+			
+			// ------------------------------------
+			// LINK
+			// ------------------------------------		
 			var link =
 			{
 				choose : function ()
@@ -15457,13 +15490,23 @@ var SNDK =
 									};
 			
 					sCMS.modal.chooser.page ({onDone: onDone});									
+				},
+				
+				onChange : function ()
+				{
+					if (_attributes.onChange != null)
+					{
+						setTimeout( function ()	{ _attributes.onChange (); }, 1);
+					}
 				}
 			}
 			
+			// ------------------------------------
+			// IMAGE
+			// ------------------------------------		
 			var image = 
 			{
-				value : null,
-				onChangeValue : null,
+				value : null,		
 				
 				set : function (value)
 				{
@@ -15514,10 +15557,10 @@ var SNDK =
 				
 				onChange : function ()
 				{		
-					if (image.onChangeValue != null)
-					{			
-						setTimeout( function ()	{ image.onChangeValue (); }, 1);
-					}		
+					if (_attributes.onChange != null)
+					{
+						setTimeout( function ()	{ _attributes.onChange (); }, 1);
+					}
 				}
 			}
 		
@@ -15557,6 +15600,8 @@ var SNDK =
 						_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "100%"});
 						_elements["content"].setAttribute ("value", _attributes.value);
 						_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
+						
+						_elements["content"].setAttribute ("onKeyUp", string.onChange);
 						break;
 					}		
 					
@@ -15620,6 +15665,9 @@ var SNDK =
 					
 						_elements["content"] = new SNDK.SUI.textarea ({tag: _attributes.tag, width: "100%", height: "100%", provider: "tinymce", providerConfig: providerconfig})				
 						_elements["content"].setAttribute ("value", _attributes.value);
+						_elements["content"].setAttribute ("onChange", text.onChange);
+						_elements["content"].setAttribute ("onKeyUp", text.onChange);
+						
 						_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 						break;
 					}		
@@ -15628,6 +15676,8 @@ var SNDK =
 					{
 						_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "90%"});
 						_elements["content"].setAttribute ("value", _attributes.value);
+						_elements["content"].settAttribute ("onChange", link.onChange ());
+						_elements["content"].settAttribute ("onKeyUp", link.onChange ());
 						_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 						
 						_elements["choose"] = new SNDK.SUI.button ({label: "Choose", width: "10%"});
@@ -15825,38 +15875,8 @@ var SNDK =
 		
 					case "onChange":
 					{
-						switch (_attributes.type)
-						{
-							case "string":
-							{
-								return _elements["content"].getAttribute ("onKeyUp");
-								break;					
-							}
-							
-							case "liststring":
-							{
-								return _attributes[attribute];
-								break;
-							}
-							
-							case "text":
-							{
-								return _elements["content"].getAttribute ("onKeyUp");
-								break;
-							}
-							
-							case "link":
-							{
-								return _elements["content"].getAttribute ("onKeyUp");
-								break;					
-							}
-							
-							case "image":
-							{
-								return image.onChangeValue;
-							
-							}
-						}								
+						return _attributes[attribute];
+						break;
 					}
 		
 					case "value":

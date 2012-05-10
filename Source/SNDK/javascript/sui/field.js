@@ -147,7 +147,7 @@ field : function (attributes)
 							};
 	
 			sCMS.modal.chooser.page ({onDone: onDone});									
-		}
+		},
 		
 		onChange : function ()
 		{
