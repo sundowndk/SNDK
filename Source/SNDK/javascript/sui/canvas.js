@@ -2,23 +2,19 @@
 // Canvas ([attributes])
 // -------------------------------------------------------------------------------------------------------------------------
 //
+// .refresh ()
+// .dispose ()
 // .addUIElement (uiElement);
-//
 // .getAttribute (string)
 // .setAttribute (string, string)
 //	
-// 	id 		get
-//	tag		get/set
+// 	id 			get
+//	tag			get/set
 //	stylesheet	get/set
 //	width		get/set
 //	height		get/set
 //	canScroll	get/set
 //
-// CHANGELOG:
-//
-// v1.00:
-//	- Initial release.
-
 /**
  * @constructor
  */
@@ -26,9 +22,11 @@ canvas : function (attributes)
 {
 	var _elements = new Array ();
 	var _attributes = attributes;				
-	var _temp = 	{ initialized: false,
-			  uiElements: new Array ()
-			};
+	
+	var _temp = 	{ 
+						initialized: false,
+			  			uiElements: new Array ()
+					};
 	
 	_attributes.id = SNDK.tools.newGuid ();
 	
@@ -41,7 +39,8 @@ canvas : function (attributes)
 	this._init = init;
 	
 	// Functions		
-	this.refresh = functionRefresh;		
+	this.refresh = functionRefresh;			
+	this.dispose = functionDispose;
 	this.addUIElement = functionAddUIElement;
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;	
@@ -97,6 +96,14 @@ canvas : function (attributes)
 		
 		setDimensions ();
 	}
+	
+	// ------------------------------------
+	// refresh
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
+	}
 				
 	// ------------------------------------
 	// setDefaultAttributes
@@ -105,8 +112,15 @@ canvas : function (attributes)
 	{
 		// Stylesheet
 		if (!_attributes.stylesheet) _attributes.stylesheet = "SUICanvas";	
+		
+		// Managed
+		if (!_attributes.managed)
+			_attributes.managed = false;				
 	
 		// Width
+		if (!_attributes.width) 
+			_attributes.width = "100%";				
+			
 		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
 			_attributes.widthType = "percent";
@@ -116,9 +130,12 @@ canvas : function (attributes)
 		{
 			_attributes.widthType = "pixel";
 			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
-		}						
+		}		
 		
 		// Height
+		if (!_attributes.height) 
+			_attributes.height = "100%";
+			
 		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{
 			_attributes.heightType = "percent";
@@ -128,7 +145,32 @@ canvas : function (attributes)
 		{
 			_attributes.heightType = "pixel";
 			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
-		}		
+		}
+				
+	
+		// Width
+//		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+//		{
+//			_attributes.widthType = "percent";
+//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
+//		}
+//		else
+//		{
+//			_attributes.widthType = "pixel";
+//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
+//		}						
+		
+		// Height
+//		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+//		{
+//			_attributes.heightType = "percent";
+//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
+//		}
+//		else
+//		{
+//			_attributes.heightType = "pixel";
+//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
+//		}		
 		
 		if (!_attributes.canScroll) 
 			_attributes.canScroll = false;
@@ -210,8 +252,16 @@ canvas : function (attributes)
 	function functionRefresh ()
 	{
 		refresh ();
-	}					
-
+	}			
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
+	}			
+					
 	// ------------------------------------
 	// addUIElement
 	// ------------------------------------							
@@ -227,26 +277,63 @@ canvas : function (attributes)
 								
 	// ------------------------------------
 	// getAttribute
-	// ------------------------------------						
+	// ------------------------------------								
 	function functionGetAttribute (attribute)
 	{
-		if (!_attributes[attribute])
+		switch (attribute)
 		{
-			var result;
-			
-			// Some attributes are attentions whores.
-			if (attribute == "width" || attribute == "height")
+			case "id":
 			{
-				result = _attributes[attribute] + _attributes[attribute + "Type"];
+				return _attributes[attribute];
 			}
-		
-			return _attributes[attribute];
-		}
-		else
-		{
-			throw "No attribute with the name '"+ attribute +"' exist in this object";
-		}
-	}
+			
+			case "tag":
+			{
+				return _attributes[attribute];
+			}
+			
+			case "stylesheet":
+			{
+				return _attributes[attribute];
+			}
+			
+			case "width":
+			{
+				if (_attributes.widthType == "percent")
+				{
+					return _attributes.width + "%";
+				}
+
+				if (_attributes.widthType == "pixel")
+				{
+					return _attributes.width + "px";
+				}
+			}
+			
+			case "height":
+			{
+				if (_attributes.heightType == "percent")
+				{
+					return _attributes.height + "%";
+				}
+
+				if (_attributes.heightType == "pixel")
+				{
+					return _attributes.height + "px";
+				}						
+			}
+			
+			case "canScroll":
+			{
+				return _attributes[attribute];			
+			}			
+								
+			default:
+			{
+				throw "No attribute with the name '"+ attribute +"' exist in this object";
+			}
+		}	
+	}	
 	
 	// ------------------------------------
 	// setAttribute
@@ -275,6 +362,80 @@ canvas : function (attributes)
 			throw "No attribute with the name '"+ attribute +"' exist in this object";
 		}
 	}	
+	
+	// ------------------------------------
+	// setAttribute
+	// ------------------------------------						
+	function functionSetAttribute (attribute, value)
+	{
+		switch (attribute)
+		{
+			case "id":
+			{
+				throw "Attribute with name ID is ready only.";
+				break;
+			}
+			
+			case "tag":
+			{
+				_attributes[attribute] = value;
+				break;
+			}
+			
+			case "stylesheet":
+			{
+				_attributes[attribute] = value;
+				break;				
+			}
+			
+			case "width":
+			{
+				if (value.substring (value.length, 3) == "%")
+				{
+					_attributes.widthType = "percent";
+					_attributes.width = value.substring (0, value.length - 1)			
+				}
+				else
+				{
+					_attributes.widthType = "pixel";
+					_attributes.width = value.substring (0, value.length - 2)
+				}	
+				
+				refresh ();
+				
+				break;			
+			}
+
+			case "height":
+			{
+				if (value.substring (value.length, 3) == "%")
+				{
+					_attributes.heightType = "percent";
+					_attributes.height = value.substring (0, value.length - 1)			
+				}
+				else
+				{
+					_attributes.heightType = "pixel";
+					_attributes.height = value.substring (0, value.length - 2)
+				}	
+				
+				refresh ();
+				
+				break;			
+			}
+			
+			case "canScroll":
+			{
+				_attributes[attribute] = value;					
+				break;
+			}			
+								
+			default:
+			{
+				throw "No attribute with the name '"+ attribute +"' exist in this object";
+			}
+		}	
+	}					
 
 	// ------------------------------------
 	// Events

@@ -77,6 +77,7 @@ iconview : function (attributes)
 	
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
 	
@@ -229,6 +230,11 @@ iconview : function (attributes)
 		{
 			drawItems ();
 		}
+	}
+	
+	function functionDispose ()
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}
 		
 	// ------------------------------------
@@ -786,6 +792,12 @@ iconview : function (attributes)
 			moveItem (index, index+1);
 		}	
 	}		
+							
+							
+	function functionDispose ()
+	{
+		dispose ();
+	}
 							
 	// ------------------------------------
 	// Events

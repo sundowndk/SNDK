@@ -62,6 +62,7 @@ upload : function (attributes)
 	
 	// Public functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;	
 							
@@ -195,6 +196,11 @@ upload : function (attributes)
 		
 		setDimensions ();
 	}	
+	
+	function Dispose ()
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
+	}
 	
 	// ------------------------------------
 	// updateCache
@@ -555,7 +561,12 @@ upload : function (attributes)
 				throw "No attribute with the name '"+ attribute +"' exist in this object";
 			}
 		}		
-	}					
+	}			
+	
+	function functionDispose ()
+	{
+		dispose ();
+	}		
 						
 	// ------------------------------------
 	// Events

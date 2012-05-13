@@ -42,6 +42,9 @@ container : function (attributes)
 	
 	// Functions				
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
+	this.addTitleBarUIElement = functionAddTitleBarUIElement;
+	this.getTitleBarUIElement = funcitonGetTitleBarUIElement;
 	this.addUIElement = functionAddUIElement;
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;
@@ -155,6 +158,14 @@ container : function (attributes)
 		
 		setDimensions ();
 	}			
+	
+	// ------------------------------------
+	// refresh
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
+	}
 	
 	// ------------------------------------
 	// updateCache
@@ -335,6 +346,14 @@ container : function (attributes)
 	{
 		refresh ();
 	}		
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
+	}				
 	
 	// ------------------------------------
 	// content

@@ -76,7 +76,8 @@ addInit : function (obj)
 							obj._init ();
 					
 							obj._temp.initialized = true;			
-
+							
+							window.removeEvent (window, 'SUIINIT', init);
 					
 						}
 					}

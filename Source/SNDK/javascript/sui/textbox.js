@@ -49,9 +49,9 @@ textbox : function (attributes)
 	
 	// Functions
 	this.refresh = functionRefresh;	
-	this.getAttribute = functionGetAttribute;
-	this.setAttribute = functionSetAttribute;
 	this.dispose = functionDispose;
+	this.getAttribute = functionGetAttribute;
+	this.setAttribute = functionSetAttribute;	
 		
 	// Construct
 	construct ();
@@ -113,9 +113,8 @@ textbox : function (attributes)
 	}		
 		
 	function functionDispose ()
-	{
-		
-	
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}
 		
 	// ------------------------------------

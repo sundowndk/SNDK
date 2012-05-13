@@ -54,6 +54,7 @@ layoutbox : function (attributes)
 	
 	// Functions		
 	this.refresh = functionRefresh;	
+	this.dispose = functionDispose;
 	this.addPanel = functionAddPanel;
 	this.getPanel = functionGetPanel;		
 	this.setAttribute = functionSetAttribute;
@@ -101,6 +102,14 @@ layoutbox : function (attributes)
 		}
 		
 		setDimensions ();
+	}
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
 	}
 	
 	// ------------------------------------
@@ -353,6 +362,14 @@ layoutbox : function (attributes)
 	{
 		refresh ();
 	}		
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
+	}	
 	
 	function newPanel (attributes)
 	{

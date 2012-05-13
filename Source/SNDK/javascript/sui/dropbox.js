@@ -63,6 +63,7 @@ dropbox : function (attributes)
 
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.addItem = functionAddItem;	
 	this.selectItemByTitle = functionSelectItemByTitle;
 	this.selectItemByValue = functionSelectItemByValue;
@@ -198,6 +199,11 @@ dropbox : function (attributes)
 		}
 			
 		setDimensions ();
+	}
+	
+	function functionDispose ()
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}
 	
 	// ------------------------------------
@@ -464,6 +470,11 @@ dropbox : function (attributes)
 	{
 		refresh ();
 	}	
+	
+	function functionDispose ()
+	{
+		dispose ();
+	}
 		
 	// ------------------------------------
 	// addItem

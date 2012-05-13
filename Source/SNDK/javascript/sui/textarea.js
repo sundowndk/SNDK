@@ -201,9 +201,10 @@ textarea : function (attributes)
 		window.addEvent (window, 'SUIREFRESH', refresh);																																			
 	}
 			
-	function functionDispose ()
+	function Dispose ()
 	{	
-		tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);
+		tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);			
+		window.removeEvent (window, 'SUIREFRESH', refresh);		
 	}
 			
 	// ------------------------------------
@@ -741,6 +742,11 @@ textarea : function (attributes)
 	{
 		refresh ();
 	}	
+	
+	function functionDispose ()
+	{
+		dispose ();
+	}
 		
 	// ------------------------------------
 	// getAttribute

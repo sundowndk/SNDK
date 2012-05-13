@@ -40,6 +40,7 @@ label : function (attributes)
 	
 	// Functions
 	this.refresh = functionRefresh;	
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
 		
@@ -99,6 +100,14 @@ label : function (attributes)
 		}
 		
 		setDimensions ();
+	}	
+
+	// ------------------------------------
+	// dispose
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
 	}	
 
 	// ------------------------------------
@@ -196,6 +205,14 @@ label : function (attributes)
 	{
 		refresh ();
 	}	
+		
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
+	}		
 		
 	// ------------------------------------
 	// getAttribute

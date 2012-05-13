@@ -93,6 +93,7 @@ listview : function (attributes)
 	
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;
 
@@ -295,6 +296,14 @@ listview : function (attributes)
 			}			
 		}
 	}
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
+	}		
 	
 	// ------------------------------------
 	// updateCache
@@ -1737,7 +1746,16 @@ listview : function (attributes)
 				throw "No attribute with the name '"+ attribute +"' exist in this object";
 			}
 		}	
-	}									
+	}						
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
+	}		
+					
 					
 	// ------------------------------------
 	// Events

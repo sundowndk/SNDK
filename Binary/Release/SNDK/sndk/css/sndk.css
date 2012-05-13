@@ -397,7 +397,7 @@ ContainerModal
 	float: 						left;
 		
 	width: 						14px;
-	height: 					51px;
+	height: 					71px;
 	
 	background: 				transparent url('images/containermodal/background1.png') no-repeat;	
 	background-position:		0px 0px;
@@ -407,10 +407,10 @@ ContainerModal
 {
 	float: 						left;
 		
-	height:						51px;
+	height:						71px;
 	
 	background: 				transparent url('images/containermodal/background1.png') repeat-x;	
-	background-position:		0px -51px;			
+	background-position:		0px -71px;			
 }
 
 .SUIContainerModal .TopRight
@@ -418,7 +418,7 @@ ContainerModal
 	float: 						left;
 			
 	width: 						14px;
-	height: 					51px;
+	height: 					71px;
 	
 	background: 				transparent url('images/containermodal/background1.png') no-repeat;	
 	background-position:		-14px 0px;
@@ -461,7 +461,7 @@ ContainerModal
 	height:						14px;	
 	
 	background: 				transparent url('images/containermodal/background1.png') no-repeat;	
-	background-position:		0px -102px;
+	background-position:		0px -142px;
 }
 
 .SUIContainerModal .BottomCenter
@@ -471,7 +471,7 @@ ContainerModal
 	height:						14px;
 
 	background: 				transparent url('images/containermodal/background1.png') repeat-x;	
-	background-position:		0px -116px;
+	background-position:		0px -156px;
 }
 
 .SUIContainerModal .BottomRight
@@ -482,7 +482,7 @@ ContainerModal
 	width: 						14px;	
 	
 	background: 				transparent url('images/containermodal/background1.png') no-repeat;	
-	background-position:		-14px -102px;
+	background-position:		-14px -142px;
 }
 
 /* --------------------------------------------------------------------------------------------------------------

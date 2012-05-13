@@ -2,16 +2,18 @@
 // button ([attributes])
 // -------------------------------------------------------------------------------------------------------------------------
 //
+// .refresh ()
+// .dispose ()
 // .getAttribute (string)
 // .setAttribute (string, string)
 //	
-// 	id 		get
-//	tag		get/set
+// 	id 			get
+//	tag			get/set
 //	stylesheet	get/set
-//	appendTo	get/set
-//	managed		get/set
 //	width		get/set
 //	height		get
+//	appendTo	get/set
+//	managed		get/set
 //	disabled	get/set
 //	focus		get/set
 //	onFocus		get/set
@@ -19,18 +21,6 @@
 //	onClick		get/set
 //	label		get/set
 //
-// CHANGELOG:
-//
-// v1.02:
-//	- Fixed dimension calculations, now works faster and percentage works correctly.
-//	- Added managed mode.
-//
-// v1.01: 
-//	- Fixed width caluclation. Now works with percentage.
-//	- Code cleanup.
-//
-// v1.00:
-//	- Initial release.
 /**
  * @constructor
  */
@@ -39,12 +29,13 @@ button : function (attributes)
 	var _elements = new Array ();			
 	var _attributes = attributes;				
 
-	var _temp = 	{ initialized: false,
-			  mouseDown: false,
-			  mouseOver: false,
-			  enterDown: false,
-			  cache: new Array ()
-			}	
+	var _temp = 	{ 
+						initialized: false,
+			  			mouseDown: false,
+			  			mouseOver: false,
+			  			enterDown: false,
+			  			cache: new Array ()
+					};
 	
 	_attributes.id = SNDK.tools.newGuid ();				
 	
@@ -58,6 +49,7 @@ button : function (attributes)
 				
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;	
 									
@@ -158,6 +150,14 @@ button : function (attributes)
 	}	
 	
 	// ------------------------------------
+	// dispose
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.addEvent (window, 'SUIREFRESH', refresh);				
+	}	
+	
+	// ------------------------------------
 	// updateCache
 	// ------------------------------------		
 	function updateCache ()
@@ -212,8 +212,7 @@ button : function (attributes)
 		if (!_attributes.focus)
 			_attributes.focus = false;
 	}
-	
-		
+			
 	// -------------------------------------
 	// setDimensions
 	// -------------------------------------
@@ -246,31 +245,31 @@ button : function (attributes)
 		}
 	}
 		
-	function setDimensions2 ()
-	{
-		if (_temp.initialized)
-		{
-			var containerwidth = SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]);
+//	function setDimensions2 ()
+//	{
+//		if (_temp.initialized)
+//		{
+//			var containerwidth = SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]);
 		
-			if (_attributes.widthType == "percent")
-			{								
+//			if (_attributes.widthType == "percent")
+//			{								
 	//			setTimeout (	function () 
 	//					{	
-							var parentwidth = SNDK.tools.getElementInnerWidth (_elements["container"].parentNode);							
-							var width = parentwidth - SNDK.tools.getElementStyledPadding (_elements["container"])["horizontal"] - containerwidth +"px";
+//							var parentwidth = SNDK.tools.getElementInnerWidth (_elements["container"].parentNode);							
+//							var width = parentwidth - SNDK.tools.getElementStyledPadding (_elements["container"])["horizontal"] - containerwidth +"px";
 													
-							_elements["center"].style.width = width;
+//							_elements["center"].style.width = width;
 	//					}, 0);						
-			}
-			else
-			{
-				var width = _attributes.width  - containerwidth +"px";
-
-				_elements["container"].style.width = _attributes.width +"px";
-				_elements["center"].style.width = width;
-			}		
-		}
-	}
+//			}
+//			else
+//			{
+//				var width = _attributes.width  - containerwidth +"px";
+//
+//				_elements["container"].style.width = _attributes.width +"px";
+//				_elements["center"].style.width = width;
+//			}		
+//		}
+//	}
 	
 	// ------------------------------------
 	// setFocus
@@ -324,6 +323,14 @@ button : function (attributes)
 	{
 		refresh ();
 	}		
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
+	}	
 		
 	// ------------------------------------
 	// getAttribute
@@ -534,8 +541,8 @@ button : function (attributes)
 				throw "No attribute with the name '"+ attribute +"' exist in this object";
 			}
 		}	
-	}			
-							
+	}				
+								
 	// ------------------------------------
 	// Events
 	// ------------------------------------

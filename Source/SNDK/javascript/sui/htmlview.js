@@ -77,6 +77,7 @@ htmlview : function (attributes)
 	
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
 	
@@ -203,6 +204,11 @@ htmlview : function (attributes)
 		}		
 
 		setDimensions ();
+	}
+	
+	function functionDispose ()
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}
 		
 	// ------------------------------------
@@ -532,7 +538,13 @@ htmlview : function (attributes)
 				throw "No attribute with the name '"+ attribute +"' exist in this object";
 			}
 		}	
-	}										
+	}									
+	
+		
+	function functionDispose ()
+	{
+		dispose ();
+	}	
 							
 	// ------------------------------------
 	// Events

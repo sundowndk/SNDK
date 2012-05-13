@@ -77,6 +77,7 @@ image : function (attributes)
 	
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
 	
@@ -193,6 +194,11 @@ image : function (attributes)
 		}		
 
 		setDimensions ();
+	}
+	
+	function functionDispose ()
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}
 		
 	// ------------------------------------
@@ -526,7 +532,12 @@ image : function (attributes)
 			}
 		}	
 	}										
-							
+					
+	function functionDispose ()
+	{
+		dispose ();
+	}							
+											
 	// ------------------------------------
 	// Events
 	// ------------------------------------					

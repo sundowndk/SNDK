@@ -52,6 +52,7 @@ checkbox : function (attributes)
 									
 	// Functions
 	this.refresh = functionRefresh;
+	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
 	this.setAttribute = functionSetAttribute;
 				
@@ -151,6 +152,11 @@ checkbox : function (attributes)
 				}
 			}										
 		}
+	}
+	
+	function functionDispose ()
+	{		
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}
 	
 	// ------------------------------------
@@ -460,7 +466,12 @@ checkbox : function (attributes)
 				throw "No attribute with the name '"+ attribute +"' exist in this object";
 			}
 		}		
-	}					
+	}		
+	
+	function functionDispose ()
+	{
+		dispose ();	
+	}			
 	
 	// ------------------------------------
 	// Events

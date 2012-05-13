@@ -57,6 +57,7 @@ tabview : function (attributes)
 	
 	// Functions		
 	this.refresh = functionRefresh;		
+	this.dispose = functionDispose;
 	this.addTab = functionAddTab;
 	this.getTab = functionGetTab;		
 	this.setAttribute = functionSetAttribute;
@@ -153,6 +154,14 @@ tabview : function (attributes)
 		changeTab (_temp.selectedTab);
 		setDimensions ();
 	}
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------			
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
+	}	
 	
 	// ------------------------------------
 	// updateCache
@@ -360,6 +369,14 @@ tabview : function (attributes)
 	function functionRefresh ()
 	{
 		refresh ();
+	}	
+	
+	// ------------------------------------
+	// dispose
+	// ------------------------------------				
+	function functionDispose ()
+	{
+		dispose ();
 	}					
 	
 	function newTab (attributes)

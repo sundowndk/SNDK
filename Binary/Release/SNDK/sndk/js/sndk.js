@@ -3599,6 +3599,7 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.setAttribute = functionSetAttribute;
 			this.getAttribute = functionGetAttribute;
 		
@@ -3801,6 +3802,14 @@ var SNDK =
 					}			
 				}
 			}
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}		
 			
 			// ------------------------------------
 			// updateCache
@@ -5243,7 +5252,16 @@ var SNDK =
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
 					}
 				}	
-			}									
+			}						
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}		
+							
 							
 			// ------------------------------------
 			// Events
@@ -5460,6 +5478,7 @@ var SNDK =
 											
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;
 						
@@ -5559,6 +5578,11 @@ var SNDK =
 						}
 					}										
 				}
+			}
+			
+			function functionDispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
 			
 			// ------------------------------------
@@ -5868,7 +5892,12 @@ var SNDK =
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
 					}
 				}		
-			}					
+			}		
+			
+			function functionDispose ()
+			{
+				dispose ();	
+			}			
 			
 			// ------------------------------------
 			// Events
@@ -5984,16 +6013,18 @@ var SNDK =
 		// button ([attributes])
 		// -------------------------------------------------------------------------------------------------------------------------
 		//
+		// .refresh ()
+		// .dispose ()
 		// .getAttribute (string)
 		// .setAttribute (string, string)
 		//	
-		// 	id 		get
-		//	tag		get/set
+		// 	id 			get
+		//	tag			get/set
 		//	stylesheet	get/set
-		//	appendTo	get/set
-		//	managed		get/set
 		//	width		get/set
 		//	height		get
+		//	appendTo	get/set
+		//	managed		get/set
 		//	disabled	get/set
 		//	focus		get/set
 		//	onFocus		get/set
@@ -6001,18 +6032,6 @@ var SNDK =
 		//	onClick		get/set
 		//	label		get/set
 		//
-		// CHANGELOG:
-		//
-		// v1.02:
-		//	- Fixed dimension calculations, now works faster and percentage works correctly.
-		//	- Added managed mode.
-		//
-		// v1.01: 
-		//	- Fixed width caluclation. Now works with percentage.
-		//	- Code cleanup.
-		//
-		// v1.00:
-		//	- Initial release.
 		/**
 		 * @constructor
 		 */
@@ -6021,12 +6040,13 @@ var SNDK =
 			var _elements = new Array ();			
 			var _attributes = attributes;				
 		
-			var _temp = 	{ initialized: false,
-					  mouseDown: false,
-					  mouseOver: false,
-					  enterDown: false,
-					  cache: new Array ()
-					}	
+			var _temp = 	{ 
+								initialized: false,
+					  			mouseDown: false,
+					  			mouseOver: false,
+					  			enterDown: false,
+					  			cache: new Array ()
+							};
 			
 			_attributes.id = SNDK.tools.newGuid ();				
 			
@@ -6040,6 +6060,7 @@ var SNDK =
 						
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;	
 											
@@ -6140,6 +6161,14 @@ var SNDK =
 			}	
 			
 			// ------------------------------------
+			// dispose
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.addEvent (window, 'SUIREFRESH', refresh);				
+			}	
+			
+			// ------------------------------------
 			// updateCache
 			// ------------------------------------		
 			function updateCache ()
@@ -6194,8 +6223,7 @@ var SNDK =
 				if (!_attributes.focus)
 					_attributes.focus = false;
 			}
-			
-				
+					
 			// -------------------------------------
 			// setDimensions
 			// -------------------------------------
@@ -6228,31 +6256,31 @@ var SNDK =
 				}
 			}
 				
-			function setDimensions2 ()
-			{
-				if (_temp.initialized)
-				{
-					var containerwidth = SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]);
+		//	function setDimensions2 ()
+		//	{
+		//		if (_temp.initialized)
+		//		{
+		//			var containerwidth = SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]);
 				
-					if (_attributes.widthType == "percent")
-					{								
+		//			if (_attributes.widthType == "percent")
+		//			{								
 			//			setTimeout (	function () 
 			//					{	
-									var parentwidth = SNDK.tools.getElementInnerWidth (_elements["container"].parentNode);							
-									var width = parentwidth - SNDK.tools.getElementStyledPadding (_elements["container"])["horizontal"] - containerwidth +"px";
+		//							var parentwidth = SNDK.tools.getElementInnerWidth (_elements["container"].parentNode);							
+		//							var width = parentwidth - SNDK.tools.getElementStyledPadding (_elements["container"])["horizontal"] - containerwidth +"px";
 															
-									_elements["center"].style.width = width;
+		//							_elements["center"].style.width = width;
 			//					}, 0);						
-					}
-					else
-					{
-						var width = _attributes.width  - containerwidth +"px";
-		
-						_elements["container"].style.width = _attributes.width +"px";
-						_elements["center"].style.width = width;
-					}		
-				}
-			}
+		//			}
+		//			else
+		//			{
+		//				var width = _attributes.width  - containerwidth +"px";
+		//
+		//				_elements["container"].style.width = _attributes.width +"px";
+		//				_elements["center"].style.width = width;
+		//			}		
+		//		}
+		//	}
 			
 			// ------------------------------------
 			// setFocus
@@ -6306,6 +6334,14 @@ var SNDK =
 			{
 				refresh ();
 			}		
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}	
 				
 			// ------------------------------------
 			// getAttribute
@@ -6516,8 +6552,8 @@ var SNDK =
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
 					}
 				}	
-			}			
-									
+			}				
+										
 			// ------------------------------------
 			// Events
 			// ------------------------------------
@@ -6744,6 +6780,7 @@ var SNDK =
 		
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.addItem = functionAddItem;	
 			this.selectItemByTitle = functionSelectItemByTitle;
 			this.selectItemByValue = functionSelectItemByValue;
@@ -6879,6 +6916,11 @@ var SNDK =
 				}
 					
 				setDimensions ();
+			}
+			
+			function functionDispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
 			
 			// ------------------------------------
@@ -7145,6 +7187,11 @@ var SNDK =
 			{
 				refresh ();
 			}	
+			
+			function functionDispose ()
+			{
+				dispose ();
+			}
 				
 			// ------------------------------------
 			// addItem
@@ -7703,6 +7750,7 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;
 			
@@ -7855,6 +7903,11 @@ var SNDK =
 				{
 					drawItems ();
 				}
+			}
+			
+			function functionDispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
 				
 			// ------------------------------------
@@ -8413,6 +8466,12 @@ var SNDK =
 				}	
 			}		
 									
+									
+			function functionDispose ()
+			{
+				dispose ();
+			}
+									
 			// ------------------------------------
 			// Events
 			// ------------------------------------					
@@ -8963,9 +9022,10 @@ var SNDK =
 				window.addEvent (window, 'SUIREFRESH', refresh);																																			
 			}
 					
-			function functionDispose ()
+			function Dispose ()
 			{	
-				tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);
+				tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);			
+				window.removeEvent (window, 'SUIREFRESH', refresh);		
 			}
 					
 			// ------------------------------------
@@ -9503,6 +9563,11 @@ var SNDK =
 			{
 				refresh ();
 			}	
+			
+			function functionDispose ()
+			{
+				dispose ();
+			}
 				
 			// ------------------------------------
 			// getAttribute
@@ -9942,9 +10007,9 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;	
-			this.getAttribute = functionGetAttribute;
-			this.setAttribute = functionSetAttribute;
 			this.dispose = functionDispose;
+			this.getAttribute = functionGetAttribute;
+			this.setAttribute = functionSetAttribute;	
 				
 			// Construct
 			construct ();
@@ -10006,9 +10071,8 @@ var SNDK =
 			}		
 				
 			function functionDispose ()
-			{
-				
-			
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
 				
 			// ------------------------------------
@@ -10640,6 +10704,7 @@ var SNDK =
 			
 			// Public functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;	
 									
@@ -10773,6 +10838,11 @@ var SNDK =
 				
 				setDimensions ();
 			}	
+			
+			function Dispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
+			}
 			
 			// ------------------------------------
 			// updateCache
@@ -11133,7 +11203,12 @@ var SNDK =
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
 					}
 				}		
-			}					
+			}			
+			
+			function functionDispose ()
+			{
+				dispose ();
+			}		
 								
 			// ------------------------------------
 			// Events
@@ -11290,6 +11365,7 @@ var SNDK =
 			
 			// Functions				
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.addUIElement = functionAddUIElement;
 			this.setAttribute = functionSetAttribute;
 			this.getAttribute = functionGetAttribute;
@@ -11403,6 +11479,14 @@ var SNDK =
 				
 				setDimensions ();
 			}			
+			
+			// ------------------------------------
+			// refresh
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}
 			
 			// ------------------------------------
 			// updateCache
@@ -11583,6 +11667,14 @@ var SNDK =
 			{
 				refresh ();
 			}		
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}				
 			
 			// ------------------------------------
 			// content
@@ -11834,6 +11926,7 @@ var SNDK =
 			
 			// Functions		
 			this.refresh = functionRefresh;	
+			this.dispose = functionDispose;
 			this.addPanel = functionAddPanel;
 			this.getPanel = functionGetPanel;		
 			this.setAttribute = functionSetAttribute;
@@ -11881,6 +11974,14 @@ var SNDK =
 				}
 				
 				setDimensions ();
+			}
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
 			}
 			
 			// ------------------------------------
@@ -12133,6 +12234,14 @@ var SNDK =
 			{
 				refresh ();
 			}		
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}	
 			
 			function newPanel (attributes)
 			{
@@ -12519,6 +12628,7 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;	
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;
 				
@@ -12578,6 +12688,14 @@ var SNDK =
 				}
 				
 				setDimensions ();
+			}	
+		
+			// ------------------------------------
+			// dispose
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
 			}	
 		
 			// ------------------------------------
@@ -12675,6 +12793,14 @@ var SNDK =
 			{
 				refresh ();
 			}	
+				
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}		
 				
 			// ------------------------------------
 			// getAttribute
@@ -12911,6 +13037,7 @@ var SNDK =
 			
 			// Functions		
 			this.refresh = functionRefresh;		
+			this.dispose = functionDispose;
 			this.addTab = functionAddTab;
 			this.getTab = functionGetTab;		
 			this.setAttribute = functionSetAttribute;
@@ -13007,6 +13134,14 @@ var SNDK =
 				changeTab (_temp.selectedTab);
 				setDimensions ();
 			}
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}	
 			
 			// ------------------------------------
 			// updateCache
@@ -13214,6 +13349,14 @@ var SNDK =
 			function functionRefresh ()
 			{
 				refresh ();
+			}	
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
 			}					
 			
 			function newTab (attributes)
@@ -13561,6 +13704,7 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;	
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;
 				
@@ -13621,6 +13765,11 @@ var SNDK =
 				
 				setDimensions ();
 			}	
+			
+			function functionDispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
+			}
 		
 			// ------------------------------------
 			// updateCache
@@ -13889,6 +14038,11 @@ var SNDK =
 				}	
 			}								
 			
+			function functionDispose ()
+			{
+				dispose ();
+			}
+			
 			// ------------------------------------
 			// Events
 			// ------------------------------------
@@ -13898,23 +14052,19 @@ var SNDK =
 		// Canvas ([attributes])
 		// -------------------------------------------------------------------------------------------------------------------------
 		//
+		// .refresh ()
+		// .dispose ()
 		// .addUIElement (uiElement);
-		//
 		// .getAttribute (string)
 		// .setAttribute (string, string)
 		//	
-		// 	id 		get
-		//	tag		get/set
+		// 	id 			get
+		//	tag			get/set
 		//	stylesheet	get/set
 		//	width		get/set
 		//	height		get/set
 		//	canScroll	get/set
 		//
-		// CHANGELOG:
-		//
-		// v1.00:
-		//	- Initial release.
-		
 		/**
 		 * @constructor
 		 */
@@ -13922,9 +14072,11 @@ var SNDK =
 		{
 			var _elements = new Array ();
 			var _attributes = attributes;				
-			var _temp = 	{ initialized: false,
-					  uiElements: new Array ()
-					};
+			
+			var _temp = 	{ 
+								initialized: false,
+					  			uiElements: new Array ()
+							};
 			
 			_attributes.id = SNDK.tools.newGuid ();
 			
@@ -13937,7 +14089,8 @@ var SNDK =
 			this._init = init;
 			
 			// Functions		
-			this.refresh = functionRefresh;		
+			this.refresh = functionRefresh;			
+			this.dispose = functionDispose;
 			this.addUIElement = functionAddUIElement;
 			this.setAttribute = functionSetAttribute;
 			this.getAttribute = functionGetAttribute;	
@@ -13993,6 +14146,14 @@ var SNDK =
 				
 				setDimensions ();
 			}
+			
+			// ------------------------------------
+			// refresh
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}
 						
 			// ------------------------------------
 			// setDefaultAttributes
@@ -14001,8 +14162,15 @@ var SNDK =
 			{
 				// Stylesheet
 				if (!_attributes.stylesheet) _attributes.stylesheet = "SUICanvas";	
+				
+				// Managed
+				if (!_attributes.managed)
+					_attributes.managed = false;				
 			
 				// Width
+				if (!_attributes.width) 
+					_attributes.width = "100%";				
+					
 				if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 				{
 					_attributes.widthType = "percent";
@@ -14012,9 +14180,12 @@ var SNDK =
 				{
 					_attributes.widthType = "pixel";
 					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
-				}						
+				}		
 				
 				// Height
+				if (!_attributes.height) 
+					_attributes.height = "100%";
+					
 				if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 				{
 					_attributes.heightType = "percent";
@@ -14024,7 +14195,32 @@ var SNDK =
 				{
 					_attributes.heightType = "pixel";
 					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
-				}		
+				}
+						
+			
+				// Width
+		//		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+		//		{
+		//			_attributes.widthType = "percent";
+		//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
+		//		}
+		//		else
+		//		{
+		//			_attributes.widthType = "pixel";
+		//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
+		//		}						
+				
+				// Height
+		//		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+		//		{
+		//			_attributes.heightType = "percent";
+		//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
+		//		}
+		//		else
+		//		{
+		//			_attributes.heightType = "pixel";
+		//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
+		//		}		
 				
 				if (!_attributes.canScroll) 
 					_attributes.canScroll = false;
@@ -14106,8 +14302,16 @@ var SNDK =
 			function functionRefresh ()
 			{
 				refresh ();
-			}					
-		
+			}			
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}			
+							
 			// ------------------------------------
 			// addUIElement
 			// ------------------------------------							
@@ -14123,26 +14327,63 @@ var SNDK =
 										
 			// ------------------------------------
 			// getAttribute
-			// ------------------------------------						
+			// ------------------------------------								
 			function functionGetAttribute (attribute)
 			{
-				if (!_attributes[attribute])
+				switch (attribute)
 				{
-					var result;
-					
-					// Some attributes are attentions whores.
-					if (attribute == "width" || attribute == "height")
+					case "id":
 					{
-						result = _attributes[attribute] + _attributes[attribute + "Type"];
+						return _attributes[attribute];
 					}
-				
-					return _attributes[attribute];
-				}
-				else
-				{
-					throw "No attribute with the name '"+ attribute +"' exist in this object";
-				}
-			}
+					
+					case "tag":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "stylesheet":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "width":
+					{
+						if (_attributes.widthType == "percent")
+						{
+							return _attributes.width + "%";
+						}
+		
+						if (_attributes.widthType == "pixel")
+						{
+							return _attributes.width + "px";
+						}
+					}
+					
+					case "height":
+					{
+						if (_attributes.heightType == "percent")
+						{
+							return _attributes.height + "%";
+						}
+		
+						if (_attributes.heightType == "pixel")
+						{
+							return _attributes.height + "px";
+						}						
+					}
+					
+					case "canScroll":
+					{
+						return _attributes[attribute];			
+					}			
+										
+					default:
+					{
+						throw "No attribute with the name '"+ attribute +"' exist in this object";
+					}
+				}	
+			}	
 			
 			// ------------------------------------
 			// setAttribute
@@ -14171,6 +14412,80 @@ var SNDK =
 					throw "No attribute with the name '"+ attribute +"' exist in this object";
 				}
 			}	
+			
+			// ------------------------------------
+			// setAttribute
+			// ------------------------------------						
+			function functionSetAttribute (attribute, value)
+			{
+				switch (attribute)
+				{
+					case "id":
+					{
+						throw "Attribute with name ID is ready only.";
+						break;
+					}
+					
+					case "tag":
+					{
+						_attributes[attribute] = value;
+						break;
+					}
+					
+					case "stylesheet":
+					{
+						_attributes[attribute] = value;
+						break;				
+					}
+					
+					case "width":
+					{
+						if (value.substring (value.length, 3) == "%")
+						{
+							_attributes.widthType = "percent";
+							_attributes.width = value.substring (0, value.length - 1)			
+						}
+						else
+						{
+							_attributes.widthType = "pixel";
+							_attributes.width = value.substring (0, value.length - 2)
+						}	
+						
+						refresh ();
+						
+						break;			
+					}
+		
+					case "height":
+					{
+						if (value.substring (value.length, 3) == "%")
+						{
+							_attributes.heightType = "percent";
+							_attributes.height = value.substring (0, value.length - 1)			
+						}
+						else
+						{
+							_attributes.heightType = "pixel";
+							_attributes.height = value.substring (0, value.length - 2)
+						}	
+						
+						refresh ();
+						
+						break;			
+					}
+					
+					case "canScroll":
+					{
+						_attributes[attribute] = value;					
+						break;
+					}			
+										
+					default:
+					{
+						throw "No attribute with the name '"+ attribute +"' exist in this object";
+					}
+				}	
+			}					
 		
 			// ------------------------------------
 			// Events
@@ -14256,6 +14571,7 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;
 			
@@ -14382,6 +14698,11 @@ var SNDK =
 				}		
 		
 				setDimensions ();
+			}
+			
+			function functionDispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
 				
 			// ------------------------------------
@@ -14711,7 +15032,13 @@ var SNDK =
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
 					}
 				}	
-			}										
+			}									
+			
+				
+			function functionDispose ()
+			{
+				dispose ();
+			}	
 									
 			// ------------------------------------
 			// Events
@@ -14847,6 +15174,7 @@ var SNDK =
 			
 			// Functions
 			this.refresh = functionRefresh;
+			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
 			this.setAttribute = functionSetAttribute;
 			
@@ -14963,6 +15291,11 @@ var SNDK =
 				}		
 		
 				setDimensions ();
+			}
+			
+			function functionDispose ()
+			{		
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
 				
 			// ------------------------------------
@@ -15296,7 +15629,12 @@ var SNDK =
 					}
 				}	
 			}										
-									
+							
+			function functionDispose ()
+			{
+				dispose ();
+			}							
+													
 			// ------------------------------------
 			// Events
 			// ------------------------------------					
@@ -16179,7 +16517,8 @@ var SNDK =
 									obj._init ();
 							
 									obj._temp.initialized = true;			
-		
+									
+									window.removeEvent (window, 'SUIINIT', init);
 							
 								}
 							}
