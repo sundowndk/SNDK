@@ -366,8 +366,17 @@ construct : function (attributes)
 					}
 				}
 			};	
-					
-	parser (root.childNodes, suiattributes.appendTo);
+		console.log (attributes.parent)				
+	if (attributes.parent)
+	{
+	
+	
+		parser (root.childNodes, attributes.parent);
+	}
+	else
+	{
+		parser (root.childNodes, suiattributes.appendTo);
+	}
 	
 	return elements;
 }

@@ -3443,8 +3443,17 @@ var SNDK =
 								}
 							}
 						};	
-								
-				parser (root.childNodes, suiattributes.appendTo);
+					console.log (attributes.parent)				
+				if (attributes.parent)
+				{
+				
+				
+					parser (root.childNodes, attributes.parent);
+				}
+				else
+				{
+					parser (root.childNodes, suiattributes.appendTo);
+				}
 				
 				return elements;
 			}
@@ -11366,6 +11375,8 @@ var SNDK =
 			// Functions				
 			this.refresh = functionRefresh;
 			this.dispose = functionDispose;
+			//this.addTitleBarUIElement = functionAddTitleBarUIElement;
+			//this.getTitleBarUIElement = funcitonGetTitleBarUIElement;
 			this.addUIElement = functionAddUIElement;
 			this.setAttribute = functionSetAttribute;
 			this.getAttribute = functionGetAttribute;
@@ -11406,6 +11417,9 @@ var SNDK =
 				// TopCenter
 				_elements["topcenter"] = SNDK.tools.newElement ("div", {className: "TopCenter", appendTo: _elements["top"]});
 				_elements["topcenter"].style.overflow = "hidden";
+				
+				// Titlebar
+				_elements["titlebar"] = SNDK.tools.newElement ("div", {className: "TitleBar", appendTo: _elements["topcenter"]});
 									
 				// TopRight
 				_elements["topright"] = SNDK.tools.newElement ("div", {className: "TopRight", appendTo: _elements["top"]});
@@ -11486,6 +11500,32 @@ var SNDK =
 			function dispose ()
 			{
 				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}
+			
+			function addTitleBarUIElement (type, attributes)
+			{
+				if (!attributes)
+					attributes = new Array ();
+					
+				attributes.appendTo = _elements["titlebar"];
+			
+				switch (type.toUpperCase ())
+				{
+					case "button":
+					{
+						var count = _temp.uiElements.length;
+				
+			 			_temp.uiElements[count] = new SNDK.SUI.button (attributes);
+			 		 		 			
+						break;
+					}						
+				}
+			}
+			
+			
+			function getTitleBarUIElement (tag)
+			{
+			
 			}
 			
 			// ------------------------------------
@@ -11675,6 +11715,16 @@ var SNDK =
 			{
 				dispose ();
 			}				
+			
+			function functionAddTitleBarUIElement (type, attributes)
+			{
+				addTitleBarUIElement (type)
+			}
+			
+			function functionGetTitleBarUIElement (tag)
+			{
+				return getTitleBarUIElement (tag);
+			}
 			
 			// ------------------------------------
 			// content

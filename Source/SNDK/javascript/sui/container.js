@@ -43,8 +43,8 @@ container : function (attributes)
 	// Functions				
 	this.refresh = functionRefresh;
 	this.dispose = functionDispose;
-	this.addTitleBarUIElement = functionAddTitleBarUIElement;
-	this.getTitleBarUIElement = funcitonGetTitleBarUIElement;
+	//this.addTitleBarUIElement = functionAddTitleBarUIElement;
+	//this.getTitleBarUIElement = funcitonGetTitleBarUIElement;
 	this.addUIElement = functionAddUIElement;
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;
@@ -85,6 +85,9 @@ container : function (attributes)
 		// TopCenter
 		_elements["topcenter"] = SNDK.tools.newElement ("div", {className: "TopCenter", appendTo: _elements["top"]});
 		_elements["topcenter"].style.overflow = "hidden";
+		
+		// Titlebar
+		_elements["titlebar"] = SNDK.tools.newElement ("div", {className: "TitleBar", appendTo: _elements["topcenter"]});
 							
 		// TopRight
 		_elements["topright"] = SNDK.tools.newElement ("div", {className: "TopRight", appendTo: _elements["top"]});
@@ -165,6 +168,32 @@ container : function (attributes)
 	function dispose ()
 	{
 		window.removeEvent (window, 'SUIREFRESH', refresh);				
+	}
+	
+	function addTitleBarUIElement (type, attributes)
+	{
+		if (!attributes)
+			attributes = new Array ();
+			
+		attributes.appendTo = _elements["titlebar"];
+	
+		switch (type.toUpperCase ())
+		{
+			case "button":
+			{
+				var count = _temp.uiElements.length;
+		
+	 			_temp.uiElements[count] = new SNDK.SUI.button (attributes);
+	 		 		 			
+				break;
+			}						
+		}
+	}
+	
+	
+	function getTitleBarUIElement (tag)
+	{
+	
 	}
 	
 	// ------------------------------------
@@ -354,6 +383,16 @@ container : function (attributes)
 	{
 		dispose ();
 	}				
+	
+	function functionAddTitleBarUIElement (type, attributes)
+	{
+		addTitleBarUIElement (type)
+	}
+	
+	function functionGetTitleBarUIElement (tag)
+	{
+		return getTitleBarUIElement (tag);
+	}
 	
 	// ------------------------------------
 	// content
