@@ -42,6 +42,7 @@ canvas : function (attributes)
 	this.refresh = functionRefresh;			
 	this.dispose = functionDispose;
 	this.addUIElement = functionAddUIElement;
+	this.getUIElement = functionGetUIElement;
 	this.setAttribute = functionSetAttribute;
 	this.getAttribute = functionGetAttribute;	
 	
@@ -273,6 +274,17 @@ canvas : function (attributes)
 	 		 	
 	 	element.setAttribute ("managed", true);
 	 	element.setAttribute ("appendTo", _elements["container"]);
+	}
+	
+	function functionGetUIElement (tag)
+	{
+		for (index in _temp.uiElements)
+		{
+			if (_temp.uiElements[index].getAttribute ("tag") == tag)
+			{
+				
+			}
+		}
 	}
 								
 	// ------------------------------------

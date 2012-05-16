@@ -19,6 +19,13 @@ ContainerModal
 	margin-top:					20px;		
 }
 
+.SUIContainerModal .TitleBar
+{
+	float:						right;
+	
+	margin-top:					20px;
+}
+
 .SUIContainerModal .Icon
 {
 	float:						left;

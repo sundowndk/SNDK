@@ -366,7 +366,7 @@ construct : function (attributes)
 					}
 				}
 			};	
-		console.log (attributes.parent)				
+			
 	if (attributes.parent)
 	{
 	

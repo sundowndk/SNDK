@@ -43,7 +43,7 @@ container : function (attributes)
 	// Functions				
 	this.refresh = functionRefresh;
 	this.dispose = functionDispose;
-	//this.addTitleBarUIElement = functionAddTitleBarUIElement;
+	this.addTitleBarUIElement = functionAddTitleBarUIElement;
 	//this.getTitleBarUIElement = funcitonGetTitleBarUIElement;
 	this.addUIElement = functionAddUIElement;
 	this.setAttribute = functionSetAttribute;
@@ -179,11 +179,13 @@ container : function (attributes)
 	
 		switch (type.toUpperCase ())
 		{
-			case "button":
+			case "BUTTON":
 			{
 				var count = _temp.uiElements.length;
 		
 	 			_temp.uiElements[count] = new SNDK.SUI.button (attributes);
+	 				 			
+	 			return _temp.uiElements[count];
 	 		 		 			
 				break;
 			}						
@@ -386,7 +388,7 @@ container : function (attributes)
 	
 	function functionAddTitleBarUIElement (type, attributes)
 	{
-		addTitleBarUIElement (type)
+		return addTitleBarUIElement (type, attributes)
 	}
 	
 	function functionGetTitleBarUIElement (tag)

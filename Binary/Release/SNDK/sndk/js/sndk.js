@@ -3443,7 +3443,7 @@ var SNDK =
 								}
 							}
 						};	
-					console.log (attributes.parent)				
+						
 				if (attributes.parent)
 				{
 				
@@ -11375,7 +11375,7 @@ var SNDK =
 			// Functions				
 			this.refresh = functionRefresh;
 			this.dispose = functionDispose;
-			//this.addTitleBarUIElement = functionAddTitleBarUIElement;
+			this.addTitleBarUIElement = functionAddTitleBarUIElement;
 			//this.getTitleBarUIElement = funcitonGetTitleBarUIElement;
 			this.addUIElement = functionAddUIElement;
 			this.setAttribute = functionSetAttribute;
@@ -11511,11 +11511,13 @@ var SNDK =
 			
 				switch (type.toUpperCase ())
 				{
-					case "button":
+					case "BUTTON":
 					{
 						var count = _temp.uiElements.length;
 				
 			 			_temp.uiElements[count] = new SNDK.SUI.button (attributes);
+			 				 			
+			 			return _temp.uiElements[count];
 			 		 		 			
 						break;
 					}						
@@ -11718,7 +11720,7 @@ var SNDK =
 			
 			function functionAddTitleBarUIElement (type, attributes)
 			{
-				addTitleBarUIElement (type)
+				return addTitleBarUIElement (type, attributes)
 			}
 			
 			function functionGetTitleBarUIElement (tag)
@@ -14142,6 +14144,7 @@ var SNDK =
 			this.refresh = functionRefresh;			
 			this.dispose = functionDispose;
 			this.addUIElement = functionAddUIElement;
+			this.getUIElement = functionGetUIElement;
 			this.setAttribute = functionSetAttribute;
 			this.getAttribute = functionGetAttribute;	
 			
@@ -14373,6 +14376,17 @@ var SNDK =
 			 		 	
 			 	element.setAttribute ("managed", true);
 			 	element.setAttribute ("appendTo", _elements["container"]);
+			}
+			
+			function functionGetUIElement (tag)
+			{
+				for (index in _temp.uiElements)
+				{
+					if (_temp.uiElements[index].getAttribute ("tag") == tag)
+					{
+						
+					}
+				}
 			}
 										
 			// ------------------------------------
