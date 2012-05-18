@@ -20,6 +20,7 @@
 //	onBlur		get/set
 //	onClick		get/set
 //	label		get/set
+//	tabIndex	get/set
 //
 /**
  * @constructor
@@ -48,6 +49,7 @@ button : function (attributes)
 	this._init = init;			
 				
 	// Functions
+	this.type = "BUTTON";
 	this.refresh = functionRefresh;
 	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
@@ -122,7 +124,7 @@ button : function (attributes)
 			}
 			else
 			{
-				_elements["container"].setAttribute("tabIndex", 0);	
+				//_elements["container"].setAttribute("tabIndex", 0);	
 				
 				if (_attributes.focus)
 				{
@@ -141,9 +143,15 @@ button : function (attributes)
 				{
 					_elements["container"].className = _attributes.stylesheet;
 				}
+				
+				_elements["container"].tabIndex = _attributes.tabIndex;
 			}	
 				
 			_elements["center"].innerHTML = _attributes.label;
+			
+			//console.log (_attributes.tabIndex)
+			
+			
 		}
 		
 		setDimensions ();
@@ -211,6 +219,10 @@ button : function (attributes)
 		// Focus	
 		if (!_attributes.focus)
 			_attributes.focus = false;
+			
+		// TabIndex
+		if (!_attributes.tabIndex)
+			_attributes.tabIndex = 0;
 	}
 			
 	// -------------------------------------
@@ -419,6 +431,11 @@ button : function (attributes)
 			{
 				return _attributes[attribute];			
 			}
+			
+			case "tabIndex":
+			{
+				return _attributes[attribute];
+			}
 					
 			default:
 			{
@@ -535,6 +552,13 @@ button : function (attributes)
 				refresh ();
 				break;
 			}
+			
+			case "tabIndex":
+			{
+				_attributes[attribute] = value;
+				refresh ();
+				break;
+			}			
 					
 			default:
 			{

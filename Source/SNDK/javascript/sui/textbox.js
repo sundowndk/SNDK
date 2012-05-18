@@ -23,6 +23,7 @@
 //		onChange		get/set
 //		onKeyUp			get/set
 //		value			get/set
+//		tabIndex		get/set
 //
 /**
  * @constructor
@@ -48,6 +49,7 @@ textbox : function (attributes)
 	
 	
 	// Functions
+	this.type = "TEXTBOX";
 	this.refresh = functionRefresh;	
 	this.dispose = functionDispose;
 	this.getAttribute = functionGetAttribute;
@@ -67,7 +69,7 @@ textbox : function (attributes)
 	// ------------------------------------			
 	function init ()
 	{
-		updateCache ();
+		updateCache ();		
 		
 		_attributes.heightType = "pixel";
 		_attributes.height = _temp.cache["containerPadding"]["vertical"] + _temp.cache["containerHeight"] +"px";		
@@ -123,7 +125,7 @@ textbox : function (attributes)
 	function refresh ()
 	{
 		if (_temp.initialized)
-		{	
+		{					
 			if (_attributes.disabled)
 			{
 				_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Disabled";														
@@ -134,12 +136,12 @@ textbox : function (attributes)
 			else
 			{
 				if (_attributes.focus)
-				{
-					_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Focus";
+				{				
+					_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Focus";					
 					setFocus ();
 				}
 				else
-				{
+				{				
 					_elements["container"].className = _attributes.stylesheet;
 				}
 
@@ -167,7 +169,9 @@ textbox : function (attributes)
 			if (_attributes.value != null)
 			{
 				_elements["input"].value = _attributes.value;
-			}							
+			}				
+			
+			_elements["input"].tabIndex = _attributes.tabIndex;									
 		}
 				
 		setDimensions ();	
@@ -256,6 +260,10 @@ textbox : function (attributes)
 		// Value
 		if (!_attributes.value)
 			_attributes.value = "";	
+			
+		// TabIndex
+		if (!_attributes.tabIndex)
+			_attributes.tabIndex = 0;
 	}		
 	
 	// ------------------------------------	
@@ -296,8 +304,8 @@ textbox : function (attributes)
 	// setFocus
 	// ------------------------------------				
 	function setFocus ()
-	{
-		setTimeout ( function () { _elements["input"].focus ();	}, 2);	
+	{	
+		setTimeout ( function () {  _attributes.focus = true; _elements["input"].focus (); }, 25);	
 	}	
 		
 	// ------------------------------------
@@ -443,6 +451,11 @@ textbox : function (attributes)
 			case "value":
 			{
 				return _attributes[attribute];			
+			}
+			
+			case "tabIndex":
+			{
+				return _attributes[attribute];
 			}
 					
 			default:
@@ -595,6 +608,12 @@ textbox : function (attributes)
 				}
 				break;
 			}
+			
+			case "tabIndex":
+			{
+				_attributes[attribute] = value;
+				refresh ();
+			}
 					
 			default:
 			{
@@ -634,7 +653,7 @@ textbox : function (attributes)
 	function eventOnFocus ()
 	{
 		if (!_attributes.disabled)
-		{
+		{		
 			if (!_attributes.focus)
 			{
 				_attributes.focus = true;				

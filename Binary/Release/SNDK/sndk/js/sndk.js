@@ -4571,7 +4571,7 @@ var SNDK =
 			// ------------------------------------				
 			function setFocus ()
 			{
-				setTimeout ( function () { _elements["contentcenter"].focus (); }, 2);	
+				setTimeout ( function () { _attributes.focus = true;  _elements["contentcenter"].focus (); }, 20);	
 			}		
 				
 			// ------------------------------------
@@ -6040,6 +6040,7 @@ var SNDK =
 		//	onBlur		get/set
 		//	onClick		get/set
 		//	label		get/set
+		//	tabIndex	get/set
 		//
 		/**
 		 * @constructor
@@ -6068,6 +6069,7 @@ var SNDK =
 			this._init = init;			
 						
 			// Functions
+			this.type = "BUTTON";
 			this.refresh = functionRefresh;
 			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
@@ -6142,7 +6144,7 @@ var SNDK =
 					}
 					else
 					{
-						_elements["container"].setAttribute("tabIndex", 0);	
+						//_elements["container"].setAttribute("tabIndex", 0);	
 						
 						if (_attributes.focus)
 						{
@@ -6161,9 +6163,15 @@ var SNDK =
 						{
 							_elements["container"].className = _attributes.stylesheet;
 						}
+						
+						_elements["container"].tabIndex = _attributes.tabIndex;
 					}	
 						
 					_elements["center"].innerHTML = _attributes.label;
+					
+					//console.log (_attributes.tabIndex)
+					
+					
 				}
 				
 				setDimensions ();
@@ -6231,6 +6239,10 @@ var SNDK =
 				// Focus	
 				if (!_attributes.focus)
 					_attributes.focus = false;
+					
+				// TabIndex
+				if (!_attributes.tabIndex)
+					_attributes.tabIndex = 0;
 			}
 					
 			// -------------------------------------
@@ -6439,6 +6451,11 @@ var SNDK =
 					{
 						return _attributes[attribute];			
 					}
+					
+					case "tabIndex":
+					{
+						return _attributes[attribute];
+					}
 							
 					default:
 					{
@@ -6555,6 +6572,13 @@ var SNDK =
 						refresh ();
 						break;
 					}
+					
+					case "tabIndex":
+					{
+						_attributes[attribute] = value;
+						refresh ();
+						break;
+					}			
 							
 					default:
 					{
@@ -9990,6 +10014,7 @@ var SNDK =
 		//		onChange		get/set
 		//		onKeyUp			get/set
 		//		value			get/set
+		//		tabIndex		get/set
 		//
 		/**
 		 * @constructor
@@ -10015,6 +10040,7 @@ var SNDK =
 			
 			
 			// Functions
+			this.type = "TEXTBOX";
 			this.refresh = functionRefresh;	
 			this.dispose = functionDispose;
 			this.getAttribute = functionGetAttribute;
@@ -10034,7 +10060,7 @@ var SNDK =
 			// ------------------------------------			
 			function init ()
 			{
-				updateCache ();
+				updateCache ();		
 				
 				_attributes.heightType = "pixel";
 				_attributes.height = _temp.cache["containerPadding"]["vertical"] + _temp.cache["containerHeight"] +"px";		
@@ -10090,7 +10116,7 @@ var SNDK =
 			function refresh ()
 			{
 				if (_temp.initialized)
-				{	
+				{					
 					if (_attributes.disabled)
 					{
 						_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Disabled";														
@@ -10101,12 +10127,12 @@ var SNDK =
 					else
 					{
 						if (_attributes.focus)
-						{
-							_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Focus";
+						{				
+							_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Focus";					
 							setFocus ();
 						}
 						else
-						{
+						{				
 							_elements["container"].className = _attributes.stylesheet;
 						}
 		
@@ -10134,7 +10160,9 @@ var SNDK =
 					if (_attributes.value != null)
 					{
 						_elements["input"].value = _attributes.value;
-					}							
+					}				
+					
+					_elements["input"].tabIndex = _attributes.tabIndex;									
 				}
 						
 				setDimensions ();	
@@ -10223,6 +10251,10 @@ var SNDK =
 				// Value
 				if (!_attributes.value)
 					_attributes.value = "";	
+					
+				// TabIndex
+				if (!_attributes.tabIndex)
+					_attributes.tabIndex = 0;
 			}		
 			
 			// ------------------------------------	
@@ -10263,8 +10295,8 @@ var SNDK =
 			// setFocus
 			// ------------------------------------				
 			function setFocus ()
-			{
-				setTimeout ( function () { _elements["input"].focus ();	}, 2);	
+			{	
+				setTimeout ( function () {  _attributes.focus = true; _elements["input"].focus (); }, 25);	
 			}	
 				
 			// ------------------------------------
@@ -10410,6 +10442,11 @@ var SNDK =
 					case "value":
 					{
 						return _attributes[attribute];			
+					}
+					
+					case "tabIndex":
+					{
+						return _attributes[attribute];
 					}
 							
 					default:
@@ -10562,6 +10599,12 @@ var SNDK =
 						}
 						break;
 					}
+					
+					case "tabIndex":
+					{
+						_attributes[attribute] = value;
+						refresh ();
+					}
 							
 					default:
 					{
@@ -10601,7 +10644,7 @@ var SNDK =
 			function eventOnFocus ()
 			{
 				if (!_attributes.disabled)
-				{
+				{		
 					if (!_attributes.focus)
 					{
 						_attributes.focus = true;				

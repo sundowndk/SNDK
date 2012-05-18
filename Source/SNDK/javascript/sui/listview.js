@@ -1056,7 +1056,7 @@ listview : function (attributes)
 	// ------------------------------------				
 	function setFocus ()
 	{
-		setTimeout ( function () { _elements["contentcenter"].focus (); }, 2);	
+		setTimeout ( function () { _attributes.focus = true;  _elements["contentcenter"].focus (); }, 20);	
 	}		
 		
 	// ------------------------------------
