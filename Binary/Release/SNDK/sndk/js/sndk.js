@@ -3626,6 +3626,7 @@ var SNDK =
 		//	this.removeAllItems = functionRemoveAllItems;
 			this.moveItemUp = functionMoveItemUp;
 			this.moveItemDown = functionMoveItemDown;
+			this.canItemMove = functionCanItemMove;
 		//	this.canItemMove = functionCanItemMove;
 		
 						
