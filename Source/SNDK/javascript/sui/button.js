@@ -162,7 +162,7 @@ button : function (attributes)
 	// ------------------------------------			
 	function dispose ()
 	{
-		window.addEvent (window, 'SUIREFRESH', refresh);				
+		window.removeEvent (window, 'SUIREFRESH', refresh);				
 	}	
 	
 	// ------------------------------------

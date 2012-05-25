@@ -2,6 +2,8 @@
 // dropbox ([attributes])
 // -------------------------------------------------------------------------------------------------------------------------
 //
+// .dispose ()
+
 // .addItem ({label, value})
 //
 // .getAttribute (string)
@@ -61,7 +63,9 @@ dropbox : function (attributes)
 	this._temp = _temp;	
 	this._init = init;
 
-	// Functions
+
+	// Functions		
+	this.type = "DROPBOX";
 	this.refresh = functionRefresh;
 	this.dispose = functionDispose;
 	this.addItem = functionAddItem;	
@@ -201,9 +205,14 @@ dropbox : function (attributes)
 		setDimensions ();
 	}
 	
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh)
+	}
+	
 	function functionDispose ()
 	{		
-		window.removeEvent (window, 'SUIREFRESH', refresh);	
+		dispose ();
 	}
 	
 	// ------------------------------------

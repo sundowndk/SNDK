@@ -6183,7 +6183,7 @@ var SNDK =
 			// ------------------------------------			
 			function dispose ()
 			{
-				window.addEvent (window, 'SUIREFRESH', refresh);				
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
 			}	
 			
 			// ------------------------------------
@@ -6753,6 +6753,8 @@ var SNDK =
 		// dropbox ([attributes])
 		// -------------------------------------------------------------------------------------------------------------------------
 		//
+		// .dispose ()
+		
 		// .addItem ({label, value})
 		//
 		// .getAttribute (string)
@@ -6812,7 +6814,9 @@ var SNDK =
 			this._temp = _temp;	
 			this._init = init;
 		
-			// Functions
+		
+			// Functions		
+			this.type = "DROPBOX";
 			this.refresh = functionRefresh;
 			this.dispose = functionDispose;
 			this.addItem = functionAddItem;	
@@ -6952,9 +6956,14 @@ var SNDK =
 				setDimensions ();
 			}
 			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh)
+			}
+			
 			function functionDispose ()
 			{		
-				window.removeEvent (window, 'SUIREFRESH', refresh);	
+				dispose ();
 			}
 			
 			// ------------------------------------
