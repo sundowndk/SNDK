@@ -201,9 +201,9 @@ textarea : function (attributes)
 		window.addEvent (window, 'SUIREFRESH', refresh);																																			
 	}
 			
-	function Dispose ()
+	function dispose ()
 	{	
-		tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);			
+		//tinyMCE.execCommand('mceRemoveControl', true, _temp.tinymceId);			
 		window.removeEvent (window, 'SUIREFRESH', refresh);		
 	}
 			

@@ -333,8 +333,8 @@ field : function (attributes)
 			{
 				_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "90%"});
 				_elements["content"].setAttribute ("value", _attributes.value);
-				_elements["content"].settAttribute ("onChange", link.onChange ());
-				_elements["content"].settAttribute ("onKeyUp", link.onChange ());
+				_elements["content"].setAttribute ("onChange", link.onChange ());
+				_elements["content"].setAttribute ("onKeyUp", link.onChange ());
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 				
 				_elements["choose"] = new SNDK.SUI.button ({label: "Choose", width: "10%"});
