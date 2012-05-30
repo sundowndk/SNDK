@@ -691,7 +691,7 @@ textbox : function (attributes)
 	// onChange
 	// ------------------------------------			
 	function eventOnChange ()
-	{
+	{	
 		_attributes.value = _elements["input"].value;
 	
 		if (_attributes.onChange != null)

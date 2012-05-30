@@ -256,6 +256,9 @@ field : function (attributes)
 			{
 				_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "100%"});
 				_elements["content"].setAttribute ("value", _attributes.value);
+				_elements["content"].setAttribute ("onChange", string.onChange);
+				_elements["content"].setAttribute ("onKeyUp", string.onChange);
+				
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 				
 				_elements["content"].setAttribute ("onKeyUp", string.onChange);
@@ -333,11 +336,12 @@ field : function (attributes)
 			{
 				_elements["content"] = new SNDK.SUI.textbox ({tag: _attributes.tag, width: "90%"});
 				_elements["content"].setAttribute ("value", _attributes.value);
-				_elements["content"].setAttribute ("onChange", link.onChange ());
-				_elements["content"].setAttribute ("onKeyUp", link.onChange ());
+				_elements["content"].setAttribute ("onChange", link.onChange);
+				_elements["content"].setAttribute ("onKeyUp", link.onChange);
+								
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["content"]);		
 				
-				_elements["choose"] = new SNDK.SUI.button ({label: "Choose", width: "10%"});
+				_elements["choose"] = new SNDK.SUI.button ({label: "Select", width: "10%"});
 				_elements["choose"].setAttribute ("onClick", link.choose);				
 				_elements["container"].getPanel ("containerpanel").addUIElement (_elements["choose"]);		
 				
@@ -533,7 +537,6 @@ field : function (attributes)
 			case "onChange":
 			{
 				return _attributes[attribute];
-				break;
 			}
 
 			case "value":
@@ -555,26 +558,22 @@ field : function (attributes)
 							result += items[index].value +"\n";
 						}
 					
-						return result;
-						break;
+						return result;						
 					}
 					
 					case "text":
 					{
-						return _elements["content"].getAttribute ("value");
-						break;
+						return _elements["content"].getAttribute ("value");						
 					}
 					
 					case "link":
 					{
-						return _elements["content"].getAttribute ("value");
-						break;
+						return _elements["content"].getAttribute ("value");						
 					}
 					
 					case "image":
 					{				
-						return image.get ();		
-						break;
+						return image.get ();								
 					}
 				}				
 			}			
@@ -662,40 +661,44 @@ field : function (attributes)
 
 			case "onChange":
 			{
-				switch (_attributes.type)
-				{
-					case "string":
-					{						
-						_elements["content"].setAttribute ("onKeyUp", value);
-						break;					
-					}
+//				switch (_attributes.type)
+//				{
+//					case "string":
+//					{						
+//						_attributes[attribute] = value;
+//						_elements["content"].setAttribute ("onKeyUp", value);
+//						break;					
+	//				}
 					
-					case "liststring":
-					{
-						_attributes[attribute] = value;
-						break;
-					}
+//					case "liststring":
+//					{
+//						_attributes[attribute] = value;
+//						break;
+//					}
 					
-					case "text":
-					{
-						_elements["content"].setAttribute ("onChange", value);
-						_elements["content"].setAttribute ("onKeyUp", value);
-						break;
-					}
+//					case "text":
+//					{
+//						_attributes[attribute] = value;
+//						_elements["content"].setAttribute ("onChange", value);
+//						_elements["content"].setAttribute ("onKeyUp", value);
+//						break;
+//					}
 					
-					case "link":
-					{						
-						_elements["content"].setAttribute ("onKeyUp", value);
-						break;					
-					}
+//					case "link":
+//					{						
+						//_elements["content"].setAttribute ("onKeyUp", value);
+//						_attributes[attribute] = value;
+//						break;					
+//					}
 					
-					case "image":
-					{
-						image.onChangeValue = value;
-						break;
-					}
-				}								
-							
+//					case "image":
+//					{
+//						image.onChangeValue = value;
+//						break;
+//					}
+//				}								
+
+				_attributes[attribute] = value;						
 				break;
 			}
 
