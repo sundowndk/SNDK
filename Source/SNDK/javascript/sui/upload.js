@@ -197,7 +197,7 @@ upload : function (attributes)
 		setDimensions ();
 	}	
 	
-	function Dispose ()
+	function dispose ()
 	{		
 		window.removeEvent (window, 'SUIREFRESH', refresh);	
 	}

@@ -5590,9 +5590,14 @@ var SNDK =
 				}
 			}
 			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
+			}
+			
 			function functionDispose ()
 			{		
-				window.removeEvent (window, 'SUIREFRESH', refresh);	
+				dispose ();
 			}
 			
 			// ------------------------------------
@@ -10901,7 +10906,7 @@ var SNDK =
 				setDimensions ();
 			}	
 			
-			function Dispose ()
+			function dispose ()
 			{		
 				window.removeEvent (window, 'SUIREFRESH', refresh);	
 			}
@@ -14817,9 +14822,14 @@ var SNDK =
 				setDimensions ();
 			}
 			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
+			}
+			
 			function functionDispose ()
 			{		
-				window.removeEvent (window, 'SUIREFRESH', refresh);	
+				dispose ();
 			}
 				
 			// ------------------------------------
@@ -15410,9 +15420,14 @@ var SNDK =
 				setDimensions ();
 			}
 			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);	
+			}
+			
 			function functionDispose ()
 			{		
-				window.removeEvent (window, 'SUIREFRESH', refresh);	
+				dispose ();
 			}
 				
 			// ------------------------------------
@@ -16915,7 +16930,7 @@ var SNDK =
 					var xmldata = "";					
 					//xmldata += "<?xml version='1.0' encoding='ISO-8859-1'?>";
 					xmldata += "<ajax>\n";			
-					
+											
 					xmldata = parseRequestRecursive (xmldata, data);			
 								
 					xmldata += "</ajax>\n";			
@@ -17019,7 +17034,7 @@ var SNDK =
 			}
 			
 			function parseRequestRecursive (document, data)
-			{	
+			{				
 				for (var index in data)
 				{
 				 
@@ -17049,7 +17064,7 @@ var SNDK =
 						
 										
 						case "boolean":
-						{					
+						{								
 							document += "<"+ index +" type=\"boolean\">\n";
 							document += "<![CDATA[";
 							if (data[index] == true)
@@ -17095,38 +17110,18 @@ var SNDK =
 								}
 								else
 								{
-								document += "<"+ index +" type=\"hashtable\">\n";	
-										for (var index2 in data[index]) 
-										{
+									document += "<"+ index +" type=\"hashtable\">\n";	
+																		
+										
+										//for (var index2 in data[index]) 
+										//{
+										//console.log (data[index])
 											
-											document = parseRequestRecursive (document, data[index]);									
-										}
+											document = parseRequestRecursive (document, data[index]);
+										//}
 										document += "</"+ index +">\n";																											
 								
 								}
-								
-																																					
-		
-		
-								
-		//							document += "<"+ index +" type=\"list\">\n";	
-		//							for (var index2 in data[index]) 
-		//							{
-		//								document += "<item>\n";						
-		//								document = parseRequestRecursive (document, data[index][index2]);
-		//								document += "</item>\n";						
-		//							}
-		//							document += "</"+ index +">\n";					
-									
-									
-									
-								//}
-								//else
-		//						{
-			//						document += "<"+ index +" type=\"object\">\n";
-				//					document = parseRequestRecursive (document, data[index]);
-					//				document += "</"+ index +">\n";						
-						//		}
 							}
 							else if (data[index].constructor == Object)
 							{

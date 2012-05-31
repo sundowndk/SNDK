@@ -206,9 +206,14 @@ htmlview : function (attributes)
 		setDimensions ();
 	}
 	
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
+	}
+	
 	function functionDispose ()
 	{		
-		window.removeEvent (window, 'SUIREFRESH', refresh);	
+		dispose ();
 	}
 		
 	// ------------------------------------

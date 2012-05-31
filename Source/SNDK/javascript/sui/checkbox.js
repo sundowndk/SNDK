@@ -154,9 +154,14 @@ checkbox : function (attributes)
 		}
 	}
 	
+	function dispose ()
+	{
+		window.removeEvent (window, 'SUIREFRESH', refresh);	
+	}
+	
 	function functionDispose ()
 	{		
-		window.removeEvent (window, 'SUIREFRESH', refresh);	
+		dispose ();
 	}
 	
 	// ------------------------------------
