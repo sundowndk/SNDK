@@ -16,6 +16,7 @@
 //		disabled		get/set
 //		autoComplete	get/set
 //		readOnly		get/set
+//		transform		get/set
 //		focus			get/set
 //		password		get/set
 //		onFocus			get/set
@@ -101,15 +102,22 @@ textbox : function (attributes)
 		{
 			type = "password";
 		}
-		
+				
 		_elements["input"] = SNDK.tools.newElement ("input", {className: "Input", type: type, appendTo: _elements["center"]});
 		_elements["input"].setAttribute ("name", _attributes.name);
+		
+		if (_attributes.textTransform)
+		{
+			_elements["input"].style.textTransform = _attributes.textTransform;					
+		}
+
 															
 		// Hook Events
 		_elements["input"].onfocus = eventOnFocus;
 		_elements["input"].onblur = eventOnBlur;
 		_elements["input"].onchange = eventOnChange;
 		_elements["input"].onkeyup = eventOnKeyUp;	
+		_elements["input"].onkeypress = eventOnKeyPress;
 		
 		window.addEvent (window, 'SUIREFRESH', refresh);						
 	}		
@@ -244,6 +252,10 @@ textbox : function (attributes)
 		// Password
 		if (!_attributes.password)
 			_attributes.password = false;
+			
+		// textTransform
+		if (!_attributes.textTransform)
+			_attributes.textTransform = "none";
 
 		// onFocus
 		if (!_attributes.onFocus)
@@ -427,6 +439,11 @@ textbox : function (attributes)
 			{
 				return _attributes[attribute];			
 			}
+			
+			case "textTransform":
+			{
+				return _attributes[attribute];			
+			}
 
 			case "onFocus":
 			{
@@ -573,6 +590,13 @@ textbox : function (attributes)
 				refresh ();
 				break;
 			}
+			
+			case "textTransform":
+			{
+				_attributes[attribute] = value;
+				refresh ();
+				break;
+			}
 
 			case "onFocus":
 			{
@@ -625,7 +649,26 @@ textbox : function (attributes)
 	// ------------------------------------
 	// Events
 	// ------------------------------------
-	// ------------------------------------		
+	// ------------------------------------	
+	
+	// ------------------------------------
+	// eventOnKeyPress
+	// ------------------------------------			
+	function eventOnKeyPress (event)
+	{
+		_attributes.value = _elements["input"].value;			
+		
+						
+		switch (_attributes.textTransform.toLowerCase ())
+		{
+			case "uppercase":
+			{
+				_elements["input"].value = _attributes.value.toUpperCase ();
+				break;
+			}
+		}				
+	}
+	
 	// ------------------------------------
 	// onKeyUp
 	// ------------------------------------	
@@ -635,7 +678,7 @@ textbox : function (attributes)
 			
 		result = keyHandler (event);				
 				
-		_attributes.value = _elements["input"].value;				
+		//_attributes.value = _elements["input"].value;				
 					
 		if (_attributes.onKeyUp != null)
 		{
