@@ -23,6 +23,7 @@
 //		onBlur			get/set
 //		onChange		get/set
 //		onKeyUp			get/set
+//		onEnter			get/set
 //		value			get/set
 //		tabIndex		get/set
 //
@@ -268,6 +269,10 @@ textbox : function (attributes)
 		// onChange
 		if (!_attributes.onChange)
 			_attributes.onChange = null;
+			
+		// onEnter
+		if (!_attributes.onEnter)
+			_attributes.onEnter = null;
 								
 		// Value
 		if (!_attributes.value)
@@ -339,6 +344,8 @@ textbox : function (attributes)
 		{
 			key = event.which;	
 		}
+		
+		return key;
 	}		
 	
 	// ------------------------------------
@@ -463,6 +470,11 @@ textbox : function (attributes)
 			case "onKeyUp":
 			{
 				return _attributes[attribute];			
+			}
+			
+			case "onEnter":
+			{
+				return _attributes[attribute];
 			}
 
 			case "value":
@@ -621,6 +633,12 @@ textbox : function (attributes)
 				_attributes[attribute] = value;
 				break;
 			}
+			
+			case "onEnter":
+			{
+				_attributes[attribute] = value;
+				break;
+			}
 
 			case "value":
 			{
@@ -657,12 +675,12 @@ textbox : function (attributes)
 	function eventOnKeyPress (event)
 	{
 		_attributes.value = _elements["input"].value;			
-		
-						
+								
 		switch (_attributes.textTransform.toLowerCase ())
 		{
 			case "uppercase":
 			{
+				_attributes.value = _attributes.value.toUpperCase ();
 				_elements["input"].value = _attributes.value.toUpperCase ();
 				break;
 			}
@@ -676,14 +694,25 @@ textbox : function (attributes)
 	{
 		var result = true;
 			
-		result = keyHandler (event);				
-				
+		var key = keyHandler (event);
+		
+		
+	
 		//_attributes.value = _elements["input"].value;				
 					
 		if (_attributes.onKeyUp != null)
 		{
 			setTimeout( function () { _attributes.onKeyUp (_attributes.tag); }, 1);
 		}	
+		
+		// ONENTER
+		if (key == 13)
+		{
+			if (_attributes.onEnter != null)
+			{
+				setTimeout( function () { _attributes.onEnter (_attributes.tag); }, 1);
+			}	
+		}
 		
 		eventOnChange ();
 							
