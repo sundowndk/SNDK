@@ -861,5 +861,6 @@
     <None Include="resources\includes\tinymce-old\utils\form_utils.js" />
     <None Include="resources\includes\tinymce-old\utils\mctabs.js" />
     <None Include="resources\includes\tinymce-old\utils\validate.js" />
+    <None Include="javascript\sui\listview-old.js" />
   </ItemGroup>
 </Project>

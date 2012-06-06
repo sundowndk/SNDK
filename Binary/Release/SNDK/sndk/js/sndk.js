@@ -3520,17 +3520,20 @@ var SNDK =
 		//	addItem (item)
 		//	removeItem ([row])
 		//
-		//	setItem (item, [row])
 		//	getItem ([row])
-		//	setItems (items)
+		//	setItem (item, [row])
+		//
 		//	getItems ()
+		//	setItems (items)
+		//  removeItems ()
 		//
 		//	refresh ()
+		//
 		//	getAttributes (value)
 		//	setAttributes (key, value)
 		//
-		//		id		get
-		//		tag		get/set
+		//		id			get
+		//		tag			get/set
 		//		stylesheet	get/set
 		//		width		get/set
 		//		height		get/set
@@ -3545,42 +3548,9 @@ var SNDK =
 		//		selectedRow	get/set
 		//		treeview	get/set		
 		//
-		//
-		// .addItem (array)
-		// .removeItem (int)
-		// .removeAllItems ();
 		// .moveItemUp ()
 		// .moveItemDowm ()
 		//
-		// .getItem ()
-		// .setItem (array)
-		// .getItems ()
-		// .setItems (array(array))
-		//
-		// .setAttribute (string, value)
-		// .getAttribute (string)
-		//
-		// -------------------------------------------------------------------------------------------------------------------------
-		// column = {title, tag, width, visible}
-		// -------------------------------------------------------------------------------------------------------------------------
-		//
-		// CHANGELOG:
-		// v1.04:
-		//	- Fixed Width/Height calculations. Dimensions should be set correct now, when using percentages.
-		//
-		// v1.03: 
-		//	- setItems fixed, array will be dereffed correctly.
-		//
-		// v1.02:
-		//	- Added support for treeview mode. 
-		//	- Changed row onClick to row onMouseDown. Makes the control feel more responsive.
-		//
-		// v1.01:
-		//	- Added get/set attribute. Cleaner way to access internal values. Depricated get/set will be remove on a later date. 
-		//
-		// v1.00:
-		//	- Initial release.
-		
 		/**
 		 * @constructor
 		 */
@@ -3629,26 +3599,7 @@ var SNDK =
 			this.canItemMove = functionCanItemMove;
 		//	this.canItemMove = functionCanItemMove;
 		
-						
-							
-			// GetSet		
-		//	this.id = getsetId;
-		//	this.tag = getsetTag;
-							
-		//	this.width = getsetWidth;
-		//	this.height = getsetHeight;
-		
-		//	this.focus = getsetFocus;
-		//	this.disabled = getsetDisabled;		
-		
-		//	this.onFocus = getsetOnFocus;
-		//	this.onBlur = getsetOnBlur;
-		//	this.onChange = getsetOnChange;
-			
-		//	this.selectedIndex = getsetSelectedIndex;
-		//	this.selectedItem = getsetSelectedItem;
-		//	this.count = getsetCount;
-					
+													
 			// Construct
 			construct ();
 					
@@ -3740,102 +3691,7 @@ var SNDK =
 				
 				window.addEvent (window, 'SUIREFRESH', refresh);					
 			}	
-				
-			// ------------------------------------
-			// refresh
-			// ------------------------------------		
-			function refresh ()
-			{	
-				// Only refresh if control has been initalized.	
-				if (_temp.initialized)
-				{
-					// If disabled, change to disabled stylesheet.
-					if (_attributes.disabled)
-					{
-						_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Disabled";
-						_elements["contentcenter"].removeAttribute("tabIndex");
-					} 
-					else
-					{			
-						// Set tabindex, it might have been removed if the control was disabled.
-						_elements["contentcenter"].setAttribute("tabIndex", 0);
-						
-						// See if control is in focus or blur, change stylesheet accoridingly.
-						if (_attributes.focus)
-						{
-							_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Focus";
-							setFocus ();
-						}
-						else
-						{
-							_elements["container"].className = _attributes.stylesheet;
-						}						
-					}				
-				}
-				
-				//if (_temp.isDirty)
-				//	{
-				setDimensions ();
-				//}
-		
-				if (_temp.initialized)
-				{
-					if (_temp.isDirty)
-					{
 					
-						var redr = 					function () 
-							{
-						// Remove all current rows.
-						_elements["contentcenter"].innerHTML = " ";				
-						_elements["rows"] = new Array ();
-						
-						// Redraw all rows.
-										
-						_elements["contentcenter"].style.display ="none";
-						drawRows ({treeviewMatchValue: null});		
-						_elements["contentcenter"].style.display ="block";
-						
-						
-						// Redraw selected row.
-						setSelectedRow (_temp.selectedRow);
-						
-						_temp.isDirty = false;	
-		
-							 
-							}
-					
-						setTimeout 
-						(redr , 
-							
-							0);	
-					
-					}			
-				}
-			}
-			
-			// ------------------------------------
-			// dispose
-			// ------------------------------------			
-			function dispose ()
-			{
-				window.removeEvent (window, 'SUIREFRESH', refresh);				
-			}		
-			
-			// ------------------------------------
-			// updateCache
-			// ------------------------------------		
-			function updateCache ()
-			{
-				if (!_temp.cacheUpdated)
-				{
-					_temp.cache["containerPadding"] = SNDK.tools.getElementStyledPadding (_elements["container"]);
-					_temp.cache["containerWidth"] = SNDK.tools.getElementStyledWidth (_elements["topleft"]) + SNDK.tools.getElementStyledWidth (_elements["topright"]);
-					_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["topleft"]) + SNDK.tools.getElementStyledHeight (_elements["bottomleft"]);
-				}
-				
-				_temp.cacheUpdated = true;	
-			}	
-						
 			// ------------------------------------
 			// setAttributes
 			// ------------------------------------					
@@ -3976,297 +3832,6 @@ var SNDK =
 					}
 				}						
 			}		
-		
-			function derefItems (array)
-			{
-				var temp = new Array ();
-				
-				for (index in array)
-				{
-					var index2 = temp.length;						
-					temp[index2] = derefItem (array[index])							
-				}
-					
-				return temp;				
-			}
-		
-			function derefItem (item)
-			{
-				var result = new Array ();
-									
-				for (key in item)
-				{				
-					var column = null;
-					var condense;
-					var value;
-								
-					for (index2 in _attributes.columns)			
-					{
-						var c = _attributes.columns[index2];
-						if (c.condense != null)
-						{	
-							if (c.tag == key)
-							{
-								column = column = c.tag;
-								condense = c.condense;
-								break;
-							}
-						}
-						else if (c.tag == key)
-						{									
-							column = c.tag;
-							break;
-						}				
-					}
-		
-					if (column == null)
-					{			
-						continue;
-					}
-								
-					if ((typeof(item[key]) == "object") && (column.visible == true))
-					{
-						value = "";
-						for (index2 in item[key])
-						{									
-							value += item[key][index2]["value"] +", ";
-						}				
-							
-						value = SNDK.string.trimEnd (value, ", ");							
-					}
-					else				
-					{
-						value = item[key];				
-					}										
-										
-					//console.log (column +" "+ value)			
-					
-					result[column] = value;
-				}
-								
-				return result;		
-			}	
-			
-		
-			function derefItem_a (item)
-			{
-				var result = new Array ();
-									
-				for (key in item)
-				{				
-					var column = null;
-					var condense;
-					var value;
-								
-					for (index2 in _attributes.columns)			
-					{
-						if (_attributes.columns[index2].condense != null)
-						{	
-							if (_attributes.columns[index2].tag == key)
-							{
-							column = column = _attributes.columns[index2].tag;
-							condense = _attributes.columns[index2].condense;
-							break;
-							}
-						//console.log (key +" "+ _attributes.columns[index2].condense.split (":")[0])
-						//if (key == _attributes.columns[index2].condense.split (":")[0])
-						//	{						
-							
-						//		column = _attributes.columns[index2].tag;
-						//		condense = _attributes.columns[index2].condense.split (":")[1];						
-						//		break;
-						//	}
-						}
-						else if (_attributes.columns[index2].tag == key)
-						{									
-							column = _attributes.columns[index2].tag;					
-							break;
-						}				
-					}
-		
-					if (column == null)
-					{			
-						continue;
-					}
-									
-					if (typeof(item[key]) == "object")
-					{
-						value = "";
-						for (index2 in item[key])
-						{									
-							value += item[key][index2]["value"] +", ";
-						}				
-							
-						value = SNDK.string.trimEnd (value, ", ");							
-					}
-					else				
-					{
-						value = item[key];				
-					}										
-										
-					//console.log (column +" "+ value)			
-					
-					result[column] = value;
-				}
-								
-				return result;		
-			}
-		
-			function derefItem2 (item)
-			{
-				var result = new Array ();
-				
-				for (index in item)
-				{				
-					var column;
-					var value;
-					
-					if (_attributes.columns[index] =! null)
-					{
-						if (_attributes.columns[index].condense != null)
-						{
-							if (typeof(item[index]) == "object")
-							{
-								column = _attributes.columns[index].condense.split (":")[0];
-								condense = _attributes.columns[index].condense.split (":")[1];
-							
-								value = "";
-								for (index2 in item[index])
-								{
-									value += item[index][index2][condense] +", ";						
-								}
-							
-								value = SNDK.string.trimEnd (value, ", ");
-							}
-							else
-							{
-								column = index;
-								value = item[index];																				
-							}
-						}				
-						
-						result[column] = value;
-					}
-				}
-								
-				return result;		
-			}
-		
-			function derefItemold (item)
-			{
-				var temp = new Array ();
-				
-				for (index in item)
-				{						
-					var column = null;
-					for (bla2 in _attributes.columns)
-					{
-						if (_attributes.columns[bla2].condense != null)
-						{
-							column = _attributes.columns[bla2].condense.split (":")[0];
-							break;
-						}
-					
-						if (_attributes.columns[bla2].tag == index)
-						{
-							column = _attributes.columns[bla2];
-							break;
-						}
-					}
-						
-					if (column == null)
-					{
-						continue;				
-					}
-						
-					if (typeof(item[index]) == "object")
-					{
-							var test = "";
-							for (bla1 in item[index])
-							{
-								test += item[index][bla1][column.condense.split (":")[1]] +", ";						
-							}
-							
-							test = SNDK.string.trimEnd (test, ", ");
-										
-							temp[index] = test;				
-					}
-					else				
-					{
-						temp[index] = item[index];
-					}							
-				}	
-				
-				return temp;		
-			}
-		
-			function derefArray (array)
-			{
-				var temp = new Array ();
-				for (index in array)
-				{
-					var index2 = temp.length;
-					temp[index2] = new Array ();
-			
-		//			columnnames = "";
-									
-		//			for (bla3 in _attributes.columns)
-		//			{
-		//				columnnames += _attributes.columns[bla3].tag +";;";							
-		//			}
-			
-					
-					
-					for (index3 in array[index])
-					{
-						
-						var column = null;
-						for (bla2 in _attributes.columns)
-						{
-							if (_attributes.columns[bla2].tag == index3)
-							{
-								column = _attributes.columns[bla2];					
-							}
-						}
-						
-						if (column == null)
-						{
-							continue;				
-						}
-						
-						//console.log (column)
-																		
-						if (typeof(array[index][index3]) == "object")
-						{
-						
-						
-							var test = "";
-							for (bla1 in array[index][index3])
-							{
-								test += array[index][index3][bla1][column.condense] +", ";
-								//console.log (array[index][index3][bla1])					
-							}
-							
-							test = SNDK.string.trimEnd (test, ", ");
-						
-							//var test = array[index][index3]
-							temp[index2][index3] = test;
-						
-						}
-						else				
-						{
-							temp[index2][index3] = array[index][index3];				
-						}
-						
-						//console.log (typeof(temp[index2][index3]))
-						
-					}			
-				}
-		
-				//_attributes.items = temp;	
-				
-				return temp;		
-			}
 								
 			// ------------------------------------
 			// setDimensions
@@ -4395,26 +3960,106 @@ var SNDK =
 			}	
 			
 			// ------------------------------------
+			// refresh
+			// ------------------------------------		
+			function refresh ()
+			{	
+				// Only refresh if control has been initalized.	
+				if (_temp.initialized)
+				{
+					// If disabled, change to disabled stylesheet.
+					if (_attributes.disabled)
+					{
+						_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Disabled";
+						_elements["contentcenter"].removeAttribute("tabIndex");
+					} 
+					else
+					{			
+						// Set tabindex, it might have been removed if the control was disabled.
+						_elements["contentcenter"].setAttribute("tabIndex", 0);
+						
+						// See if control is in focus or blur, change stylesheet accoridingly.
+						if (_attributes.focus)
+						{
+							_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Focus";
+							setFocus ();
+						}
+						else
+						{
+							_elements["container"].className = _attributes.stylesheet;
+						}						
+					}				
+				}
+				
+				setDimensions ();
+		
+				if (_temp.initialized)
+				{
+					if (_temp.isDirty)
+					{			
+						var draw = 	function () 
+									{
+										// Remove all current rows.
+										_elements["contentcenter"].innerHTML = " ";				
+										_elements["rows"] = new Array ();
+						
+										// Redraw all rows.								
+										_elements["contentcenter"].style.display ="none";
+										drawRows ({treeviewMatchValue: null});		
+										_elements["contentcenter"].style.display ="block";
+										
+										// Redraw selected row.
+										setSelectedRow (_temp.selectedRow);
+						
+										_temp.isDirty = false;						 
+									};
+					
+						setTimeout (draw, 0);				
+					}			
+				}
+			}
+									
+			// ------------------------------------
+			// dispose
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}		
+			
+			// ------------------------------------
+			// updateCache
+			// ------------------------------------		
+			function updateCache ()
+			{
+				if (!_temp.cacheUpdated)
+				{
+					_temp.cache["containerPadding"] = SNDK.tools.getElementStyledPadding (_elements["container"]);
+					_temp.cache["containerWidth"] = SNDK.tools.getElementStyledWidth (_elements["topleft"]) + SNDK.tools.getElementStyledWidth (_elements["topright"]);
+					_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["topleft"]) + SNDK.tools.getElementStyledHeight (_elements["bottomleft"]);
+				}
+				
+				_temp.cacheUpdated = true;	
+			}		
+			
+			// ------------------------------------
 			// drawRows
 			// ------------------------------------			
 			function drawRows (options)
 			{
 				if (!_attributes.treeview)
 				{
-					// Draw rows for normal view.
-					// for (index in _attributes.items)
-					var len = _attributes.items.length;
-					for (var index = 0; index < len; index++)			
+					// Draw rows for normal view.			
+					var length = _attributes.items.length;
+					for (var index = 0; index < length; index++)			
 					{
 						drawRow ({itemIndex: index, indentDepth: indentdepth});
 					}					
 				}
 				else
 				{
-					// Draw rows for treeview.
-				
-					var indentdepth = -1;
-					
+					// Draw rows for treeview.		
+					var indentdepth = -1;			
 					if (options)
 					{
 						if (options.indentDepth != null)
@@ -4425,12 +4070,10 @@ var SNDK =
 					
 					indentdepth++;
 		
-					for (index in _attributes.items)
-					//var len = _attributes.items.length;
-					//for (var index = 0; index <= len; index++)			
-					{		
-					//console.log (index);
-						// TODO: Needs to be cleaned.
+					var length = _attributes.items.length;
+					for (var index = 0; index < length; index++)			
+					//for (index in _attributes.items)			
+					{					
 						var test =_attributes.items[index][_temp.treeviewChildColumn];
 						
 						if (test == _attributes.treeviewRootValue)
@@ -4451,122 +4094,56 @@ var SNDK =
 			// ------------------------------------
 			// drawRow
 			// ------------------------------------	
-			function drawRow (options)
+			function drawRow (attributes)
 			{
-				var row = _elements["rows"].length;
-				var roww;
-			
-				//_elements["contentcenter"].innerHTML += '<div class="ItemRow" id="'+ _attributes.id +'_'+ row +'" > </div>';
-					document.createDocumentFragment ()
-				var t2 = document.createDocumentFragment ()
-				
-				roww = new Array ();
-				//_elements["rows"][row][0] = document.getElementById (_attributes.id +'_'+ row);
-				//_elements["rows"][row][0] = SNDK.tools.newElement ("div", {className: "ItemRow", id: _attributes.id +"_"+ row, appendTo: _elements["contentcenter"]});		
-				roww[0] = SNDK.tools.newElement ("div", {className: "ItemRow", id: _attributes.id +"_"+ row, appendTo: t2});		
-				roww["itemIndex"] = options.itemIndex;
-				roww["indentDepth"] = options.indentDepth;
-				roww[0].style.overflow = "hidden";
-				roww[0].style.width = "100%";
-				roww[0].onmousedown = eventOnRowClick;
+				var rowcount = _elements["rows"].length;
+				var container = document.createDocumentFragment ()		
+				var row = new Array ();
+					
+				row[0] = SNDK.tools.newElement ("div", {className: "ItemRow", id: _attributes.id +"_"+ rowcount, appendTo: container});
+				row[0].style.overflow = "hidden";
+				row[0].style.width = "100%";
+				row[0].onmousedown = eventOnRowClick;
+				row["itemIndex"] = attributes.itemIndex;
+				row["indentDepth"] = attributes.indentDepth;
 		
-				SNDK.tools.textSelectionDisable (roww[0]);
+				SNDK.tools.textSelectionDisable (row[0]);
 		
-				for (column in _attributes.columns)
+				for (columncount in _attributes.columns)
 				{				
-					if (_attributes.columns[column].visible)
-					{
-						//_elements["rows"][row][column + 1] = SNDK.tools.newElement ("div", {className: "ItemColumn", id: _attributes.id +"_"+ row +"_"+ column, appendTo: _elements["rows"][row][0]});
-						var t = SNDK.tools.newElement ("div", {className: "ItemColumn", id: _attributes.id +"_"+ row +"_"+ column, appendTo: roww[0]});
-						
-						var content = "";
+					if (_attributes.columns[columncount].visible)
+					{	
+						var content = "";			
+						var column = SNDK.tools.newElement ("div", {className: "ItemColumn", id: _attributes.id +"_"+ rowcount +"_"+ columncount, appendTo: row[0]});				
 		
 						if (_attributes.treeview)
 						{
-							if (column == 1)
+							if (columncount == 1)
 							{
-								content += "<span style='padding-left: "+ (options.indentDepth * 20) +"px;'> </span>";
+								content += "<span style='padding-left: "+ (attributes.indentDepth * 20) +"px;'> </span>";
 							}
 						}
 						
-						if (_attributes.columns[column].tag != null)
+						if (_attributes.columns[columncount].tag != null)
 						{
-							content += _attributes.items[options.itemIndex][_attributes.columns[column].tag];
+							content += _attributes.items[attributes.itemIndex][_attributes.columns[columncount].tag];
 						}
 						else
 						{
-							content += _attributes.items[options.itemIndex][column];					
+							content += _attributes.items[attributes.itemIndex][columncount];					
 						}
-										
-		//				_elements["rows"][row][column + 1].innerHTML = content;			
-		//				_elements["rows"][row][column + 1].style.width = _attributes.columns[column].calculatedWidth - 10 +"px";
-		//				_elements["rows"][row][column + 1].style.overflow = "hidden";
-		//				_elements["rows"][row][column + 1].style.whiteSpace = "nowrap";
-						
-						t.innerHTML = content;			
-						
-						t.style.width = _attributes.columns[column].calculatedWidth - 10 +"px";
-						t.style.overflow = "hidden";
-						t.style.whiteSpace = "nowrap";
-						
-						
-						//_elements["rows"][row][column + 1] = t;
-						
+														
+						column.innerHTML = content;							
+						column.style.width = _attributes.columns[columncount].calculatedWidth - 10 +"px";
+						column.style.overflow = "hidden";
+						column.style.whiteSpace = "nowrap";
 					}
 				}
 				
-				_elements["rows"][row] = roww;
-				
-				_elements["contentcenter"].appendChild (t2);
-			}	
-			
-			function drawRowOLD (options)
-			{
-				var row = _elements["rows"].length;
-			
-				_elements["rows"][row] = new Array ();
-				_elements["rows"][row][0] = SNDK.tools.newElement ("div", {className: "ItemRow", id: _attributes.id +"_"+ row, appendTo: _elements["contentcenter"]});
-				_elements["rows"][row]["itemIndex"] = options.itemIndex;
-				_elements["rows"][row]["indentDepth"] = options.indentDepth;
-				_elements["rows"][row][0].style.overflow = "hidden";
-				_elements["rows"][row][0].style.width = "100%";
-				_elements["rows"][row][0].onmousedown = eventOnRowClick;
+				_elements["rows"][rowcount] = row;		
+				_elements["contentcenter"].appendChild (container);
+			}			
 		
-				SNDK.tools.textSelectionDisable (_elements["rows"][row][0]);
-		
-				for (column in _attributes.columns)
-				{				
-					if (_attributes.columns[column].visible)
-					{
-						_elements["rows"][row][column + 1] = SNDK.tools.newElement ("div", {className: "ItemColumn", id: _attributes.id +"_"+ row +"_"+ column, appendTo: _elements["rows"][row][0]});
-						
-						var content = "";
-		
-						if (_attributes.treeview)
-						{
-							if (column == 1)
-							{
-								content += "<span style='padding-left: "+ (options.indentDepth * 20) +"px;'> </span>";
-							}
-						}
-						
-						if (_attributes.columns[column].tag != null)
-						{
-							content += _attributes.items[options.itemIndex][_attributes.columns[column].tag];
-						}
-						else
-						{
-							content += _attributes.items[options.itemIndex][column];					
-						}
-										
-						_elements["rows"][row][column + 1].innerHTML = content;			
-						_elements["rows"][row][column + 1].style.width = _attributes.columns[column].calculatedWidth - 10 +"px";
-						_elements["rows"][row][column + 1].style.overflow = "hidden";
-						_elements["rows"][row][column + 1].style.whiteSpace = "nowrap";
-					}
-				}
-			}	
-						
 			// ------------------------------------
 			// setFocus
 			// ------------------------------------				
@@ -4574,27 +4151,41 @@ var SNDK =
 			{
 				setTimeout ( function () { _attributes.focus = true;  _elements["contentcenter"].focus (); }, 20);	
 			}		
+		
 				
 			// ------------------------------------
 			// setSelectedRow
 			// ------------------------------------		
 			function setSelectedRow (row)
 			{		
-				if (_temp.selectedRow != -1)
-				{
-					_elements["rows"][_temp.selectedRow][0].className = "ItemRow";
-				}
+				
+		//		try 
+		//		{
+					if (_temp.selectedRow != -1)
+					{
+						_elements["rows"][_temp.selectedRow][0].className = "ItemRow";
+					}
+		//		}
+		//		catch (exception)
+		//		{
+		//		
+		//		}
 			
 				_temp.selectedRow = parseInt (row);
-		
-				if (_temp.selectedRow != -1)
-				{
-					_elements["rows"][_temp.selectedRow][0].className = "ItemRow ItemRowSelected";			
-				}
-		
-				//eventOnChange ();
-			}	
 			
+		//		try
+		//		{		
+					if (_temp.selectedRow != -1)
+					{
+						_elements["rows"][_temp.selectedRow][0].className = "ItemRow ItemRowSelected";			
+					}	
+		//		}
+		//		catch (exception)
+		//		{
+		//		
+		//		}
+			}	
+														
 			// ------------------------------------
 			// removeRow
 			// ------------------------------------					
@@ -4694,21 +4285,311 @@ var SNDK =
 				
 			function addItem (item)
 			{
+				var result = _attributes.items.length;
+			
 				if (_attributes.unique)
 				{					
 					for (index in _attributes.items)
 					{
 						if (_attributes.items[index][_attributes.uniqueColumn] == item[_attributes.uniqueColumn])
 						{
-							return;
+							result = index;
+							return result;
 						}
 					}		
 				}
-				
 					
-				_attributes.items[_attributes.items.length] = derefItem (item);
+				_attributes.items[result] = derefItem (item);
 				_temp.isDirty = true;
+				
+				return result
 			}	
+			
+			// ------------------------------------
+			// derefItem
+			// ------------------------------------
+			function derefItem (item)
+			{
+				var result = new Array ();
+									
+				for (key in item)
+				{				
+					var columnname = null;
+					var condense;
+					var value;
+								
+					for (index in _attributes.columns)			
+					{
+						var column = _attributes.columns[index];
+		//				if (c.condense != null)
+		//				{	
+		//					if (c.tag == key)
+		//					{
+		//						column = c.tag;
+		//						condense = c.condense;
+		//						break;
+		//					}
+		//				}
+						if (column.tag == key)
+						{									
+							columnname = column.tag;
+							break;
+						}				
+					}
+		
+					if (columnname == null)
+					{			
+						continue;
+					}
+								
+		//			if ((typeof(item[key]) == "object") && (column.visible == true))
+		//			{
+		//				value = "";
+		//				for (index2 in item[key])
+		//				{									
+		//					value += item[key][index2]["value"] +", ";
+		//				}				
+		//					
+		//				value = SNDK.string.trimEnd (value, ", ");							
+		//			}
+		//			else				
+		//			{
+						value = item[key];				
+		//			}										
+																
+					result[columnname] = value;
+				}
+								
+				return result;		
+			}	
+		
+			// ------------------------------------
+			// derefItems
+			// ------------------------------------	
+			function derefItems (array)
+			{
+				var result = new Array ();
+				
+				for (index in array)
+				{
+					var index2 = result.length;
+					result[index2] = derefItem (array[index])							
+				}
+					
+				return result;				
+			}		
+			
+			
+			// ------------------------------------
+			// getAttribute
+			// ------------------------------------						
+			function functionGetAttribute (attribute)
+			{
+				switch (attribute)
+				{
+					case "id":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "tag":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "stylesheet":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "width":
+					{
+						if (_attributes.widthType == "percent")
+						{
+							return _attributes.width + "%";
+						}
+		
+						if (_attributes.widthType == "pixel")
+						{
+							return _attributes.width + "px";
+						}
+					}
+					
+					case "height":
+					{
+						if (_attributes.heightType == "percent")
+						{
+							return _attributes.height + "%";
+						}
+		
+						if (_attributes.heightType == "pixel")
+						{
+							return _attributes.height + "px";
+						}
+					}
+					
+					case "appendTo":
+					{
+						return _attributes[attribute];			
+					}			
+					
+					case "managed":
+					{
+						return _attributes[attribute];			
+					}
+					
+					case "disabled":
+					{
+						return _attributes[attribute];			
+					}			
+		
+					case "onFocus":
+					{
+						return _attributes[attribute];			
+					}			
+		
+					case "onBlur":
+					{
+						return _attributes[attribute];			
+					}			
+		
+					case "onChange":
+					{
+						return _attributes[attribute];			
+					}			
+					
+					case "selectedRow":
+					{		
+						return _temp.selectedRow;
+					}					
+		
+					case "treeview":
+					{		
+						return _attributes.treeview;				
+					}					
+										
+					default:
+					{
+						throw "No attribute with the name '"+ attribute +"' exist in this object";
+					}
+				}	
+			}
+			
+			// ------------------------------------
+			// setAttribute
+			// ------------------------------------						
+			function functionSetAttribute (attribute, value)
+			{
+				switch (attribute)
+				{
+					case "id":
+					{
+						throw "Attribute with name ID is ready only.";
+						break;
+					}
+					
+					case "tag":
+					{
+						_attributes[attribute] = value;
+						break;
+					}
+					
+					case "stylesheet":
+					{
+						_attributes[attribute] = value;
+						break;				
+					}
+					
+					case "width":
+					{
+						if (value.substring (value.width.length, 3) == "%")
+						{
+							_attributes.widthType = "percent";
+							_attributes.width = value.width.substring (0, value.width.length - 1)			
+						}
+						else
+						{
+							_attributes.widthType = "pixel";
+							_attributes.width = value.width.substring (0, value.width.length - 2)
+						}	
+						break;			
+					}
+					
+					case "appendTo":
+					{
+						_attributes[attribute] = value;	
+						_attributes.appendTo.appendChild (_elements["container"]);			
+						break;
+					}			
+					
+					case "managed":
+					{
+						_attributes[attribute] = value;
+		
+						if (value)
+						{
+							window.removeEvent (window, 'SUIREFRESH', refresh);		
+						}
+						else
+						{
+							window.addEvent (window, 'SUIREFRESH', refresh);
+						}
+		
+						break;
+					}
+					
+					case "disabled":
+					{
+						_attributes[attribute] = value;
+						refresh ();
+						break;
+					}	
+		
+					case "onFocus":
+					{
+						_attributes[attribute] = value;
+						break;
+					}			
+		
+					case "onBlur":
+					{
+						_attributes[attribute] = value;
+						break;
+					}			
+					
+					case "onChange":
+					{
+						_attributes[attribute] = value;
+						break;
+					}			
+					
+					case "selectedRow":
+					{
+						setSelectedRow (value);
+						break;
+					}		
+		
+					case "treeview":
+					{
+						_attributes[attribute] = value;
+						refresh ();
+						break;
+					}		
+													
+					default:
+					{
+						throw "No attribute with the name '"+ attribute +"' exist in this object";
+					}
+				}	
+			}						
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}			
 			
 			// ------------------------------------
 			// Public functions
@@ -4719,8 +4600,7 @@ var SNDK =
 			function functionRefresh ()
 			{
 				refresh ();
-			}	
-				
+			}			
 		
 			// ------------------------------------
 			// addItems
@@ -4743,49 +4623,16 @@ var SNDK =
 			// addItem
 			// ------------------------------------						
 			function functionAddItem (item)
-			{		
-				addItem (item);
+			{					
+				var result = addItem (item);
 					
 				if (_temp.initialized)
 				{
-			//		var newitem = new Array ();
-			//		for (index in item)
-			//		{
-			//			newitem[index] = item[index];
-			//		}
-					
-		//			_attributes.items[_attributes.items.length] = derefItem (item);
-					
-					
 					refresh ();
 					eventOnChange ();		
 				}
-		//		else
-		//		{			
-		//			_attributes.items[_attributes.items.length] = derefItem (item);
-		//		}
-			
-			// TODO: fix this
-		//		var newitem = new Array ();	
-		//		for (index in item)
-		//		{
-		//			if (isNaN (index))
-		//			{
-		//				newitem[index] = item[index];					
-		//			}
-		//			else
-		//			{
-		//				if (_attributes.columns[index].tag != null)
-		//				{
-		//					newitem[_attributes.columns[index].tag] = item[index];
-		//				}
-		//				else
-		//				{
-		//					newitem[index] = item[index];
-		//				}		
-		//			}
-		//		}
 				
+				return result;
 			}	
 				
 			// ------------------------------------
@@ -5061,216 +4908,7 @@ var SNDK =
 			}
 			
 			
-			// ------------------------------------
-			// getAttribute
-			// ------------------------------------						
-			function functionGetAttribute (attribute)
-			{
-				switch (attribute)
-				{
-					case "id":
-					{
-						return _attributes[attribute];
-					}
-					
-					case "tag":
-					{
-						return _attributes[attribute];
-					}
-					
-					case "stylesheet":
-					{
-						return _attributes[attribute];
-					}
-					
-					case "width":
-					{
-						if (_attributes.widthType == "percent")
-						{
-							return _attributes.width + "%";
-						}
-		
-						if (_attributes.widthType == "pixel")
-						{
-							return _attributes.width + "px";
-						}
-					}
-					
-					case "height":
-					{
-						if (_attributes.heightType == "percent")
-						{
-							return _attributes.height + "%";
-						}
-		
-						if (_attributes.heightType == "pixel")
-						{
-							return _attributes.height + "px";
-						}
-					}
-					
-					case "appendTo":
-					{
-						return _attributes[attribute];			
-					}			
-					
-					case "managed":
-					{
-						return _attributes[attribute];			
-					}
-					
-					case "disabled":
-					{
-						return _attributes[attribute];			
-					}			
-		
-					case "onFocus":
-					{
-						return _attributes[attribute];			
-					}			
-		
-					case "onBlur":
-					{
-						return _attributes[attribute];			
-					}			
-		
-					case "onChange":
-					{
-						return _attributes[attribute];			
-					}			
-					
-					case "selectedRow":
-					{		
-						return _temp.selectedRow;
-					}					
-		
-					case "treeview":
-					{		
-						return _attributes.treeview;				
-					}					
-										
-					default:
-					{
-						throw "No attribute with the name '"+ attribute +"' exist in this object";
-					}
-				}	
-			}
 			
-			// ------------------------------------
-			// setAttribute
-			// ------------------------------------						
-			function functionSetAttribute (attribute, value)
-			{
-				switch (attribute)
-				{
-					case "id":
-					{
-						throw "Attribute with name ID is ready only.";
-						break;
-					}
-					
-					case "tag":
-					{
-						_attributes[attribute] = value;
-						break;
-					}
-					
-					case "stylesheet":
-					{
-						_attributes[attribute] = value;
-						break;				
-					}
-					
-					case "width":
-					{
-						if (value.substring (value.width.length, 3) == "%")
-						{
-							_attributes.widthType = "percent";
-							_attributes.width = value.width.substring (0, value.width.length - 1)			
-						}
-						else
-						{
-							_attributes.widthType = "pixel";
-							_attributes.width = value.width.substring (0, value.width.length - 2)
-						}	
-						break;			
-					}
-					
-					case "appendTo":
-					{
-						_attributes[attribute] = value;	
-						_attributes.appendTo.appendChild (_elements["container"]);			
-						break;
-					}			
-					
-					case "managed":
-					{
-						_attributes[attribute] = value;
-		
-						if (value)
-						{
-							window.removeEvent (window, 'SUIREFRESH', refresh);		
-						}
-						else
-						{
-							window.addEvent (window, 'SUIREFRESH', refresh);
-						}
-		
-						break;
-					}
-					
-					case "disabled":
-					{
-						_attributes[attribute] = value;
-						refresh ();
-						break;
-					}	
-		
-					case "onFocus":
-					{
-						_attributes[attribute] = value;
-						break;
-					}			
-		
-					case "onBlur":
-					{
-						_attributes[attribute] = value;
-						break;
-					}			
-					
-					case "onChange":
-					{
-						_attributes[attribute] = value;
-						break;
-					}			
-					
-					case "selectedRow":
-					{
-						setSelectedRow (value);
-						break;
-					}		
-		
-					case "treeview":
-					{
-						_attributes[attribute] = value;
-						refresh ();
-						break;
-					}		
-													
-					default:
-					{
-						throw "No attribute with the name '"+ attribute +"' exist in this object";
-					}
-				}	
-			}						
-			
-			// ------------------------------------
-			// dispose
-			// ------------------------------------				
-			function functionDispose ()
-			{
-				dispose ();
-			}		
 							
 							
 			// ------------------------------------
@@ -5384,8 +5022,18 @@ var SNDK =
 				if (_temp.initialized)
 				{					
 					if (row != null)
-					{			
-						_attributes.items [_element.rows[row].itemIndex] = derefItem (item);
+					{	
+						
+		//				for (index in _elements.rows)
+		//				{
+		//					if (_element.rows[row].itemIndex == row)
+		//					{
+						_attributes.items [row] = derefItem (item);
+		//					}				
+		//				}
+							
+		//				_attributes.items [_element.rows[row].itemIndex] = derefItem (item);							
+						
 						_temp.isDirty = true;
 						refresh ();								
 					}
@@ -10485,7 +10133,7 @@ var SNDK =
 		
 					case "value":
 					{
-						return _attributes[attribute];			
+						return getValue ();
 					}
 					
 					case "tabIndex":
@@ -10682,12 +10330,35 @@ var SNDK =
 			{
 				_attributes.value = _elements["input"].value;			
 										
+				
+			}
+			
+			function getValue ()
+			{
+				var result = _attributes.value;
+			
+				switch (_attributes.textTransform.toLowerCase ())
+				{
+					case "uppercase":
+					{				
+						result = result.toUpperCase ();
+						break;
+					}
+				}				
+				
+				return result;
+			}
+			
+			function transform ()
+			{
+			
 				switch (_attributes.textTransform.toLowerCase ())
 				{
 					case "uppercase":
 					{
-						_attributes.value = _attributes.value.toUpperCase ();
-						_elements["input"].value = _attributes.value.toUpperCase ();
+						//_attributes.value = _attributes.value.toUpperCase ();
+						return _attributes.value.toUpperCase ();
+						//_elements["input"].value = _attributes.value.toUpperCase ();
 						break;
 					}
 				}				
@@ -10719,6 +10390,8 @@ var SNDK =
 						setTimeout( function () { _attributes.onEnter (_attributes.tag); }, 1);
 					}	
 				}
+				
+			
 				
 				eventOnChange ();
 									

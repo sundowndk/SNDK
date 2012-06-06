@@ -479,7 +479,7 @@ textbox : function (attributes)
 
 			case "value":
 			{
-				return _attributes[attribute];			
+				return getValue ();
 			}
 			
 			case "tabIndex":
@@ -676,12 +676,35 @@ textbox : function (attributes)
 	{
 		_attributes.value = _elements["input"].value;			
 								
+		
+	}
+	
+	function getValue ()
+	{
+		var result = _attributes.value;
+	
+		switch (_attributes.textTransform.toLowerCase ())
+		{
+			case "uppercase":
+			{				
+				result = result.toUpperCase ();
+				break;
+			}
+		}				
+		
+		return result;
+	}
+	
+	function transform ()
+	{
+	
 		switch (_attributes.textTransform.toLowerCase ())
 		{
 			case "uppercase":
 			{
-				_attributes.value = _attributes.value.toUpperCase ();
-				_elements["input"].value = _attributes.value.toUpperCase ();
+				//_attributes.value = _attributes.value.toUpperCase ();
+				return _attributes.value.toUpperCase ();
+				//_elements["input"].value = _attributes.value.toUpperCase ();
 				break;
 			}
 		}				
@@ -713,6 +736,8 @@ textbox : function (attributes)
 				setTimeout( function () { _attributes.onEnter (_attributes.tag); }, 1);
 			}	
 		}
+		
+	
 		
 		eventOnChange ();
 							
