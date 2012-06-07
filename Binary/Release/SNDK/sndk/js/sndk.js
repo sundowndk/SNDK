@@ -4158,7 +4158,7 @@ var SNDK =
 			// ------------------------------------		
 			function setSelectedRow (row)
 			{		
-				
+				//console.log (row)
 		//		try 
 		//		{
 					if (_temp.selectedRow != -1)
@@ -4185,56 +4185,156 @@ var SNDK =
 		//		
 		//		}
 			}	
-														
+				
+			function removeItem (itemIndex)
+			{
+				var row = _temp.selectedRow;
+			
+				if (itemIndex != null)
+				{
+					// Find row via itemindex.
+					for (i in _elements["rows"])
+					{				
+						if (_elements["rows"][i].itemIndex == itemIndex)
+						{					
+							row = i;
+							break;
+						}			
+					}	
+					
+					// If the itemindex was not found, then there is no need to continue.
+					return;
+				}		
+		
+				// If a row was found, lets remove it.
+				if (row != -1)
+				{
+					// Remove item from item list.
+					var currentindentdepth = _elements["rows"][row].indentDepth;
+					_attributes.items.splice (_elements["rows"][row].itemIndex, 1);
+					_temp.isDirty = true;
+								
+					// If row was the selected one, we need to deal with that.
+					if (row == _temp.selectedRow)
+					{							
+						_temp.selectedRow = -1;
+					
+						var currentindentdepth = _elements["rows"][row].indentDepth;
+		
+						if (!_attributes.treeview)
+						{										
+							// Top row removed with rows below.
+							if (row == 0 && _elements.rows.length > 1)
+							{
+								_temp.selectedRow = 0;
+							}
+							// Bottom row removed with no rows below.
+							else if (row == (_elements.rows.length - 1))
+							{
+								_temp.selectedRow = (row - 1);
+							}
+							// Middle row removed with rows below.				
+							else if (row < _elements.rows.length)
+							{
+								_temp.selectedRow = row;
+							}
+						}
+						else
+						{					
+							if ((row < _elements.rows.length - 1) && _elements.rows[row+1].indentDepth == currentindentdepth)
+							{
+								_temp.selectedRow = row;
+							}
+							// Bottom row removed with no rows below.
+							else if (row == (_elements.rows.length - 1))
+							{						
+								_temp.selectedRow = (row - 1);					
+							}
+							// Bottom row removed with rows below that are not at the same depth.
+							else if ((row < _elements.rows.length -1) && (_elements.rows[row+1].indentDepth != currentindentdepth))
+							{
+								_temp.selectedRow = (row - 1);
+							}
+							
+							// If there is a row belove with same depth move cursor down.
+		//					if (row < _elements.rows.length && _elements.rows[row].indentDepth == currentindentdepth)
+		//					{
+		//						setSelectedRow (row);
+		//					}
+		//					else
+		//					{
+								// Since there where no row below with same depth, search for row above with same depth.
+								// If no row is found above, cursor will be deselected.
+		//						for (index = row -1 ; index >= 0; index--)
+		//						{
+		//							if (_elements.rows[index].indentDepth == currentindentdepth)
+		//							{
+		//								setSelectedRow (index);
+		//								break;				
+		//							}
+		//							else if (_elements.rows[index].indentDepth < currentindentdepth)
+		//							{
+		//								break;
+		//							}					
+		//						}
+		//					}
+						}			
+					}			
+				
+					refresh ();		
+					eventOnChange ();				
+				}
+			}
+																																		
 			// ------------------------------------
 			// removeRow
 			// ------------------------------------					
 			function removeRow (row)
-			{			
-				var currentindentdepth = _elements["rows"][row].indentDepth;
-						
-				_attributes.items.splice (_elements["rows"][row].itemIndex, 1);
-				_temp.selectedRow = -1;
-				_temp.isDirty = true;
+			{				
+					var currentindentdepth = _elements["rows"][row].indentDepth;
+							
+					_attributes.items.splice (_elements["rows"][row].itemIndex, 1);
+					_temp.selectedRow = -1;
+					_temp.isDirty = true;
 		
-				refresh ();		
+					refresh ();		
 		
-				if (!_attributes.treeview)
-				{
-					if (row < _elements.rows.length)
+					if (!_attributes.treeview)
 					{
-						setSelectedRow (row );
-					}				
-					else
-					{
-						setSelectedRow (row - 1);
-					}
-				}
-				else
-				{
-					// If there is a row belove with same depth move cursor down.
-					if (row < _elements.rows.length && _elements.rows[row].indentDepth == currentindentdepth)
-					{
-						setSelectedRow (row);
-					}
-					else
-					{
-						// Since there where no row below with same depth, search for row above with same depth.
-						// If no row is found above, cursor will be deselected.
-						for (index = row -1 ; index >= 0; index--)
+						if (row < _elements.rows.length)
 						{
-							if (_elements.rows[index].indentDepth == currentindentdepth)
-							{
-								setSelectedRow (index);
-								break;				
-							}
-							else if (_elements.rows[index].indentDepth < currentindentdepth)
-							{
-								break;
-							}					
+							setSelectedRow (row );
+						}				
+						else
+						{
+							setSelectedRow (row - 1);
 						}
 					}
-				}
+					else
+					{
+						// If there is a row belove with same depth move cursor down.
+						if (row < _elements.rows.length && _elements.rows[row].indentDepth == currentindentdepth)
+						{
+							setSelectedRow (row);
+						}
+						else
+						{
+							// Since there where no row below with same depth, search for row above with same depth.
+							// If no row is found above, cursor will be deselected.
+							for (index = row -1 ; index >= 0; index--)
+							{
+								if (_elements.rows[index].indentDepth == currentindentdepth)
+								{
+									setSelectedRow (index);
+									break;				
+								}
+								else if (_elements.rows[index].indentDepth < currentindentdepth)
+								{
+									break;
+								}					
+							}
+						}
+					}
 				
 				eventOnChange ();
 			}	
@@ -4285,21 +4385,25 @@ var SNDK =
 				
 			function addItem (item)
 			{
-				var result = _attributes.items.length;
+				var result = 0;
 			
 				if (_attributes.unique)
 				{					
-					for (index in _attributes.items)
+					for (i in _attributes.items)
 					{
-						if (_attributes.items[index][_attributes.uniqueColumn] == item[_attributes.uniqueColumn])
-						{
-							result = index;
-							return result;
+						if (_attributes.items[i][_attributes.uniqueColumn] == item[_attributes.uniqueColumn])
+						{					
+							result = i;
+							break;
 						}
 					}		
 				}
-					
-				_attributes.items[result] = derefItem (item);
+				else
+				{
+					result = _attributes.items.length;
+					_attributes.items[result] = derefItem (item);
+				}			
+				
 				_temp.isDirty = true;
 				
 				return result
@@ -4370,16 +4474,14 @@ var SNDK =
 			{
 				var result = new Array ();
 				
-				for (index in array)
-				{
-					var index2 = result.length;
-					result[index2] = derefItem (array[index])							
+				for (i in array)
+				{			
+					result[result.length] = derefItem (array[i]);
 				}
 					
 				return result;				
 			}		
-			
-			
+				
 			// ------------------------------------
 			// getAttribute
 			// ------------------------------------						
@@ -4583,13 +4685,7 @@ var SNDK =
 				}	
 			}						
 			
-			// ------------------------------------
-			// dispose
-			// ------------------------------------				
-			function functionDispose ()
-			{
-				dispose ();
-			}			
+				
 			
 			// ------------------------------------
 			// Public functions
@@ -4601,24 +4697,15 @@ var SNDK =
 			{
 				refresh ();
 			}			
-		
+			
 			// ------------------------------------
-			// addItems
-			// ------------------------------------								
-			function functionAddItems (items)
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
 			{
-				for (index in items)
-				{
-					addItem (items[index]);
-				}
-		
-				if (_temp.initialized)
-				{
-					refresh ();
-					eventOnChange ();
-				}		
-			}
-				
+				dispose ();
+			}	
+								
 			// ------------------------------------
 			// addItem
 			// ------------------------------------						
@@ -4638,17 +4725,42 @@ var SNDK =
 			// ------------------------------------
 			// removeItem
 			// ------------------------------------						
-			function functionRemoveItem (row)
+			function functionRemoveItem (itemIndex)
 			{
-				if (row != null)
-				{
-					removeRow (row);				
-				}
-				else if (_temp.selectedRow >= 0)
-				{				
-					removeRow (_temp.selectedRow);
-				}				
+				removeItem (itemIndex);	
 			}	
+			
+			// ------------------------------------
+			// addItems
+			// ------------------------------------								
+			function functionAddItems (items)
+			{
+				for (i in items)
+				{
+					addItem (items[i]);
+				}
+		
+				if (_temp.initialized)
+				{
+					refresh ();
+					eventOnChange ();
+				}		
+			}	
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			
 			// ------------------------------------
 			// moveItemUp

@@ -113,6 +113,7 @@
     <Folder Include="SNDK\" />
     <Folder Include="SNDK.Strings\" />
     <Folder Include="resources\js\" />
+    <Folder Include="javascript\sui\listview\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -862,5 +863,11 @@
     <None Include="resources\includes\tinymce-old\utils\mctabs.js" />
     <None Include="resources\includes\tinymce-old\utils\validate.js" />
     <None Include="javascript\sui\listview-old.js" />
+    <None Include="javascript\sui\listview\constructor.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="javascript\sui\listview\public_functions.js" />
+    <EmbeddedResource Include="javascript\sui\listview\private_functions.js" />
+    <EmbeddedResource Include="javascript\sui\listview\events.js" />
   </ItemGroup>
 </Project>
