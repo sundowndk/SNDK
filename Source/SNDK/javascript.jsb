@@ -24,13 +24,12 @@
 				<js file="javascript/widgets/simplamenu.js" />
 			</class>			
 			<class name="SUI">
-				<constructor name="listview" attributes="attributes,test">
-					<js file="javascript/sui/listview/constructor.js" />
+				<constructor name="listview" variables="attributes">					
+					<js file="javascript/sui/listview/def.js" />
 					<js file="javascript/sui/listview/private_functions.js" />
 					<js file="javascript/sui/listview/public_functions.js" />
 					<js file="javascript/sui/listview/events.js" />				
-				</constructor>
-				<js file="javascript/sui/listview.js" />
+				</constructor>			
 				<js file="javascript/sui/checkbox.js" />
 				<js file="javascript/sui/button.js" />
 				<js file="javascript/sui/dropbox.js" />				

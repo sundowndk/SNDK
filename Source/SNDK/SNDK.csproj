@@ -863,7 +863,8 @@
     <None Include="resources\includes\tinymce-old\utils\mctabs.js" />
     <None Include="resources\includes\tinymce-old\utils\validate.js" />
     <None Include="javascript\sui\listview-old.js" />
-    <None Include="javascript\sui\listview\constructor.js" />
+    <None Include="javascript\sui\listview\def.js" />
+    <None Include="javascript\sui\listview\doc.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\public_functions.js" />
