@@ -360,7 +360,7 @@ canvas : function (attributes)
 				throw "Attribute with name '"+ attribute +"' is ready only.";
 			}
 				
-			_attributes[attribute] == value;
+			_attributes[attribute] = value;
 			
 			// Some attributes needs special threatment.						
 			if (attribute == "width" || attribute == "height" || attribute == "stylesheet" || attribute == "title" || attribute == "icon")

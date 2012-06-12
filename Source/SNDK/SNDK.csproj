@@ -114,6 +114,7 @@
     <Folder Include="SNDK.Strings\" />
     <Folder Include="resources\js\" />
     <Folder Include="javascript\sui\listview\" />
+    <Folder Include="javascript\sui\listview\OLD\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -149,7 +150,6 @@
     <None Include="javascript\sui\image.js" />
     <None Include="javascript\sui\label.js" />
     <None Include="javascript\sui\layoutbox.js" />
-    <None Include="javascript\sui\listview.js" />
     <None Include="javascript\sui\scrollbox.js" />
     <None Include="javascript\sui\tabview.js" />
     <None Include="javascript\sui\text.js" />
@@ -862,13 +862,14 @@
     <None Include="resources\includes\tinymce-old\utils\form_utils.js" />
     <None Include="resources\includes\tinymce-old\utils\mctabs.js" />
     <None Include="resources\includes\tinymce-old\utils\validate.js" />
-    <None Include="javascript\sui\listview-old.js" />
-    <None Include="javascript\sui\listview\def.js" />
     <None Include="javascript\sui\listview\doc.xml" />
+    <None Include="javascript\sui\listview\OLD\listview.js" />
+    <None Include="javascript\sui\listview\OLD\listview-old.js" />
+    <None Include="javascript\sui\listview\10_definitions.js" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="javascript\sui\listview\public_functions.js" />
-    <EmbeddedResource Include="javascript\sui\listview\private_functions.js" />
-    <EmbeddedResource Include="javascript\sui\listview\events.js" />
+    <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />
+    <EmbeddedResource Include="javascript\sui\listview\30_public_functions.js" />
+    <EmbeddedResource Include="javascript\sui\listview\40_events.js" />
   </ItemGroup>
 </Project>

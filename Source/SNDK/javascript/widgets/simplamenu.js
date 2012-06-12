@@ -10,8 +10,7 @@ simplaMenu : function (attributes)
 			  lastid: "",
 			  lastfocus: "",
 			  animations: new Array (),
-			  categoryheight: null,
-			  
+			  categoryheight: null			  
 			};
 
 	_attributes.id = SNDK.tools.newGuid ();

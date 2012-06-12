@@ -112,12 +112,12 @@ text : function (attributes)
 	// ------------------------------------		
 	function updateCache ()
 	{
-		if (!_temp.cacheUpdated)
-		{
+//		if (!_temp.cacheUpdated)
+//		{
 //			_temp.cache["containerPadding"] = SNDK.tools.getElementStyledPadding (_elements["container"]);
 //			_temp.cache["containerWidth"] = (SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]));
 //			_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["center"]);			
-		}
+//		}
 		
 		_temp.cacheUpdated = true;	
 	}

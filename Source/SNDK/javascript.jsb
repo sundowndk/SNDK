@@ -23,13 +23,13 @@
 				<js file="javascript/widgets/blobmenu.js" />
 				<js file="javascript/widgets/simplamenu.js" />
 			</class>			
-			<class name="SUI">
-				<constructor name="listview" variables="attributes">					
-					<js file="javascript/sui/listview/def.js" />
-					<js file="javascript/sui/listview/private_functions.js" />
-					<js file="javascript/sui/listview/public_functions.js" />
-					<js file="javascript/sui/listview/events.js" />				
-				</constructor>			
+			<class name="SUI">			
+				<constructor name="listview" variables="attributes">
+					<js file="javascript/sui/listview/10_definitions.js" />
+					<js file="javascript/sui/listview/20_private_functions.js" />
+					<js file="javascript/sui/listview/30_public_functions.js" />
+					<js file="javascript/sui/listview/40_events.js" />
+				</constructor>
 				<js file="javascript/sui/checkbox.js" />
 				<js file="javascript/sui/button.js" />
 				<js file="javascript/sui/dropbox.js" />				

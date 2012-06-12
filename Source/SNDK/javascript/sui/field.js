@@ -33,7 +33,7 @@ field : function (attributes)
 	var _elements = new Array ();
 	var _attributes = attributes;
 	var _elements = new Array ();	
-	var _temp = 	{ initialized: false,
+	var _temp = 	{ initialized: false
 					};
 					
 	setAttributes ();

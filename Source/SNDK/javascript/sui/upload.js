@@ -137,10 +137,10 @@ upload : function (attributes)
 		{
 			_elements["input"].style.right = '0px';
 		}
-		else if ( client.ie ) 
-		{			
+	//	else if ( client.ie ) 
+	//	{			
 			//_elements["input"].style.width = '0';
-		}							
+	//	}							
 																	
 		// Hook events	
 		_elements["input"].onfocus = eventOnFocus;
@@ -248,7 +248,7 @@ upload : function (attributes)
 			width.textCenter = width.container - _temp.cache.containerWidth;
 			width.legacy = _temp.cache.buttonWidth;
 
-			SNDK.tools.getElementStyledWidth (_elements["buttonleft"]) + SNDK.tools.getElementStyledWidth (_elements["buttoncenter"]) + SNDK.tools.getElementStyledWidth (_elements["buttonright"]) +"px";
+			//SNDK.tools.getElementStyledWidth (_elements["buttonleft"]) + SNDK.tools.getElementStyledWidth (_elements["buttoncenter"]) + SNDK.tools.getElementStyledWidth (_elements["buttonright"]) +"px";
 
 			_elements["container"].style.width = width.container +"px";
 			_elements["textcenter"].style.width = width.textCenter +"px";

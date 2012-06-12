@@ -13,8 +13,8 @@
 scene: function(options)
 {
 	var _options = options;
-	var _temp = { initialized: false,
-		    };
+	var _temp = { initialized: false
+		    	};
 		    
 	var _animations = new Array ();
 

@@ -1,40 +1,89 @@
-// -------------------------------------------------------------------------------------------------------------------------
-// Listview ([attributes])
-// -------------------------------------------------------------------------------------------------------------------------
-//
-//	refresh ()
-//	dispose ()
-//
-//	addItem (item)
-//	setItem (item, [row])
-//	getItem ([row])
-//	removeItem ([row])
-//
-//	setItems (items)
-//	getItems ()
-//  removeItems ()
-//
-//	removeRow ([row])
-//
-//	getAttributes (value)
-//	setAttributes (key, value)
-//
-//		id			get
-//		tag			get/set
-//		stylesheet	get/set
-//		width		get/set
-//		height		get/set
-//		managed		get/set
-//		appendTo	get/set
-//		disabled	get/set
-//		onFocus		get/set
-//		onBlur		get/set
-//		onChange	get/set
-//		columns		get/set
-//		items		get/set
-//		selectedRow	get/set
-//		treeview	get/set		
-//
-// .moveItemUp ()
-// .moveItemDowm ()
-//
+<doc>
+	<constructor>
+		<variable type="optional">attributes</variable>
+	</constructor>
+	<function>
+		<name>refresh</name>
+	</function>
+	<function>
+		<name>dispose</name>
+	</function>
+	<function>
+		<name>addItem</name>
+		<variable type="required">item</variable>
+	</function>
+	<function>
+		<name>setItem</name>
+		<variable type="required">item</variable>
+		<variable type="optional">row</variable>		
+	</function>
+	<function>
+		<name>getItem</name>		
+		<variable type="optional">row</variable>		
+	</function>	
+	<function>
+		<name>removeItem</name>		
+		<variable type="optional">row</variable>		
+	</function>		
+	<function>
+		<name>setItems</name>		
+		<variable type="required">item</variable>
+	</function>		
+	<function>
+		<name>getItems</name>		
+	</function>			
+	<function>
+		<name>removeItems</name>		
+	</function>				
+	<function>
+		<name>removeRow</name>		
+		<variable type="optional">row</variable>
+	</function>					
+	<function>
+		<name>getAttriubtes</name>		
+		<variable type="required">key</variable>
+	</function>
+	<function>
+		<name>settAttriubtes</name>		
+		<variable type="required">key</variable>
+		<variable type="required">value</variable>
+	</function>	
+</doc>
+
+<!--
+refresh ()
+dispose ()
+
+addItem (item)
+setItem (item, [row])
+getItem ([row])
+removeItem ([row])
+
+setItems (items)
+getItems ()
+removeItems ()
+
+removeRow ([row])
+
+getAttributes (value)
+setAttributes (key, value)
+
+	id			get
+	tag			get/set
+	stylesheet	get/set
+	width		get/set
+	height		get/set
+	managed		get/set
+	appendTo	get/set
+	disabled	get/set
+	onFocus		get/set
+	onBlur		get/set
+	onChange	get/set
+	columns		get/set
+	items		get/set
+	selectedRow	get/set
+		treeview	get/set		
+
+.moveItemUp ()
+.moveItemDowm ()
+-->

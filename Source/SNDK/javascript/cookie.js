@@ -65,7 +65,7 @@ get : function (check_name)
 	}
 },
 
-delete : function (name, path, domain) 
+remove : function (name, path, domain) 
 {
 	if (SNDK.cookie.get (name)) document.cookie = name + "=" +
 	((path) ? ";path=" + path : "") +
