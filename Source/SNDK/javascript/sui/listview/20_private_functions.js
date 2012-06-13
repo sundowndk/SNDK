@@ -688,14 +688,13 @@ function getNumberOfRowChildren (row)
 
 	if (_attributes.treeview)
 	{
-		for (index = row + 1; index < _elements.rows.length; index++)
+		for (i = (row + 1); i < _elements.rows.length; i++)
 		{
-			if (_elements.rows[index].indentDepth == _elements.rows[row].indentDepth || _elements.rows[index].indentDepth < _elements.rows[row].indentDepth)
-			{
+			if (_elements.rows[i].indentDepth == _elements.rows[row].indentDepth || _elements.rows[i].indentDepth < _elements.rows[row].indentDepth)
+			{				
 				break;
 			}
-			
-			result++;
+			result++;			
 		}
 	}
 	
