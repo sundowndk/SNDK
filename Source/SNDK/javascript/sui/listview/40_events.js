@@ -61,15 +61,44 @@ function eventOnChange ()
 function eventOnRowClick ()
 {
 	if (!_attributes.disabled)
-	{		
-		setSelectedRow (this.id.split("_")[1])
+	{	
+		var row = this.id.split("_")[1];	
+		var doubleclick = false;
+									
+		if (((SNDK.tools.getTicks () - _temp.doubleClickTicks) < 500) && (row == _temp.doubleClickRow) )
+		{			
+			_temp.doubleClickTicks = 0;
+			doubleclick = true;
+		}
+		else
+		{
+			_temp.doubleClickTicks = SNDK.tools.getTicks ();
+			_temp.doubleClickRow = row;
+		}
+		
+		if ((row == _temp.selectedRow) && (doubleclick == false))
+		{
+			row = -1;
+		}
+		
+		setSelectedRow (row)
 		
 		eventOnChange ();
-						
-//		if (_attributes.onClick != null)
-//		{
-//			setTimeout( function ()	{ _attributes.onClick (); }, 1);
-//		}							
+									
+		if (doubleclick)
+		{
+			if (_attributes.onDoubleClick != null)
+			{
+				setTimeout( function ()	{ _attributes.onDoubleClick (); }, 1);
+			}							
+		}
+		else
+		{
+			if (_attributes.onClick != null)
+			{
+				setTimeout( function ()	{ _attributes.onClick (); }, 1);
+			}							
+		}
 	}
 }
 			

@@ -5,7 +5,9 @@ var _temp =	{ 	initialized: false,
 			  	selectedRow: -1,			  
 				isDirty: true,
 				cache: new Array (),
-				bla: false
+				bla: false,
+				doubleClickTicks: 0,
+				doubleClickRow: ""
 			};
 
 _attributes.id = SNDK.tools.newGuid ();

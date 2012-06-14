@@ -1,3 +1,9 @@
+
+getTicks : function ()
+{	
+    return new Date().getTime();
+},
+
 derefItem : function (array)
 {
 	var result;

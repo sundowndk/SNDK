@@ -183,6 +183,14 @@ function setAttributes ()
 	if (!_attributes.selectedRow) 
 		_attributes.selectedRow = -1;
 		
+	// onClick
+	if (!_attributes.onClick)
+		_attributes.onClick = null;			
+		
+	// onDoubleClick
+	if (!_attributes.onDoubleClick)
+		_attributes.onDoubleClick = null;			
+		
 	// onFocus
 	if (!_attributes.onFocus)
 		_attributes.onFocus = null;	
@@ -567,7 +575,7 @@ function setSelectedRow (row)
 function removeItem (itemIndex)
 {
 	var row = _temp.selectedRow;
-
+		
 	if (itemIndex != null)
 	{
 		// Find row via itemindex.
@@ -578,12 +586,12 @@ function removeItem (itemIndex)
 				row = i;
 				break;
 			}			
-		}	
+		}			
 		
 		// If the itemindex was not found, then there is no need to continue.
 		return;
 	}		
-
+		
 	removeRow (row);		
 }
 
@@ -601,8 +609,9 @@ function removeAllItems ()
 // removeRow ([row])
 // ------------------------------------					
 function removeRow (row)
-{						
-	if (row != -1 && row >= _elements.rows.length)
+{				
+	// Check if row is valid.		
+	if (row != -1 && row <= _elements.rows.length)
 	{
 		// Remove item from item list.
 		var currentindentdepth = _elements["rows"][row].indentDepth;
@@ -656,6 +665,10 @@ function removeRow (row)
 	
 		refresh ();		
 		eventOnChange ();				
+	}
+	else
+	{
+		throw "Cannot remove row "+ row +" of "+ (_elements.rows.length - 1) +"";	
 	}
 }	
 
@@ -866,6 +879,16 @@ function functionGetAttribute (attribute)
 			return _attributes[attribute];			
 		}			
 
+		case "onClick":
+		{
+			return _attributes[attribute];			
+		}			
+
+		case "onDoubleClick":
+		{
+			return _attributes[attribute];			
+		}			
+
 		case "onFocus":
 		{
 			return _attributes[attribute];			
@@ -967,6 +990,18 @@ function functionSetAttribute (attribute, value)
 			refresh ();
 			break;
 		}	
+
+		case "onClick":
+		{
+			_attributes[attribute] = value;
+			break;
+		}			
+
+		case "onDoubleClick":
+		{
+			_attributes[attribute] = value;
+			break;
+		}			
 
 		case "onFocus":
 		{

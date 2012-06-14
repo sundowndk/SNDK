@@ -97,7 +97,7 @@ function functionSetItem (item, row)
 // removeItem
 // ------------------------------------						
 function functionRemoveItem (itemIndex)
-{
+{	
 	removeItem (itemIndex);	
 }	
 	
@@ -254,52 +254,51 @@ function functionCanItemMove (row)
 // moveItemUp
 // ------------------------------------						
 function functionMoveItemUp (row)
-{
-	if (!row )
-	{
-		row = _temp.selectedRow;
-	}
-
+{	
 	var from;
 	var to;
-
-	if (!_attributes.treeview)
+	var select;
+	
+	// If no row given, just use the currently selected one.
+	if (!row )
+	{		
+		row = _temp.selectedRow;				
+	}
+	
+	// Check if row is valid.
+	if ((row >= _elements.rows.length) || (row == -1))
 	{
-		if (row > 0)
-		{
-			moveItem (row, (row - 1));
-			setSelectedRow ((row - 1));
-			
+		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+	}
+	
+	// If row is not the first, than lets continue.
+	if (row > 0)
+	{		
+		if (!_attributes.treeview)
+		{			
 			from = row;
 			to = (row -1);
-		}		
-	}
-	else
-	{
-		if (row > 0)
-		{	
+			select = (row - 1);
+		}				
+		else
+		{
+			// If row above is of same depth, just move up.	
 			if (_elements.rows[(row - 1)].indentDepth == _elements.rows[row].indentDepth)
 			{	
-				moveItem (row, (row - 1));
-				setSelectedRow ((row - 1));		
-				
 				from = row;
 				to = (row - 1);
-
-			}
+				select = (row - 1);
+			}			
 			else
 			{
+				// Figure out how many rows we need to move up before we hit a row on the same depth, if it exists.
 				for (i = (row - 1); i >= 0; i--)
 				{
 					if (_elements.rows[i].indentDepth == _elements.rows[row].indentDepth)
-					{
-						var row1 = row;
-						var row2 = i;
-						moveItem (row1, row2);
-						setSelectedRow (row2);
-						
-						from = row1;
-						to = row2;
+					{						
+						from = row;
+						to = i;
+						select = i;
 						
 						break;				
 					}
@@ -312,286 +311,106 @@ function functionMoveItemUp (row)
 		}
 	}	
 	
+	// Move rows around, but only if eveything is ok.
+	if (from && to && select)
+	{
+		moveItem (from, to);
+		setSelectedRow (select);
+	}
+	else
+	{
+		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+	}
+	
+	// Create result.
 	var result = new Array ();
 	result[0] = from;
 	result[1] = to;
 	
+	// All done.	
 	return result;			
 }
-
 
 // ------------------------------------
 // moveItemDown
 // ------------------------------------								
 function functionMoveItemDown (row)
-{
+{	
+	var from;
+	var to;
+	var select;
+
+	// If no row given, just use the currently selected one.
 	if (!row)
 	{
 		row = _temp.selectedRow;
 	}
 	
-	var from;
-	var to;
-
-	if (!_attributes.treeview)
+	// Check if row is valid.
+	if ((row >= _elements.rows.length) || (row == -1))
 	{
-		if (row < (_elements.rows.length - 1))
-		{
-			moveItem (row, (row + 1));
-			setSelectedRow ((row + 1));
-			
+		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+	}
+	
+	// If row is not the last one, than lets continue.
+	if (row < (_elements.rows.length - 1))
+	{		
+		if (!_attributes.treeview)
+		{					
 			from = row;
 			to = (row + 1);
+			select = (row + 1);
 		}
-	}
-	else
-	{
-		if (row < (_elements.rows.length - 1))
+		else
 		{
+			// If row below i of same depth, just move down.
 			if (_elements.rows[(row + 1)].indentDepth == _elements.rows[row].indentDepth)
-			{	
-				console.log (getNumberOfRowChildren ((row + 1)))
-			
-				moveItem (row, (row + 1));				
-				setSelectedRow (row + (getNumberOfRowChildren ((row + 1)) + 1));
-				
+			{												
 				from = row;
 				to = (row + 1);
+				select = row + (getNumberOfRowChildren ((row + 1)) + 1)
 			}
 			else
-			{
-				from = row;				
-			
+			{										
+				// Figure out how many rows we need to move down before we hit a row of the same depth, if it exists.
 				for (i = (row + 1); i < _elements.rows.length; i++)
-				{									
-					
-				
+				{																		
 					if (_elements.rows[i].indentDepth == _elements.rows[row].indentDepth)
 					{
 						to = i;
 						break;
 					}
-					else
-					{						
-						console.log (getNumberOfRowChildren (i))
-					
-						i = i + getNumberOfRowChildren (i);
-						
-					}				
 				}
-			
-				
-			
-//				var row1 = row;
-//				var row2 = null;
-//				var row3 = null;															
-
-//				for (i = (row + 1); i < _elements.rows.length; i++)
-//				{
-//					if (_elements.rows[i].indentDepth == _elements.rows[row].indentDepth)
-//					{	
-//						if (row2 == null)
-//						{
-//							row2 = i;
-//						}		
-//						else
-//						{
-//							row3 = (i - row2);
-//							break;
-//						}						
-//					}
-//					else if (_elements.rows[i].indentDepth < _elements.rows[row].indentDepth)
-//					{
-//						break;
-//					}					
-//				}				
-				
-//				if (row3 == null)
-//				{
-//					row3 = (row1 + 1);
-//				}
-				
-//				if (row2 != null)
-//				{					
-					moveItem (from, to);
-					setSelectedRow (from + 1);
-//					
-//					from = row1;
-//					to = row3; 
-//				}
+								
+				from = row;								
+				select = (from + getNumberOfRowChildren (to) + 1)
 			}				
 		}
 	}
 	
-	var result = new Array ();
-	result[0] = from;
-	result[1] = to;
-	
-	return result;
-}
-
-
-
-
-
-
-// ------------------------------------
-// moveItemUp
-// ------------------------------------						
-function functionMoveItemUpOld (row)
-{
-	if (row == null)
+	// Move rows around, but only if eveything is ok.
+	if (from && to && select)
 	{
-		row = _temp.selectedRow;
-	}
-
-	var from;
-	var to;
-
-	if (!_attributes.treeview)
-	{
-		if (row > 0)
-		{
-			moveItem (row, row - 1);
-			setSelectedRow (row - 1);
-			
-			from = row;
-			to = row -1;
-		}		
+		moveItem (from, to);
+		setSelectedRow (select);
 	}
 	else
 	{
-		if (row > 0)
-		{
+		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+	}
 	
-			if (_elements.rows[row - 1].indentDepth == _elements.rows[row].indentDepth)
-			{	
-				moveItem (row, row - 1);
-				setSelectedRow (row - 1);		
-				
-				from = row;
-				to = row - 1;
-
-			}
-			else
-			{
-				for (index = row - 1; index >= 0; index--)
-				{
-					if (_elements.rows[index].indentDepth == _elements.rows[row].indentDepth)
-					{
-						var row1 = row;
-						var row2 = index;
-						moveItem (row1, row2);
-						setSelectedRow (row2);
-						
-						from = row1;
-						to = row2;
-						
-						break;				
-					}
-					else if (_elements.rows[index].indentDepth < _elements.rows[row].indentDepth)
-					{
-						break;
-					}					
-				}				
-			}								
-		}
-	}	
-	
+	// Create result.
 	var result = new Array ();
 	result[0] = from;
 	result[1] = to;
 	
-	return result;			
+	// All done.
+	return result;
 }
 
 // ------------------------------------
-// moveItemDown
-// ------------------------------------								
-function functionMoveItemDownOld (row)
-{
-	if (row == null)
-	{
-		row = _temp.selectedRow;
-	}
-	
-	var from;
-	var to;
-
-	if (!_attributes.treeview)
-	{
-		if (row < _elements.rows.length - 1)
-		{
-			moveItem (row, row + 1);
-			setSelectedRow (row + 1);
-			
-			from = row;
-			to = row + 1;
-		}
-	}
-	else
-	{
-		if (row < _elements.rows.length)
-		{
-			if (_elements.rows[row + 1].indentDepth == _elements.rows[row].indentDepth)
-			{	
-				moveItem (row, row + 1);
-				setSelectedRow (row + getNumberOfRowChildren (row + 1) + 1);
-				
-				from = row;
-				to = row + 1;
-			}
-			else
-			{
-				var row1 = row;
-				var row2 = null;
-				var row3 = null;															
-
-				for (index = row + 1; index < _elements.rows.length; index++)
-				{
-					if (_elements.rows[index].indentDepth == _elements.rows[row].indentDepth)
-					{	
-						if (row2 == null)
-						{
-							row2 = index;
-						}		
-						else
-						{
-							row3 = index - row2;
-							break;
-						}
-						
-					}
-					else if (_elements.rows[index].indentDepth < _elements.rows[row].indentDepth)
-					{
-						break;
-					}					
-				}				
-				
-				if (row3 == null)
-				{
-					row3 = row1 + 1;
-				}
-				
-				if (row2 != null)
-				{					
-					moveItem (row1, row2);
-					setSelectedRow (row3);				
-					
-					from = row1;
-					to = row3; 
-				}
-			}				
-		}
-	}
-	
-	var result = new Array ();
-	result[0] = from;
-	result[1] = to;
-	
-	return result;
-}
-	
+// getItemRow
+// ------------------------------------		
 function functionGetItemRow ()
 {
 	return _temp.selectedRow;
