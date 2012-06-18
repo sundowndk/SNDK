@@ -268,7 +268,7 @@ function functionMoveItemUp (row)
 	// Check if row is valid.
 	if ((row >= _elements.rows.length) || (row == -1))
 	{
-		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+		throw "Cannot move row '"+ row +"' of "+ (_elements.rows.length - 1) +"";
 	}
 	
 	// If row is not the first, than lets continue.
@@ -310,16 +310,16 @@ function functionMoveItemUp (row)
 			}								
 		}
 	}	
-	
+		
 	// Move rows around, but only if eveything is ok.
-	if (from && to && select)
+	if ((from != null) && (to != null) && (select != null))
 	{
 		moveItem (from, to);
 		setSelectedRow (select);
 	}
 	else
 	{
-		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+		throw "Cannot move row '"+ row +"' of "+ (_elements.rows.length - 1) +"";
 	}
 	
 	// Create result.
@@ -349,7 +349,7 @@ function functionMoveItemDown (row)
 	// Check if row is valid.
 	if ((row >= _elements.rows.length) || (row == -1))
 	{
-		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+		throw "Cannot move row '"+ row +"' of "+ (_elements.rows.length - 1) +"";
 	}
 	
 	// If row is not the last one, than lets continue.
@@ -389,14 +389,14 @@ function functionMoveItemDown (row)
 	}
 	
 	// Move rows around, but only if eveything is ok.
-	if (from && to && select)
+	if ((from != null) && (to != null) && (select != null))
 	{
 		moveItem (from, to);
 		setSelectedRow (select);
 	}
 	else
 	{
-		throw "Cannot move row '"+ row +"' of "+ (_elements.row.length - 1) +"";
+		throw "Cannot move row '"+ row +"' of "+ (_elements.rows.length - 1) +"";
 	}
 	
 	// Create result.
