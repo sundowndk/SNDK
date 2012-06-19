@@ -121,8 +121,12 @@ canvas : function (attributes)
 		// Width
 		if (!_attributes.width) 
 			_attributes.width = "100%";				
-			
-		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+		
+		if (_attributes.width == "content")
+		{
+			_attributes.widthType = "content";
+		}			
+		else if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
 			_attributes.widthType = "percent";
 			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
@@ -136,8 +140,12 @@ canvas : function (attributes)
 		// Height
 		if (!_attributes.height) 
 			_attributes.height = "100%";
-			
-		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+		
+		if (_attributes.height == "content")
+		{
+			_attributes.heightType = "content";
+		}
+		else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{
 			_attributes.heightType = "percent";
 			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
@@ -147,32 +155,7 @@ canvas : function (attributes)
 			_attributes.heightType = "pixel";
 			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
 		}
-				
-	
-		// Width
-//		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
-//		{
-//			_attributes.widthType = "percent";
-//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
-//		}
-//		else
-//		{
-//			_attributes.widthType = "pixel";
-//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
-//		}						
-		
-		// Height
-//		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
-//		{
-//			_attributes.heightType = "percent";
-//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
-//		}
-//		else
-//		{
-//			_attributes.heightType = "pixel";
-//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
-//		}		
-		
+						
 		if (!_attributes.canScroll) 
 			_attributes.canScroll = false;
 	}		
@@ -189,24 +172,112 @@ canvas : function (attributes)
 			var width = 0;
 			var height = 0;
 			var combinedheightofchildren = 0;
-						
-			if (_attributes.widthType == "percent")
+
+			switch (_attributes.widthType.toLowerCase ())
 			{
-				width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
-			}
-			else
-			{
-				width = _attributes.width;
-			}
+				case "content":
+				{
+					width.container = 0;
 					
-			if (_attributes.heightType == "percent")
-			{	
-				height = (SNDK.tools.getElementInnerHeight (parent) * _attributes.height) / 100;
+					for (i in _temp.uiElements)
+					{		
+						if (_temp.uiElements[i]._attributes.widthType == "pixel")
+						{				
+							if (width.container < parseInt (_temp.uiElements[index]._attributes.width))					
+							{
+								width.container = parseInt (_temp.uiElements[index]._attributes.height);
+							}							
+						}
+					}									
+				
+					break;
+				}
+				
+				case "pixel":
+				{
+					width = _attributes.width;
+					break;
+				}
+				
+				case "percent":
+				{
+					width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
+					break;
+				}
 			}
-			else
-			{					
-				height = _attributes.height;
+
+			switch (_attributes.heightType.toLowerCase ())
+			{
+				case "content":
+				{
+					height.container = 0;
+				
+					for (i in _temp.uiElements)
+					{		
+						if (_temp.uiElements[i]._attributes.heightType == "pixel")
+						{									
+							height.container += parseInt (_temp.uiElements[index]._attributes.height);		
+						}
+					}									
+					break;
+				}
+			
+				case "pixel":
+				{
+					height = _attributes.height;
+					break;
+				}
+				
+				case "percent":
+				{
+					height = (SNDK.tools.getElementInnerHeight (parent) * _attributes.height) / 100;
+					break;
+				}
 			}
+						
+												
+																								
+//			if (_attributes.widthType == "percent")
+//			{
+//				width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
+//			}
+//			else if (_attributes.widthType == "content")
+//			{
+//				var contentwidth = 0;
+//				
+//				if (_temp.uiElements[index]._attributes.widthType == "pixel")
+//				{													
+//					contentwidth += parseInt (_temp.uiElements[index]._attributes.width);
+//				}							
+//													
+//				width.container = contentwidth;
+//			}
+//			else
+//			{
+//				width = _attributes.width;
+//			}
+//					
+//			if (_attributes.heightType == "percent")
+//			{	
+//				height = (SNDK.tools.getElementInnerHeight (parent) * _attributes.height) / 100;
+//			}
+//			else if (_attributes.heightType == "content")
+//			{
+//				var contentheight = 0;
+//				
+//				if (_temp.uiElements[index]._attributes.heightType == "pixel")
+//				{													
+//					contentheight += parseInt (_temp.uiElements[index]._attributes.height);
+//				}							
+//					
+//				console.log (contentheight)
+//					
+//				height.container = contentheight;
+//			}
+//			else
+//			{					
+//				height = _attributes.height;
+//			}
 			
 			_elements["container"].style.width = width +"px";
 			_elements["container"].style.height = height +"px";
@@ -276,13 +347,16 @@ canvas : function (attributes)
 	 	element.setAttribute ("appendTo", _elements["container"]);
 	}
 	
+	// ------------------------------------
+	// getUIElement
+	// ------------------------------------							
 	function functionGetUIElement (tag)
 	{
 		for (index in _temp.uiElements)
 		{
 			if (_temp.uiElements[index].getAttribute ("tag") == tag)
 			{
-				
+				return _temp.uiElements[index];	
 			}
 		}
 	}
@@ -311,27 +385,43 @@ canvas : function (attributes)
 			
 			case "width":
 			{
-				if (_attributes.widthType == "percent")
+				switch (_attributes.widthType.toLowerCase ())
 				{
-					return _attributes.width + "%";
-				}
-
-				if (_attributes.widthType == "pixel")
-				{
-					return _attributes.width + "px";
-				}
+					case "content":
+					{
+						return "content";
+					}
+					
+					case "pixel":
+					{
+						return _attributes.width + "px";						
+					}
+					
+					case "percent":
+					{
+						return _attributes.width + "%";						
+					}
+				}			
 			}
 			
 			case "height":
 			{
-				if (_attributes.heightType == "percent")
+				switch (_attributes.heightType.toLowerCase ())
 				{
-					return _attributes.height + "%";
-				}
-
-				if (_attributes.heightType == "pixel")
-				{
-					return _attributes.height + "px";
+					case "content":
+					{
+						return "content";
+					}
+					
+					case "pixel":
+					{
+						return _attributes.height + "px";						
+					}
+					
+					case "percent":
+					{
+						return _attributes.height + "%";						
+					}
 				}						
 			}
 			
@@ -346,35 +436,7 @@ canvas : function (attributes)
 			}
 		}	
 	}	
-	
-	// ------------------------------------
-	// setAttribute
-	// ------------------------------------						
-	function functionSetAttribute (attribute, value)
-	{
-		if (!_attributes[attribute])
-		{
-			// Some attributes is readonly.
-			if (attribute == "id")
-			{
-				throw "Attribute with name '"+ attribute +"' is ready only.";
-			}
-				
-			_attributes[attribute] = value;
-			
-			// Some attributes needs special threatment.						
-			if (attribute == "width" || attribute == "height" || attribute == "stylesheet" || attribute == "title" || attribute == "icon")
-			{
-				setAttributes ();
-				refresh ()
-			}
-		}
-		else
-		{
-			throw "No attribute with the name '"+ attribute +"' exist in this object";
-		}
-	}	
-	
+		
 	// ------------------------------------
 	// setAttribute
 	// ------------------------------------						
@@ -402,7 +464,12 @@ canvas : function (attributes)
 			
 			case "width":
 			{
-				if (value.substring (value.length, 3) == "%")
+				if (value == "content")
+				{
+					_attributes.widthType = "content";
+					_attributes.width = "content";
+				}			
+				else if (value.substring (value.length, 3) == "%")
 				{
 					_attributes.widthType = "percent";
 					_attributes.width = value.substring (0, value.length - 1)			
@@ -420,7 +487,12 @@ canvas : function (attributes)
 
 			case "height":
 			{
-				if (value.substring (value.length, 3) == "%")
+				if (value == "content")
+				{
+					_attributes.heightType = "content";
+					_attributes.height = "content";
+				}
+				else if (value.substring (value.length, 3) == "%")
 				{
 					_attributes.heightType = "percent";
 					_attributes.height = value.substring (0, value.length - 1)			

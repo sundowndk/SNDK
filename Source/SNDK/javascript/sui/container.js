@@ -27,7 +27,9 @@ container : function (attributes)
 	var _attributes = attributes;				
 	var _temp = 	{ initialized: false,
 			  uiElements: new Array (),
-			  cache: new Array ()		 
+			  cache: new Array (),
+			  calculatedWidth: 0,
+			  calculatedHeight: 0	 
 			};
 	
 	_attributes.id = SNDK.tools.newGuid ();
@@ -191,8 +193,7 @@ container : function (attributes)
 			}						
 		}
 	}
-	
-	
+		
 	function getTitleBarUIElement (tag)
 	{
 	
@@ -230,7 +231,11 @@ container : function (attributes)
 		if (!_attributes.width) 
 			_attributes.width = "100%";				
 			
-		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+		if (_attributes.width == "content")
+		{
+			_attributes.widthType = "content";
+		}
+		else if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
 			_attributes.widthType = "percent";
 			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
@@ -245,7 +250,11 @@ container : function (attributes)
 		if (!_attributes.height) 
 			_attributes.height = "100%";				
 			
-		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+		if (_attributes.height == "content")
+		{
+			_attributes.heightType = "content";
+		}
+		else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{
 			_attributes.heightType = "percent";
 			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
@@ -280,39 +289,123 @@ container : function (attributes)
 			var height = {};
 			var combinedheightofchildren = 0;
 
-			if (!_attributes.managed && _attributes.widthType != "pixel")
-			{					
-				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
-			}
-			else
-			{			
-				if (_attributes.managed && _attributes.widthType == "percent")
-				{
+//			if (!_attributes.managed && _attributes.widthType != "pixel")
+//			{					
+//				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
+//			}
+//			else
+//			{										
+//				if (_attributes.managed && _attributes.widthType == "percent")
+//				{
+//
+//					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+//				}				
+//				else
+//				{
+//					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
+//				}			
+//			}	
 
-					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+			switch (_attributes.widthType.toLowerCase ())
+			{
+				case "content":
+				{
+					width.container = 0;
+					
+					for (i in _temp.uiElements)
+					{		
+						if ((_temp.uiElements[i]._attributes.widthType == "pixel") || (_temp.uiElements[i]._attributes.widthType == "content"))
+						{				
+							if (width.container < _temp.uiElements[i]._elements["container"].offsetWidth)					
+							{
+								width.container = parseInt (_temp.uiElements[i]._elements["container"].offsetWidth);
+							}							
+						}
+					}									
+				
+					break;
 				}
-				else
+				
+				case "pixel":
 				{
 					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
-				}			
-			}	
-
-
-			if (!_attributes.managed && _attributes.heightType != "pixel")
-			{					
-				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
-			}
-			else
-			{			
-				if (_attributes.managed && _attributes.heightType == "percent")
-				{
-					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+					break;
 				}
-				else
+				
+				case "percent":
+				{
+					if (_attributes.managed)
+					{
+						width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+					}
+					else
+					{
+						swidth.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
+					}
+					break;
+				}
+			}
+
+			switch (_attributes.heightType.toLowerCase ())
+			{
+				case "content":
+				{
+					height.container = 0;
+				
+					for (i in _temp.uiElements)
+					{		
+						if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content") )
+						{									
+							height.container += _temp.uiElements[index]._elements["container"].offsetHeight;
+						}
+					}									
+					break;
+				}
+			
+				case "pixel":
 				{
 					height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
-				}			
-			}	
+					break;
+				}
+				
+				case "percent":
+				{
+					if (_attributes.managed)
+					{
+						height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+					}
+					else
+					{
+						height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
+					}
+					break;
+				}
+			}
+
+//			if (!_attributes.managed && _attributes.heightType != "pixel")
+//			{					
+//				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
+//			}
+//			else
+//			{			
+//				if (_attributes.managed && _attributes.heightType == "content")
+//				{
+//					height.container = 0;
+//				
+//					if (_temp.uiElements[index]._attributes.heightType == "pixel")
+//					{													
+//						height.container += parseInt (_temp.uiElements[index]._attributes.height);
+//					}							
+//				}			
+//				else if (_attributes.managed && _attributes.heightType == "percent")
+//				{
+//					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+//				}
+//				else
+//				{
+//					height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
+//				}			
+//			}	
 
 			width.topCenter = width.container - _temp.cache.containerWidth;
 			width.contentCenter = width.container - _temp.cache.containerWidth;

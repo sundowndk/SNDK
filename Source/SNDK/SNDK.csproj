@@ -115,6 +115,8 @@
     <Folder Include="resources\js\" />
     <Folder Include="javascript\sui\listview\" />
     <Folder Include="javascript\sui\listview\OLD\" />
+    <Folder Include="javascript\sui\canvas\" />
+    <Folder Include="javascript\sui\canvas\old\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -866,6 +868,9 @@
     <None Include="javascript\sui\listview\OLD\listview.js" />
     <None Include="javascript\sui\listview\OLD\listview-old.js" />
     <None Include="javascript\sui\listview\10_definitions.js" />
+    <None Include="javascript\sui\canvas\10_definitions.js" />
+    <None Include="javascript\sui\canvas\20_private_functions.js" />
+    <None Include="javascript\sui\canvas\30_public_functions.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

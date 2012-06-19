@@ -3521,6 +3521,484 @@ var SNDK =
 		/**
 		* @constructor
 		*/
+		canvas : function (attributes)
+		{
+			var _elements = new Array ();
+			var _attributes = attributes;				
+			
+			var _temp = 	{ 
+								initialized: false,
+					  			uiElements: new Array ()
+							};
+			
+			
+			
+			setAttributes ();	
+			
+			// Private functions
+			this._attributes = _attributes;
+			this._elements = _elements;
+			this._temp = _temp;	
+			this._init = init;
+			
+			// Functions		
+			this.refresh = functionRefresh;			
+			this.dispose = functionDispose;
+			this.addUIElement = functionAddUIElement;
+			this.getUIElement = functionGetUIElement;
+			this.setAttribute = functionSetAttribute;
+			this.getAttribute = functionGetAttribute;	
+			
+			// Construct
+			construct ();
+										
+			// Initialize
+			SNDK.SUI.addInit (this);
+			// ------------------------------------
+			// Private functions
+			// ------------------------------------
+			// ------------------------------------
+			// init
+			// ------------------------------------	
+			function init ()
+			{
+			}
+			
+			// ------------------------------------
+			// construct
+			// ------------------------------------	
+			function construct ()
+			{
+				// Container
+				_elements["container"] = SNDK.tools.newElement ("div", {});
+				_elements["container"].setAttribute ("id", _attributes.id);
+				
+				if (_attributes.canScroll)
+				{
+					_elements["container"].style.overflow = "auto";		
+				}		
+				else
+				{
+					_elements["container"].style.overflow = "hidden";		
+				}
+																			
+				// Hook Events
+				window.addEvent (window, 'SUIREFRESH', refresh);	
+			}	
+				
+			// ------------------------------------
+			// refresh
+			// ------------------------------------		
+			function refresh ()
+			{	
+				// Only refresh if control has been initalized.	
+				if (_temp.initialized)
+				{
+					_elements["container"].className = _attributes.stylesheet;
+				}
+				
+				setDimensions ();
+			}
+			
+			// ------------------------------------
+			// refresh
+			// ------------------------------------			
+			function dispose ()
+			{
+				window.removeEvent (window, 'SUIREFRESH', refresh);				
+			}
+						
+			// ------------------------------------
+			// setDefaultAttributes
+			// ------------------------------------					
+			function setAttributes ()
+			{
+				// Id
+				_attributes.id = SNDK.tools.newGuid ();
+			
+				// Stylesheet
+				if (!_attributes.stylesheet) _attributes.stylesheet = "SUICanvas";	
+				
+				// Managed
+				if (!_attributes.managed)
+					_attributes.managed = false;				
+			
+				// Width
+				if (!_attributes.width) 
+					_attributes.width = "100%";				
+				
+				if (_attributes.width == "content")
+				{
+					_attributes.width = 0;
+					_attributes.widthType = "content";
+				}			
+				else if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+				{
+					_attributes.widthType = "percent";
+					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
+				}
+				else
+				{
+					_attributes.widthType = "pixel";
+					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
+				}		
+				
+				// Height
+				if (!_attributes.height) 
+					_attributes.height = "100%";
+				
+				if (_attributes.height == "content")
+				{
+					_attributes.height = 0;
+					_attributes.heightType = "content";
+				}
+				else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+				{
+					_attributes.heightType = "percent";
+					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
+				}
+				else
+				{
+					_attributes.heightType = "pixel";
+					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
+				}
+								
+				if (!_attributes.canScroll) 
+					_attributes.canScroll = false;
+			}		
+								
+			// ------------------------------------
+			// setDimensions
+			// ------------------------------------
+			function setDimensions ()
+			{		
+				// Only set dimensions if control has been initalized.	
+				if (_temp.initialized)
+				{	
+					var parent = _elements["container"].parentNode;			
+					var width = 0;
+					var height = 0;
+					
+					// Find width.
+					switch (_attributes.widthType.toLowerCase ())
+					{
+						// Width is content.
+						case "content":
+						{
+							width = 0;
+							
+							for (i in _temp.uiElements)
+							{		
+								if ((_temp.uiElements[i]._attributes.widthType == "pixel") || (_temp.uiElements[i]._attributes.widthType == "content"))
+								{				
+									if (width < _temp.uiElements[index]._attributes.offsetWidth)
+									{
+										width = _temp.uiElements[index]._attributes.offsetWidth;
+									}							
+								}
+							}									
+						
+							break;
+						}
+						
+						// Width is in pixels.
+						case "pixel":
+						{
+							width = _attributes.width;
+							break;
+						}
+						
+						// Width is percent.
+						case "percent":
+						{
+							width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
+							break;
+						}
+					}
+			
+					// Find height.
+					switch (_attributes.heightType.toLowerCase ())
+					{
+						// Height is content.
+						case "content":
+						{
+							height = 0;
+									
+							for (i in _temp.uiElements)
+							{		
+								
+								if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content"))
+								{						
+									height += _temp.uiElements[i]._elements["container"].offsetHeight;								
+								}
+							}									
+							break;
+						}
+					
+						// Height is in pixels.
+						case "pixel":
+						{
+							height = _attributes.height;
+							break;
+						}
+						
+						// Height is in percent.
+						case "percent":
+						{
+							height = (SNDK.tools.getElementInnerHeight (parent) * _attributes.height) / 100;
+							break;
+						}
+					}
+																																								
+					_elements["container"].style.width = width +"px";
+					_elements["container"].style.height = height +"px";
+			
+					// If canvas can scroll, we need to make room for the scrollbar.
+					if (_attributes.canScroll)
+					{
+						var contentheight = 0;
+						
+						for (i in _temp.uiElements)
+						{		
+							if (_temp.uiElements[i]._attributes.heightType == "pixel" || _temp.uiElements[i]._attributes.heightType == "content")
+							{									
+								contentheight += parseInt (_temp.uiElements[i]._attributes.height);
+							}
+						}						
+					
+						if (i > height)
+						{
+							width = width - window.scrollbarWidth;
+						}			
+					}						
+					
+					// All child elements that use percentage needs to have their width and height updated accordingly.
+					for (index in _temp.uiElements)
+					{
+						if (_temp.uiElements[index]._attributes.widthType == "percent")
+						{
+							_temp.uiElements[index]._attributes.managedWidth = (width * _temp.uiElements[index]._attributes.width) / 100;
+						}
+						
+						if (_temp.uiElements[index]._attributes.heightType == "percent")
+						{
+							_temp.uiElements[index]._attributes.managedHeight = (height * _temp.uiElements[index]._attributes.height) / 100;
+						}
+						
+						_temp.uiElements[index].refresh ();
+					}
+				}
+			}	
+			// ------------------------------------
+			// Public functions
+			// ------------------------------------
+			// ------------------------------------
+			// refresh
+			// ------------------------------------				
+			function functionRefresh ()
+			{
+				refresh ();
+			}			
+			
+			// ------------------------------------
+			// dispose
+			// ------------------------------------				
+			function functionDispose ()
+			{
+				dispose ();
+			}			
+							
+			// ------------------------------------
+			// addUIElement
+			// ------------------------------------							
+			function functionAddUIElement (element)
+			{
+				var count = _temp.uiElements.length;
+				
+			 	_temp.uiElements[count] = element;
+			 		 	
+			 	element.setAttribute ("managed", true);
+			 	element.setAttribute ("appendTo", _elements["container"]);
+			}
+			
+			// ------------------------------------
+			// getUIElement
+			// ------------------------------------							
+			function functionGetUIElement (tag)
+			{
+				for (index in _temp.uiElements)
+				{
+					if (_temp.uiElements[index].getAttribute ("tag") == tag)
+					{
+						return _temp.uiElements[index];	
+					}
+				}
+			}
+										
+			// ------------------------------------
+			// getAttribute
+			// ------------------------------------								
+			function functionGetAttribute (attribute)
+			{
+				switch (attribute)
+				{
+					case "id":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "tag":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "stylesheet":
+					{
+						return _attributes[attribute];
+					}
+					
+					case "width":
+					{
+						switch (_attributes.widthType.toLowerCase ())
+						{
+							case "content":
+							{
+								return "content";
+							}
+							
+							case "pixel":
+							{
+								return _attributes.width + "px";						
+							}
+							
+							case "percent":
+							{
+								return _attributes.width + "%";						
+							}
+						}			
+					}
+					
+					case "height":
+					{
+						switch (_attributes.heightType.toLowerCase ())
+						{
+							case "content":
+							{
+								return "content";
+							}
+							
+							case "pixel":
+							{
+								return _attributes.height + "px";						
+							}
+							
+							case "percent":
+							{
+								return _attributes.height + "%";						
+							}
+						}						
+					}
+					
+					case "canScroll":
+					{
+						return _attributes[attribute];			
+					}			
+										
+					default:
+					{
+						throw "No attribute with the name '"+ attribute +"' exist in this object";
+					}
+				}	
+			}	
+				
+			// ------------------------------------
+			// setAttribute
+			// ------------------------------------						
+			function functionSetAttribute (attribute, value)
+			{
+				switch (attribute)
+				{
+					case "id":
+					{
+						throw "Attribute with name ID is ready only.";
+						break;
+					}
+					
+					case "tag":
+					{
+						_attributes[attribute] = value;
+						break;
+					}
+					
+					case "stylesheet":
+					{
+						_attributes[attribute] = value;
+						break;				
+					}
+					
+					case "width":
+					{
+						if (value == "content")
+						{
+							_attributes.widthType = "content";
+							_attributes.width = "content";
+						}			
+						else if (value.substring (value.length, 3) == "%")
+						{
+							_attributes.widthType = "percent";
+							_attributes.width = value.substring (0, value.length - 1)			
+						}
+						else
+						{
+							_attributes.widthType = "pixel";
+							_attributes.width = value.substring (0, value.length - 2)
+						}	
+						
+						refresh ();
+						
+						break;			
+					}
+			
+					case "height":
+					{
+						if (value == "content")
+						{
+							_attributes.heightType = "content";
+							_attributes.height = "content";
+						}
+						else if (value.substring (value.length, 3) == "%")
+						{
+							_attributes.heightType = "percent";
+							_attributes.height = value.substring (0, value.length - 1)			
+						}
+						else
+						{
+							_attributes.heightType = "pixel";
+							_attributes.height = value.substring (0, value.length - 2)
+						}	
+						
+						refresh ();
+						
+						break;			
+					}
+					
+					case "canScroll":
+					{
+						_attributes[attribute] = value;					
+						break;
+					}			
+										
+					default:
+					{
+						throw "No attribute with the name '"+ attribute +"' exist in this object";
+					}
+				}	
+			}					
+		},
+	
+		/**
+		* @constructor
+		*/
 		listview : function (attributes)
 		{
 			var _elements = new Array ();
@@ -11221,7 +11699,9 @@ var SNDK =
 			var _attributes = attributes;				
 			var _temp = 	{ initialized: false,
 					  uiElements: new Array (),
-					  cache: new Array ()		 
+					  cache: new Array (),
+					  calculatedWidth: 0,
+					  calculatedHeight: 0	 
 					};
 			
 			_attributes.id = SNDK.tools.newGuid ();
@@ -11385,8 +11865,7 @@ var SNDK =
 					}						
 				}
 			}
-			
-			
+				
 			function getTitleBarUIElement (tag)
 			{
 			
@@ -11424,7 +11903,11 @@ var SNDK =
 				if (!_attributes.width) 
 					_attributes.width = "100%";				
 					
-				if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+				if (_attributes.width == "content")
+				{
+					_attributes.widthType = "content";
+				}
+				else if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 				{
 					_attributes.widthType = "percent";
 					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
@@ -11439,7 +11922,11 @@ var SNDK =
 				if (!_attributes.height) 
 					_attributes.height = "100%";				
 					
-				if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+				if (_attributes.height == "content")
+				{
+					_attributes.heightType = "content";
+				}
+				else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 				{
 					_attributes.heightType = "percent";
 					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
@@ -11474,39 +11961,123 @@ var SNDK =
 					var height = {};
 					var combinedheightofchildren = 0;
 		
-					if (!_attributes.managed && _attributes.widthType != "pixel")
-					{					
-						width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
-					}
-					else
-					{			
-						if (_attributes.managed && _attributes.widthType == "percent")
-						{
+		//			if (!_attributes.managed && _attributes.widthType != "pixel")
+		//			{					
+		//				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
+		//			}
+		//			else
+		//			{										
+		//				if (_attributes.managed && _attributes.widthType == "percent")
+		//				{
+		//
+		//					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+		//				}				
+		//				else
+		//				{
+		//					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
+		//				}			
+		//			}	
 		
-							width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+					switch (_attributes.widthType.toLowerCase ())
+					{
+						case "content":
+						{
+							width.container = 0;
+							
+							for (i in _temp.uiElements)
+							{		
+								if (_temp.uiElements[i]._attributes.widthType == "pixel")
+								{				
+									if (width.container < _temp.uiElements[i]._elements["container"].offsetWidth)					
+									{
+										width.container = parseInt (_temp.uiElements[i]._elements["container"].offsetWidth);
+									}							
+								}
+							}									
+						
+							break;
 						}
-						else
+						
+						case "pixel":
 						{
 							width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
-						}			
-					}	
-		
-		
-					if (!_attributes.managed && _attributes.heightType != "pixel")
-					{					
-						height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
-					}
-					else
-					{			
-						if (_attributes.managed && _attributes.heightType == "percent")
-						{
-							height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+							break;
 						}
-						else
+						
+						case "percent":
+						{
+							if (_attributes.managed)
+							{
+								width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+							}
+							else
+							{
+								swidth.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
+							}
+							break;
+						}
+					}
+		
+					switch (_attributes.heightType.toLowerCase ())
+					{
+						case "content":
+						{
+							height.container = 0;
+						
+							for (i in _temp.uiElements)
+							{		
+								if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content") )
+								{									
+									height.container += _temp.uiElements[index]._elements["container"].offsetHeight;
+								}
+							}									
+							break;
+						}
+					
+						case "pixel":
 						{
 							height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
-						}			
-					}	
+							break;
+						}
+						
+						case "percent":
+						{
+							if (_attributes.managed)
+							{
+								height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+							}
+							else
+							{
+								height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
+							}
+							break;
+						}
+					}
+		
+		//			if (!_attributes.managed && _attributes.heightType != "pixel")
+		//			{					
+		//				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
+		//			}
+		//			else
+		//			{			
+		//				if (_attributes.managed && _attributes.heightType == "content")
+		//				{
+		//					height.container = 0;
+		//				
+		//					if (_temp.uiElements[index]._attributes.heightType == "pixel")
+		//					{													
+		//						height.container += parseInt (_temp.uiElements[index]._attributes.height);
+		//					}							
+		//				}			
+		//				else if (_attributes.managed && _attributes.heightType == "percent")
+		//				{
+		//					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+		//				}
+		//				else
+		//				{
+		//					height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
+		//				}			
+		//			}	
 		
 					width.topCenter = width.container - _temp.cache.containerWidth;
 					width.contentCenter = width.container - _temp.cache.containerWidth;
@@ -11825,7 +12396,8 @@ var SNDK =
 			var _elements = new Array ();
 			var _attributes = attributes;
 			var _temp = 	{ initialized: false,
-				 	  cache: new Array ()		 
+				 	  cache: new Array (),
+				 	  contentHeight: 0
 					};
 		
 			_attributes.id = SNDK.tools.newGuid ();
@@ -11837,6 +12409,8 @@ var SNDK =
 			this._elements = _elements;
 			this._temp = _temp;	
 			this._init = init;	
+			
+			this._height = getContainerHeight ();
 			
 			// Functions		
 			this.refresh = functionRefresh;	
@@ -11912,6 +12486,19 @@ var SNDK =
 				_temp.cacheUpdated = true;	
 			}	
 						
+						
+			function getContainerHeight ()
+			{
+				if (_temp.initialized)
+				{
+					return _elements["container"].style.container;
+				}
+				else
+				{
+					return 0;		
+				}
+			}
+						
 			// ------------------------------------
 			// setDefaultAttributes
 			// ------------------------------------					
@@ -11942,9 +12529,13 @@ var SNDK =
 				
 				// Height
 				if (!_attributes.height) 
-					_attributes.height = "100%";
+					_attributes.height = "content";
 					
-				if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+				if (_attributes.height == "content")
+				{
+					_attributes.heightType = "content";
+				}
+				else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 				{
 					_attributes.heightType = "percent";
 					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
@@ -11991,8 +12582,12 @@ var SNDK =
 						height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
 					}
 					else
-					{			
-						if (_attributes.managed && _attributes.heightType == "percent")
+					{									
+						if (_attributes.managed && _attributes.heightType == "content")
+						{
+							height.container = 200;
+						}
+						else if (_attributes.managed && _attributes.heightType == "percent")
 						{
 							height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
 						}
@@ -12161,7 +12756,8 @@ var SNDK =
 			{
 				var _attributes = attributes;
 				var _elements = new Array ();
-				var _temp =	{ uiElements: new Array ()
+				var _temp =	{ uiElements: new Array (),
+							contentHeight: 0
 						}
 		
 				setAttributes ();
@@ -12262,6 +12858,8 @@ var SNDK =
 				 	element.setAttribute ("managed", true);
 				 	element.setAttribute ("appendTo", _elements["container"]);
 				 	
+				 	_temp.contentHeight += parseInt (element.height); 		 	
+									 	
 				//  SNDK.SUI.refresh ();		 			 	 
 				}	
 				
@@ -13961,462 +14559,6 @@ var SNDK =
 			// ------------------------------------
 			// Events
 			// ------------------------------------
-		},
-	
-		// -------------------------------------------------------------------------------------------------------------------------
-		// Canvas ([attributes])
-		// -------------------------------------------------------------------------------------------------------------------------
-		//
-		// .refresh ()
-		// .dispose ()
-		// .addUIElement (uiElement);
-		// .getAttribute (string)
-		// .setAttribute (string, string)
-		//	
-		// 	id 			get
-		//	tag			get/set
-		//	stylesheet	get/set
-		//	width		get/set
-		//	height		get/set
-		//	canScroll	get/set
-		//
-		/**
-		 * @constructor
-		 */
-		canvas : function (attributes)
-		{
-			var _elements = new Array ();
-			var _attributes = attributes;				
-			
-			var _temp = 	{ 
-								initialized: false,
-					  			uiElements: new Array ()
-							};
-			
-			_attributes.id = SNDK.tools.newGuid ();
-			
-			setAttributes ();	
-			
-			// Private functions
-			this._attributes = _attributes;
-			this._elements = _elements;
-			this._temp = _temp;	
-			this._init = init;
-			
-			// Functions		
-			this.refresh = functionRefresh;			
-			this.dispose = functionDispose;
-			this.addUIElement = functionAddUIElement;
-			this.getUIElement = functionGetUIElement;
-			this.setAttribute = functionSetAttribute;
-			this.getAttribute = functionGetAttribute;	
-			
-			// Construct
-			construct ();
-										
-			// Initialize
-			SNDK.SUI.addInit (this);
-				
-			// ------------------------------------
-			// Private functions
-			// ------------------------------------
-			// ------------------------------------
-			// init
-			// ------------------------------------	
-			function init ()
-			{
-			}
-			
-			// ------------------------------------
-			// construct
-			// ------------------------------------	
-			function construct ()
-			{
-				// Container
-				_elements["container"] = SNDK.tools.newElement ("div", {});
-				_elements["container"].setAttribute ("id", _attributes.id);
-				
-				if (_attributes.canScroll)
-				{
-					_elements["container"].style.overflow = "auto";		
-				}		
-				else
-				{
-					_elements["container"].style.overflow = "hidden";		
-				}
-																			
-				// Hook Events
-				window.addEvent (window, 'SUIREFRESH', refresh);	
-			}	
-				
-			// ------------------------------------
-			// refresh
-			// ------------------------------------		
-			function refresh ()
-			{	
-				// Only refresh if control has been initalized.	
-				if (_temp.initialized)
-				{
-					_elements["container"].className = _attributes.stylesheet;
-				}
-				
-				setDimensions ();
-			}
-			
-			// ------------------------------------
-			// refresh
-			// ------------------------------------			
-			function dispose ()
-			{
-				window.removeEvent (window, 'SUIREFRESH', refresh);				
-			}
-						
-			// ------------------------------------
-			// setDefaultAttributes
-			// ------------------------------------					
-			function setAttributes ()
-			{
-				// Stylesheet
-				if (!_attributes.stylesheet) _attributes.stylesheet = "SUICanvas";	
-				
-				// Managed
-				if (!_attributes.managed)
-					_attributes.managed = false;				
-			
-				// Width
-				if (!_attributes.width) 
-					_attributes.width = "100%";				
-					
-				if (_attributes.width.substring (_attributes.width.length - 1) == "%")
-				{
-					_attributes.widthType = "percent";
-					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
-				}
-				else
-				{
-					_attributes.widthType = "pixel";
-					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
-				}		
-				
-				// Height
-				if (!_attributes.height) 
-					_attributes.height = "100%";
-					
-				if (_attributes.height.substring (_attributes.height.length - 1) == "%")
-				{
-					_attributes.heightType = "percent";
-					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
-				}
-				else
-				{
-					_attributes.heightType = "pixel";
-					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
-				}
-						
-			
-				// Width
-		//		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
-		//		{
-		//			_attributes.widthType = "percent";
-		//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
-		//		}
-		//		else
-		//		{
-		//			_attributes.widthType = "pixel";
-		//			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
-		//		}						
-				
-				// Height
-		//		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
-		//		{
-		//			_attributes.heightType = "percent";
-		//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
-		//		}
-		//		else
-		//		{
-		//			_attributes.heightType = "pixel";
-		//			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
-		//		}		
-				
-				if (!_attributes.canScroll) 
-					_attributes.canScroll = false;
-			}		
-								
-			// ------------------------------------
-			// setDimensions
-			// ------------------------------------
-			function setDimensions ()
-			{		
-				// Only set dimensions if control has been initalized.	
-				if (_temp.initialized)
-				{	
-					var parent = _elements["container"].parentNode;			
-					var width = 0;
-					var height = 0;
-					var combinedheightofchildren = 0;
-								
-					if (_attributes.widthType == "percent")
-					{
-						width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
-					}
-					else
-					{
-						width = _attributes.width;
-					}
-							
-					if (_attributes.heightType == "percent")
-					{	
-						height = (SNDK.tools.getElementInnerHeight (parent) * _attributes.height) / 100;
-					}
-					else
-					{					
-						height = _attributes.height;
-					}
-					
-					_elements["container"].style.width = width +"px";
-					_elements["container"].style.height = height +"px";
-		
-					if (_attributes.canScroll)
-					{
-						for (index in _temp.uiElements)
-						{		
-							if (_temp.uiElements[index]._attributes.heightType == "pixel")
-							{									
-								combinedheightofchildren += parseInt (_temp.uiElements[index]._attributes.height);
-							}
-						}						
-					
-						if (combinedheightofchildren > height)
-						{
-							width = width - window.scrollbarWidth;
-						}			
-					}						
-					
-					for (index in _temp.uiElements)
-					{
-						if (_temp.uiElements[index]._attributes.widthType == "percent")
-						{
-							_temp.uiElements[index]._attributes.managedWidth = (width * _temp.uiElements[index]._attributes.width) / 100;
-						}
-						
-						if (_temp.uiElements[index]._attributes.heightType == "percent")
-						{
-							_temp.uiElements[index]._attributes.managedHeight = (height * _temp.uiElements[index]._attributes.height) / 100;
-						}
-						
-						_temp.uiElements[index].refresh ();
-					}
-				}
-			}	
-											
-			// ------------------------------------
-			// Public functions
-			// ------------------------------------
-			// ------------------------------------
-			// refresh
-			// ------------------------------------				
-			function functionRefresh ()
-			{
-				refresh ();
-			}			
-			
-			// ------------------------------------
-			// dispose
-			// ------------------------------------				
-			function functionDispose ()
-			{
-				dispose ();
-			}			
-							
-			// ------------------------------------
-			// addUIElement
-			// ------------------------------------							
-			function functionAddUIElement (element)
-			{
-				var count = _temp.uiElements.length;
-				
-			 	_temp.uiElements[count] = element;
-			 		 	
-			 	element.setAttribute ("managed", true);
-			 	element.setAttribute ("appendTo", _elements["container"]);
-			}
-			
-			function functionGetUIElement (tag)
-			{
-				for (index in _temp.uiElements)
-				{
-					if (_temp.uiElements[index].getAttribute ("tag") == tag)
-					{
-						
-					}
-				}
-			}
-										
-			// ------------------------------------
-			// getAttribute
-			// ------------------------------------								
-			function functionGetAttribute (attribute)
-			{
-				switch (attribute)
-				{
-					case "id":
-					{
-						return _attributes[attribute];
-					}
-					
-					case "tag":
-					{
-						return _attributes[attribute];
-					}
-					
-					case "stylesheet":
-					{
-						return _attributes[attribute];
-					}
-					
-					case "width":
-					{
-						if (_attributes.widthType == "percent")
-						{
-							return _attributes.width + "%";
-						}
-		
-						if (_attributes.widthType == "pixel")
-						{
-							return _attributes.width + "px";
-						}
-					}
-					
-					case "height":
-					{
-						if (_attributes.heightType == "percent")
-						{
-							return _attributes.height + "%";
-						}
-		
-						if (_attributes.heightType == "pixel")
-						{
-							return _attributes.height + "px";
-						}						
-					}
-					
-					case "canScroll":
-					{
-						return _attributes[attribute];			
-					}			
-										
-					default:
-					{
-						throw "No attribute with the name '"+ attribute +"' exist in this object";
-					}
-				}	
-			}	
-			
-			// ------------------------------------
-			// setAttribute
-			// ------------------------------------						
-			function functionSetAttribute (attribute, value)
-			{
-				if (!_attributes[attribute])
-				{
-					// Some attributes is readonly.
-					if (attribute == "id")
-					{
-						throw "Attribute with name '"+ attribute +"' is ready only.";
-					}
-						
-					_attributes[attribute] = value;
-					
-					// Some attributes needs special threatment.						
-					if (attribute == "width" || attribute == "height" || attribute == "stylesheet" || attribute == "title" || attribute == "icon")
-					{
-						setAttributes ();
-						refresh ()
-					}
-				}
-				else
-				{
-					throw "No attribute with the name '"+ attribute +"' exist in this object";
-				}
-			}	
-			
-			// ------------------------------------
-			// setAttribute
-			// ------------------------------------						
-			function functionSetAttribute (attribute, value)
-			{
-				switch (attribute)
-				{
-					case "id":
-					{
-						throw "Attribute with name ID is ready only.";
-						break;
-					}
-					
-					case "tag":
-					{
-						_attributes[attribute] = value;
-						break;
-					}
-					
-					case "stylesheet":
-					{
-						_attributes[attribute] = value;
-						break;				
-					}
-					
-					case "width":
-					{
-						if (value.substring (value.length, 3) == "%")
-						{
-							_attributes.widthType = "percent";
-							_attributes.width = value.substring (0, value.length - 1)			
-						}
-						else
-						{
-							_attributes.widthType = "pixel";
-							_attributes.width = value.substring (0, value.length - 2)
-						}	
-						
-						refresh ();
-						
-						break;			
-					}
-		
-					case "height":
-					{
-						if (value.substring (value.length, 3) == "%")
-						{
-							_attributes.heightType = "percent";
-							_attributes.height = value.substring (0, value.length - 1)			
-						}
-						else
-						{
-							_attributes.heightType = "pixel";
-							_attributes.height = value.substring (0, value.length - 2)
-						}	
-						
-						refresh ();
-						
-						break;			
-					}
-					
-					case "canScroll":
-					{
-						_attributes[attribute] = value;					
-						break;
-					}			
-										
-					default:
-					{
-						throw "No attribute with the name '"+ attribute +"' exist in this object";
-					}
-				}	
-			}					
-		
-			// ------------------------------------
-			// Events
-			// ------------------------------------		
 		},
 	
 		// -------------------------------------------------------------------------------------------------------------------------

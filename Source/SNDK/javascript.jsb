@@ -24,6 +24,11 @@
 				<js file="javascript/widgets/simplamenu.js" />
 			</class>			
 			<class name="SUI">			
+				<constructor name="canvas" variables="attributes">
+					<js file="javascript/sui/canvas/10_definitions.js" />
+					<js file="javascript/sui/canvas/20_private_functions.js" />
+					<js file="javascript/sui/canvas/30_public_functions.js" />					
+				</constructor>					
 				<constructor name="listview" variables="attributes">
 					<js file="javascript/sui/listview/10_definitions.js" />
 					<js file="javascript/sui/listview/20_private_functions.js" />
@@ -42,7 +47,7 @@
 				<js file="javascript/sui/label.js" />
 				<js file="javascript/sui/tabview.js" />
 				<js file="javascript/sui/text.js" />
-				<js file="javascript/sui/canvas.js" />			
+				
 				<js file="javascript/sui/htmlview.js" />			
 				<js file="javascript/sui/image.js" />
 						

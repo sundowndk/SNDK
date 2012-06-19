@@ -39,7 +39,8 @@ layoutbox : function (attributes)
 	var _elements = new Array ();
 	var _attributes = attributes;
 	var _temp = 	{ initialized: false,
-		 	  cache: new Array ()		 
+		 	  cache: new Array (),
+		 	  contentHeight: 0
 			};
 
 	_attributes.id = SNDK.tools.newGuid ();
@@ -51,6 +52,8 @@ layoutbox : function (attributes)
 	this._elements = _elements;
 	this._temp = _temp;	
 	this._init = init;	
+	
+	this._height = getContainerHeight ();
 	
 	// Functions		
 	this.refresh = functionRefresh;	
@@ -126,6 +129,19 @@ layoutbox : function (attributes)
 		_temp.cacheUpdated = true;	
 	}	
 				
+				
+	function getContainerHeight ()
+	{
+		if (_temp.initialized)
+		{
+			return _elements["container"].style.container;
+		}
+		else
+		{
+			return 0;		
+		}
+	}
+				
 	// ------------------------------------
 	// setDefaultAttributes
 	// ------------------------------------					
@@ -156,9 +172,13 @@ layoutbox : function (attributes)
 		
 		// Height
 		if (!_attributes.height) 
-			_attributes.height = "100%";
+			_attributes.height = "content";
 			
-		if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+		if (_attributes.height == "content")
+		{
+			_attributes.heightType = "content";
+		}
+		else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 		{
 			_attributes.heightType = "percent";
 			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
@@ -205,8 +225,12 @@ layoutbox : function (attributes)
 				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
 			}
 			else
-			{			
-				if (_attributes.managed && _attributes.heightType == "percent")
+			{									
+				if (_attributes.managed && _attributes.heightType == "content")
+				{
+					height.container = 200;
+				}
+				else if (_attributes.managed && _attributes.heightType == "percent")
 				{
 					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
 				}
@@ -375,7 +399,8 @@ layoutbox : function (attributes)
 	{
 		var _attributes = attributes;
 		var _elements = new Array ();
-		var _temp =	{ uiElements: new Array ()
+		var _temp =	{ uiElements: new Array (),
+					contentHeight: 0
 				}
 
 		setAttributes ();
@@ -476,6 +501,8 @@ layoutbox : function (attributes)
 		 	element.setAttribute ("managed", true);
 		 	element.setAttribute ("appendTo", _elements["container"]);
 		 	
+		 	_temp.contentHeight += parseInt (element.height); 		 	
+							 	
 		//  SNDK.SUI.refresh ();		 			 	 
 		}	
 		
