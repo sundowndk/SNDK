@@ -136,7 +136,7 @@ container : function (attributes)
 		SNDK.tools.textSelectionDisable (_elements["title"]);													
 		
 		// Hook Events
-		window.addEvent (window, 'SUIREFRESH', refresh);			
+		window.addEvent (window, 'SUIREFRESH', refresh);							
 	}	
 	
 	// ------------------------------------
@@ -146,7 +146,8 @@ container : function (attributes)
 	{	
 		// Only refresh if control has been initalized.	
 		if (_temp.initialized)
-		{
+		{		
+		
 			_elements["container"].className = _attributes.stylesheet;
 			if (_attributes.icon != "")
 			{
@@ -160,7 +161,7 @@ container : function (attributes)
 			
 			_elements["title"].innerHTML = _attributes.title;		
 		}
-		
+						
 		setDimensions ();
 	}			
 	
@@ -231,9 +232,10 @@ container : function (attributes)
 		if (!_attributes.width) 
 			_attributes.width = "100%";				
 			
+			
 		if (_attributes.width == "content")
-		{
-			_attributes.widthType = "content";
+		{			
+			_attributes.widthType = "content";			
 		}
 		else if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{
@@ -245,13 +247,13 @@ container : function (attributes)
 			_attributes.widthType = "pixel";
 			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
 		}				
-		
+				
 		// Height
 		if (!_attributes.height) 
 			_attributes.height = "100%";				
 			
 		if (_attributes.height == "content")
-		{
+		{			
 			_attributes.heightType = "content";
 		}
 		else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
@@ -264,7 +266,7 @@ container : function (attributes)
 			_attributes.heightType = "pixel";
 			_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
 		}				
-
+		
 		// canScroll
 		if (!_attributes.canScroll) 
 			_attributes.canScroll = false;
@@ -275,7 +277,8 @@ container : function (attributes)
 				
 		// Title
 		if (!_attributes.title) 
-			_attributes.title = "";
+			_attributes.title = "";															
+	
 	}		
 				
 	// ------------------------------------	
@@ -283,46 +286,35 @@ container : function (attributes)
 	// ------------------------------------			
 	function setDimensions ()
 	{
+		// Only set dimensions if control has been initalized.	
 		if (_temp.initialized)
 		{	
 			var width = {};
 			var height = {};
 			var combinedheightofchildren = 0;
+			
+			// Refresh all child elements.
+			for (index in _temp.uiElements)
+			{							
+				_temp.uiElements[index].refresh ();
+			}			
 
-//			if (!_attributes.managed && _attributes.widthType != "pixel")
-//			{					
-//				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
-//			}
-//			else
-//			{										
-//				if (_attributes.managed && _attributes.widthType == "percent")
-//				{
-//
-//					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
-//				}				
-//				else
-//				{
-//					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
-//				}			
-//			}	
-
+			// Find width.
 			switch (_attributes.widthType.toLowerCase ())
 			{
 				case "content":
 				{
-					width.container = 0;
-					
+					width.container = 0;				
 					for (i in _temp.uiElements)
-					{		
+					{								
 						if ((_temp.uiElements[i]._attributes.widthType == "pixel") || (_temp.uiElements[i]._attributes.widthType == "content"))
-						{				
+						{											
 							if (width.container < _temp.uiElements[i]._elements["container"].offsetWidth)					
 							{
-								width.container = parseInt (_temp.uiElements[i]._elements["container"].offsetWidth);
+								width.container = _temp.uiElements[i]._elements["container"].offsetWidth + _temp.cache.containerWidth;
 							}							
 						}
-					}									
-				
+					}													
 					break;
 				}
 				
@@ -346,6 +338,7 @@ container : function (attributes)
 				}
 			}
 
+			// Find height.
 			switch (_attributes.heightType.toLowerCase ())
 			{
 				case "content":
@@ -356,7 +349,7 @@ container : function (attributes)
 					{		
 						if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content") )
 						{									
-							height.container += _temp.uiElements[index]._elements["container"].offsetHeight;
+							height.container += _temp.uiElements[i]._elements["container"].offsetHeight + _temp.cache.containerHeight; 
 						}
 					}									
 					break;
@@ -382,31 +375,7 @@ container : function (attributes)
 				}
 			}
 
-//			if (!_attributes.managed && _attributes.heightType != "pixel")
-//			{					
-//				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
-//			}
-//			else
-//			{			
-//				if (_attributes.managed && _attributes.heightType == "content")
-//				{
-//					height.container = 0;
-//				
-//					if (_temp.uiElements[index]._attributes.heightType == "pixel")
-//					{													
-//						height.container += parseInt (_temp.uiElements[index]._attributes.height);
-//					}							
-//				}			
-//				else if (_attributes.managed && _attributes.heightType == "percent")
-//				{
-//					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
-//				}
-//				else
-//				{
-//					height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
-//				}			
-//			}	
-
+			// Set width & height.
 			width.topCenter = width.container - _temp.cache.containerWidth;
 			width.contentCenter = width.container - _temp.cache.containerWidth;
 			width.bottomCenter = width.container - _temp.cache.containerWidth; 
@@ -427,35 +396,44 @@ container : function (attributes)
 			_elements["contentcenter"].style.height = height.contentCenter +"px";			
 			_elements["contentright"].style.height = height.contentRight +"px";			
 						
-			if (_attributes.canScroll)
+			// If canvas can scroll, we need to make room for the scrollbar.		
+			if ((_attributes.canScroll) && (_attributes.heightType.toLowerCase () != "content"))
 			{
+				var contentheight = 0;
 				for (index in _temp.uiElements)
 				{		
 					if (_temp.uiElements[index]._attributes.heightType == "pixel")
 					{									
-						combinedheightofchildren += parseInt (_temp.uiElements[index]._attributes.height);
+						contentheight += parseInt (_temp.uiElements[index]._attributes.height);
 					}
 				}						
 			
-				if (combinedheightofchildren > height.child)
+				if (contentheight > height.child)
 				{
 					width.child = width.child - window.scrollbarWidth;
 				}			
 			}	
-						
+					
+			// All child elements that use percentage needs to have their width and height updated accordingly.
 			for (index in _temp.uiElements)
 			{
+				var refresh = false;			
 				if (_temp.uiElements[index]._attributes.widthType == "percent")
 				{
 					_temp.uiElements[index]._attributes.managedWidth = (width.child * _temp.uiElements[index]._attributes.width) / 100;
+					refresh = true;
 				}
 				
 				if (_temp.uiElements[index]._attributes.heightType == "percent")
 				{
 					_temp.uiElements[index]._attributes.managedHeight = (height.child * _temp.uiElements[index]._attributes.height) / 100;
+					refresh = true;
 				}
 				
-				_temp.uiElements[index].refresh ();
+				if (refresh)
+				{
+					_temp.uiElements[index].refresh ();
+				}
 			}			
 		}
 	}			

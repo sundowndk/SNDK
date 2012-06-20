@@ -3,11 +3,10 @@ var _attributes = attributes;
 
 var _temp = 	{ 
 					initialized: false,
-		  			uiElements: new Array ()
+		  			uiElements: new Array ()		  		
 				};
 
-
-
+// Set attributes
 setAttributes ();	
 
 // Private functions

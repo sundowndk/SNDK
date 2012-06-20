@@ -123,25 +123,29 @@ function setDimensions ()
 		var width = 0;
 		var height = 0;
 		
+		// Refresh all child elements.
+		for (index in _temp.uiElements)
+		{		
+			_temp.uiElements[index].refresh ();
+		}			
+									
 		// Find width.
 		switch (_attributes.widthType.toLowerCase ())
 		{
 			// Width is content.
 			case "content":
 			{
-				width = 0;
-				
+				width = 0;			
 				for (i in _temp.uiElements)
-				{		
+				{																		
 					if ((_temp.uiElements[i]._attributes.widthType == "pixel") || (_temp.uiElements[i]._attributes.widthType == "content"))
-					{				
-						if (width < _temp.uiElements[index]._attributes.offsetWidth)
+					{	
+						if (width < _temp.uiElements[i]._elements["container"].offsetWidth)
 						{
-							width = _temp.uiElements[index]._attributes.offsetWidth;
+							width = _temp.uiElements[i]._elements["container"].offsetWidth;
 						}							
 					}
-				}									
-			
+				}																				
 				break;
 			}
 			
@@ -166,14 +170,12 @@ function setDimensions ()
 			// Height is content.
 			case "content":
 			{
-				height = 0;
-						
+				height = 0;						
 				for (i in _temp.uiElements)
-				{		
-					
+				{							
 					if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content"))
 					{						
-						height += _temp.uiElements[i]._elements["container"].offsetHeight;								
+						height += _temp.uiElements[i]._elements["container"].offsetHeight;
 					}
 				}									
 				break;
@@ -193,15 +195,15 @@ function setDimensions ()
 				break;
 			}
 		}
-																																					
+		
+		// Set width & height.
 		_elements["container"].style.width = width +"px";
 		_elements["container"].style.height = height +"px";
 
-		// If canvas can scroll, we need to make room for the scrollbar.
-		if (_attributes.canScroll)
+		// If canvas can scroll, we need to make room for the scrollbar.		
+		if ((_attributes.canScroll) && (_attributes.heightType.toLowerCase () != "content"))
 		{
-			var contentheight = 0;
-			
+			var contentheight = 0;			
 			for (i in _temp.uiElements)
 			{		
 				if (_temp.uiElements[i]._attributes.heightType == "pixel" || _temp.uiElements[i]._attributes.heightType == "content")
@@ -210,26 +212,59 @@ function setDimensions ()
 				}
 			}						
 		
-			if (i > height)
+			if (contentheight > height)
 			{
 				width = width - window.scrollbarWidth;
 			}			
 		}						
 		
 		// All child elements that use percentage needs to have their width and height updated accordingly.
-		for (index in _temp.uiElements)
+		for (i in _temp.uiElements)
 		{
-			if (_temp.uiElements[index]._attributes.widthType == "percent")
+			var refresh = false;			
+			if (_temp.uiElements[i]._attributes.widthType == "percent")
 			{
-				_temp.uiElements[index]._attributes.managedWidth = (width * _temp.uiElements[index]._attributes.width) / 100;
+				_temp.uiElements[i]._attributes.managedWidth = (width * _temp.uiElements[i]._attributes.width) / 100;
+				refresh = true;
 			}
 			
-			if (_temp.uiElements[index]._attributes.heightType == "percent")
+			if (_temp.uiElements[i]._attributes.heightType == "percent")
 			{
-				_temp.uiElements[index]._attributes.managedHeight = (height * _temp.uiElements[index]._attributes.height) / 100;
+				_temp.uiElements[i]._attributes.managedHeight = (height * _temp.uiElements[i]._attributes.height) / 100;
+				refresh = true;
 			}
 			
-			_temp.uiElements[index].refresh ();
+			if (refresh)
+			{
+				_temp.uiElements[i].refresh ();
+			}
 		}
 	}
 }	
+
+// ------------------------------------
+// addUIElement
+// ------------------------------------							
+function addUIElement (element)
+{
+ 	_temp.uiElements[_temp.uiElements.length] = element;
+ 		 	
+ 	element.setAttribute ("managed", true);
+ 	element.setAttribute ("appendTo", _elements["container"]);
+}
+
+// ------------------------------------
+// getUIElement
+// ------------------------------------							
+function getUIElement (tag)
+{
+	for (i in _temp.uiElements)
+	{
+		if (_temp.uiElements[i].getAttribute ("tag") == tag)
+		{
+			return _temp.uiElements[i];	
+		}
+	}
+	
+	throw ("No element with tag '"+ tag +"' was found in this canvas.");
+}

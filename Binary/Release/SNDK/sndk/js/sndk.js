@@ -3528,11 +3528,10 @@ var SNDK =
 			
 			var _temp = 	{ 
 								initialized: false,
-					  			uiElements: new Array ()
+					  			uiElements: new Array ()		  		
 							};
 			
-			
-			
+			// Set attributes
 			setAttributes ();	
 			
 			// Private functions
@@ -3679,25 +3678,29 @@ var SNDK =
 					var width = 0;
 					var height = 0;
 					
+					// Refresh all child elements.
+					for (index in _temp.uiElements)
+					{		
+						_temp.uiElements[index].refresh ();
+					}			
+												
 					// Find width.
 					switch (_attributes.widthType.toLowerCase ())
 					{
 						// Width is content.
 						case "content":
 						{
-							width = 0;
-							
+							width = 0;			
 							for (i in _temp.uiElements)
-							{		
+							{																		
 								if ((_temp.uiElements[i]._attributes.widthType == "pixel") || (_temp.uiElements[i]._attributes.widthType == "content"))
-								{				
-									if (width < _temp.uiElements[index]._attributes.offsetWidth)
+								{	
+									if (width < _temp.uiElements[i]._elements["container"].offsetWidth)
 									{
-										width = _temp.uiElements[index]._attributes.offsetWidth;
+										width = _temp.uiElements[i]._elements["container"].offsetWidth;
 									}							
 								}
-							}									
-						
+							}																				
 							break;
 						}
 						
@@ -3722,14 +3725,12 @@ var SNDK =
 						// Height is content.
 						case "content":
 						{
-							height = 0;
-									
+							height = 0;						
 							for (i in _temp.uiElements)
-							{		
-								
+							{							
 								if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content"))
 								{						
-									height += _temp.uiElements[i]._elements["container"].offsetHeight;								
+									height += _temp.uiElements[i]._elements["container"].offsetHeight;
 								}
 							}									
 							break;
@@ -3749,15 +3750,15 @@ var SNDK =
 							break;
 						}
 					}
-																																								
+					
+					// Set width & height.
 					_elements["container"].style.width = width +"px";
 					_elements["container"].style.height = height +"px";
 			
-					// If canvas can scroll, we need to make room for the scrollbar.
-					if (_attributes.canScroll)
+					// If canvas can scroll, we need to make room for the scrollbar.		
+					if ((_attributes.canScroll) && (_attributes.heightType.toLowerCase () != "content"))
 					{
-						var contentheight = 0;
-						
+						var contentheight = 0;			
 						for (i in _temp.uiElements)
 						{		
 							if (_temp.uiElements[i]._attributes.heightType == "pixel" || _temp.uiElements[i]._attributes.heightType == "content")
@@ -3766,29 +3767,62 @@ var SNDK =
 							}
 						}						
 					
-						if (i > height)
+						if (contentheight > height)
 						{
 							width = width - window.scrollbarWidth;
 						}			
 					}						
 					
 					// All child elements that use percentage needs to have their width and height updated accordingly.
-					for (index in _temp.uiElements)
+					for (i in _temp.uiElements)
 					{
-						if (_temp.uiElements[index]._attributes.widthType == "percent")
+						var refresh = false;			
+						if (_temp.uiElements[i]._attributes.widthType == "percent")
 						{
-							_temp.uiElements[index]._attributes.managedWidth = (width * _temp.uiElements[index]._attributes.width) / 100;
+							_temp.uiElements[i]._attributes.managedWidth = (width * _temp.uiElements[i]._attributes.width) / 100;
+							refresh = true;
 						}
 						
-						if (_temp.uiElements[index]._attributes.heightType == "percent")
+						if (_temp.uiElements[i]._attributes.heightType == "percent")
 						{
-							_temp.uiElements[index]._attributes.managedHeight = (height * _temp.uiElements[index]._attributes.height) / 100;
+							_temp.uiElements[i]._attributes.managedHeight = (height * _temp.uiElements[i]._attributes.height) / 100;
+							refresh = true;
 						}
 						
-						_temp.uiElements[index].refresh ();
+						if (refresh)
+						{
+							_temp.uiElements[i].refresh ();
+						}
 					}
 				}
 			}	
+			
+			// ------------------------------------
+			// addUIElement
+			// ------------------------------------							
+			function addUIElement (element)
+			{
+			 	_temp.uiElements[_temp.uiElements.length] = element;
+			 		 	
+			 	element.setAttribute ("managed", true);
+			 	element.setAttribute ("appendTo", _elements["container"]);
+			}
+			
+			// ------------------------------------
+			// getUIElement
+			// ------------------------------------							
+			function getUIElement (tag)
+			{
+				for (i in _temp.uiElements)
+				{
+					if (_temp.uiElements[i].getAttribute ("tag") == tag)
+					{
+						return _temp.uiElements[i];	
+					}
+				}
+				
+				throw ("No element with tag '"+ tag +"' was found in this canvas.");
+			}
 			// ------------------------------------
 			// Public functions
 			// ------------------------------------
@@ -3813,12 +3847,7 @@ var SNDK =
 			// ------------------------------------							
 			function functionAddUIElement (element)
 			{
-				var count = _temp.uiElements.length;
-				
-			 	_temp.uiElements[count] = element;
-			 		 	
-			 	element.setAttribute ("managed", true);
-			 	element.setAttribute ("appendTo", _elements["container"]);
+				addUIElement (element);
 			}
 			
 			// ------------------------------------
@@ -3826,13 +3855,7 @@ var SNDK =
 			// ------------------------------------							
 			function functionGetUIElement (tag)
 			{
-				for (index in _temp.uiElements)
-				{
-					if (_temp.uiElements[index].getAttribute ("tag") == tag)
-					{
-						return _temp.uiElements[index];	
-					}
-				}
+				return getUIElement (tag)
 			}
 										
 			// ------------------------------------
@@ -3938,7 +3961,7 @@ var SNDK =
 					
 					case "width":
 					{
-						if (value == "content")
+						if (value.toLowerCase () == "content")
 						{
 							_attributes.widthType = "content";
 							_attributes.width = "content";
@@ -3961,7 +3984,7 @@ var SNDK =
 			
 					case "height":
 					{
-						if (value == "content")
+						if (value.toLowerCase () == "content")
 						{
 							_attributes.heightType = "content";
 							_attributes.height = "content";
@@ -11808,7 +11831,7 @@ var SNDK =
 				SNDK.tools.textSelectionDisable (_elements["title"]);													
 				
 				// Hook Events
-				window.addEvent (window, 'SUIREFRESH', refresh);			
+				window.addEvent (window, 'SUIREFRESH', refresh);							
 			}	
 			
 			// ------------------------------------
@@ -11818,7 +11841,8 @@ var SNDK =
 			{	
 				// Only refresh if control has been initalized.	
 				if (_temp.initialized)
-				{
+				{		
+				
 					_elements["container"].className = _attributes.stylesheet;
 					if (_attributes.icon != "")
 					{
@@ -11832,7 +11856,7 @@ var SNDK =
 					
 					_elements["title"].innerHTML = _attributes.title;		
 				}
-				
+								
 				setDimensions ();
 			}			
 			
@@ -11903,9 +11927,10 @@ var SNDK =
 				if (!_attributes.width) 
 					_attributes.width = "100%";				
 					
+					
 				if (_attributes.width == "content")
-				{
-					_attributes.widthType = "content";
+				{			
+					_attributes.widthType = "content";			
 				}
 				else if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 				{
@@ -11917,13 +11942,13 @@ var SNDK =
 					_attributes.widthType = "pixel";
 					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
 				}				
-				
+						
 				// Height
 				if (!_attributes.height) 
 					_attributes.height = "100%";				
 					
 				if (_attributes.height == "content")
-				{
+				{			
 					_attributes.heightType = "content";
 				}
 				else if (_attributes.height.substring (_attributes.height.length - 1) == "%")
@@ -11936,7 +11961,7 @@ var SNDK =
 					_attributes.heightType = "pixel";
 					_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
 				}				
-		
+				
 				// canScroll
 				if (!_attributes.canScroll) 
 					_attributes.canScroll = false;
@@ -11947,7 +11972,8 @@ var SNDK =
 						
 				// Title
 				if (!_attributes.title) 
-					_attributes.title = "";
+					_attributes.title = "";															
+			
 			}		
 						
 			// ------------------------------------	
@@ -11955,46 +11981,35 @@ var SNDK =
 			// ------------------------------------			
 			function setDimensions ()
 			{
+				// Only set dimensions if control has been initalized.	
 				if (_temp.initialized)
 				{	
 					var width = {};
 					var height = {};
 					var combinedheightofchildren = 0;
+					
+					// Refresh all child elements.
+					for (index in _temp.uiElements)
+					{							
+						_temp.uiElements[index].refresh ();
+					}			
 		
-		//			if (!_attributes.managed && _attributes.widthType != "pixel")
-		//			{					
-		//				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
-		//			}
-		//			else
-		//			{										
-		//				if (_attributes.managed && _attributes.widthType == "percent")
-		//				{
-		//
-		//					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
-		//				}				
-		//				else
-		//				{
-		//					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
-		//				}			
-		//			}	
-		
+					// Find width.
 					switch (_attributes.widthType.toLowerCase ())
 					{
 						case "content":
 						{
-							width.container = 0;
-							
+							width.container = 0;				
 							for (i in _temp.uiElements)
-							{		
-								if (_temp.uiElements[i]._attributes.widthType == "pixel")
-								{				
+							{								
+								if ((_temp.uiElements[i]._attributes.widthType == "pixel") || (_temp.uiElements[i]._attributes.widthType == "content"))
+								{											
 									if (width.container < _temp.uiElements[i]._elements["container"].offsetWidth)					
 									{
-										width.container = parseInt (_temp.uiElements[i]._elements["container"].offsetWidth);
+										width.container = _temp.uiElements[i]._elements["container"].offsetWidth + _temp.cache.containerWidth;
 									}							
 								}
-							}									
-						
+							}													
 							break;
 						}
 						
@@ -12018,6 +12033,7 @@ var SNDK =
 						}
 					}
 		
+					// Find height.
 					switch (_attributes.heightType.toLowerCase ())
 					{
 						case "content":
@@ -12028,7 +12044,7 @@ var SNDK =
 							{		
 								if ((_temp.uiElements[i]._attributes.heightType == "pixel") || (_temp.uiElements[i]._attributes.heightType == "content") )
 								{									
-									height.container += _temp.uiElements[index]._elements["container"].offsetHeight;
+									height.container += _temp.uiElements[i]._elements["container"].offsetHeight + _temp.cache.containerHeight; 
 								}
 							}									
 							break;
@@ -12054,31 +12070,7 @@ var SNDK =
 						}
 					}
 		
-		//			if (!_attributes.managed && _attributes.heightType != "pixel")
-		//			{					
-		//				height.container = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100) - _temp.cache.containerPadding["vertical"];
-		//			}
-		//			else
-		//			{			
-		//				if (_attributes.managed && _attributes.heightType == "content")
-		//				{
-		//					height.container = 0;
-		//				
-		//					if (_temp.uiElements[index]._attributes.heightType == "pixel")
-		//					{													
-		//						height.container += parseInt (_temp.uiElements[index]._attributes.height);
-		//					}							
-		//				}			
-		//				else if (_attributes.managed && _attributes.heightType == "percent")
-		//				{
-		//					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
-		//				}
-		//				else
-		//				{
-		//					height.container = _attributes.height - _temp.cache.containerPadding["vertical"];
-		//				}			
-		//			}	
-		
+					// Set width & height.
 					width.topCenter = width.container - _temp.cache.containerWidth;
 					width.contentCenter = width.container - _temp.cache.containerWidth;
 					width.bottomCenter = width.container - _temp.cache.containerWidth; 
@@ -12099,35 +12091,44 @@ var SNDK =
 					_elements["contentcenter"].style.height = height.contentCenter +"px";			
 					_elements["contentright"].style.height = height.contentRight +"px";			
 								
-					if (_attributes.canScroll)
+					// If canvas can scroll, we need to make room for the scrollbar.		
+					if ((_attributes.canScroll) && (_attributes.heightType.toLowerCase () != "content"))
 					{
+						var contentheight = 0;
 						for (index in _temp.uiElements)
 						{		
 							if (_temp.uiElements[index]._attributes.heightType == "pixel")
 							{									
-								combinedheightofchildren += parseInt (_temp.uiElements[index]._attributes.height);
+								contentheight += parseInt (_temp.uiElements[index]._attributes.height);
 							}
 						}						
 					
-						if (combinedheightofchildren > height.child)
+						if (contentheight > height.child)
 						{
 							width.child = width.child - window.scrollbarWidth;
 						}			
 					}	
-								
+							
+					// All child elements that use percentage needs to have their width and height updated accordingly.
 					for (index in _temp.uiElements)
 					{
+						var refresh = false;			
 						if (_temp.uiElements[index]._attributes.widthType == "percent")
 						{
 							_temp.uiElements[index]._attributes.managedWidth = (width.child * _temp.uiElements[index]._attributes.width) / 100;
+							refresh = true;
 						}
 						
 						if (_temp.uiElements[index]._attributes.heightType == "percent")
 						{
 							_temp.uiElements[index]._attributes.managedHeight = (height.child * _temp.uiElements[index]._attributes.height) / 100;
+							refresh = true;
 						}
 						
-						_temp.uiElements[index].refresh ();
+						if (refresh)
+						{
+							_temp.uiElements[index].refresh ();
+						}
 					}			
 				}
 			}			

@@ -22,12 +22,7 @@ function functionDispose ()
 // ------------------------------------							
 function functionAddUIElement (element)
 {
-	var count = _temp.uiElements.length;
-	
- 	_temp.uiElements[count] = element;
- 		 	
- 	element.setAttribute ("managed", true);
- 	element.setAttribute ("appendTo", _elements["container"]);
+	addUIElement (element);
 }
 
 // ------------------------------------
@@ -35,13 +30,7 @@ function functionAddUIElement (element)
 // ------------------------------------							
 function functionGetUIElement (tag)
 {
-	for (index in _temp.uiElements)
-	{
-		if (_temp.uiElements[index].getAttribute ("tag") == tag)
-		{
-			return _temp.uiElements[index];	
-		}
-	}
+	return getUIElement (tag)
 }
 							
 // ------------------------------------
@@ -147,7 +136,7 @@ function functionSetAttribute (attribute, value)
 		
 		case "width":
 		{
-			if (value == "content")
+			if (value.toLowerCase () == "content")
 			{
 				_attributes.widthType = "content";
 				_attributes.width = "content";
@@ -170,7 +159,7 @@ function functionSetAttribute (attribute, value)
 
 		case "height":
 		{
-			if (value == "content")
+			if (value.toLowerCase () == "content")
 			{
 				_attributes.heightType = "content";
 				_attributes.height = "content";
