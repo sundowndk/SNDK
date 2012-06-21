@@ -172,7 +172,7 @@ layoutbox : function (attributes)
 		
 		// Height
 		if (!_attributes.height) 
-			_attributes.height = "content";
+			_attributes.height = "100%";
 			
 		if (_attributes.height == "content")
 		{

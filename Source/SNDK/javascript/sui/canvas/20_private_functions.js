@@ -108,7 +108,7 @@ function setAttributes ()
 	}
 					
 	if (!_attributes.canScroll) 
-		_attributes.canScroll = false;
+		_attributes.canScroll = false;			
 }		
 					
 // ------------------------------------
@@ -124,9 +124,9 @@ function setDimensions ()
 		var height = 0;
 		
 		// Refresh all child elements.
-		for (index in _temp.uiElements)
+		for (i in _temp.uiElements)
 		{		
-			_temp.uiElements[index].refresh ();
+			_temp.uiElements[i].refresh ();
 		}			
 									
 		// Find width.
@@ -195,7 +195,7 @@ function setDimensions ()
 				break;
 			}
 		}
-		
+				
 		// Set width & height.
 		_elements["container"].style.width = width +"px";
 		_elements["container"].style.height = height +"px";

@@ -29,6 +29,16 @@
 					<js file="javascript/sui/canvas/20_private_functions.js" />
 					<js file="javascript/sui/canvas/30_public_functions.js" />					
 				</constructor>					
+				<constructor name="container" variables="attributes">
+					<js file="javascript/sui/container/10_definitions.js" />
+					<js file="javascript/sui/container/20_private_functions.js" />
+					<js file="javascript/sui/container/30_public_functions.js" />					
+				</constructor>									
+				<constructor name="layoutbox" variables="attributes">
+					<js file="javascript/sui/layoutbox/10_definitions.js" />
+					<js file="javascript/sui/layoutbox/20_private_functions.js" />
+					<js file="javascript/sui/layoutbox/30_public_functions.js" />					
+				</constructor>													
 				<constructor name="listview" variables="attributes">
 					<js file="javascript/sui/listview/10_definitions.js" />
 					<js file="javascript/sui/listview/20_private_functions.js" />
@@ -41,9 +51,7 @@
 				<js file="javascript/sui/iconview.js" />
 				<js file="javascript/sui/textarea.js" />
 				<js file="javascript/sui/textbox.js" />
-				<js file="javascript/sui/upload.js" />
-				<js file="javascript/sui/container.js" />
-				<js file="javascript/sui/layoutbox.js" />
+				<js file="javascript/sui/upload.js" />							
 				<js file="javascript/sui/label.js" />
 				<js file="javascript/sui/tabview.js" />
 				<js file="javascript/sui/text.js" />
