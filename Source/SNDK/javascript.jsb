@@ -34,11 +34,6 @@
 					<js file="javascript/sui/container/20_private_functions.js" />
 					<js file="javascript/sui/container/30_public_functions.js" />					
 				</constructor>									
-				<constructor name="layoutbox" variables="attributes">
-					<js file="javascript/sui/layoutbox/10_definitions.js" />
-					<js file="javascript/sui/layoutbox/20_private_functions.js" />
-					<js file="javascript/sui/layoutbox/30_public_functions.js" />					
-				</constructor>													
 				<constructor name="listview" variables="attributes">
 					<js file="javascript/sui/listview/10_definitions.js" />
 					<js file="javascript/sui/listview/20_private_functions.js" />
@@ -46,6 +41,7 @@
 					<js file="javascript/sui/listview/40_events.js" />
 				</constructor>
 				<js file="javascript/sui/checkbox.js" />
+				<js file="javascript/sui/layoutbox.js" />
 				<js file="javascript/sui/button.js" />
 				<js file="javascript/sui/dropbox.js" />				
 				<js file="javascript/sui/iconview.js" />

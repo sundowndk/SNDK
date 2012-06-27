@@ -153,8 +153,8 @@ function setDimensions ()
 				{												
 					if ((_attributes.panels[i]._attributes.sizeType == "pixel") || (_attributes.panels[i]._attributes.sizeType == "content"))
 					{							
-						console.log (_attributes.panels[i]._elements["container"].offsetWidth)
-						console.log (_attributes.panels[i]._elements["container"].offsetHeight)
+					//	console.log (_attributes.panels[i]._elements["container"].offsetWidth)
+					//	console.log (_attributes.panels[i]._elements["container"].offsetHeight)
 						if (width.container < _attributes.panels[i]._elements["container"].offsetWidth)					
 						{
 							width.container = _attributes.panels[i]._elements["container"].offsetWidth;							
@@ -321,7 +321,7 @@ function setDimensions ()
 					
 					console.log ("d"+ contentwidth)
 				
-					dimensions.width = 600 - SNDK.tools.getElementStyledPadding (e)["horizontal"];
+					dimensions.width = contentwidth - SNDK.tools.getElementStyledPadding (e)["horizontal"];
 				}
 				else
 				{
