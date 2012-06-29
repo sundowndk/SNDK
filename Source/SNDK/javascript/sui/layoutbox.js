@@ -575,6 +575,8 @@ layoutbox : function (attributes)
 		_attributes.panels[count] = new newPanel (attributes);
 									
 		refresh ();	
+		
+		return _attributes.panels[count];
 	}
 	
 	// ------------------------------------

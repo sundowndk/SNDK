@@ -728,16 +728,14 @@ function addItem (item)
 			if (_attributes.items[i][_attributes.uniqueColumn] == item[_attributes.uniqueColumn])
 			{					
 				result = i;
-				break;
+				return i;
 			}
-		}		
+		}				
 	}
-	else
-	{
-		result = _attributes.items.length;
-		_attributes.items[result] = derefItem (item);
-	}			
-	
+
+	result = _attributes.items.length;
+	_attributes.items[result] = derefItem (item);			
+		
 	_temp.isDirty = true;
 	
 	return result
