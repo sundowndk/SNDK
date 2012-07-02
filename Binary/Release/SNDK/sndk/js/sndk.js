@@ -15944,7 +15944,7 @@ var SNDK =
 										};
 									};
 						
-					sConsole.modal.chooser.media ({type: "image", subType: "upload", path: "/media/scms/%%FILENAME%%%%EXTENSION%%", mediatransformations: _attributes.options.mediatransformationids, onDone: onDone});
+					sConsole.modal.chooser.media ({type: "image", subType: "upload", path: "/media/scms/%%FILENAME%%%%EXTENSION%%", mediatransformations: _attributes.options.mediatransformations, onDone: onDone});
 				},
 				
 				onChange : function ()
@@ -16201,9 +16201,9 @@ var SNDK =
 				if (!_attributes.options)
 					_attributes.options = new Array ();
 					
-				// OPTIONS.MEDIATRANSFORMATIONIDS
-				if (!_attributes.options.mediatransformationids)
-					_attributes.options.mediatransformationids = "";
+				// OPTIONS.MEDIATRANSFORMATIONS
+				if (!_attributes.options.mediatransformations)
+					_attributes.options.mediatransformations = "";
 			}	
 			
 			// ------------------------------------
