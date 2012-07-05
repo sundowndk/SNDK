@@ -211,8 +211,8 @@ layoutbox : function (attributes)
 			{			
 				if (_attributes.managed && _attributes.widthType == "percent")
 				{
-
 					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+					//console.log ("managed: "+ _attributes.managedWidth);
 				}
 				else
 				{
@@ -233,6 +233,7 @@ layoutbox : function (attributes)
 				else if (_attributes.managed && _attributes.heightType == "percent")
 				{
 					height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+					
 				}
 				else
 				{
@@ -242,6 +243,8 @@ layoutbox : function (attributes)
 			
 			_elements["container"].style.width = width.container +"px";				
 			_elements["container"].style.height = height.container +"px"; 				
+			
+			//console.log ("layoutbox: "+ width.container +" x "+ height.container);
 			
 			var dynamics = new Array ();
 			var combinedsize = 0;						

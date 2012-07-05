@@ -439,22 +439,25 @@ var SNDK =
 		getStyle : function (element, property)
 		{
 			var result = null;
-			if (element.currentStyle)
-			{
-				if (property == "padding-left") property = "paddingLeft";
-				if (property == "padding-right") property = "paddingRight";
-				if (property == "padding-top") property = "paddingTop";
-				if (property == "padding-bottom") property = "paddingBottom";
 				
-				if (property == "margin-left") property = "marginLeft";
-				if (property == "margin-right") property = "marginRight";		
-				if (property == "margin-top") property = "marginTop";
-				if (property == "margin-bottom") property = "marginBottom";	
+				//console.log (property)
+			
+		//	if (element.currentStyle)
+		//	{
+		//		if (property == "padding-left") property = "paddingLeft";
+		//		if (property == "padding-right") property = "paddingRight";
+		//		if (property == "padding-top") property = "paddingTop";
+		//		if (property == "padding-bottom") property = "paddingBottom";
 				
-				if (property == "border-left-width") property = "borderLeftWidth";
-				if (property == "border-right-width") property = "borderRightWidth";		
-				if (property == "border-top-width") property = "borderTopWidth";
-				if (property == "border-bottom-width") property = "borderBottomWidth";			
+		//		if (property == "margin-left") property = "marginLeft";
+		//		if (property == "margin-right") property = "marginRight";		
+		//		if (property == "margin-top") property = "marginTop";
+		//		if (property == "margin-bottom") property = "marginBottom";	
+				
+		//		if (property == "border-left-width") property = "borderLeftWidth";
+		//		if (property == "border-right-width") property = "borderRightWidth";		
+		//		if (property == "border-top-width") property = "borderTopWidth";
+		//		if (property == "border-bottom-width") property = "borderBottomWidth";			
 				
 		//		var test = "";
 		//		for (var i in element.currentStyle)
@@ -463,12 +466,17 @@ var SNDK =
 		//		}
 		//		alert (test);
 		
-				result = element.currentStyle[property];
-			}	
-			else if (window.getComputedStyle)
-			{
+				
+		
+		//		result = element.currentStyle[property];
+		//	}	
+		//	else if (window.getComputedStyle)
+		//	{
+				//console.log ("getStyle -> getComputedStyle");
+				//console.log ("getstyle: "+ element.currentStyle[property])	
+				//console.log (property +" "+ document.defaultView.getComputedStyle (element, null).getPropertyValue (property))
 				result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
-			}
+		//	}
 			return result;
 		},
 		
@@ -644,7 +652,7 @@ var SNDK =
 		getElementInnerWidth : function (element)
 		{
 			// LeftMargin
-			var leftmargin = SNDK.tools.getStyle (element, "margin-left");
+			var leftmargin = SNDK.tools.getStyle (element, "margin-left");	
 			
 			if (leftmargin != null && leftmargin != "auto")
 			{
@@ -675,6 +683,8 @@ var SNDK =
 				
 			// Width
 			var width = element.offsetWidth;
+			
+			console.log ("getElementInnerWidth: "+ leftmargin +", "+ rightmargin +", "+ leftpadding +", "+ rightpadding)
 			
 			// Done
 			return width - leftmargin - rightmargin - leftpadding - rightpadding;		
@@ -3435,10 +3445,18 @@ var SNDK =
 			
 									case "textarea":
 									{
+										console.log ("textarea")
 										if (node.childNodes.length > 0)
 										{
-											attributes.provider = node.childNodes[1].tagName;
-											attributes.providerConfig = parseAttributes (node.childNodes[1].attributes);
+										for (var index2 = 0; index2 < node.childNodes.length; index2++)
+											{
+												var child = node.childNodes.item (index2);
+												if ((child.tagName.toLowerCase () == "codemirror") || (child.tagName.toLowerCase () == "tinymce"))
+												{
+													attributes.provider = "codemirror";
+													attributes.providerConfig = parseAttributes (child.attributes);
+												}																			
+											}		
 										}
 			
 										elements[attributes.tag] = new SNDK.SUI.textarea (attributes);
@@ -3715,6 +3733,7 @@ var SNDK =
 						case "percent":
 						{
 							width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
+							//console.log ("canvas: "+ SNDK.tools.getElementInnerWidth (parent))	
 							break;
 						}
 					}
@@ -3778,7 +3797,7 @@ var SNDK =
 					{
 						var refresh = false;			
 						if (_temp.uiElements[i]._attributes.widthType == "percent")
-						{
+						{						
 							_temp.uiElements[i]._attributes.managedWidth = (width * _temp.uiElements[i]._attributes.width) / 100;
 							refresh = true;
 						}
@@ -7080,8 +7099,8 @@ var SNDK =
 					{			
 						if (_attributes.managed && _attributes.widthType == "percent")
 						{
-		
 							width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
+							//console.log ("managed: "+ _attributes.managedWidth);
 						}
 						else
 						{
@@ -7102,6 +7121,7 @@ var SNDK =
 						else if (_attributes.managed && _attributes.heightType == "percent")
 						{
 							height.container = _attributes.managedHeight - _temp.cache.containerPadding["vertical"];				
+							
 						}
 						else
 						{
@@ -7111,6 +7131,8 @@ var SNDK =
 					
 					_elements["container"].style.width = width.container +"px";				
 					_elements["container"].style.height = height.container +"px"; 				
+					
+					//console.log ("layoutbox: "+ width.container +" x "+ height.container);
 					
 					var dynamics = new Array ();
 					var combinedsize = 0;						
@@ -17237,20 +17259,24 @@ String.prototype.trimEnd = function (character)
 // -------------------------------------------------------------------------------------------------------------------------
 // Client
 // -------------------------------------------------------------------------------------------------------------------------
-var client = {
-	init: function () {
+var client = 
+{
+	init: function () 
+	{
 		this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
-		this.version = this.searchVersion(navigator.userAgent)
-			|| this.searchVersion(navigator.appVersion)
-			|| "an unknown version";
+		this.version = this.searchVersion(navigator.userAgent)	|| this.searchVersion(navigator.appVersion)	 || "an unknown version";
 		this.OS = this.searchString(this.dataOS) || "an unknown OS";
 	},
-	searchString: function (data) {
-		for (var i=0;i<data.length;i++)	{
+	
+	searchString: function (data) 
+	{
+		for (var i=0;i<data.length;i++)	
+		{
 			var dataString = data[i].string;
 			var dataProp = data[i].prop;
 			this.versionSearchString = data[i].versionSearch || data[i].identity;
-			if (dataString) {
+			if (dataString) 
+			{
 				if (dataString.indexOf(data[i].subString) != -1)
 					return data[i].identity;
 			}
@@ -17258,11 +17284,14 @@ var client = {
 				return data[i].identity;
 		}
 	},
-	searchVersion: function (dataString) {
+	
+	searchVersion: function (dataString) 
+	{
 		var index = dataString.indexOf(this.versionSearchString);
 		if (index == -1) return;
 		return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
 	},
+	
 	dataBrowser: [
 		{
 			string: navigator.userAgent,
@@ -17328,6 +17357,7 @@ var client = {
 			versionSearch: "Mozilla"
 		}
 	],
+	
 	dataOS : [
 		{
 			string: navigator.platform,
@@ -17761,14 +17791,14 @@ window.onDomReady (bla);
 
 
 
-var test = function ()
-{
+//var test = function ()
+//{
 	
 
-}
+//}
 
 
-window.onDomReady (test);
+//window.onDomReady (test);
 
 
 SNDK.page.init ();

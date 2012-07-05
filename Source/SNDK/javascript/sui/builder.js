@@ -353,10 +353,18 @@ construct : function (attributes)
 
 						case "textarea":
 						{
+							console.log ("textarea")
 							if (node.childNodes.length > 0)
 							{
-								attributes.provider = node.childNodes[1].tagName;
-								attributes.providerConfig = parseAttributes (node.childNodes[1].attributes);
+							for (var index2 = 0; index2 < node.childNodes.length; index2++)
+								{
+									var child = node.childNodes.item (index2);
+									if ((child.tagName.toLowerCase () == "codemirror") || (child.tagName.toLowerCase () == "tinymce"))
+									{
+										attributes.provider = "codemirror";
+										attributes.providerConfig = parseAttributes (child.attributes);
+									}																			
+								}		
 							}
 
 							elements[attributes.tag] = new SNDK.SUI.textarea (attributes);

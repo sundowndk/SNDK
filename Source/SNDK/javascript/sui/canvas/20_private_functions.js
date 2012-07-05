@@ -160,6 +160,7 @@ function setDimensions ()
 			case "percent":
 			{
 				width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
+				//console.log ("canvas: "+ SNDK.tools.getElementInnerWidth (parent))	
 				break;
 			}
 		}
@@ -223,7 +224,7 @@ function setDimensions ()
 		{
 			var refresh = false;			
 			if (_temp.uiElements[i]._attributes.widthType == "percent")
-			{
+			{						
 				_temp.uiElements[i]._attributes.managedWidth = (width * _temp.uiElements[i]._attributes.width) / 100;
 				refresh = true;
 			}

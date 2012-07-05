@@ -302,7 +302,11 @@ canvas : function (attributes)
 			{
 				if (_temp.uiElements[index]._attributes.widthType == "percent")
 				{
+					
+				
 					_temp.uiElements[index]._attributes.managedWidth = (width * _temp.uiElements[index]._attributes.width) / 100;
+					
+					
 				}
 				
 				if (_temp.uiElements[index]._attributes.heightType == "percent")

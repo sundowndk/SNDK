@@ -1,13 +1,13 @@
 
 
-var test = function ()
-{
+//var test = function ()
+//{
 	
 
-}
+//}
 
 
-window.onDomReady (test);
+//window.onDomReady (test);
 
 
 SNDK.page.init ();

@@ -1,20 +1,24 @@
 ﻿// -------------------------------------------------------------------------------------------------------------------------
 // Client
 // -------------------------------------------------------------------------------------------------------------------------
-var client = {
-	init: function () {
+var client = 
+{
+	init: function () 
+	{
 		this.browser = this.searchString(this.dataBrowser) || "An unknown browser";
-		this.version = this.searchVersion(navigator.userAgent)
-			|| this.searchVersion(navigator.appVersion)
-			|| "an unknown version";
+		this.version = this.searchVersion(navigator.userAgent)	|| this.searchVersion(navigator.appVersion)	 || "an unknown version";
 		this.OS = this.searchString(this.dataOS) || "an unknown OS";
 	},
-	searchString: function (data) {
-		for (var i=0;i<data.length;i++)	{
+	
+	searchString: function (data) 
+	{
+		for (var i=0;i<data.length;i++)	
+		{
 			var dataString = data[i].string;
 			var dataProp = data[i].prop;
 			this.versionSearchString = data[i].versionSearch || data[i].identity;
-			if (dataString) {
+			if (dataString) 
+			{
 				if (dataString.indexOf(data[i].subString) != -1)
 					return data[i].identity;
 			}
@@ -22,11 +26,14 @@ var client = {
 				return data[i].identity;
 		}
 	},
-	searchVersion: function (dataString) {
+	
+	searchVersion: function (dataString) 
+	{
 		var index = dataString.indexOf(this.versionSearchString);
 		if (index == -1) return;
 		return parseFloat(dataString.substring(index+this.versionSearchString.length+1));
 	},
+	
 	dataBrowser: [
 		{
 			string: navigator.userAgent,
@@ -92,6 +99,7 @@ var client = {
 			versionSearch: "Mozilla"
 		}
 	],
+	
 	dataOS : [
 		{
 			string: navigator.platform,
