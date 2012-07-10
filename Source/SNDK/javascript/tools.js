@@ -68,7 +68,7 @@ newGuid : function ()
 	uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
 	uuid[14] = '4'; // version 4
 
-	for (var index = 0; index < 36; i++)
+	for (var index = 0; index < 36; index++)
 	{
 		if (!uuid[index])
 		{
@@ -644,9 +644,7 @@ getElementInnerWidth : function (element)
 		
 	// Width
 	var width = element.offsetWidth;
-	
-	console.log ("getElementInnerWidth: "+ leftmargin +", "+ rightmargin +", "+ leftpadding +", "+ rightpadding)
-	
+		
 	// Done
 	return width - leftmargin - rightmargin - leftpadding - rightpadding;		
 },

@@ -94,11 +94,150 @@ var SNDK =
 	// ---------------------------------------------------------------------------------------------------------------
 	tools :
 	{
-		
+		// ***************************************************************************************************************************************************
+		// ** getTicks																																		**
+		// ***************************************************************************************************************************************************
+		// ** Return ticks since epoch.																														**
+		// ***************************************************************************************************************************************************
 		getTicks : function ()
-		{	
-		    return new Date().getTime();
+		{		
+		    return new Date ().getTime ();
 		},
+		
+		// ***************************************************************************************************************************************************
+		// ** getStyle																																		**
+		// ***************************************************************************************************************************************************
+		// ** Returns value of the current style on the specifed element.																					**
+		// ***************************************************************************************************************************************************	
+		getStyle : function (element, property)
+		{
+			var result = null;
+					
+			if (client.browser == "Explorer" &&  parseInt (client.version) < 9)
+			{
+				// Internet Explore 8 and below does not work with getComputedStyle, 
+				// so we use currentStyle instead.
+				
+				// Stylenames are abit differrent when using currentStyle, and only the
+				// moste used are being altered here. Fell free to add more if need.
+				
+				// PADDING
+				if (property == "padding-left") property = "paddingLeft";
+				if (property == "padding-right") property = "paddingRight";
+				if (property == "padding-top") property = "paddingTop";
+				if (property == "padding-bottom") property = "paddingBottom";
+				
+				// MARGIN
+				if (property == "margin-left") property = "marginLeft";
+				if (property == "margin-right") property = "marginRight";		
+				if (property == "margin-top") property = "marginTop";
+				if (property == "margin-bottom") property = "marginBottom";	
+				
+				// BORDER
+				if (property == "border-left-width") property = "borderLeftWidth";
+				if (property == "border-right-width") property = "borderRightWidth";		
+				if (property == "border-top-width") property = "borderTopWidth";
+				if (property == "border-bottom-width") property = "borderBottomWidth";				
+				
+				result = element.currentStyle[property];
+			}
+			else	
+			{
+				// All moderen browsers work with getComputedStyle.
+			
+				result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
+			}
+			
+			return result;
+		},
+		
+		// ***************************************************************************************************************************************************
+		// ** newGuid																																		**
+		// ***************************************************************************************************************************************************
+		// ** Create new GUID, that is compatible with C# and other popular languages.																		**
+		// ***************************************************************************************************************************************************		
+		newGuid : function ()
+		{
+			var chars = '0123456789abcdef'.split ('');
+		
+			var uuid = [], rnd = Math.random, r;
+			uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
+			uuid[14] = '4'; // version 4
+		
+			for (var index = 0; index < 36; index++)
+			{
+				if (!uuid[index])
+				{
+					r = 0 | rnd ()*16;
+					uuid[index] = chars[(index == 19) ? (r & 0x3) | 0x8 : r & 0xf];
+				}
+			}
+		
+			return uuid.join ('');
+		},
+		
+		// ***************************************************************************************************************************************************
+		// ** getXML																																		**
+		// ***************************************************************************************************************************************************
+		// ** Get XML document from URL.																													**
+		// ***************************************************************************************************************************************************		
+		getXML : function (URL)
+		{
+			var xmlhttp = SNDK.tools.getXmlHttpObject ();
+			xmlhttp.open ("GET", URL + "?"+ Math.random(), false);
+											
+			xmlhttp.send (null);		
+			xmldoc = xmlhttp.responseXML;
+			
+			return xmldoc;
+		},
+		
+		// ***************************************************************************************************************************************************
+		// ** randomNumber																																	**
+		// ***************************************************************************************************************************************************
+		// ** Returns a random number between two values.																									**
+		// ***************************************************************************************************************************************************
+		randomNumber : function (begin, end)
+		{
+			return Math.floor ((end-begin) * Math.random ()) + begin;		
+		},
+		
+		// ***************************************************************************************************************************************************
+		// ** reloadURL																																		**
+		// ***************************************************************************************************************************************************
+		// ** Reloads the current window.																													**
+		// ***************************************************************************************************************************************************
+		reloadURL : function ()
+		{
+			document.location.reload (true);
+		},
+		
+		// ***************************************************************************************************************************************************
+		// ** setURL																																		**
+		// ***************************************************************************************************************************************************
+		// ** Set given URL on the current window, if no frame is specified.																				**
+		// ***************************************************************************************************************************************************
+		setURL : function (url, frame)
+		{
+			if (frame == null)
+			{
+				if (url == document.location.href)
+				{
+					SNDK.tools.reloadURL ();
+				}
+				else
+				{			
+					document.location.href = url;
+				}
+			}
+			else
+			{
+				parent.frames[frame].location = url;
+			}		
+		},
+		
+		
+		
 		
 		derefItem : function (array)
 		{
@@ -145,50 +284,13 @@ var SNDK =
 			return result;
 		},	
 		
-		randomNumber : function (begin, end)
-		{
-			return Math.floor((end-begin)*Math.random()) + begin;		
-		},
 		
 		
-		getXML : function (URL)
-		{
-			var xmlhttp = SNDK.tools.getXmlHttpObject ();
-			xmlhttp.open ("GET", URL + "?"+ Math.random(), false);
-											
-			xmlhttp.send (null);		
-			xmldoc = xmlhttp.responseXML;
-			
-			return xmldoc;
-		},
 		
-		reloadURL : function ()
-		{
-			document.location.reload (true);
-		},
 		
-		setURL : function (url, frame)
-		{
-			if (frame == null)
-			{
-				var oldurl = document.location.href;
-				if (url == oldurl)
-				{
-					document.location.reload(true);
-				}
-				else
-				{			
-					document.location.href = url;
-				}
-						
-		//				alert(document.location.href)				
-		//				window.location.href = url; 
-			}
-			else
-			{
-				parent.frames[frame].location = url;
-			}		
-		},
+		
+		
+		
 		
 		derefArray : function (array)
 		{
@@ -433,52 +535,7 @@ var SNDK =
 			return key;
 		},
 				
-		// ------------------------------------
-		// getStyle
-		// ------------------------------------	
-		getStyle : function (element, property)
-		{
-			var result = null;
-				
-				//console.log (property)
-			
-		//	if (element.currentStyle)
-		//	{
-		//		if (property == "padding-left") property = "paddingLeft";
-		//		if (property == "padding-right") property = "paddingRight";
-		//		if (property == "padding-top") property = "paddingTop";
-		//		if (property == "padding-bottom") property = "paddingBottom";
-				
-		//		if (property == "margin-left") property = "marginLeft";
-		//		if (property == "margin-right") property = "marginRight";		
-		//		if (property == "margin-top") property = "marginTop";
-		//		if (property == "margin-bottom") property = "marginBottom";	
-				
-		//		if (property == "border-left-width") property = "borderLeftWidth";
-		//		if (property == "border-right-width") property = "borderRightWidth";		
-		//		if (property == "border-top-width") property = "borderTopWidth";
-		//		if (property == "border-bottom-width") property = "borderBottomWidth";			
-				
-		//		var test = "";
-		//		for (var i in element.currentStyle)
-		//		{
-		//			test += i +" | ";
-		//		}
-		//		alert (test);
 		
-				
-		
-		//		result = element.currentStyle[property];
-		//	}	
-		//	else if (window.getComputedStyle)
-		//	{
-				//console.log ("getStyle -> getComputedStyle");
-				//console.log ("getstyle: "+ element.currentStyle[property])	
-				//console.log (property +" "+ document.defaultView.getComputedStyle (element, null).getPropertyValue (property))
-				result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
-		//	}
-			return result;
-		},
 		
 		// ------------------------------------
 		// getStyledMargin
@@ -683,9 +740,7 @@ var SNDK =
 				
 			// Width
 			var width = element.offsetWidth;
-			
-			console.log ("getElementInnerWidth: "+ leftmargin +", "+ rightmargin +", "+ leftpadding +", "+ rightpadding)
-			
+				
 			// Done
 			return width - leftmargin - rightmargin - leftpadding - rightpadding;		
 		},
@@ -1069,29 +1124,6 @@ var SNDK =
 			}
 		
 			return element;
-		},
-		
-		// ------------------------------------
-		// newGuid
-		// ------------------------------------		
-		newGuid : function ()
-		{
-			var chars = '0123456789abcdef'.split('');
-		
-			var uuid = [], rnd = Math.random, r;
-			uuid[8] = uuid[13] = uuid[18] = uuid[23] = '-';
-			uuid[14] = '4'; // version 4
-		
-			for (var i = 0; i < 36; i++)
-			{
-				if (!uuid[i])
-				{
-					r = 0 | rnd()*16;
-					uuid[i] = chars[(i == 19) ? (r & 0x3) | 0x8 : r & 0xf];
-				}
-			}
-		
-			return uuid.join('');
 		},
 		
 		// ------------------------------------
@@ -3445,19 +3477,46 @@ var SNDK =
 			
 									case "textarea":
 									{
-										console.log ("textarea")
+										//console.log ("textarea")
+										//if (node.childNodes.length > 0)
+										//{
+											//for (var index2 = 1; index2 < node.childNodes.length; index2++)
+											//{
+										//		var child = node.firstChild;
+												//console.log (child)
+												//if ((child.tagName.toLowerCase () == "codemirror") || (child.tagName.toLowerCase () == "tinymce"))
+												//{
+										//			attributes.provider = child.tagName;
+													
+										//			console.log (child)
+													//attributes.provider = "codemirror";
+										//			attributes.providerConfig = parseAttributes (child.attributes);
+												//}																			
+											//}		
+										//}
+										
 										if (node.childNodes.length > 0)
-										{
-										for (var index2 = 0; index2 < node.childNodes.length; index2++)
+										{							
+											var items = new Array ();
+			
+											for (var index2 = 0; index2 < node.childNodes.length; index2++)
 											{
 												var child = node.childNodes.item (index2);
-												if ((child.tagName.toLowerCase () == "codemirror") || (child.tagName.toLowerCase () == "tinymce"))
+												if (child.tagName == "codemirror")
 												{
-													attributes.provider = "codemirror";
+													attributes.provider = "codemirror";									
 													attributes.providerConfig = parseAttributes (child.attributes);
-												}																			
-											}		
-										}
+												}
+												else if (child.tagName == "tinymce")
+												{
+													attributes.provider = "tinymce";
+													attributes.providerConfig = parseAttributes (child.attributes);	
+												}																																					
+											}																				
+											
+											attributes.items = items;
+										}							
+										
 			
 										elements[attributes.tag] = new SNDK.SUI.textarea (attributes);
 										Parent.addUIElement (elements[attributes.tag]);

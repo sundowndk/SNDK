@@ -353,19 +353,46 @@ construct : function (attributes)
 
 						case "textarea":
 						{
-							console.log ("textarea")
+							//console.log ("textarea")
+							//if (node.childNodes.length > 0)
+							//{
+								//for (var index2 = 1; index2 < node.childNodes.length; index2++)
+								//{
+							//		var child = node.firstChild;
+									//console.log (child)
+									//if ((child.tagName.toLowerCase () == "codemirror") || (child.tagName.toLowerCase () == "tinymce"))
+									//{
+							//			attributes.provider = child.tagName;
+										
+							//			console.log (child)
+										//attributes.provider = "codemirror";
+							//			attributes.providerConfig = parseAttributes (child.attributes);
+									//}																			
+								//}		
+							//}
+							
 							if (node.childNodes.length > 0)
-							{
-							for (var index2 = 0; index2 < node.childNodes.length; index2++)
+							{							
+								var items = new Array ();
+
+								for (var index2 = 0; index2 < node.childNodes.length; index2++)
 								{
 									var child = node.childNodes.item (index2);
-									if ((child.tagName.toLowerCase () == "codemirror") || (child.tagName.toLowerCase () == "tinymce"))
+									if (child.tagName == "codemirror")
 									{
-										attributes.provider = "codemirror";
+										attributes.provider = "codemirror";									
 										attributes.providerConfig = parseAttributes (child.attributes);
-									}																			
-								}		
-							}
+									}
+									else if (child.tagName == "tinymce")
+									{
+										attributes.provider = "tinymce";
+										attributes.providerConfig = parseAttributes (child.attributes);	
+									}																																					
+								}																				
+								
+								attributes.items = items;
+							}							
+							
 
 							elements[attributes.tag] = new SNDK.SUI.textarea (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
