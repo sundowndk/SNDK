@@ -1,107 +1,658 @@
-
-/* --------------------------------------------------------------------------------------------------------------
-Button
--------------------------------------------------------------------------------------------------------------- */
-.SUIButton
-{
-	margin: 				1px;	
-	
-	padding:				3px;
-
-	font-family:				arial;		
-	font-size:				13px;
-	text-decoration: 			none;	
-	text-shadow: 				1px 1px 0px #444444;		
-	text-align:				center;
-
-	display: 				inline-block;	
-	outline:				none;	
+button::-moz-focus-inner {
+  border: 0;
 }
 
-.SUIButtonFocus
-{
-	outline:				#aaaaaa dotted 1px;
+
+
+
+/* Set line-height so buttons fit */
+.button-height {
+	line-height: 34px;
+	margin-top: -2px;
+	margin-bottom: -2px;
+	}
+	.button-height.wrapped {
+		padding: 8px 10px;
+		margin-top: 0;
+	}
+	p.button-height,
+	ul.button-height,
+	ol.button-height {
+		margin-bottom: 14px;
+	}
+	p.button-height:last-child,
+	ul.button-height:last-child,
+	ol.button-height:last-child {
+		margin-bottom: -2px;
+		}
+		/* IE7 */
+		p.button-height.last-child,
+		ul.button-height.last-child,
+		ol.button-height.last-child {
+			margin-bottom: -2px;
+		}
+	.button-height.absolute-left,
+	.button-height.absolute-right {
+		margin-top: -17px;
+		margin-bottom: 0;
+	}
+
+/* Disabled elements */
+.disabled, .disabled span,
+.disabled .input, .disabled input,
+.disabled .label, .disabled label,
+.disabled .button, .disabled button,
+.disabled a,
+:disabled {
+	cursor: not-allowed !important;
 }
 
-.SUIButtonDisabled
-{
-}
+.button {
 
-.SUIButtonLeftClicked
-{
-}
-
-.SUIButton .Left
-{
-	float: 					left;
+	margin: 2px;	/* ADDED */
 		
-	width: 					6px;
-	height: 				32px;
+	display: inline-block;
+	*display: inline;
+	zoom: 1;
+	vertical-align: baseline;
+	*vertical-align: middle;
+	position: relative;
+	text-align: center;
+	font-weight: bold;
+	text-transform: none;
+	padding: 0 11px;
+	font-size: 13px;
+	line-height: 28px;
+	height: 28px;
+	*line-height: 26px;
+	*height: 26px;
+	-webkit-background-clip: padding-box;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	min-width: 6px;
+	border-width: 1px;
+	border-style: solid;
+	-webkit-background-clip: padding-box;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-appearance: none;
+	background-position: center center !important; /* This is required for glossy gradients image fallbacck*/
 	
-	background: 				transparent url('images/button/background.png') no-repeat;
-	background-position:			0px 0px;
-}
 
-.SUIButtonLeftClicked .Left
-{
-	background-position:			0px -64px;
-}
-
-.SUIButtonDisabled .Left
-{
-	background-position:			0px -128px;
-}
-
-.SUIButton .Center
-{
-	float: 					left;
-
-	padding-top:				7px;
-	
-	height:					25px;
-	
-	background: 				transparent url('images/button/background.png') repeat-x;
-	background-position:			0px -32px;	
+	}
+	.ie7 button.button {
+		line-height: 24px;
+		height: 28px;
+	}
+	.ie7 .button {
+		margin-left: 4px;
+		}
+		.ie7 .button:first-child {
+			margin-left: 0;
+		}
 		
-	color:					#ffffff;	
-	cursor:					default;	
-}
+	.button.full-width {
+		width: 100%;
+		margin: 0;
+		height: auto;
+		-webkit-box-sizing: border-box;
+		-moz-box-sizing: border-box;
+		box-sizing: border-box;
+		}
+		.no-boxsizing .button.full-width {
+			width: 94%;
+		}
+		.no-boxsizing button.button.full-width {
+			width: 100%;
+		}
+	.button-height .button.float-left,
+	.button-height .button.float-right {
+		margin-top: 2px;
+	}
+	.button.absolute-left,
+	.button.absolute-right {
+		position: absolute;
+		margin-top: -15px;
+	}
 
-.SUIButtonLeftClicked .Center
-{
-	padding-top:				8px;
-	
-	height:					24px;
-	
-	background-position:			0px -96px;
-}
+	/* Buttons in inputs */
+	.input .button {
+		margin-top: -1px;
+		margin-bottom: -1px;
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		}
+		.input .button:first-child {
+			margin-left: -9px;
+		}
+		.ie7 .input .button:first-child {
+			margin-left: 0;
+			margin-right: 3px;
+		}
+		.input.large .button,
+		.input .button:first-child {
+			-webkit-border-bottom-left-radius: 3px;
+			-webkit-border-top-left-radius: 3px;
+			-moz-border-radius-topleft: 3px;
+			-moz-border-radius-bottomleft: 3px;
+			border-bottom-left-radius: 3px;
+			border-top-left-radius: 3px;
+		}
+		.input .button:last-child {
+			margin-right: -9px;
+			}
+			/* IE7 */
+			.input .button.last-child {
+				margin-right: -9px;
+			}
+		.input.large .button,
+		.input .button:last-child {
+			-webkit-border-bottom-right-radius: 3px;
+			-webkit-border-top-right-radius: 3px;
+			-moz-border-radius-topright: 3px;
+			-moz-border-radius-bottomright: 3px;
+			border-bottom-right-radius: 3px;
+			border-top-right-radius: 3px;
+			}
 
-.SUIButtonDisabled .Center
-{
-	background-position:			0px -160px;
-	
-	text-shadow: 				1px 1px 0px #fff;	
-	color:					#777;
-}
+	/* Default shadows */
+	.button,
+	.button-group > .button:first-child,
+	.select-value,
+	.legend {
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+		}
+		.button-group > .button,
+		.select-arrow {
+			-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+			-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+			box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+		}
+		.button,
+		.select-value,
+		.legend {
+			-webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+			-moz-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+		}
 
-.SUIButton .Right
-{
-	float: 					left;
+	/* Custom tones shadows */
+	.button.black-gradient, .button-group > .black-gradient:first-child,
+	.button.anthracite-gradient, .button-group > .anthracite-gradient:first-child,
+	.button.grey-gradient, .button-group > .grey-gradient:first-child,
+	.button.blue-gradient, .button-group > .blue-gradient:first-child,
+	.button.red-gradient, .button-group > .red-gradient:first-child,
+	.button.orange-gradient, .button-group > .orange-gradient:first-child,
+	.button.green-gradient, .button-group > .green-gradient:first-child,
+	.black-gradient > .select-value, .anthracite-gradient > .select-value,
+	.blue-gradient > .select-value, .grey-gradient > .select-value,
+	.red-gradient > .select-value, .orange-gradient > .select-value,
+	.green-gradient > .select-value {
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.25);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.25);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), 0 1px 1px rgba(0, 0, 0, 0.25);
+		}
+		.button.black-gradient,
+		.button.anthracite-gradient,
+		.button.grey-gradient,
+		.button.blue-gradient,
+		.black-gradient > .select-value, .anthracite-gradient > .select-value,
+		.blue-gradient > .select-value, .grey-gradient > .select-value {
+			-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+			-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+		}
+		.button.red-gradient,
+		.button.orange-gradient,
+		.button.green-gradient,
+		.select.red-gradient > .select-value, .select.orange-gradient > .select-value, .select.green-gradient > .select-value {
+			-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+			-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+		}
+	.button-group > .silver-gradient,
+	.button-group > .white-gradient,
+	.white-gradient > .select-arrow {
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.75), inset 1px 0 0 rgba(255, 255, 255, 0.75), 0 1px 1px rgba(0, 0, 0, 0.15);
+	}
+	.button-group > .black-gradient,
+	.button-group > .anthracite-gradient,
+	.button-group > .grey-gradient,
+	.button-group > .red-gradient,
+	.button-group > .orange-gradient,
+	.button-group > .green-gradient,
+	.button-group > .blue-gradient,
+	.black-gradient > .select-arrow, .anthracite-gradient > .select-arrow,
+	.grey-gradient > .select-arrow, .red-gradient > .select-arrow,
+	.orange-gradient > .select-arrow, .green-gradient > .select-arrow, .blue-gradient > .select-arrow {
+		-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.35), 0 1px 1px rgba(0, 0, 0, 0.25);
+		-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.35), 0 1px 1px rgba(0, 0, 0, 0.25);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 1px 0 0 rgba(255, 255, 255, 0.35), 0 1px 1px rgba(0, 0, 0, 0.25);
+	}
+
+	/* Active state */
+	.button:active, .button.active {
+		border: 0;
+		padding: 1px 12px;
+		-webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75), 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+		-moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75), 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+		box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75), 0 1px 1px rgba(255, 255, 255, 0.35) !important;
+		}
+		.button.silver-active:active, .button.silver-active.active,
+		.button.white-active:active, .button.white-active.active {
+			-webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+			-moz-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+		}
+		.button.black-active:active, .button.black-active.active,
+		.button.anthracite-active:active, .button.anthracite-active.active,
+		.button.grey-active:active, .button.grey-active.active,
+		.button.blue-active:active, .button.blue-active.active {
+			-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+			-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+		}
+		.button.red-active:active, .button.red-active.active,
+		.button.orange-active:active, .button.orange-active.active,
+		.button.green-active:active, .button.green-active.active {
+			-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+			-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+		}
 		
-	width: 					6px;
-	height: 				32px;
+		
+
+	/* Disabled state */
+	.button:disabled, .button.disabled, .disabled .button,
+	.disabled .select-value, .disabled .select-arrow {
+		-webkit-box-shadow: none !important;
+		-moz-box-shadow: none !important;
+		box-shadow: none !important;
+		-webkit-text-shadow: none !important;
+		-moz-text-shadow: none !important;
+		text-shadow: none !important;
+		}
+		.button:disabled, .button.disabled, .disabled .button {
+			border-width: 1px;
+			border-style: solid;
+			padding: 0 11px;
+		}
+
+/* Icon section in a button */
+.button > .button-icon {
+	display: inline-block;
+	vertical-align: baseline;
+	position: relative;
+	text-align: left;
+	font-weight: bold;
+	padding: 0 10px;
+	line-height: inherit;
+	//line-height:expression(this.parentNode.currentStyle['line-height']);
+	height: inherit;
+	//height:expression(this.parentNode.currentStyle['height']-2);
+	min-width: 6px;
+	border-width: 1px;
+	border-style: solid;
+	margin: -1px 9px -1px -12px;
+	-webkit-background-clip: padding-box;
+	-webkit-border-top-left-radius: 4px;
+	-webkit-border-bottom-left-radius: 4px;
+	-moz-border-radius: 4px 0 0 4px;
+	border-radius: 4px 0 0 4px;
+	-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+	-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+	-webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	-moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.3);
+	background-position: center center !important; /* This is required for glossy gradients image fallbacck*/
+	}
+	.ie7 .button > .button-icon {
+		margin: -1px 9px -1px 0;
+	}
+	.button > .button-icon.right-side {
+		margin: -1px -12px -1px 9px;
+		-webkit-border-radius: 0;
+		-webkit-border-top-right-radius: 4px;
+		-webkit-border-bottom-right-radius: 4px;
+		-moz-border-radius: 0 4px 4px 0;
+		border-radius: 0 4px 4px 0;
+		}
+		.ie7 .button > .button-icon.right-side {
+			margin: -1px 0 -1px 0;
+		}
+	:active > .button-icon,
+	.active > .button-icon {
+		-webkit-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75);
+		-moz-box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75);
+		box-shadow: inset 0 1px 5px rgba(0, 0, 0, 0.75);
+		}
+		:active > .button-icon.black-gradient,
+		.active > .button-icon.black-gradient,
+		:active > .button-icon.anthracite-gradient,
+		.active > .button-icon.anthracite-gradient,
+		:active > .button-icon.grey-gradient,
+		.active > .button-icon.grey-gradient,
+		:active > .button-icon.blue-gradient,
+		.active > .button-icon.blue-gradient {
+			-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+			-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.6);
+		}
+		:active > .button-icon.white-gradient,
+		.active > .button-icon.white-gradient {
+			-webkit-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+			-moz-text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+			text-shadow: 0 1px 0 rgba(255, 255, 255, 0.75);
+		}
+		:active .button-icon.red-gradient,
+		.active .button-icon.red-gradient,
+		:active .button-icon.orange-gradient,
+		.active .button-icon.orange-gradient,
+		:active .button-icon.green-gradient,
+		.active .button-icon.green-gradient {
+			-webkit-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+			-moz-text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+		}
+	:disabled > .button-icon,
+	.disabled .button-icon {
+		-webkit-box-shadow: none;
+		-moz-box-shadow: none;
+		box-shadow: none;
+		-webkit-text-shadow: none;
+		-moz-text-shadow: none;
+		text-shadow: none;
+	}
+
+/* Tiny button */
+.button.tiny, .tiny .button {
+	padding: 0 5px;
+	line-height: 16px;
+	height: 16px;
+	*line-height: 14px;
+	*height: 14px;
+	font-size: 11px;
+	min-width: auto;
+	font-weight: normal;
+	-webkit-background-clip: padding-box;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	}
+	.ie7 button.button.tiny,
+	.ie7 .tiny button.button {
+		line-height: 12px;
+		height: 16px;
+	}
+	p > .button.tiny, p.tiny > .button, .tiny p > .button {
+		margin-top: -1px;
+		margin-bottom: -1px;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+	.button.tiny.absolute-left, .tiny .button.absolute-left,
+	.button.tiny.absolute-right, .tiny .button.absolute-right {
+		margin-top: -9px;
+	}
+	.input .button.tiny:first-child,
+	.input.tiny .button:first-child {
+		margin-left: -3px;
+	}
+	.input .button.tiny:last-child,
+	.input.tiny .button:last-child {
+		margin-right: -3px;
+		}
+		/* IE7 */
+		.input .button.tiny.last-child,
+		.input.tiny .button.last-child {
+			margin-right: -3px;
+		}
+	.button.tiny:active, .tiny .button:active,
+	.button.tiny.active, .tiny .button.active {
+		padding: 1px 6px;
+		}
+		.button.tiny:disabled, .button.tiny.disabled,
+		.tiny .button:disabled, .tiny .button.disabled,
+		.tiny.disabled .button, .disabled .tiny .button {
+			padding: 0 5px;
+		}
+	.button-group.tiny, .tiny .button-group {
+		line-height: 18px;
+		height: 18px;
+		margin-top: -2px;
+		margin-bottom: 0;
+		}
+		.button-group.tiny.absolute-left, .tiny .button-group.absolute-left,
+		.button-group.tiny.absolute-right, .tiny .button-group.absolute-right {
+			margin-top: -9px;
+		}
+
+/* Compact button */
+.button.compact, .compact .button {
+	padding: 0 8px;
+	line-height: 22px;
+	height: 22px;
+	*line-height: 20px;
+	*height: 20px;
+	}
+	.ie7 button.button.compact,
+	.ie7 .compact button.button {
+		line-height: 18px;
+		height: 22px;
+	}
+	.button.compact.absolute-left, .compact .button.absolute-left,
+	.button.compact.absolute-right, .compact .button.absolute-right {
+		margin-top: -12px;
+	}
+	.input .button.compact {
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+		}
+		.input .button.compact:first-child,
+		.input.compact .button:first-child {
+			margin-left: -6px;
+		}
+		.input .button.compact:last-child,
+		.input.compact .button:last-child {
+			margin-right: -6px;
+			}
+			/* IE7 */
+			.input .button.compact.last-child,
+			.input.compact .button.last-child {
+				margin-right: -6px;
+			}
+	.button.compact:active, .compact .button:active,
+	.button.compact.active, .compact .button.active {
+		padding: 1px 9px;
+		}
+		.button.compact:disabled, .button.compact.disabled,
+		.compact .button:disabled, .compact .button.disabled,
+		.compact.disabled .button, .disabled .compact .button {
+			padding: 0 8px;
+		}
+	.button-group.compact, .compact .button-group {
+		line-height: 24px;
+		height: 24px;
+		margin-top: -5px;
+		margin-bottom: -3px;
+		}
+		.button-group.compact.absolute-left, .compact .button-group.absolute-left,
+		.button-group.compact.absolute-right, .compact .button-group.absolute-right {
+			margin-top: -12px;
+		}
+	.compact > .button-icon {
+		margin: -1px 4px -1px -9px;
+		padding: 0 6px;
+		}
+		.compact > .button-icon.right-side {
+			margin: -1px -9px -1px 4px;
+		}
+
+/* Big button */
+.button.big, .big .button {
+	padding: 0 12px;
+	font-size: 14px;
+	line-height: 32px;
+	height: 32px;
+	*line-height: 30px;
+	*height: 30px;
+	margin-top: 0;
+	margin-bottom: 0;
+	-webkit-background-clip: padding-box;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	}
+	.ie7 button.button.big,
+	.ie7 .big button.button {
+		line-height: 28px;
+		height: 32px;
+	}
+	.button.big.absolute-left, .big .button.absolute-left,
+	.button.big.absolute-right, .big .button.absolute-right {
+		margin-top: -17px;
+	}
+	.button.big:active, .big .button:active,
+	.button.big.active, .big .button.active,
+	.button.big:first-child:active, .big .button:first-child:active,
+	.button.big.active:first-child, .big .button.active:first-child {
+		padding: 1px 13px;
+		}
+		.button.big:disabled, .button.big.disabled,
+		.big .button:disabled, .big .button.disabled,
+		.big.disabled .button, .disabled .big .button {
+			padding: 0 12px;
+		}
+	.big > .button-icon {
+		margin: -1px 8px -1px -13px;
+		padding: 0 11px;
+		}
+		.big > .button-icon.right-side {
+			margin: -1px -13px -1px 8px;
+		}
+
+/* Huge button */
+.button.huge, .huge .button {
+	padding: 0 18px;
+	font-size: 18px;
+	line-height: 46px;
+	height: 46px;
+	*line-height: 44px;
+	*height: 44px;
+	min-width: 10px;
+	margin-top: 0;
+	margin-bottom: 0;
+	-webkit-background-clip: padding-box;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	}
+	.ie7 button.button.huge,
+	.ie7 .huge button.button {
+		line-height: 42px;
+		height: 46px;
+	}
+	.button.huge.absolute-left, .huge .button.absolute-left,
+	.button.huge.absolute-right, .huge .button.absolute-right {
+		margin-top: -24px;
+	}
+	.button.huge:active, .huge .button:active,
+	.button.huge.active, .huge .button.active,
+	.button.huge:first-child:active, .huge .button:first-child:active,
+	.button.huge.active:first-child, .huge .button.active:first-child {
+		padding: 1px 19px;
+		}
+		.button.huge:disabled, .button.huge.disabled,
+		.huge .button:disabled, .huge .button.disabled,
+		.huge.disabled .button, .disabled .huge .button {
+			padding: 0 18px;
+		}
+	.huge > .button-icon {
+		margin: -1px 15px -1px -19px;
+		padding: 0 18px;
+		}
+		.huge > .button-icon.right-side {
+			margin: -1px -19px -1px 15px;
+		}
+
+/* Checkable included in a button label */
+.js label.button > input[type="checkbox"],
+.js label.button > input[type="radio"] {
+	display: none;
+}
+
+/* Grouped buttons */
+.button-group {
 	
-	background: 				transparent url('images/button/background.png') no-repeat;
-	background-position:			-6px 0px;
-}
 
-.SUIButtonLeftClicked .Right
-{
-	background-position:			-6px -64px;
-}
+	display: inline-block;
+	zoom: 1;
+	font-size: 13px;
+	line-height: 30px;
+	height: 30px;
+	vertical-align: middle;
+	padding-left: 1px;
+	}
+	.ie7 .button-group {
+		display: inline;
+		margin-left: 4px;
+		}
+		.ie7 .button-group:first-child {
+			margin-left: 0;
+		}
+	p > .button-group {
+		margin-top: -8px;
+		margin-bottom: -6px;
+	}
+	.button-height .button-group {
+		margin-top: -2px;
+		margin-bottom: 2px;
+	}
+	.button-group.absolute-left,
+	.button-group.absolute-right {
+		margin-top: -15px;
+	}
+	.button-group > .button,
+	.ie7 .button-group > .button {
+		margin: 0px;	/* ADDED */
+		
+		-webkit-border-radius: 0;
+		-moz-border-radius: 0;
+		border-radius: 0;
+		float: left;
+		margin-left: -1px;
+		}
+		.button-group > .button:first-child {
+			border-left-width: 1px;
+			-webkit-border-top-left-radius: 4px;
+			-webkit-border-bottom-left-radius: 4px;
+			-moz-border-radius-topleft: 4px;
+			-moz-border-radius-bottomleft: 4px;
+			border-top-left-radius: 4px;
+			border-bottom-bottom-radius: 4px;
+		}
+		.button-group > .button:last-child {
+			-webkit-border-top-right-radius: 4px;
+			-webkit-border-bottom-right-radius: 4px;
+			-moz-border-radius-topright: 4px;
+			-moz-border-radius-bottomright: 4px;
+			border-top-right-radius: 4px;
+			border-top-right-radius: 4px;
+		}
 
-.SUIButtonDisabled .Right
-{
-	background-position:			-6px -128px;
-}
 
+	.button:focus {
+		-webkit-box-shadow: inset 0 0 0 1px rgba(51, 153, 255, 1), inset 0 2px 5px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 5px rgba(51, 153, 255, 0.75);
+		-moz-box-shadow: inset 0 0 0 1px rgba(51, 153, 255, 1), inset 0 2px 5px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 5px rgba(51, 153, 255, 0.75);
+		box-shadow: inset 0 0 0 1px rgba(51, 153, 255, 1), inset 0 2px 5px rgba(0, 0, 0, 0.35), 0 1px 1px rgba(255, 255, 255, 0.5), 0 0 5px rgba(51, 153, 255, 0.75);
+	}		

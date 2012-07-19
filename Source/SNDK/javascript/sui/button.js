@@ -69,40 +69,22 @@ button : function (attributes)
 		updateCache ();
 
 		_attributes.heightType = "pixel";
-		_attributes.height = _temp.cache["containerPadding"]["vertical"] + _temp.cache["containerHeight"] +"px";		
+		_attributes.height = _temp.cache["containerBoxSize"]["vertical"] + _temp.cache["containerHeight"] +"px";
 	}
 	
 	// ------------------------------------
 	// construct
 	// ------------------------------------	
 	function construct ()
-	{								
-		// Container
-		_elements["container"] = SNDK.tools.newElement ("div", {});
-		_elements["container"].setAttribute ("id", _attributes.id);		
-		_elements["container"].className = _attributes.stylesheet;	
-			
-		// Left	
-		_elements["left"] = SNDK.tools.newElement ("div", {className: "Left", appendTo: _elements["container"]});
-
-		// Center
-		_elements["center"] = SNDK.tools.newElement ("div", {className: "Center", appendTo: _elements["container"]});
-		SNDK.tools.textSelectionDisable (_elements["center"]);
-
-		// Right
-		_elements["right"] = SNDK.tools.newElement ("div", {className: "Right", appendTo: _elements["container"]});	
-		
-		// Clear
-		SNDK.tools.newElement ("div", {className: "Clear", appendTo: _elements["container"]});																						
-																	
+	{					
+		// Container					
+		_elements["container"] = SNDK.tools.newElement ("button", {});
+		_elements["container"].className = _attributes.stylesheet;
+																			
 		// Hook events	
 		_elements["container"].onfocus = eventOnFocus;
 		_elements["container"].onblur = eventOnBlur;
-		_elements["container"].onmousedown = eventOnMouseDown;
-		_elements["container"].onmouseup = eventOnMouseUp;			
-		_elements["container"].onmouseover = eventOnMouseOver;
-		_elements["container"].onmouseout = eventOnMouseOut;
-		_elements["container"].onkeyup = eventOnKeyUp;
+		_elements["container"].onclick = eventOnClick;				
 		_elements["container"].onkeydown = eventOnKeyDown;
 		
 		window.addEvent (window, 'SUIREFRESH', refresh);			
@@ -115,46 +97,40 @@ button : function (attributes)
 	{
 		if (_temp.initialized)
 		{
+			var style = _attributes.stylesheet;
+					
 			if (_attributes.disabled)
 			{
-				_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Disabled";
-				_elements["container"].removeAttribute("tabIndex");
+				_elements["container"].disabled = true;
 				_attributes.focus = false;
 				eventOnBlur ();				
 			}
 			else
-			{
-				//_elements["container"].setAttribute("tabIndex", 0);	
-				
+			{				
+				_elements["container"].disabled = false;
+			
+				if (_attributes.active)
+				{	
+					style += " active";						
+					_attributes.active = false;
+					setTimeout (refresh, 100);					
+				}				
+												
 				if (_attributes.focus)
-				{
-					if (_temp.mouseDown)
-					{
-						_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Focus "+ _attributes.stylesheet+"LeftClicked";
-					}
-					else
-					{
-						_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet +"Focus";
-					}								
-					
+				{	
+					style += " focus";								
 					setFocus ();			
-				}
-				else
-				{
-					_elements["container"].className = _attributes.stylesheet;
 				}
 				
 				_elements["container"].tabIndex = _attributes.tabIndex;
 			}	
-				
-			_elements["center"].innerHTML = _attributes.label;
+						
+			SNDK.tools.setButtonLabel (_elements["container"], _attributes.label);						
 			
-			//console.log (_attributes.tabIndex)
-			
-			
-		}
+			_elements["container"].className = style;
 		
-		setDimensions ();
+			setDimensions ();
+		}		
 	}	
 	
 	// ------------------------------------
@@ -172,9 +148,8 @@ button : function (attributes)
 	{
 		if (!_temp.cacheUpdated)
 		{
-			_temp.cache["containerPadding"] = SNDK.tools.getElementStyledPadding (_elements["container"]);
-			_temp.cache["containerWidth"] = (SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]));
-			_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["left"]);
+			_temp.cache["containerBoxSize"] = SNDK.tools.getElementStyledBoxSize (_elements["container"]);			
+			_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["container"]);
 		}
 		
 		_temp.cacheUpdated = true;	
@@ -187,7 +162,7 @@ button : function (attributes)
 	{					
 		// Stylesheet
 		if (!_attributes.stylesheet)
-			_attributes.stylesheet = "SUIButton";			
+			_attributes.stylesheet = "button white-gradient glossy";			
 			
 		// Managed
 		if (!_attributes.managed)
@@ -220,6 +195,10 @@ button : function (attributes)
 		if (!_attributes.focus)
 			_attributes.focus = false;
 			
+		// Active
+		if (!_attributes.active)
+			_attributes.active = false;
+			
 		// TabIndex
 		if (!_attributes.tabIndex)
 			_attributes.tabIndex = 0;
@@ -232,63 +211,37 @@ button : function (attributes)
 	{
 		if (_temp.initialized)
 		{
-			var width = {};
-			
-			if (!_attributes.managed && _attributes.widthType != "pixel")
-			{					
-				width.container = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100) - _temp.cache.containerPadding["horizontal"];
+			var width = 0;
+		
+			//if (!_attributes.managed && _attributes.widthType != "pixel")
+			if (_attributes.widthType != "pixel")
+			{
+			//	console.log (SNDK.tools.getElementInnerWidth (_elements["container"].parentNode))
+				
+																											
+				width = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100);
+				
+			//	console.log (width)
 			}
 			else
-			{			
-				if (_attributes.managed && _attributes.widthType == "percent")
-				{
-					width.container = _attributes.managedWidth - _temp.cache.containerPadding["horizontal"];
-				}
-				else
-				{
-					width.container = _attributes.width - _temp.cache.containerPadding["horizontal"];
-				}			
+			{	
+				width = _attributes.width ;
 			}	
 			
-			width.center = width.container - _temp.cache.containerWidth;
-
-			_elements["container"].style.width = width.container +"px";
-			_elements["center"].style.width = width.center +"px";		
+			_elements["container"].style.width = width - _temp.cache.containerBoxSize["horizontal"] +"px";
+			
+			//console.log (_temp.cache.containerBoxSize["horizontal"])
+			
 		}
 	}
-		
-//	function setDimensions2 ()
-//	{
-//		if (_temp.initialized)
-//		{
-//			var containerwidth = SNDK.tools.getElementStyledWidth (_elements["left"]) + SNDK.tools.getElementStyledWidth (_elements["right"]);
-		
-//			if (_attributes.widthType == "percent")
-//			{								
-	//			setTimeout (	function () 
-	//					{	
-//							var parentwidth = SNDK.tools.getElementInnerWidth (_elements["container"].parentNode);							
-//							var width = parentwidth - SNDK.tools.getElementStyledPadding (_elements["container"])["horizontal"] - containerwidth +"px";
-													
-//							_elements["center"].style.width = width;
-	//					}, 0);						
-//			}
-//			else
-//			{
-//				var width = _attributes.width  - containerwidth +"px";
-//
-//				_elements["container"].style.width = _attributes.width +"px";
-//				_elements["center"].style.width = width;
-//			}		
-//		}
-//	}
 	
 	// ------------------------------------
 	// setFocus
 	// ------------------------------------				
 	function setFocus ()
 	{
-		setTimeout ( function () { _elements["container"].focus (); }, 2);	
+		_elements["container"].focus ()
+		//setTimeout ( function () { _elements["container"].focus (); }, 2);	
 	}	
 	
 	// ------------------------------------
@@ -593,20 +546,8 @@ button : function (attributes)
 	{	
 		if (!attributes.disabled)
 		{
-			if (_temp.enterDown)
-			{
-				_temp.enterDown = false;
-				_temp.mouseDown = false;
-				refresh ();
-			}
-			else
-			{
-				_temp.enterDown = true;
-				_temp.mouseDown = true;
-				refresh ();
-				
-				eventOnClick ();
-			}				
+			_attributes.active = true;
+			refresh ();		
 		}	
 	}
 
@@ -712,7 +653,7 @@ button : function (attributes)
 	// onClick
 	// ------------------------------------	
 	function eventOnClick ()
-	{
+	{		
 		if (_attributes.onClick != null)
 		{
 			setTimeout( function () { _attributes.onClick (_attributes.name); }, 1);

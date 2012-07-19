@@ -1,3 +1,22 @@
+setButtonLabel : function (element, text)
+{
+	if (element)
+	{
+		if (element.childNodes[0])
+		{
+			element.childNodes[0].nodeValue = text;
+		}
+		else if (element.value)
+		{
+			element.value = text;
+		}
+		else
+		{
+			element.innerHTML = text;
+		}
+	}
+},
+
 // ***************************************************************************************************************************************************
 // ** getTicks																																		**
 // ***************************************************************************************************************************************************
@@ -505,6 +524,42 @@ getElementStyledPadding : function (element)
 	
 	return result;
 },
+
+
+getElementStyledBoxSize : function (element)
+{
+	var result = new Array ();
+	result["vertical"] = 0;
+	result["horizontal"] = 0;
+
+	var dimensions = new Array ();
+	
+	// PADDING
+	dimensions["paddingLeft"] = parseInt (SNDK.tools.getStyle (element, "padding-left"));
+	dimensions["paddingRight"] = parseInt (SNDK.tools.getStyle (element, "padding-right"));
+	dimensions["paddingTop"] = parseInt (SNDK.tools.getStyle (element, "padding-top"));
+	dimensions["paddingBottom"] = parseInt (SNDK.tools.getStyle (element, "padding-bottom"));
+	
+	// MARGIN
+	dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
+	dimensions["marginRight"] = parseInt (SNDK.tools.getStyle (element, "margin-right"));
+	dimensions["marginTop"] = parseInt (SNDK.tools.getStyle (element, "margin-top"));
+	dimensions["marginBottom"] = parseInt (SNDK.tools.getStyle (element, "margin-bottom"));				
+	
+	//BORDER
+	dimensions["borderLeft"] = parseInt (SNDK.tools.getStyle (element, "border-left-width"));
+	dimensions["borderRight"] = parseInt (SNDK.tools.getStyle (element, "border-right-width"));
+	dimensions["borderTop"] = parseInt (SNDK.tools.getStyle (element, "border-top-width"));
+	dimensions["borderBottom"] = parseInt (SNDK.tools.getStyle (element, "border-bottom-width"));	
+	
+	//console.log (dimensions)	
+	
+	result["vertical"] = (dimensions.paddingTop + dimensions.paddingBottom + dimensions.marginTop + dimensions.marginBottom + dimensions.borderTop + dimensions.borderBottom);
+	result["horizontal"] = (dimensions.paddingLeft + dimensions.paddingRight + dimensions.marginLeft + dimensions.marginRight + dimensions.borderLeft + dimensions.borderRight);
+	
+	return result;
+},
+
 
 // ------------------------------------
 // getElementStyleWidth

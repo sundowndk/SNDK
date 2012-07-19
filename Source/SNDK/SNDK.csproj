@@ -879,6 +879,9 @@
     <None Include="javascript\sui\layoutbox\10_definitions.js" />
     <None Include="javascript\sui\layoutbox\20_private_functions.js" />
     <None Include="javascript\sui\layoutbox\30_public_functions.js" />
+    <None Include="resources\css\05_colors.css" />
+    <None Include="resources\css\01_global.css" />
+    <None Include="resources\css\00_reset.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />
