@@ -7830,6 +7830,18 @@ var SNDK =
 				// Container					
 				_elements["container"] = SNDK.tools.newElement ("button", {});
 				_elements["container"].className = _attributes.stylesheet;
+				
+				// Icon
+				if (_attributes.icon)
+				{						
+					_elements["button-icon"] = SNDK.tools.newElement ("span", {appendTo: _elements["container"]});
+					
+					_elements["button-icon"].className = "button-icon "+ _attributes.iconColor;
+					_elements["button-icon"].style.cssFloat = "left";
+				
+					_elements["icon"] = SNDK.tools.newElement ("span", {appendTo: _elements["button-icon"]});
+					_elements["icon"].className = "icon-"+ _attributes.iconName;
+				}	
 																					
 				// Hook events	
 				_elements["container"].onfocus = eventOnFocus;
@@ -7932,6 +7944,21 @@ var SNDK =
 					_attributes.widthType = "pixel";
 					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
 				}						
+										
+				// Icon
+				if (!_attributes.icon)
+				{
+					_attributes.icon = false;
+				}
+				else
+				{
+					_attributes.iconName = _attributes.icon;
+					_attributes.icon = true;
+				}	
+					
+				// IconColor
+				if (!_attributes.iconColor)
+					_attributes.iconColor = "";	
 										
 				// Label
 				if (!_attributes.label)

@@ -3928,8 +3928,16 @@ button::-moz-focus-inner {
 /* Icon section in a button */
 .button > .button-icon {
 	display: inline-block;
+	
+	left: -2px;
+	
+	
+	
 	vertical-align: baseline;
 	position: relative;
+	
+	
+	
 	text-align: left;
 	font-weight: bold;
 	padding: 0 10px;
