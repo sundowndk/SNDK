@@ -983,6 +983,11 @@ var SNDK =
 						}
 						
 					}
+		
+					if (options.href != null)
+					{
+						element.setAttribute ("href", options.href);
+					}
 					
 					if (options.display != null)
 					{
