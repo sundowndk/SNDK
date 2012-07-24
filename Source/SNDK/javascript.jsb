@@ -22,6 +22,7 @@
 				<js file="javascript/widgets/rotator.js" />
 				<js file="javascript/widgets/blobmenu.js" />
 				<js file="javascript/widgets/simplamenu.js" />
+				<js file="javascript/widgets/shortcuts.js" />
 			</class>			
 			<class name="SUI">			
 				<constructor name="canvas" variables="attributes">

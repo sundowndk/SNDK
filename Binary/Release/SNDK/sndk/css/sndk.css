@@ -189,34 +189,34 @@ body, button, input, textarea {
 
 .carbon {
 	color: white;
-	background: #3c4044 url(../img/textures/grid.png);
-	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0))), #3c4044 url(../img/textures/grid.png);
-	background: -webkit-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(../img/textures/grid.png);
-	background: -moz-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(../img/textures/grid.png);
-	background: -ms-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(../img/textures/grid.png);
-	background: -o-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(../img/textures/grid.png);
-	background: linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(../img/textures/grid.png);
+	background: #3c4044 url(images/textures/grid.png);
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.4)), to(rgba(0, 0, 0, 0))), #3c4044 url(images/textures/grid.png);
+	background: -webkit-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(images/textures/grid.png);
+	background: -moz-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(images/textures/grid.png);
+	background: -ms-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(images/textures/grid.png);
+	background: -o-linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(images/textures/grid.png);
+	background: linear-gradient( top, rgba(0,0,0,0.4), rgba(0,0,0,0)), #3c4044 url(images/textures/grid.png);
 }
 .linen {
 	color: white;
 	border-color: #929ba6;
-	background: #a7b2be url(../img/textures/fabric.png);
-	background: url(../img/textures/fabric.png), -webkit-gradient(linear, left top, left bottom, from(#5d656e), to(#a7b2be)) repeat-x, #a7b2be;
-	background: url(../img/textures/fabric.png), -webkit-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
-	background: url(../img/textures/fabric.png), -moz-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
-	background: url(../img/textures/fabric.png), -ms-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
-	background: url(../img/textures/fabric.png), -o-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
-	background: url(../img/textures/fabric.png), linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
+	background: #a7b2be url(images/textures/fabric.png);
+	background: url(images/textures/fabric.png), -webkit-gradient(linear, left top, left bottom, from(#5d656e), to(#a7b2be)) repeat-x, #a7b2be;
+	background: url(images/textures/fabric.png), -webkit-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
+	background: url(images/textures/fabric.png), -moz-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
+	background: url(images/textures/fabric.png), -ms-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
+	background: url(images/textures/fabric.png), -o-linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
+	background: url(images/textures/fabric.png), linear-gradient(top, #5d656e, #a7b2be) repeat-x, #a7b2be;
 }
 .scratch-metal {
 	border-color: #999999;
-	background: #dedede url(../img/textures/scratches.png);
-	background: url(../img/textures/scratches.png), -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#aaaaaa), color-stop(0.25, #f2f2f2), color-stop(0.38, #ffffff), color-stop(0.63, #c5c5c5), color-stop(0.87, #f7f7f7));
-	background: url(../img/textures/scratches.png), -webkit-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
-	background: url(../img/textures/scratches.png), -moz-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
-	background: url(../img/textures/scratches.png), -ms-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
-	background: url(../img/textures/scratches.png), -o-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
-	background: url(../img/textures/scratches.png), linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
+	background: #dedede url(images/textures/scratches.png);
+	background: url(images/textures/scratches.png), -webkit-gradient(linear, left top, left bottom, from(#aaaaaa), to(#aaaaaa), color-stop(0.25, #f2f2f2), color-stop(0.38, #ffffff), color-stop(0.63, #c5c5c5), color-stop(0.87, #f7f7f7));
+	background: url(images/textures/scratches.png), -webkit-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
+	background: url(images/textures/scratches.png), -moz-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
+	background: url(images/textures/scratches.png), -ms-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
+	background: url(images/textures/scratches.png), -o-linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
+	background: url(images/textures/scratches.png), linear-gradient(top, #aaaaaa, #f2f2f2 25%, #ffffff 38%, #c5c5c5 63%, #f7f7f7 87%, #aaaaaa);
 }
 
 /********************************************************/
@@ -224,7 +224,7 @@ body, button, input, textarea {
 /********************************************************/
 
 .input-wrapper {
-	background: #585d62 url(../img/old-browsers/colors/bg_input-wrapper.png) repeat-x;
+	background: #585d62 url(images/old-browsers/colors/bg_input-wrapper.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -238,7 +238,7 @@ body, button, input, textarea {
 }
 .big-menu {
 	color: white;
-	background: #6ead12 url(../img/old-browsers/colors/bg_big-menu.png) repeat-x;
+	background: #6ead12 url(images/old-browsers/colors/bg_big-menu.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -253,7 +253,7 @@ body, button, input, textarea {
 .translucid,
 .notification {
 	color: #bdbdbd;
-	background: #000 url(../img/old-browsers/colors/bg_translucid.png) repeat-x;
+	background: #000 url(images/old-browsers/colors/bg_translucid.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -271,13 +271,13 @@ body, button, input, textarea {
 .row-drop > td,
 .cell-drop,
 .back {
-	background: #3c4044 url(../img/textures/grid.png) !important;
-	background: url(../img/textures/grid.png), -webkit-gradient(linear, left top, left bottom, from(#6d7073), to(#3c4044)) !important;
-	background: url(../img/textures/grid.png), -webkit-linear-gradient(top, #6d7073, #3c4044) !important;
-	background: url(../img/textures/grid.png), -moz-linear-gradient(top, #6d7073, #3c4044) !important;
-	background: url(../img/textures/grid.png), -ms-linear-gradient(top, #6d7073, #3c4044) !important;
-	background: url(../img/textures/grid.png), -o-linear-gradient(top, #6d7073, #3c4044) !important;
-	background: url(../img/textures/grid.png), linear-gradient(top, #6d7073, #3c4044) !important;
+	background: #3c4044 url(images/textures/grid.png) !important;
+	background: url(images/textures/grid.png), -webkit-gradient(linear, left top, left bottom, from(#6d7073), to(#3c4044)) !important;
+	background: url(images/textures/grid.png), -webkit-linear-gradient(top, #6d7073, #3c4044) !important;
+	background: url(images/textures/grid.png), -moz-linear-gradient(top, #6d7073, #3c4044) !important;
+	background: url(images/textures/grid.png), -ms-linear-gradient(top, #6d7073, #3c4044) !important;
+	background: url(images/textures/grid.png), -o-linear-gradient(top, #6d7073, #3c4044) !important;
+	background: url(images/textures/grid.png), linear-gradient(top, #6d7073, #3c4044) !important;
 	color: #afafaf;
 	}
 	.field-drop b, .field-drop strong,
@@ -293,7 +293,7 @@ body, button, input, textarea {
 .input, .inputs,
 .progress, .slider,
 .checkbox, .radio {
-	background: #e6e6e6 url(../img/old-browsers/colors/bg_input.png) repeat-x;
+	background: #e6e6e6 url(images/old-browsers/colors/bg_input.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -313,7 +313,7 @@ body, button, input, textarea {
 	.black-inputs .slider, .slider.black-input,
 	.black-inputs .checkbox, .checkbox.black-input,
 	.black-inputs .radio, .radio.black-input {
-		background: #323232 url(../img/old-browsers/colors/bg_black-inputs_input.png) repeat-x;
+		background: #323232 url(images/old-browsers/colors/bg_black-inputs_input.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -340,7 +340,7 @@ body, button, input, textarea {
 /********************************************************/
 
 .modal {
-	background: #101010 url(../img/old-browsers/colors/bg_modal.png) repeat-x;
+	background: #101010 url(images/old-browsers/colors/bg_modal.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -355,7 +355,7 @@ body, button, input, textarea {
 	border-color: #191919;
 	}
 	.modal-bar {
-		background: url(../img/old-browsers/colors/bg_modal-bar.png) repeat-x;
+		background: url(images/old-browsers/colors/bg_modal-bar.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -391,7 +391,7 @@ body, button, input, textarea {
 .panel-control,
 .wizard-step {
 	color: #666666;
-	background: #d6dadf url(../img/old-browsers/colors/bg_button.png) repeat-x;
+	background: #d6dadf url(images/old-browsers/colors/bg_button.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -408,7 +408,7 @@ body, button, input, textarea {
 	a.select-value:hover, .no-touch .select-arrow:hover,
 	a.agenda-event:hover {
 		color: #666666;
-		background: #d7dbdf url(../img/old-browsers/colors/bg_a_button_hover.png) repeat-x;
+		background: #d7dbdf url(images/old-browsers/colors/bg_a_button_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -423,7 +423,7 @@ body, button, input, textarea {
 	}
 	.button.glossy,
 	.glossy > .select-value, .glossy > .select-arrow {
-		background: #dcdce0 url(../img/old-browsers/colors/bg_button_glossy.png) repeat-x;
+		background: #dcdce0 url(images/old-browsers/colors/bg_button_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -437,7 +437,7 @@ body, button, input, textarea {
 		}
 		a.button.glossy:hover, button.button.glossy:hover,
 		.glossy > a.select-value:hover, .glossy > .select-arrow:hover {
-			background: #e8e8eb url(../img/old-browsers/colors/bg_a_button_glossy_hover.png) repeat-x;
+			background: #e8e8eb url(images/old-browsers/colors/bg_a_button_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -451,7 +451,7 @@ body, button, input, textarea {
 		}
 	a.button:active, button.button:active, .button.active, .button.active:hover,
 	a.button.glossy:active, button.button.glossy:active, .button.glossy.active {
-		background: #dbdbdb url(../img/old-browsers/colors/bg_a_button_active.png) repeat-x;
+		background: #dbdbdb url(images/old-browsers/colors/bg_a_button_active.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -466,7 +466,7 @@ body, button, input, textarea {
 
 /* Black */
 #title-bar, #access {
-	background: #000000 url(../img/old-browsers/colors/bg_tr_highlight_glossy_th.png) repeat-x;
+	background: #000000 url(images/old-browsers/colors/bg_tr_highlight_glossy_th.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -485,7 +485,7 @@ body, button, input, textarea {
 .radio > .check-knob,
 .wizard-steps {
 	color: white;
-	background: #404040 url(../img/old-browsers/colors/bg_black-inputs_switch-button.png) repeat-x;
+	background: #404040 url(images/old-browsers/colors/bg_black-inputs_switch-button.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -507,7 +507,7 @@ li.message-menu,
 .message, .big-message,
 .table > thead > tr > .header:hover {
 	color: #666666;
-	background: #e4e7eb url(../img/old-browsers/colors/bg_message.png) repeat-x;
+	background: #e4e7eb url(images/old-browsers/colors/bg_message.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -521,7 +521,7 @@ li.message-menu,
 	border-color: #cccccc;
 	}
 	.message.glossy, .big-message.glossy {
-		background: #e8e8eb url(../img/old-browsers/colors/bg_message_glossy.png) repeat-x;
+		background: #e8e8eb url(images/old-browsers/colors/bg_message_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -539,7 +539,7 @@ li.message-menu,
 .extra-notifications,
 .more-notifications {
 	color: white;
-	background: #d52607 url(../img/old-browsers/colors/bg_count.png) repeat-x;
+	background: #d52607 url(images/old-browsers/colors/bg_count.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -554,7 +554,7 @@ li.message-menu,
 	}
 	a.count:hover, a.close:hover {
 		color: white;
-		background: #d12206 url(../img/old-browsers/colors/bg_a_count_hover.png) repeat-x;
+		background: #d12206 url(images/old-browsers/colors/bg_a_count_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -568,7 +568,7 @@ li.message-menu,
 		border-color: #931a03;
 	}
 	.count.glossy, .close.glossy {
-		background: #d42622 url(../img/old-browsers/colors/bg_count_glossy.png) repeat-x;
+		background: #d42622 url(images/old-browsers/colors/bg_count_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -581,7 +581,7 @@ li.message-menu,
 		background: linear-gradient(top, #fd8383, #c30909 50%, #a70606 50%, #d42622);
 		}
 		a.count.glossy:hover, a.close.glossy:hover {
-			background: #e94237 url(../img/old-browsers/colors/bg_a_count_glossy_hover.png) repeat-x;
+			background: #e94237 url(images/old-browsers/colors/bg_a_count_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -595,7 +595,7 @@ li.message-menu,
 		}
 	a.count:active, a.count.active, a.count.glossy:active,
 	a.close:active, a.close.active, a.close.glossy:active {
-		background: #e4360a url(../img/old-browsers/colors/bg_a_count_active.png) repeat-x;
+		background: #e4360a url(images/old-browsers/colors/bg_a_count_active.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -612,7 +612,7 @@ li.message-menu,
 .ribbon-inner,
 .active > .wizard-step {
 	color: white;
-	background: #87ba17 url(../img/old-browsers/colors/bg_ribbon-inner.png) repeat-x;
+	background: #87ba17 url(images/old-browsers/colors/bg_ribbon-inner.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -638,7 +638,7 @@ li.message-menu,
 .table-header,
 .table-footer {
 	color: white;
-	background: #00438d url(../img/old-browsers/colors/bg_button-icon.png) repeat-x;
+	background: #00438d url(images/old-browsers/colors/bg_button-icon.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -654,7 +654,7 @@ li.message-menu,
 	.no-touch .drop-down > span:hover, .no-touch .drop-down > a:hover, .drop-down > .selected,
 	:hover > .button-icon {
 		color: white;
-		background: #003d86 url(../img/old-browsers/colors/bg_no-touch_drop-down_span_hover.png) repeat-x;
+		background: #003d86 url(images/old-browsers/colors/bg_no-touch_drop-down_span_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -669,7 +669,7 @@ li.message-menu,
 	}
 	.button-icon.glossy, .glossy > .button-icon,
 	.progress-bar, .slider-bar {
-		background: #0a5db8 url(../img/old-browsers/colors/bg_button-icon_glossy.png) repeat-x;
+		background: #0a5db8 url(images/old-browsers/colors/bg_button-icon_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -682,7 +682,7 @@ li.message-menu,
 		background: linear-gradient(top, #65b2dd, #045ab2 50%, #004995 50%, #0a5db8);
 		}
 		:hover > .button-icon.glossy, .glossy:hover > .button-icon {
-			background: #056fc9 url(../img/old-browsers/colors/bg_hover_button-icon_glossy.png) repeat-x;
+			background: #056fc9 url(images/old-browsers/colors/bg_hover_button-icon_glossy.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -695,7 +695,7 @@ li.message-menu,
 			background: linear-gradient(top, #46bde5, #026cc4 50%, #005cac 50%, #056fc9);
 		}
 	.button:active > .button-icon, .active > .button-icon {
-		background: #005fb4 url(../img/old-browsers/colors/bg_button_active_button-icon.png) repeat-x;
+		background: #005fb4 url(images/old-browsers/colors/bg_button_active_button-icon.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -726,7 +726,7 @@ li.message-menu,
 .silver-gradient, .silver-gradient:visited,
 .silver-gradient > .select-value, .silver-gradient > .select-arrow {
 	color: #666666;
-	background: #d6dadf url(../img/old-browsers/colors/bg_silver-gradient.png) repeat-x;
+	background: #d6dadf url(images/old-browsers/colors/bg_silver-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -743,7 +743,7 @@ li.message-menu,
 	:hover > .button-icon.silver-gradient,
 	.silver-gradient > a.select-value:hover, .silver-gradient > .select-arrow:hover {
 		color: #666666;
-		background: #d7dbdf url(../img/old-browsers/colors/bg_a_silver-gradient_hover.png) repeat-x;
+		background: #d7dbdf url(images/old-browsers/colors/bg_a_silver-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -759,7 +759,7 @@ li.message-menu,
 	.silver-gradient.glossy,
 	.glossy > .button-icon.silver-gradient, .button-icon.glossy.silver-gradient,
 	.silver-gradient.glossy > .select-value, .silver-gradient.glossy > .select-arrow {
-		background: #dcdce0 url(../img/old-browsers/colors/bg_silver-gradient_glossy.png) repeat-x;
+		background: #dcdce0 url(images/old-browsers/colors/bg_silver-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -774,7 +774,7 @@ li.message-menu,
 		a.silver-gradient.glossy:hover, button.silver-gradient.glossy:hover,
 		.glossy:hover > .button-icon.silver-gradient, :hover > .button-icon.glossy.silver-gradient,
 		.silver-gradient.glossy > a.select-value:hover, .silver-gradient.glossy > .select-arrow:hover {
-			background: #e8e8eb url(../img/old-browsers/colors/bg_a_silver-gradient_glossy_hover.png) repeat-x;
+			background: #e8e8eb url(images/old-browsers/colors/bg_a_silver-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -788,7 +788,7 @@ li.message-menu,
 		}
 	a.silver-gradient:active, button.silver-gradient:active, .button.silver-gradient:active, .silver-gradient.active,
 	:active > .button-icon.silver-gradient, .active > .button-icon.silver-gradient {
-		background: #dbdbdb url(../img/old-browsers/colors/bg_a_silver-gradient_active.png) repeat-x !important;
+		background: #dbdbdb url(images/old-browsers/colors/bg_a_silver-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -814,7 +814,7 @@ li.message-menu,
 .black-gradient, .black-gradient:visited,
 .black-gradient > .select-value, .black-gradient > .select-arrow {
 	color: white;
-	background: #000000 url(../img/old-browsers/colors/bg_black-gradient.png) repeat-x;
+	background: #000000 url(images/old-browsers/colors/bg_black-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -831,7 +831,7 @@ li.message-menu,
 	:hover > .button-icon.black-gradient,
 	.black-gradient > a.select-value:hover, .black-gradient > .select-arrow:hover {
 		color: white;
-		background: #1b1b1b url(../img/old-browsers/colors/bg_a_black-gradient_hover.png) repeat-x;
+		background: #1b1b1b url(images/old-browsers/colors/bg_a_black-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -847,7 +847,7 @@ li.message-menu,
 	.black-gradient.glossy,
 	.glossy > .button-icon.black-gradient, .button-icon.glossy.black-gradient,
 	.black-gradient.glossy > .select-value, .black-gradient.glossy > .select-arrow {
-		background: #000000 url(../img/old-browsers/colors/bg_black-gradient_glossy.png) repeat-x;
+		background: #000000 url(images/old-browsers/colors/bg_black-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -862,7 +862,7 @@ li.message-menu,
 		a.black-gradient.glossy:hover, button.black-gradient.glossy:hover,
 		.glossy:hover > .button-icon.black-gradient, :hover > .button-icon.glossy.black-gradient,
 		.black-gradient.glossy > a.select-value:hover, .black-gradient.glossy > .select-arrow:hover {
-			background: #080808 url(../img/old-browsers/colors/bg_a_black-gradient_glossy_hover.png) repeat-x;
+			background: #080808 url(images/old-browsers/colors/bg_a_black-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -876,7 +876,7 @@ li.message-menu,
 		}
 	a.black-gradient:active, button.black-gradient:active, .button.black-gradient:active, .black-gradient.active,
 	:active > .button-icon.black-gradient, .active > .button-icon.black-gradient {
-		background: #262626 url(../img/old-browsers/colors/bg_a_black-gradient_active.png) repeat-x !important;
+		background: #262626 url(images/old-browsers/colors/bg_a_black-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -904,7 +904,7 @@ li.message-menu,
 .black-inputs .number-up, .black-input > .number-up,
 .black-inputs .number-down, .black-input > .number-down {
 	color: white;
-	background: #404040 url(../img/old-browsers/colors/bg_anthracite-gradient.png) repeat-x;
+	background: #404040 url(images/old-browsers/colors/bg_anthracite-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -927,7 +927,7 @@ li.message-menu,
 	.black-inputs .number-up:hover, .black-input > .number-up:hover,
 	.black-inputs .number-down:hover, .black-input > .number-down:hover {
 		color: white;
-		background: #3a3a3a url(../img/old-browsers/colors/bg_a_anthracite-gradient_hover.png) repeat-x;
+		background: #3a3a3a url(images/old-browsers/colors/bg_a_anthracite-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -943,7 +943,7 @@ li.message-menu,
 	.anthracite-gradient.glossy,
 	.glossy > .button-icon.anthracite-gradient, .button-icon.glossy.anthracite-gradient,
 	.anthracite-gradient.glossy > .select-value, .anthracite-gradient.glossy > .select-arrow {
-		background: #505050 url(../img/old-browsers/colors/bg_anthracite-gradient_glossy.png) repeat-x;
+		background: #505050 url(images/old-browsers/colors/bg_anthracite-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -958,7 +958,7 @@ li.message-menu,
 		a.anthracite-gradient.glossy:hover, button.anthracite-gradient.glossy:hover,
 		.glossy:hover > .button-icon.anthracite-gradient, :hover > .button-icon.glossy.anthracite-gradient,
 		.anthracite-gradient.glossy > a.select-value:hover, .anthracite-gradient.glossy > .select-arrow:hover {
-			background: #656565 url(../img/old-browsers/colors/bg_a_anthracite-gradient_glossy_hover.png) repeat-x;
+			background: #656565 url(images/old-browsers/colors/bg_a_anthracite-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -974,7 +974,7 @@ li.message-menu,
 	:active > .button-icon.anthracite-gradient, .active > .button-icon.anthracite-gradient,
 	.black-inputs .number-up:active, .black-input > .number-up:active,
 	.black-inputs .number-down:active, .black-input > .number-down:active {
-		background: #474747 url(../img/old-browsers/colors/bg_a_anthracite-gradient_active.png) repeat-x !important;
+		background: #474747 url(images/old-browsers/colors/bg_a_anthracite-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1001,7 +1001,7 @@ li.message-menu,
 .grey-gradient > .select-value, .grey-gradient > .select-arrow,
 .title-menu > li, li.title-menu {
 	color: white;
-	background: #939393 url(../img/old-browsers/colors/bg_grey-gradient.png) repeat-x;
+	background: #939393 url(images/old-browsers/colors/bg_grey-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1018,7 +1018,7 @@ li.message-menu,
 	:hover > .button-icon.grey-gradient,
 	.grey-gradient > a.select-value:hover, .grey-gradient > .select-arrow:hover {
 		color: white;
-		background: #8b8b8b url(../img/old-browsers/colors/bg_a_grey-gradient_hover.png) repeat-x;
+		background: #8b8b8b url(images/old-browsers/colors/bg_a_grey-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1034,7 +1034,7 @@ li.message-menu,
 	.grey-gradient.glossy,
 	.glossy > .button-icon.grey-gradient, .button-icon.glossy.grey-gradient,
 	.grey-gradient.glossy > .select-value, .grey-gradient.glossy > .select-arrow {
-		background: #9c9c9c url(../img/old-browsers/colors/bg_grey-gradient_glossy.png) repeat-x;
+		background: #9c9c9c url(images/old-browsers/colors/bg_grey-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1049,7 +1049,7 @@ li.message-menu,
 		a.grey-gradient.glossy:hover, button.grey-gradient.glossy:hover,
 		.glossy:hover > .button-icon.grey-gradient, :hover > .button-icon.glossy.grey-gradient,
 		.grey-gradient.glossy > a.select-value:hover, .grey-gradient.glossy > .select-arrow:hover {
-			background: #ababab url(../img/old-browsers/colors/bg_a_grey-gradient_glossy_hover.png) repeat-x;
+			background: #ababab url(images/old-browsers/colors/bg_a_grey-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -1064,7 +1064,7 @@ li.message-menu,
 	a.grey-gradient:active, button.grey-gradient:active, .button.grey-gradient:active, .grey-gradient.active,
 	:active > .button-icon.grey-gradient, .active > .button-icon.grey-gradient,
 	.black-inputs .switch-off, .black-input > .switch-off {
-		background: #b7b7b7 url(../img/old-browsers/colors/bg_a_grey-gradient_active.png) repeat-x !important;
+		background: #b7b7b7 url(images/old-browsers/colors/bg_a_grey-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1090,7 +1090,7 @@ li.message-menu,
 .white-gradient, .white-gradient:visited,
 .white-gradient > .select-value, .white-gradient > .select-arrow {
 	color: #666666;
-	background: #e4e7eb url(../img/old-browsers/colors/bg_white-gradient.png) repeat-x;
+	background: #e4e7eb url(images/old-browsers/colors/bg_white-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1107,7 +1107,7 @@ li.message-menu,
 	:hover > .button-icon.white-gradient,
 	.white-gradient > a.select-value:hover, .white-gradient > .select-arrow:hover {
 		color: #666666;
-		background: #edf0f2 url(../img/old-browsers/colors/bg_a_white-gradient_hover.png) repeat-x;
+		background: #edf0f2 url(images/old-browsers/colors/bg_a_white-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1123,7 +1123,7 @@ li.message-menu,
 	.white-gradient.glossy,
 	.glossy > .button-icon.white-gradient, .button-icon.glossy.white-gradient,
 	.white-gradient.glossy > .select-value, .white-gradient.glossy > .select-arrow {
-		background: #e8e8eb url(../img/old-browsers/colors/bg_white-gradient_glossy.png) repeat-x;
+		background: #e8e8eb url(images/old-browsers/colors/bg_white-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1138,7 +1138,7 @@ li.message-menu,
 		a.white-gradient.glossy:hover, button.white-gradient.glossy:hover,
 		.glossy:hover > .button-icon.white-gradient, :hover > .button-icon.glossy.white-gradient,
 		.white-gradient.glossy > a.select-value:hover, .white-gradient.glossy > .select-arrow:hover {
-			background: #f5f5f7 url(../img/old-browsers/colors/bg_a_white-gradient_glossy_hover.png) repeat-x;
+			background: #f5f5f7 url(images/old-browsers/colors/bg_a_white-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -1153,7 +1153,7 @@ li.message-menu,
 	a.white-gradient:active, button.white-gradient:active, .button.white-gradient:active, .white-gradient.active,
 	:active > .button-icon.white-gradient, .active > .button-icon.white-gradient,
 	.switch-off {
-		background: #f0f0f0 url(../img/old-browsers/colors/bg_a_white-gradient_active.png) repeat-x !important;
+		background: #f0f0f0 url(images/old-browsers/colors/bg_a_white-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1180,7 +1180,7 @@ li.message-menu,
 .red-gradient, .red-gradient:visited,
 .red-gradient > .select-value, .red-gradient > .select-arrow {
 	color: white;
-	background: #d52607 url(../img/old-browsers/colors/bg_red-gradient.png) repeat-x;
+	background: #d52607 url(images/old-browsers/colors/bg_red-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1197,7 +1197,7 @@ li.message-menu,
 	:hover > .button-icon.red-gradient,
 	.red-gradient > a.select-value:hover, .red-gradient > .select-arrow:hover {
 		color: white;
-		background: #d12206 url(../img/old-browsers/colors/bg_a_red-gradient_hover.png) repeat-x;
+		background: #d12206 url(images/old-browsers/colors/bg_a_red-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1213,7 +1213,7 @@ li.message-menu,
 	.red-gradient.glossy,
 	.glossy > .button-icon.red-gradient, .button-icon.glossy.red-gradient,
 	.red-gradient.glossy > .select-value, .red-gradient.glossy > .select-arrow {
-		background: #d42622 url(../img/old-browsers/colors/bg_red-gradient_glossy.png) repeat-x;
+		background: #d42622 url(images/old-browsers/colors/bg_red-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1228,7 +1228,7 @@ li.message-menu,
 		a.red-gradient.glossy:hover, button.red-gradient.glossy:hover,
 		.glossy:hover > .button-icon.red-gradient, :hover > .button-icon.glossy.red-gradient,
 		.red-gradient.glossy > a.select-value:hover, .red-gradient.glossy > .select-arrow:hover {
-			background: #e94237 url(../img/old-browsers/colors/bg_a_red-gradient_glossy_hover.png) repeat-x;
+			background: #e94237 url(images/old-browsers/colors/bg_a_red-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -1242,7 +1242,7 @@ li.message-menu,
 		}
 	a.red-gradient:active, button.red-gradient:active, .button.red-gradient:active, .red-gradient.active,
 	:active > .button-icon.red-gradient, .active > .button-icon.red-gradient {
-		background: #e4360a url(../img/old-browsers/colors/bg_a_red-gradient_active.png) repeat-x !important;
+		background: #e4360a url(images/old-browsers/colors/bg_a_red-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1268,7 +1268,7 @@ li.message-menu,
 .orange-gradient, .orange-gradient:visited,
 .orange-gradient > .select-value, .orange-gradient > .select-arrow {
 	color: white;
-	background: #ff9e00 url(../img/old-browsers/colors/bg_orange-gradient.png) repeat-x;
+	background: #ff9e00 url(images/old-browsers/colors/bg_orange-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1285,7 +1285,7 @@ li.message-menu,
 	:hover > .button-icon.orange-gradient,
 	.orange-gradient > a.select-value:hover, .orange-gradient > .select-arrow:hover {
 		color: white;
-		background: #ff9700 url(../img/old-browsers/colors/bg_a_orange-gradient_hover.png) repeat-x;
+		background: #ff9700 url(images/old-browsers/colors/bg_a_orange-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1301,7 +1301,7 @@ li.message-menu,
 	.orange-gradient.glossy,
 	.glossy > .button-icon.orange-gradient, .button-icon.glossy.orange-gradient,
 	.orange-gradient.glossy > .select-value, .orange-gradient.glossy > .select-arrow {
-		background: #d38800 url(../img/old-browsers/colors/bg_orange-gradient_glossy.png) repeat-x;
+		background: #d38800 url(images/old-browsers/colors/bg_orange-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1316,7 +1316,7 @@ li.message-menu,
 		a.orange-gradient.glossy:hover, button.orange-gradient.glossy:hover,
 		.glossy:hover > .button-icon.orange-gradient, :hover > .button-icon.glossy.orange-gradient,
 		.orange-gradient.glossy > a.select-value:hover, .orange-gradient.glossy > .select-arrow:hover {
-			background: #e8a400 url(../img/old-browsers/colors/bg_a_orange-gradient_glossy_hover.png) repeat-x;
+			background: #e8a400 url(images/old-browsers/colors/bg_a_orange-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -1330,7 +1330,7 @@ li.message-menu,
 		}
 	a.orange-gradient:active, button.orange-gradient:active, .button.orange-gradient:active, .orange-gradient.active,
 	:active > .button-icon.orange-gradient, .active > .button-icon.orange-gradient {
-		background: #ffbf00 url(../img/old-browsers/colors/bg_a_orange-gradient_active.png) repeat-x !important;
+		background: #ffbf00 url(images/old-browsers/colors/bg_a_orange-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1356,7 +1356,7 @@ li.message-menu,
 .green-gradient, .green-gradient:visited,
 .green-gradient > .select-value, .green-gradient > .select-arrow {
 	color: white;
-	background: #87ba17 url(../img/old-browsers/colors/bg_green-gradient.png) repeat-x;
+	background: #87ba17 url(images/old-browsers/colors/bg_green-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1373,7 +1373,7 @@ li.message-menu,
 	:hover > .button-icon.green-gradient,
 	.green-gradient > a.select-value:hover, .green-gradient > .select-arrow:hover {
 		color: white;
-		background: #80b514 url(../img/old-browsers/colors/bg_a_green-gradient_hover.png) repeat-x;
+		background: #80b514 url(images/old-browsers/colors/bg_a_green-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1389,7 +1389,7 @@ li.message-menu,
 	.green-gradient.glossy,
 	.glossy > .button-icon.green-gradient, .button-icon.glossy.green-gradient,
 	.green-gradient.glossy > .select-value, .green-gradient.glossy > .select-arrow {
-		background: #5eb80a url(../img/old-browsers/colors/bg_green-gradient_glossy.png) repeat-x;
+		background: #5eb80a url(images/old-browsers/colors/bg_green-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1404,7 +1404,7 @@ li.message-menu,
 		a.green-gradient.glossy:hover, button.green-gradient.glossy:hover,
 		.glossy:hover > .button-icon.green-gradient, :hover > .button-icon.glossy.green-gradient,
 		.green-gradient.glossy > a.select-value:hover, .green-gradient.glossy > .select-arrow:hover {
-			background: #6ac905 url(../img/old-browsers/colors/bg_a_green-gradient_glossy_hover.png) repeat-x;
+			background: #6ac905 url(images/old-browsers/colors/bg_a_green-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -1419,7 +1419,7 @@ li.message-menu,
 	a.green-gradient:active, button.green-gradient:active, .button.green-gradient:active, .green-gradient.active,
 	:active > .button-icon.green-gradient, .active > .button-icon.green-gradient,
 	.switch-on {
-		background: #b0d222 url(../img/old-browsers/colors/bg_a_green-gradient_active.png) repeat-x !important;
+		background: #b0d222 url(images/old-browsers/colors/bg_a_green-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1446,7 +1446,7 @@ li.message-menu,
 .blue-gradient, .blue-gradient:visited,
 .blue-gradient > .select-value, .blue-gradient > .select-arrow {
 	color: white;
-	background: #00438d url(../img/old-browsers/colors/bg_blue-gradient.png) repeat-x;
+	background: #00438d url(images/old-browsers/colors/bg_blue-gradient.png) repeat-x;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1462,7 +1462,7 @@ li.message-menu,
 	a.blue-gradient:hover, button.blue-gradient:hover,
 	.blue-gradient > a.select-value:hover, .blue-gradient > .select-arrow:hover {
 		color: white;
-		background: #003d86 url(../img/old-browsers/colors/bg_a_blue-gradient_hover.png) repeat-x;
+		background: #003d86 url(images/old-browsers/colors/bg_a_blue-gradient_hover.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1477,7 +1477,7 @@ li.message-menu,
 	}
 	.blue-gradient.glossy,
 	.blue-gradient.glossy > .select-value, .blue-gradient.glossy > .select-arrow {
-		background: #0a5db8 url(../img/old-browsers/colors/bg_blue-gradient_glossy.png) repeat-x;
+		background: #0a5db8 url(images/old-browsers/colors/bg_blue-gradient_glossy.png) repeat-x;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1491,7 +1491,7 @@ li.message-menu,
 		}
 		a.blue-gradient.glossy:hover, button.blue-gradient.glossy:hover,
 		.blue-gradient.glossy > a.select-value:hover, .blue-gradient.glossy > .select-arrow:hover {
-			background: #056fc9 url(../img/old-browsers/colors/bg_a_blue-gradient_glossy_hover.png) repeat-x;
+			background: #056fc9 url(images/old-browsers/colors/bg_a_blue-gradient_glossy_hover.png) repeat-x;
 			-webkit-background-size: 100% 100%;
 			-moz-background-size: 100% 100%;
 			-o-background-size: 100% 100%;
@@ -1504,7 +1504,7 @@ li.message-menu,
 			background: linear-gradient(top, #46bde5, #026cc4 50%, #005cac 50%, #056fc9);
 		}
 	a.blue-gradient:active, button.blue-gradient:active, .button.blue-gradient:active, .blue-gradient.active {
-		background: #005fb4 url(../img/old-browsers/colors/bg_a_blue-gradient_active.png) repeat-x !important;
+		background: #005fb4 url(images/old-browsers/colors/bg_a_blue-gradient_active.png) repeat-x !important;
 		-webkit-background-size: 100% 100%;
 		-moz-background-size: 100% 100%;
 		-o-background-size: 100% 100%;
@@ -1523,7 +1523,7 @@ li.message-menu,
 
 .silver-active:active, .silver-active.active,
 .silver-active > .switch-on {
-	background: #dbdbdb url(../img/old-browsers/colors/bg_silver-active_active.png) repeat-x !important;
+	background: #dbdbdb url(images/old-browsers/colors/bg_silver-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1539,7 +1539,7 @@ li.message-menu,
 }
 .black-active:active, .black-active.active,
 .black-active > .switch-on {
-	background: #262626 url(../img/old-browsers/colors/bg_black-active_active.png) repeat-x !important;
+	background: #262626 url(images/old-browsers/colors/bg_black-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1555,7 +1555,7 @@ li.message-menu,
 }
 .anthracite-active:active, .anthracite-active.active,
 .anthracite-active > .switch-on {
-	background: #474747 url(../img/old-browsers/colors/bg_anthracite-active_active.png) repeat-x !important;
+	background: #474747 url(images/old-browsers/colors/bg_anthracite-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1571,7 +1571,7 @@ li.message-menu,
 }
 .grey-active:active, .grey-active.active,
 .grey-active > .switch-on {
-	background: #b7b7b7 url(../img/old-browsers/colors/bg_grey-active_active.png) repeat-x !important;
+	background: #b7b7b7 url(images/old-browsers/colors/bg_grey-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1587,7 +1587,7 @@ li.message-menu,
 }
 .white-active:active, .white-active.active,
 .white-active > .switch-on {
-	background: #f0f0f0 url(../img/old-browsers/colors/bg_white-active_active.png) repeat-x !important;
+	background: #f0f0f0 url(images/old-browsers/colors/bg_white-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1603,7 +1603,7 @@ li.message-menu,
 }
 .red-active:active, .red-active.active,
 .red-active > .switch-on {
-	background: #e4360a url(../img/old-browsers/colors/bg_red-active_active.png) repeat-x !important;
+	background: #e4360a url(images/old-browsers/colors/bg_red-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1619,7 +1619,7 @@ li.message-menu,
 }
 .orange-active:active, .orange-active.active,
 .orange-active > .switch-on {
-	background: #ffbf00 url(../img/old-browsers/colors/bg_orange-active_active.png) repeat-x !important;
+	background: #ffbf00 url(images/old-browsers/colors/bg_orange-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1635,7 +1635,7 @@ li.message-menu,
 }
 .green-active:active, .green-active.active,
 .green-active > .switch-on {
-	background: #b0d222 url(../img/old-browsers/colors/bg_green-active_active.png) repeat-x !important;
+	background: #b0d222 url(images/old-browsers/colors/bg_green-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1651,7 +1651,7 @@ li.message-menu,
 }
 .blue-active:active, .blue-active.active,
 .blue-active > .switch-on {
-	background: #005fb4 url(../img/old-browsers/colors/bg_blue-active_active.png) repeat-x !important;
+	background: #005fb4 url(images/old-browsers/colors/bg_blue-active_active.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1677,7 +1677,7 @@ li.message-menu,
 .disabled .switch-off {
 	color: #666666 !important;
 	border-color: #d0d0d0 !important;
-	background: #f8f8f8 url(../img/old-browsers/colors/bg_button_disabled.png) repeat-x !important;
+	background: #f8f8f8 url(images/old-browsers/colors/bg_button_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1694,7 +1694,7 @@ li.message-menu,
 .disabled .switch-on, .disabled .switch-on {
 	color: white !important;
 	border-color: #b2b9ab !important;
-	background: #b3d36b url(../img/old-browsers/colors/bg_disabled_switch-on.png) repeat-x !important;
+	background: #b3d36b url(images/old-browsers/colors/bg_disabled_switch-on.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1711,7 +1711,7 @@ li.message-menu,
 :disabled > .button-icon, .disabled .button-icon {
 	color: white !important;
 	border-color: #858c94 !important;
-	background: #84a4c8 url(../img/old-browsers/colors/bg_disabled_button-icon.png) repeat-x !important;
+	background: #84a4c8 url(images/old-browsers/colors/bg_disabled_button-icon.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1729,7 +1729,7 @@ li.message-menu,
 .disabled .silver-gradient > .select-value, .disabled .silver-gradient > .select-arrow {
 	color: #666666 !important;
 	border-color: #d0d0d0 !important;
-	background: #f8f8f8 url(../img/old-browsers/colors/bg_silver-gradient_disabled.png) repeat-x !important;
+	background: #f8f8f8 url(images/old-browsers/colors/bg_silver-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1746,7 +1746,7 @@ li.message-menu,
 .disabled .black-gradient > .select-value, .disabled .black-gradient > .select-arrow {
 	color: white !important;
 	border-color: #595959 !important;
-	background: #636363 url(../img/old-browsers/colors/bg_black-gradient_disabled.png) repeat-x !important;
+	background: #636363 url(images/old-browsers/colors/bg_black-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1772,7 +1772,7 @@ li.message-menu,
 .disabled .black-inputs .radio, .black-input.radio {
 	color: white !important;
 	border-color: #777777 !important;
-	background: #848484 url(../img/old-browsers/colors/bg_button_anthracite-gradient_disabled.png) repeat-x !important;
+	background: #848484 url(images/old-browsers/colors/bg_button_anthracite-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1792,7 +1792,7 @@ li.message-menu,
 .radio.disabled, .disabled .radio {
 	color: white !important;
 	border-color: #9c9c9c !important;
-	background: #b9b9b9 url(../img/old-browsers/colors/bg_button_grey-gradient_disabled.png) repeat-x !important;
+	background: #b9b9b9 url(images/old-browsers/colors/bg_button_grey-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1810,7 +1810,7 @@ li.message-menu,
 .disabled .white-gradient > .select-value, .disabled .white-gradient > .select-arrow {
 	color: #666666 !important;
 	border-color: #e0e0e0 !important;
-	background: #fafafa url(../img/old-browsers/colors/bg_button_white-gradient_disabled.png) repeat-x !important;
+	background: #fafafa url(images/old-browsers/colors/bg_button_white-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1828,7 +1828,7 @@ li.message-menu,
 .disabled .red-gradient > .select-value, .disabled .red-gradient > .select-arrow {
 	color: white !important;
 	border-color: #a99e9c !important;
-	background: #e98b7a url(../img/old-browsers/colors/bg_button_red-gradient_disabled.png) repeat-x !important;
+	background: #e98b7a url(images/old-browsers/colors/bg_button_red-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1846,7 +1846,7 @@ li.message-menu,
 .disabled .orange-gradient > .select-value, .disabled .orange-gradient > .select-arrow {
 	color: white !important;
 	border-color: #d0ccc3 !important;
-	background: #ffc15d url(../img/old-browsers/colors/bg_button_orange-gradient_disabled.png) repeat-x !important;
+	background: #ffc15d url(images/old-browsers/colors/bg_button_orange-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1864,7 +1864,7 @@ li.message-menu,
 .disabled .green-gradient > .select-value, .disabled .green-gradient > .select-arrow {
 	color: white !important;
 	border-color: #b2b9ab !important;
-	background: #b3d36b url(../img/old-browsers/colors/bg_button_green-gradient_disabled.png) repeat-x !important;
+	background: #b3d36b url(images/old-browsers/colors/bg_button_green-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;
@@ -1882,7 +1882,7 @@ li.message-menu,
 .disabled .blue-gradient > .select-value, .disabled .blue-gradient > .select-arrow {
 	color: white !important;
 	border-color: #858c94 !important;
-	background: #84a4c8 url(../img/old-browsers/colors/bg_button_blue-gradient_disabled.png) repeat-x !important;
+	background: #84a4c8 url(images/old-browsers/colors/bg_button_blue-gradient_disabled.png) repeat-x !important;
 	-webkit-background-size: 100% 100%;
 	-moz-background-size: 100% 100%;
 	-o-background-size: 100% 100%;

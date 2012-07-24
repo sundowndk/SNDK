@@ -119,6 +119,8 @@
     <Folder Include="javascript\sui\canvas\old\" />
     <Folder Include="javascript\sui\container\" />
     <Folder Include="javascript\sui\layoutbox\" />
+    <Folder Include="resources\css\widgets\" />
+    <Folder Include="resources\css\images\effects\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -882,6 +884,8 @@
     <None Include="resources\css\05_colors.css" />
     <None Include="resources\css\01_global.css" />
     <None Include="resources\css\00_reset.css" />
+    <None Include="javascript\widgets\shortcuts.js" />
+    <None Include="resources\css\widgets\shortcuts.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

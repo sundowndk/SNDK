@@ -27,11 +27,12 @@ echo "Bulding 'css'..."
 mkdir "$OUTPUTDIR/sndk/css"
 CSSFILE="$OUTPUTDIR/sndk/css/sndk.css"
 touch "$CSSFILE"
-find resources/css -type f -name '*.css' | sort | while read filename; do
+find resources/css -maxdepth 1 -type f -name '*.css' | sort | while read filename; do
     cat "$filename"
 done > $CSSFILE
 
 cp -rv "resources/css/images/" "$OUTPUTDIR/sndk/css/"
+cp -rv "resources/css/widgets/" "$OUTPUTDIR/sndk/css/"
 
 ####################################################
 # INCLUDES                                         #
