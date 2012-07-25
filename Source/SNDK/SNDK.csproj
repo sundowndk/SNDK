@@ -121,6 +121,8 @@
     <Folder Include="javascript\sui\layoutbox\" />
     <Folder Include="resources\css\widgets\" />
     <Folder Include="resources\css\images\effects\" />
+    <Folder Include="javascript\sui\textbox\" />
+    <Folder Include="resources\css\fonts\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -886,6 +888,13 @@
     <None Include="resources\css\00_reset.css" />
     <None Include="javascript\widgets\shortcuts.js" />
     <None Include="resources\css\widgets\shortcuts.css" />
+    <None Include="javascript\sui\textbox\10_definitions.js" />
+    <None Include="javascript\sui\textbox\20_private_functions.js" />
+    <None Include="javascript\sui\textbox\30_public_functions.js" />
+    <None Include="javascript\sui\textbox\40_events.js" />
+    <None Include="resources\css\91_textbox.css" />
+    <None Include="resources\css\06_icons.css" />
+    <None Include="resources\css\92_infospot.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

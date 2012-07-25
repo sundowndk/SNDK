@@ -174,7 +174,7 @@ button : function (attributes)
 	{					
 		// Stylesheet
 		if (!_attributes.stylesheet)
-			_attributes.stylesheet = "button white-gradient glossy";			
+			_attributes.stylesheet = "button";			
 			
 		// Managed
 		if (!_attributes.managed)
@@ -182,7 +182,7 @@ button : function (attributes)
 					
 		// Width
 		if (!_attributes.width) 
-			_attributes.width = "100px";				
+			_attributes.width = "100%";				
 			
 		if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 		{

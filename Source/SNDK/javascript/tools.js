@@ -541,10 +541,15 @@ getElementStyledBoxSize : function (element)
 	dimensions["paddingBottom"] = parseInt (SNDK.tools.getStyle (element, "padding-bottom"));
 	
 	// MARGIN
-	dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
-	dimensions["marginRight"] = parseInt (SNDK.tools.getStyle (element, "margin-right"));
-	dimensions["marginTop"] = parseInt (SNDK.tools.getStyle (element, "margin-top"));
-	dimensions["marginBottom"] = parseInt (SNDK.tools.getStyle (element, "margin-bottom"));				
+	dimensions["marginLeft"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-left")));
+	dimensions["marginRight"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-right")));
+	dimensions["marginTop"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-top")));
+	dimensions["marginBottom"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-bottom")));				
+	
+//	dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
+//	dimensions["marginRight"] = parseInt (SNDK.tools.getStyle (element, "margin-right"));
+//	dimensions["marginTop"] = parseInt (SNDK.tools.getStyle (element, "margin-top"));
+//	dimensions["marginBottom"] = parseInt (SNDK.tools.getStyle (element, "margin-bottom"));				
 	
 	//BORDER
 	dimensions["borderLeft"] = parseInt (SNDK.tools.getStyle (element, "border-left-width"));
