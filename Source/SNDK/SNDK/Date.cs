@@ -52,7 +52,43 @@ namespace SNDK
 //		{
 //			return new DateTime (Year, System.Convert.ToInt32 (Month), DateTime.DaysInMonth (Year, System.Convert.ToInt32 (Month)), 23, 59, 59, 999);
 //		}
-
+		
+		public static int GetDaysInMonth (int Year, int Month)
+		{
+			int result = 0;
+			
+			DateTime begin = GetStartOfMonth (Year, Month);
+			DateTime end = GetEndOfMonth (Year, Month);
+			
+			result = (end - begin).Days + 1;
+			
+			return result;			
+		}
+						
+		public static int GetDaysInQuarter (int Year, SNDK.Enums.Quarter Quarter)
+		{
+			int result = 0;
+			
+			DateTime begin = GetStartOfQuarter (Year, Quarter);
+			DateTime end = GetEndOfQuarter (Year, Quarter);
+			
+			result = (end - begin).Days + 1;
+			
+			return result;
+		}
+		
+		public static int GetDaysInYear (int Year)
+		{
+			int result = 0;
+			
+			DateTime begin = new DateTime (Year, 1, 1);
+			DateTime end = new DateTime (Year, 12, 31, 23, 59, 59);
+			
+			result = (end - begin).Days + 1;
+			
+			return result;			
+		}
+						
 		public static DateTime GetStartOfQuarter (int Year, SNDK.Enums.Quarter Quarter)
 		{
 			switch (Quarter)
@@ -91,6 +127,72 @@ namespace SNDK
 			}
 
 			return DateTime.Now;
+		}
+		
+		
+		public static SNDK.Enums.Quarter GetQuarter (int Month)
+		{
+			if (Month == 1)
+			{
+				return GetQuarter (SNDK.Enums.Month.January);
+			}
+			
+			if (Month == 2)
+			{
+				return GetQuarter (SNDK.Enums.Month.February);
+			}
+			
+			if (Month == 3)
+			{
+				return GetQuarter (SNDK.Enums.Month.March);
+			}
+			
+			if (Month == 4)
+			{
+				return GetQuarter (SNDK.Enums.Month.April);
+			}
+			
+			if (Month == 5)
+			{
+				return GetQuarter (SNDK.Enums.Month.May);
+			}
+			
+			if (Month == 6)
+			{
+				return GetQuarter (SNDK.Enums.Month.June);
+			}
+			
+			if (Month == 7)
+			{
+				return GetQuarter (SNDK.Enums.Month.July);
+			}
+			
+			if (Month == 8)
+			{
+				return GetQuarter (SNDK.Enums.Month.August);
+			}
+			
+			if (Month == 9)
+			{
+				return GetQuarter (SNDK.Enums.Month.September);
+			}
+			
+			if (Month == 10)
+			{
+				return GetQuarter (SNDK.Enums.Month.October);
+			}
+			
+			if (Month == 11)
+			{
+				return GetQuarter (SNDK.Enums.Month.November);
+			}
+			
+			if (Month == 12)
+			{
+				return GetQuarter (SNDK.Enums.Month.December);
+			}
+			
+			return SNDK.Enums.Quarter.First;
 		}
 
 		public static SNDK.Enums.Quarter GetQuarter (SNDK.Enums.Month Month)
@@ -143,6 +245,8 @@ namespace SNDK
 		{
 			return (System.Convert.ToInt32 ((Timespan.Ticks / 10000000L)) / 60);
 		}
+		
+		
 		#endregion
 	}
 }
