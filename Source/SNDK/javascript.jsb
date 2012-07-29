@@ -41,13 +41,19 @@
 					<js file="javascript/sui/listview/30_public_functions.js" />
 					<js file="javascript/sui/listview/40_events.js" />
 				</constructor>
+				<constructor name="textbox" variables="attributes">
+					<js file="javascript/sui/textbox/10_definitions.js" />
+					<js file="javascript/sui/textbox/20_private_functions.js" />
+					<js file="javascript/sui/textbox/30_public_functions.js" />					
+					<js file="javascript/sui/textbox/40_events.js" />	
+				</constructor>									
 				<js file="javascript/sui/checkbox.js" />
 				<js file="javascript/sui/layoutbox.js" />
 				<js file="javascript/sui/button.js" />
 				<js file="javascript/sui/dropbox.js" />				
 				<js file="javascript/sui/iconview.js" />
 				<js file="javascript/sui/textarea.js" />
-				<js file="javascript/sui/textbox.js" />
+				
 				<js file="javascript/sui/upload.js" />							
 				<js file="javascript/sui/label.js" />
 				<js file="javascript/sui/tabview.js" />

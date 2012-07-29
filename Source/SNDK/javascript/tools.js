@@ -541,7 +541,12 @@ getElementStyledBoxSize : function (element)
 	dimensions["paddingBottom"] = parseInt (SNDK.tools.getStyle (element, "padding-bottom"));
 	
 	// MARGIN
-	dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
+//	dimensions["marginLeft"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-left")));
+//	dimensions["marginRight"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-right")));
+//	dimensions["marginTop"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-top")));
+//	dimensions["marginBottom"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-bottom")));				
+	
+ 	dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
 	dimensions["marginRight"] = parseInt (SNDK.tools.getStyle (element, "margin-right"));
 	dimensions["marginTop"] = parseInt (SNDK.tools.getStyle (element, "margin-top"));
 	dimensions["marginBottom"] = parseInt (SNDK.tools.getStyle (element, "margin-bottom"));				
@@ -554,8 +559,18 @@ getElementStyledBoxSize : function (element)
 	
 	//console.log (dimensions)	
 	
+	for (index in dimensions)
+	{
+		if (dimensions[index] < 0)
+		{
+			dimensions[index] = 0;
+		}
+	}
+	
+	
 	result["vertical"] = (dimensions.paddingTop + dimensions.paddingBottom + dimensions.marginTop + dimensions.marginBottom + dimensions.borderTop + dimensions.borderBottom);
 	result["horizontal"] = (dimensions.paddingLeft + dimensions.paddingRight + dimensions.marginLeft + dimensions.marginRight + dimensions.borderLeft + dimensions.borderRight);
+	result["dimensions"] = dimensions;
 	
 	return result;
 },
@@ -667,41 +682,51 @@ getElementStyledHeight : function (element)
 // ------------------------------------	
 getElementInnerWidth : function (element)
 {
+
 	// LeftMargin
-	var leftmargin = SNDK.tools.getStyle (element, "margin-left");	
+//	var leftmargin = SNDK.tools.getStyle (element, "margin-left");	
 	
-	if (leftmargin != null && leftmargin != "auto")
-	{
-		leftmargin = parseInt (leftmargin, 10);
-	}
-	else
-	{
-		leftmargin = 0;
-	}
+//	if (leftmargin != null && leftmargin != "auto")
+//	{
+//		leftmargin = parseInt (leftmargin, 10);
+//	}
+//	else
+//	{
+//		leftmargin = 0;
+//	}
 		
 	// RightMargin	
-	var rightmargin = SNDK.tools.getStyle (element, "margin-right");
+//	var rightmargin = SNDK.tools.getStyle (element, "margin-right");
 		
-	if (rightmargin != null && rightmargin != "auto")
-	{
-		rightmargin = parseInt (rightmargin, 10);
-	}
-	else
-	{
-		rightmargin = 0;
-	}
+//	if (rightmargin != null && rightmargin != "auto")
+//	{
+//		rightmargin = parseInt (rightmargin, 10);
+//	}
+//	else
+//	{
+//		rightmargin = 0;
+//	}
 	
 	// LeftPadding
-	var leftpadding = parseInt (SNDK.tools.getStyle (element, "padding-left"), 10);
+//	var leftpadding = parseInt (SNDK.tools.getStyle (element, "padding-left"), 10);
 	
 	// RightPadding
-	var rightpadding = parseInt (SNDK.tools.getStyle (element, "padding-right"), 10);
+//	var rightpadding = parseInt (SNDK.tools.getStyle (element, "padding-right"), 10);
 		
 	// Width
 	var width = element.offsetWidth;
 		
+	var box = SNDK.tools.getElementStyledBoxSize (element);
+		
 	// Done
-	return width - leftmargin - rightmargin - leftpadding - rightpadding;		
+//	console.log (element)
+//	console.log (box)
+//	console.log (width)
+	
+	return width - box.dimensions.paddingLeft - box.dimensions.paddingRight - box.dimensions.borderLeft - box.dimensions.borderRight;
+	//return width - 10
+//	return width - leftmargin - rightmargin - leftpadding - rightpadding;		
+//	return width - leftpadding - rightpadding;		
 },
 
 // ------------------------------------
@@ -710,40 +735,44 @@ getElementInnerWidth : function (element)
 getElementInnerHeight : function (element)
 {
 	// TopMargin
-	var topmargin = SNDK.tools.getStyle (element, "margin-top");
+//	var topmargin = SNDK.tools.getStyle (element, "margin-top");
 	
-	if (topmargin != null && topmargin != "auto")
-	{
-		topmargin = parseInt (topmargin, 10);
-	}
-	else
-	{
-		topmargin = 0;
-	}
+//	if (topmargin != null && topmargin != "auto")
+//	{
+//		topmargin = parseInt (topmargin, 10);
+//	}
+//	else
+//	{
+//		topmargin = 0;
+//	}
 		
 	// BottomMargin
-	var bottommargin = SNDK.tools.getStyle (element, "margin-bottom");
-		
-	if (bottommargin != null && bottommargin != "auto")
-	{
-		bottommargin = parseInt (bottommargin, 10);
-	}
-	else
-	{
-		bottommargin = 0;
-	}
+//	var bottommargin = SNDK.tools.getStyle (element, "margin-bottom");
+//		
+//	if (bottommargin != null && bottommargin != "auto")
+//	{
+//		bottommargin = parseInt (bottommargin, 10);
+//	}
+//	else
+//	{
+//		bottommargin = 0;
+//	}
 	
 	// TopPadding
-	var toppadding = parseInt (SNDK.tools.getStyle (element, "padding-top"), 10);
+//	var toppadding = parseInt (SNDK.tools.getStyle (element, "padding-top"), 10);
 	
 	// BottomPadding
-	var bottompadding = parseInt (SNDK.tools.getStyle (element, "padding-bottom"), 10);
-		
+//	var bottompadding = parseInt (SNDK.tools.getStyle (element, "padding-bottom"), 10);
+	
+	var box = SNDK.tools.getElementStyledBoxSize (element);
+				
 	// Height
 	var height = parseInt (element.offsetHeight, 10);
 	
+	return height - box.dimensions.paddingTop - box.dimensions.paddingBottom - box.dimensions.borderTop - box.dimensions.borderBottom;
+	
 	// Done
-	return height - topmargin - bottommargin - toppadding - bottompadding;	
+//	return height - topmargin - bottommargin - toppadding - bottompadding;	
 },
 
 

@@ -38,7 +38,7 @@ pre, code, kbd, samp { font-family: monospace, sans-serif; }
 
 body, select, input, textarea {   color: #444; }
 h1,h2,h3,h4,h5,h6 { font-weight: bold; }
-html { overflow-y: scroll; }
+html { overflow-y: auto; }
 
 a:hover, a:active, a:focus { outline: none; ie-dummy: expression(this.hideFocus=true); }
 a, a:active { color: #607890; }

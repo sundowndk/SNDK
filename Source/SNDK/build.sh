@@ -33,6 +33,7 @@ done > $CSSFILE
 
 cp -rv "resources/css/images/" "$OUTPUTDIR/sndk/css/"
 cp -rv "resources/css/widgets/" "$OUTPUTDIR/sndk/css/"
+cp -rv "resources/css/fonts/" "$OUTPUTDIR/sndk/css/"
 
 ####################################################
 # INCLUDES                                         #
