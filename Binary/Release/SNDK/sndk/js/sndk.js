@@ -4233,7 +4233,7 @@ var SNDK =
 						// Width is percent.
 						case "percent":
 						{
-						console.log ("CANVAS parent innerwidth: "+ SNDK.tools.getElementInnerWidth (parent) )
+						//console.log ("CANVAS parent innerwidth: "+ SNDK.tools.getElementInnerWidth (parent) )
 						
 							width = (SNDK.tools.getElementInnerWidth (parent) * _attributes.width) / 100;
 							//console.log ("canvas: "+ SNDK.tools.getElementInnerWidth (parent))	
@@ -4268,7 +4268,7 @@ var SNDK =
 						// Height is in percent.
 						case "percent":
 						{
-						console.log ("CANVAS parent innerheight: "+ SNDK.tools.getElementInnerHeight (parent) )
+						//console.log ("CANVAS parent innerheight: "+ SNDK.tools.getElementInnerHeight (parent) )
 						
 							height = (SNDK.tools.getElementInnerHeight (parent) * _attributes.height) / 100;
 							break;
