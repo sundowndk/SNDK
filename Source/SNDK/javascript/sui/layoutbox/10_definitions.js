@@ -10,12 +10,15 @@ _attributes.id = SNDK.tools.newGuid ();
 setAttributes ();	
 
 // Private functions
+
 this._attributes = _attributes;
 this._elements = _elements;
 this._temp = _temp;	
 this._init = init;	
 
 this._height = getContainerHeight ();
+
+this.type = "LAYOUTBOX";
 
 // Functions		
 this.refresh = functionRefresh;	

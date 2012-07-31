@@ -37,7 +37,7 @@ label : function (attributes)
 	this._elements = _elements;
 	this._temp = _temp;	
 	this._init = init;	
-	
+	this.type = "LABEL";
 	// Functions
 	this.refresh = functionRefresh;	
 	this.dispose = functionDispose;

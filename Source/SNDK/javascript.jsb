@@ -1,6 +1,7 @@
 <solution name="SNDK" outputdirectory="">	
 	<project name="sndk">
 		<class name="SNDK">	
+			<js file="javascript/definitions.js" />
 			<class name="cookie">	
 				<js file="javascript/cookie.js" />
 			</class>		

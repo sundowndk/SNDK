@@ -3571,8 +3571,19 @@ var SNDK =
 				if (attributes.URL)
 				{
 					var xmlhttp = SNDK.tools.getXmlHttpObject ();
-					xmlhttp.open ("GET", attributes.URL + "?"+ Math.random(), false);
-												
+					var url;
+					
+					if (attributes.noCache || SNDK.debugMode)
+					{
+						url = attributes.URL + "?"+ Math.random ();
+					}
+					else
+					{
+						url = attributes.URL;
+					}
+						
+					xmlhttp.open ("GET", url, false);
+					
 					xmlhttp.send (null);		
 					xmldoc = xmlhttp.responseXML;
 				}
@@ -4059,6 +4070,7 @@ var SNDK =
 			this._temp = _temp;	
 			this._init = init;
 			
+			this.type = "CANVAS";
 			// Functions		
 			this.refresh = functionRefresh;			
 			this.dispose = functionDispose;
@@ -5206,6 +5218,8 @@ var SNDK =
 			this._elements = _elements;
 			this._temp = _temp;		
 			this._init = init;
+			
+			this.type = "LISTVIEW";
 			
 			// Functions
 			this.addItem = functionAddItem;
@@ -8266,6 +8280,8 @@ var SNDK =
 			this._init = init;	
 			
 			this._height = getContainerHeight ();
+			
+			this.type = "LAYOUTBOX";
 			
 			// Functions		
 			this.refresh = functionRefresh;	
@@ -13626,7 +13642,7 @@ var SNDK =
 			this._elements = _elements;
 			this._temp = _temp;	
 			this._init = init;	
-			
+			this.type = "LABEL";
 			// Functions
 			this.refresh = functionRefresh;	
 			this.dispose = functionDispose;
@@ -14036,7 +14052,7 @@ var SNDK =
 			this._elements = _elements;
 			this._temp = _temp;	
 			this._init = init;
-			
+			this.type = "TABVIEW";
 			// Functions		
 			this.refresh = functionRefresh;		
 			this.dispose = functionDispose;
@@ -17673,6 +17689,9 @@ var SNDK =
 		}
 		
 	},
+
+	debugMode: false
+	,
 
 	includeJS : function (attributes)
 	{

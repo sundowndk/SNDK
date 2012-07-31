@@ -55,6 +55,8 @@ layoutbox : function (attributes)
 	
 	this._height = getContainerHeight ();
 	
+	this.type = "LAYOUTBOX";
+	
 	// Functions		
 	this.refresh = functionRefresh;	
 	this.dispose = functionDispose;

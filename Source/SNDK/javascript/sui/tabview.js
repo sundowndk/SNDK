@@ -54,7 +54,7 @@ tabview : function (attributes)
 	this._elements = _elements;
 	this._temp = _temp;	
 	this._init = init;
-	
+	this.type = "TABVIEW";
 	// Functions		
 	this.refresh = functionRefresh;		
 	this.dispose = functionDispose;

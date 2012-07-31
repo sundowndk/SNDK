@@ -12,14 +12,14 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Test\SNDK\</OutputPath>
     <DefineConstants>DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CustomCommands>
       <CustomCommands>
         <Command type="AfterBuild" command="build.sh bin/Debug/cgi-bin/Addins/sConsole/resources/includes/" />
@@ -29,11 +29,11 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>none</DebugType>
-    <Optimize>true</Optimize>
+    <Optimize>True</Optimize>
     <OutputPath>bin\Release\SNDK\</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <ConsolePause>false</ConsolePause>
+    <ConsolePause>False</ConsolePause>
     <CustomCommands>
       <CustomCommands>
         <Command type="AfterBuild" command="build.sh ${TargetDir}" />
@@ -42,10 +42,10 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Test|AnyCPU' ">
     <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
+    <Optimize>False</Optimize>
     <OutputPath>bin\Test\SNDK\</OutputPath>
     <WarningLevel>4</WarningLevel>
-    <DebugSymbols>true</DebugSymbols>
+    <DebugSymbols>True</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -896,6 +896,7 @@
     <None Include="resources\css\91_textbox.css" />
     <None Include="resources\css\06_icons.css" />
     <None Include="resources\css\92_infospot.css" />
+    <None Include="javascript\definitions.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

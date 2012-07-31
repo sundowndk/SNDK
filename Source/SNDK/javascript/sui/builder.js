@@ -5,8 +5,19 @@ construct : function (attributes)
 	if (attributes.URL)
 	{
 		var xmlhttp = SNDK.tools.getXmlHttpObject ();
-		xmlhttp.open ("GET", attributes.URL + "?"+ Math.random(), false);
-									
+		var url;
+		
+		if (attributes.noCache || SNDK.debugMode)
+		{
+			url = attributes.URL + "?"+ Math.random ();
+		}
+		else
+		{
+			url = attributes.URL;
+		}
+			
+		xmlhttp.open ("GET", url, false);
+		
 		xmlhttp.send (null);		
 		xmldoc = xmlhttp.responseXML;
 	}

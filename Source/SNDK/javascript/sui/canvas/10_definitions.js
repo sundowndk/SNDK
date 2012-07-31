@@ -15,6 +15,7 @@ this._elements = _elements;
 this._temp = _temp;	
 this._init = init;
 
+this.type = "CANVAS";
 // Functions		
 this.refresh = functionRefresh;			
 this.dispose = functionDispose;

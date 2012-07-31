@@ -20,6 +20,8 @@ this._elements = _elements;
 this._temp = _temp;		
 this._init = init;
 
+this.type = "LISTVIEW";
+
 // Functions
 this.addItem = functionAddItem;
 this.addItems = functionAddItems;
