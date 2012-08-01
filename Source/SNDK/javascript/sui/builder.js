@@ -1,5 +1,7 @@
 construct : function (attributes)
 {
+	
+
 	var xmldoc;
 
 	if (attributes.URL)
@@ -41,6 +43,8 @@ construct : function (attributes)
 	{
 		throw "Neither URL or xml was given.";
 	}
+	
+	
 
 	
 	var root = xmldoc.getElementsByTagName ('sui').item(0);	
@@ -141,7 +145,7 @@ construct : function (attributes)
 						{						
 							elements[attributes.tag] = new SNDK.SUI.canvas (attributes);
 							parser (node.childNodes, elements[attributes.tag]);
-							
+							continue;
 							break;
 						}
 
@@ -150,7 +154,7 @@ construct : function (attributes)
 							elements[attributes.tag] = new SNDK.SUI.container (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
 							parser (node.childNodes, elements[attributes.tag]);
-							
+							continue;
 							break;						
 						}
 						
@@ -175,7 +179,7 @@ construct : function (attributes)
 									}						
 								}																
 							}
-							
+							continue;
 							break;
 						}
 												
@@ -200,7 +204,7 @@ construct : function (attributes)
 									}						
 								}																
 							}							
-							
+							continue;
 							break;
 						}
 						
@@ -208,7 +212,7 @@ construct : function (attributes)
 						{
 							elements[attributes.tag] = new SNDK.SUI.button (attributes);
 							Parent.addUIElement (elements[attributes.tag]);							
-							
+							continue;
 							break;
 						}
 						
@@ -216,7 +220,7 @@ construct : function (attributes)
 						{
 							elements[attributes.tag] = new SNDK.SUI.textbox (attributes);
 							Parent.addUIElement (elements[attributes.tag]);			
-											
+								continue;			
 							break;
 						}						
 
@@ -224,7 +228,7 @@ construct : function (attributes)
 						{
 							elements[attributes.tag] = new SNDK.SUI.label (attributes);
 							Parent.addUIElement (elements[attributes.tag]);			
-							
+							continue;
 							break;
 						}						
 						
@@ -255,7 +259,7 @@ construct : function (attributes)
 
 							elements[attributes.tag] = new SNDK.SUI.listview (attributes);
 							Parent.addUIElement (elements[attributes.tag]);									
-													
+								continue;					
 							break;
 						}																	
 
@@ -263,7 +267,7 @@ construct : function (attributes)
 						{
 							elements[attributes.tag] = new SNDK.SUI.checkbox (attributes);
 							Parent.addUIElement (elements[attributes.tag]);									
-
+continue;
 							break;
 						}																	
 
@@ -290,7 +294,7 @@ construct : function (attributes)
 
 							elements[attributes.tag] = new SNDK.SUI.dropbox (attributes);
 							Parent.addUIElement (elements[attributes.tag]);									
-														
+								continue;						
 							break;
 						}																	
 
@@ -298,7 +302,7 @@ construct : function (attributes)
 						{
 							elements[attributes.tag] = new SNDK.SUI.upload (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
-							
+							continue;
 							break;
 						}																	
 
@@ -334,7 +338,7 @@ construct : function (attributes)
 						
 							elements[attributes.tag] = new SNDK.SUI.iconview (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
-							
+							continue;
 							break;
 						}	
 						
@@ -342,7 +346,7 @@ construct : function (attributes)
 						{													
 							elements[attributes.tag] = new SNDK.SUI.htmlview (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
-							
+							continue;
 							break;
 						}	
 						
@@ -350,7 +354,7 @@ construct : function (attributes)
 						{													
 							elements[attributes.tag] = new SNDK.SUI.image (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
-							
+							continue;
 							break;
 						}							
 												
@@ -358,7 +362,8 @@ construct : function (attributes)
 						case "text":
 						{						
 							elements[attributes.tag] = new SNDK.SUI.text (attributes);
-							Parent.addUIElement (elements[attributes.tag]);			
+							Parent.addUIElement (elements[attributes.tag]);		
+							continue;	
 							break;
 						}											
 
@@ -407,6 +412,7 @@ construct : function (attributes)
 
 							elements[attributes.tag] = new SNDK.SUI.textarea (attributes);
 							Parent.addUIElement (elements[attributes.tag]);
+							continue;
 							break;
 						}											
 					}
@@ -423,6 +429,9 @@ construct : function (attributes)
 	{
 		parser (root.childNodes, suiattributes.appendTo);
 	}
+	
+		
+
 	
 	return elements;
 }

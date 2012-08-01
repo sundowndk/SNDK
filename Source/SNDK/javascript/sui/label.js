@@ -85,6 +85,8 @@ label : function (attributes)
 	// ------------------------------------	
 	function refresh ()
 	{
+	if (!SNDK.debugStopRefresh)
+		{
 		if (_temp.initialized)
 		{
 			if (_attributes.disabled)
@@ -100,6 +102,7 @@ label : function (attributes)
 		}
 		
 		setDimensions ();
+		}
 	}	
 
 	// ------------------------------------

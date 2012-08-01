@@ -131,7 +131,7 @@ var SNDK =
 		getStyle : function (element, property)
 		{
 			var result = null;
-					
+						
 			if (client.browser == "Explorer" &&  parseInt (client.version) < 9)
 			{
 				// Internet Explore 8 and below does not work with getComputedStyle, 
@@ -164,7 +164,26 @@ var SNDK =
 			{
 				// All moderen browsers work with getComputedStyle.
 			
-				result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
+				//result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
+				result = window.getComputedStyle (element, null).getPropertyValue (property);
+			}
+			
+			return result;
+		},
+		
+		getStyle2 : function (element)
+		{
+		var result = null;
+						
+			if (client.browser == "Explorer" &&  parseInt (client.version) < 9)
+			{
+				result = element.currentStyle;
+			}
+			else	
+			{
+				// All moderen browsers work with getComputedStyle.
+			
+				result = window.getComputedStyle (element, null);
 			}
 			
 			return result;
@@ -576,7 +595,8 @@ var SNDK =
 		// ------------------------------------	
 		getElementStyledMargin : function (element)
 		{
-			var result = {top: 0, left: 0, right: 0, bottom: 0};
+		
+				var result = {top: 0, left: 0, right: 0, bottom: 0};
 			
 			result.top = parseInt (SNDK.tools.getStyle (element, "margin-top"));
 			result.left = parseInt (SNDK.tools.getStyle (element, "margin-left"));
@@ -589,23 +609,43 @@ var SNDK =
 		
 		getElementStyledPadding : function (element)
 		{
+			var styles = SNDK.tools.getStyle2 (element);
+			
 			var result = new Array ();
 			result["vertical"] = 0;
 			result["horizontal"] = 0;
 		
 			var dimensions = new Array ();
-			dimensions["paddingLeft"] = parseInt (SNDK.tools.getStyle (element, "padding-left"));
-			dimensions["paddingRight"] = parseInt (SNDK.tools.getStyle (element, "padding-right"));
-			dimensions["paddingTop"] = parseInt (SNDK.tools.getStyle (element, "padding-top"));
-			dimensions["paddingBottom"] = parseInt (SNDK.tools.getStyle (element, "padding-bottom"));
-			dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
-			dimensions["marginRight"] = parseInt (SNDK.tools.getStyle (element, "margin-right"));
-			dimensions["marginTop"] = parseInt (SNDK.tools.getStyle (element, "margin-top"));
-			dimensions["marginBottom"] = parseInt (SNDK.tools.getStyle (element, "margin-bottom"));				
-			dimensions["borderLeft"] = parseInt (SNDK.tools.getStyle (element, "border-left-width"));
-			dimensions["borderRight"] = parseInt (SNDK.tools.getStyle (element, "border-right-width"));
-			dimensions["borderTop"] = parseInt (SNDK.tools.getStyle (element, "border-top-width"));
-			dimensions["borderBottom"] = parseInt (SNDK.tools.getStyle (element, "border-bottom-width"));				
+		//	var numberRe = new RegExp(/^\d+/);
+		//	console.log (numberRe.exec (styles.getPropertyValue ("padding-left")[0][0]));
+			
+			dimensions["paddingLeft"] = parseInt (styles.getPropertyValue ("padding-left"));
+			dimensions["paddingRight"] = parseInt (styles.getPropertyValue ("padding-right"));
+			dimensions["paddingTop"] = parseInt (styles.getPropertyValue ("padding-top"));
+			dimensions["paddingBottom"] = parseInt (styles.getPropertyValue ("padding-bottom"));
+			dimensions["marginLeft"] = parseInt (styles.getPropertyValue ("margin-left"));
+			dimensions["marginRight"] = parseInt (styles.getPropertyValue ("margin-right"));
+			dimensions["marginTop"] = parseInt (styles.getPropertyValue ("margin-top"));
+			dimensions["marginBottom"] = parseInt (styles.getPropertyValue ("margin-bottom"));				
+			dimensions["borderLeft"] = parseInt (styles.getPropertyValue ("border-left-width"));
+			dimensions["borderRight"] = parseInt (styles.getPropertyValue ("border-right-width"));
+			dimensions["borderTop"] = parseInt (styles.getPropertyValue ("border-top-width"));
+			dimensions["borderBottom"] = parseInt (styles.getPropertyValue ("border-bottom-width"));				
+		
+		//	dimensions["paddingLeft"] = parseInt (styles["paddingLeft"]);
+		//	dimensions["paddingRight"] = parseInt (styles["paddingRight"]);
+		//	dimensions["paddingTop"] = parseInt (styles["paddingTop"]);
+		//	dimensions["paddingBottom"] = parseInt (styles["paddingBottom"]);
+		//	dimensions["marginLeft"] = parseInt (styles["marginLeft"]);
+		//	dimensions["marginRight"] = parseInt (styles["marginRight"]);
+		//	dimensions["marginTop"] = parseInt (styles["marginTop"]);
+		//	dimensions["marginBottom"] = parseInt (styles["marginBottom"]);				
+		//	dimensions["borderLeft"] = parseInt (styles["borderLeftWidth"]);
+		//	dimensions["borderRight"] = parseInt (styles["borderRightWidth"]);
+		//	dimensions["borderTop"] = parseInt (styles["borderTopWidth"]);
+		//	dimensions["borderBottom"] = parseInt (styles["borderBottomWidth"]);				
+			
+		
 		
 		//	console.log ("paddingleft"+ dimensions.paddingLeft);
 		//	console.log ("paddingright"+ dimensions.paddingRight);
@@ -623,6 +663,59 @@ var SNDK =
 		
 		
 		getElementStyledBoxSize : function (element)
+		{
+			var result = new Array ();
+			result["vertical"] = 0;
+			result["horizontal"] = 0;
+		
+			var dimensions = new Array ();
+			
+			var styles = SNDK.tools.getStyle2 (element);
+			
+			// PADDING	
+			//parseInt (styles.getPropertyValue (""));
+			
+			dimensions["paddingLeft"] = parseInt (styles["paddingLeft"]);
+			dimensions["paddingRight"] = parseInt (styles["paddingRight"]);
+			dimensions["paddingTop"] = parseInt (styles["paddingTop"]);
+			dimensions["paddingBottom"] = parseInt (styles["paddingBottom"]);
+			
+			// MARGIN
+		//	dimensions["marginLeft"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-left")));
+		//	dimensions["marginRight"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-right")));
+		//	dimensions["marginTop"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-top")));
+		//	dimensions["marginBottom"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-bottom")));				
+			
+		 	dimensions["marginLeft"] = parseInt (styles["marginLeft"]);
+			dimensions["marginRight"] = parseInt (styles["marginRight"]);
+			dimensions["marginTop"] = parseInt (styles.getPropertyValue ("margin-top"));
+			dimensions["marginBottom"] = parseInt (styles.getPropertyValue ("margin-bottom"));
+			
+			//BORDER
+			dimensions["borderLeft"] = parseInt (styles.getPropertyValue ("border-left-width"))
+			dimensions["borderRight"] = parseInt (styles.getPropertyValue ("border-right-width"));
+			dimensions["borderTop"] = parseInt (styles.getPropertyValue ("border-top-width"));
+			dimensions["borderBottom"] = parseInt (styles.getPropertyValue ("border-bottom-width"));
+			
+			//console.log (dimensions)	
+			
+			for (index in dimensions)
+			{
+				if (dimensions[index] < 0)
+				{
+					dimensions[index] = 0;
+				}
+			}
+			
+			
+			result["vertical"] = (dimensions.paddingTop + dimensions.paddingBottom + dimensions.marginTop + dimensions.marginBottom + dimensions.borderTop + dimensions.borderBottom);
+			result["horizontal"] = (dimensions.paddingLeft + dimensions.paddingRight + dimensions.marginLeft + dimensions.marginRight + dimensions.borderLeft + dimensions.borderRight);
+			result["dimensions"] = dimensions;
+			
+			return result;
+		},
+		
+		getElementStyledBoxSizeOLD : function (element)
 		{
 			var result = new Array ();
 			result["vertical"] = 0;
@@ -672,13 +765,17 @@ var SNDK =
 		},
 		
 		
+		
 		// ------------------------------------
 		// getElementStyleWidth
 		// ------------------------------------	
 		getElementStyledWidth : function (element)
 		{
+			var styles = SNDK.tools.getStyle2 (element);
+			
 			// LeftMargin
-			var leftmargin = SNDK.tools.getStyle (element, "margin-left");
+			//var leftmargin = SNDK.tools.getStyle (element, "margin-left");
+			var leftmargin = styles.getPropertyValue ("margin-left");
 			
 			if (leftmargin != null && leftmargin != "auto")
 			{
@@ -690,7 +787,8 @@ var SNDK =
 			}
 				
 			// RightMargin	
-			var rightmargin = SNDK.tools.getStyle (element, "margin-right");
+			//var rightmargin = SNDK.tools.getStyle (element, "margin-right");
+			var rightmargin = styles.getPropertyValue ("margin-right");
 				
 			if (rightmargin != null && rightmargin != "auto")
 			{
@@ -702,13 +800,16 @@ var SNDK =
 			}
 			
 			// LeftPadding
-			var leftpadding = parseInt (SNDK.tools.getStyle (element, "padding-left"), 10);
+			//var leftpadding = parseInt (SNDK.tools.getStyle (element, "padding-left"), 10);
+			var leftpadding = parseInt (styles.getPropertyValue ("padding-left"), 10);
 			
 			// RightPadding
-			var rightpadding = parseInt (SNDK.tools.getStyle (element, "padding-right"), 10);
+			//var rightpadding = parseInt (SNDK.tools.getStyle (element, "padding-right"), 10);
+			var rightpadding = parseInt (styles.getPropertyValue ("padding-right"), 10);
 				
 			// Width
-			var width = SNDK.tools.getStyle (element, "width");
+			//var width = SNDK.tools.getStyle (element, "width");
+			var width = styles.getPropertyValue ("width");
 			if (width != null && width != "auto")
 			{
 				width = parseInt (width, 10);
@@ -3560,12 +3661,531 @@ var SNDK =
 	SUI :
 	{
 		// ---------------------------------------------------------------------------------------------------------------
+		// CLASS: modal
+		// ---------------------------------------------------------------------------------------------------------------
+		modal :
+		{
+			/**
+			* @constructor
+			*/
+			window : function (attributes)
+			{
+				var _initialized = false;
+				var _attributes = attributes;	
+				var _elements = new Array ();
+					
+				var _temp = 	{ 			  
+						  controls: 0,
+						  tabs: 0,
+						  controlWidth: "533px",
+						  controlWidthTabbed: "510px",
+						  top: 0,
+						  left: 0,
+						  isBusy: false,
+						  cache: Array (),
+						  isOpen: false
+						}
+						
+				setAttributes ();
+				
+				// Values
+				var _valuehidden = true;
+				
+				// Methods		
+				this.open = functionOpen;
+				this.close = functionClose;	
+				this.dispose = functionDispose;
+				this.toggleBusy = functionToggleBusy;
+					
+				this.getUIElement = functionGetUIElement;
+				this.addUIElement = functionAddUIElement;
+				//	this.addUIElementsByXML = functionAddUIElementsByXML;
+					
+				// Construct
+				construct ();
+				
+				// Init Control
+				init ();
+				// -----------------------------------------------------------------------------------------------------------------
+				// Private functions
+				// ----------------------------------------------------------------------------------------------------------------- 	
+				// ------------------------------------
+				// Init
+				// ------------------------------------
+				function init ()
+				{
+					updateCache ();
+							
+					refresh ();		
+				}
+				
+				// ------------------------------------
+				// Construct
+				// ------------------------------------
+				function construct ()
+				{			
+					SNDK.debugStopRefresh = true;
+					
+					// Blocker.
+					_elements.blocker = SNDK.tools.newElement ("div", {appendTo: SNDK.SUI.modal.container});
+					SNDK.tools.changeOpacityByObject (_elements.blocker, 0);	
+				
+					// Container.
+					_elements.container = SNDK.tools.newElement ("div", {appendTo: SNDK.SUI.modal.container});
+					_elements.container.className = "modal";
+					_elements.container.style.display = "none";		
+					SNDK.tools.changeOpacityByObject (_elements.container, 0);								
+					
+					// Bar.
+					_elements.bar = SNDK.tools.newElement ("div", {appendTo: _elements.container});
+					_elements.bar.className = "modal-bar";
+					
+					// Title.
+					_elements.title = SNDK.tools.newElement ("h2", {appendTo: _elements.bar});
+					
+					// Content.
+					_elements.content = SNDK.tools.newElement ("div", {appendTo: _elements.container});
+					_elements.content.className = "modal-bg";		
+				
+					// Canvas.
+					var canvas = new SNDK.SUI.canvas ({canScroll: false, appendTo: _elements.content,  width: "100%", height: "100%"});
+								
+					// UI.
+					_elements.ui = {};
+					
+					
+					
+					
+					// Process UI from xml document.
+					if (_attributes.UIXML)
+					{
+						_elements.ui = SNDK.SUI.builder.construct ({XML: _attributes.UIXML, appendTo: canvas});	
+					}
+					
+					// Fetch UI from URL.
+					if (_attributes.UIURL != null)
+					{				
+						_elements.ui = SNDK.SUI.builder.construct ({URL: _attributes.UIURL, appendTo: canvas});	
+					}
+					
+					_elements.ui.canvas = canvas;
+																			
+					SNDK.SUI.init ();
+							
+					// Busy.
+					_elements.busy = SNDK.tools.newElement ("div", {appendTo: _elements.content});
+					_elements.busy.style.display = "none";
+					_elements.busy.className = "modal-busy";
+							
+					// Hook events.		
+					window.addEvent (window, 'resize', refresh);				
+					
+					SNDK.debugStopRefresh = false;
+				}
+				
+				// ------------------------------------
+				// Refresh
+				// ------------------------------------				
+				function refresh ()
+				{
+					_elements.title.innerHTML = _attributes.title;
+					
+					setDimensions ();
+				}	
+					
+				// ------------------------------------
+				// updateCache
+				// ------------------------------------
+				function updateCache ()
+				{
+					_temp.cache["containerBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
+				
+					_temp.cache["barBoxSize"] = SNDK.tools.getElementStyledBoxSize (_elements["bar"]);
+					_temp.cache["barHeight"] = SNDK.tools.getElementStyledHeight (_elements["bar"]);
+										
+					_temp.cache.containerHeight = _temp.cache.containerBoxDimensions.vertical + _temp.cache.barHeight + _temp.cache.barBoxSize.vertical ;
+					_temp.cache.containerWidth = _temp.cache.containerBoxDimensions.horizontal + _temp.cache.barBoxSize.horizontal;
+					
+					_temp.cache["barBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["bar"]);		
+				}	
+				
+				// ------------------------------------
+				// Refresh
+				// ------------------------------------	
+				function setAttributes ()
+				{
+					// Width
+					if (!_attributes.width) 
+						_attributes.width = "content";	
+									
+					if (_attributes.width != "content")
+					{
+						if (_attributes.width.substring (_attributes.width.length - 1) == "%")
+						{	
+							_attributes.widthType = "percent";
+							_attributes.width = _attributes.width.substring (0, _attributes.width.length - 1)			
+						}
+						else
+						{	
+							_attributes.widthType = "pixel";
+							_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
+						}
+					}
+					else
+					{
+						_attributes.widthType = "content";
+					}
+					
+					// Height
+					if (!_attributes.height) 
+						_attributes.height = "content";
+								
+					if (_attributes.height != "content")
+					{
+						if (_attributes.height.substring (_attributes.height.length - 1) == "%")
+						{
+							_attributes.heightType = "percent";
+							_attributes.height = _attributes.height.substring (0, _attributes.height.length - 1)			
+						}
+						else
+						{
+							_attributes.heightType = "pixel";
+							_attributes.height = _attributes.height.substring (0, _attributes.height.length - 2)
+						}	
+					}
+					else
+					{
+						_attributes.heightType = "content";		
+					}
+					
+					// Title
+					if (!_attributes.title) 
+						_attributes.title = "";					
+				}
+					
+				// ------------------------------------
+				// SetDimensions
+				// ------------------------------------			
+				function setDimensions ()
+				{
+					var width = 0;
+					var height = 0;
+				
+					if (_attributes.widthType != "pixel")
+					{																										
+						width = ((SNDK.tools.getElementInnerWidth (_elements["container"].parentNode) * _attributes.width) / 100);
+					}
+					else
+					{	
+						width = _attributes.width ;
+					}	
+						
+					if (_attributes.heightType != "pixel")
+					{																										
+						height = ((SNDK.tools.getElementInnerHeight (_elements["container"].parentNode) * _attributes.height) / 100);
+					}
+					else
+					{	
+						height = _attributes.height ;
+					}			
+				
+					_elements["content"].style.width = width - (_temp.cache.containerWidth) +"px";
+					_elements["content"].style.height = height - (_temp.cache.containerHeight) +"px";
+					
+					_elements["busy"].style.width = width - (_temp.cache.containerWidth) +"px";		
+					_elements["busy"].style.height = height - (_temp.cache.containerHeight) +"px";
+					
+					
+					
+					
+							
+					var windowSize = SNDK.tools.getWindowSize ();							
+					
+				//		console.log (SNDK.tools.getElementInnerWidth (_elements["container"].parentNode))
+				//		console.log (_temp.cache.containerWidth)
+				//		console.log (_temp.cache.containerHeight)						
+				//		console.log (windowSize)		
+				//		console.log (width)
+				
+					var left = (windowSize[0] - width) / 2;				
+					var top = (windowSize[1] - height) / 2;
+					
+					
+					_temp.top = top;
+					_temp.left = left;
+					
+				//		console.log (windowSize[0] - width)
+				
+					_elements["container"].style.left = left +"px";					
+					_elements["container"].style.top = top +"px";				
+				}				
+				
+				// ------------------------------------
+				// open
+				// ------------------------------------	
+				function open ()
+				{
+					if (!_temp.isOpen)
+					{
+						// If no other windows are open, we need to setup the modal container.
+						if (SNDK.SUI.modal.depth == 0)
+						{			
+							SNDK.SUI.modal.container.className =  "with-blocker";		
+						}
+						
+						// Add modal depth.
+						SNDK.SUI.modal.depth++;
+						
+						// Show blocker.
+						_elements.blocker.className = "modal-blocker visible";
+						_elements.blocker.style.display = "block";
+						SNDK.animation.opacityFade (_elements.blocker, 0, 100, 150);
+						
+						// Show container.
+						_elements.container.style.display = "block";			
+						SNDK.animation.opacityFade (_elements.container, 0, 100, 200);		
+						
+						// Set Window dimensions.
+						setDimensions ();	
+				
+						// Animate container.
+						var anim = new SNDK.animation.animate ({ element: _elements["container"], 
+											 duration: 350, 
+											 fps: 60, 
+											 top: {	begin: (_temp.top - 80) +"px", 
+											 	end: _temp.top +"px", 
+											 	ease: "outexpo"
+											 	}
+											});
+						//anim.play ();	
+						
+						//SNDK.SUI.refresh ();
+						
+						_temp.isOpen = true;		
+					}
+				}
+				
+				// ------------------------------------
+				// close
+				// ------------------------------------	
+				function close ()
+				{
+					if (_temp.isOpen)
+					{		
+						// Hide blocker.
+						SNDK.animation.opacityFade (_elements.container, 100, 0, 200);
+									
+						// Hide container.
+						SNDK.animation.opacityFade (_elements.blocker, 100, 0, 200);
+					
+						// Animate container.		
+						var anim = new SNDK.animation.animate ({ element: _elements.container, 
+											 duration: 350, 
+											 fps: 60, 
+											 top: {	begin: _temp.top +"px", 
+											 	end: (_temp.top - 80) +"px", 
+											 	ease: "outexpo"
+											 	}
+											});
+				//		anim.play ();
+						
+						// Unblock content underneath when done.
+						var onDone = 	function ()
+								{
+									// Remove modal depth.
+									SNDK.SUI.modal.depth--;
+						
+									// If no other windows are open, we need to remove the blocker.
+									if (SNDK.SUI.modal.depth == 0)
+									{			
+										SNDK.SUI.modal.container.className =  "";		
+									}		
+									
+									_elements.blocker.className = "";
+									_elements.blocker.style.display = "none";			
+								
+									_temp.isOpen = false;
+								};	
+								
+						setTimeout (onDone, 400);
+					}
+				}
+				
+				// ------------------------------------
+				// dipose
+				// ------------------------------------				
+				function dispose ()
+				{	
+					close ();
+					
+					// When all is done, make sure to remove all traces of the modal window.
+					var onDone =	function ()
+							{		
+								// Dispose all UI elements.																														
+								for (index in _elements.ui)
+								{
+									try
+									{
+										_elements.ui[index].dispose ();
+									}
+									catch (e)
+									{
+										console.log (e);
+										console.log ("CANNOT DISPOSE: ");
+										console.log (_elements.ui[index]);
+									}
+								}								
+				
+								SNDK.SUI.modal.container.removeChild (_elements.blocker);
+								SNDK.SUI.modal.container.removeChild (_elements.container);
+							};
+							
+					// Unhook events.
+					window.removeEvent (window, 'resize', refresh);					
+									
+					setTimeout (onDone, 400 + 10); 
+				}	
+				
+				function toggleBusy ()
+				{
+					if (!_temp.isBusy)
+					{
+						_elements.busy.style.display = "block";
+						SNDK.animation.opacityFade (_elements.busy, 0, 50, 150);	
+						_temp.isBusy = true;
+					}
+					else
+					{
+						SNDK.animation.opacityFade (_elements.busy, 50, 0, 150);
+						
+						var onDone = 	function ()
+								{
+									_elements.busy.style.display = "none";
+									_temp.isBusy = false;
+								};
+						
+						setTimeout (onDone, 150);			
+					}
+				}
+				// -----------------------------------------------------------------------------------------------------------------
+				// Public functions
+				// ----------------------------------------------------------------------------------------------------------------- 	
+				// ------------------------------------
+				// addUIElement
+				// ------------------------------------			
+				function functionAddUIElement (element)
+				{		
+					//_elements.ui[element.getAttribute ("tag")] = element;
+					
+					_elements.ui.canvas.addUIElement (element);
+					
+					//return element;
+				
+				}
+				
+				// ------------------------------------
+				// addUIElementByXML
+				// ------------------------------------	
+				function functionAddUIElementsByXML (xml, appendTo)
+				{
+					var elements = SNDK.SUI.builder.construct ({XML: xml, appendTo: appendTo});
+					
+					for (i in elements)
+					{		
+						_elements["ui"][i] = elements[i];		
+					}
+				}
+				
+				// ------------------------------------
+				// getUIElement
+				// ------------------------------------	
+				function functionGetUIElement (tag)
+				{
+				
+					if (_elements.ui[tag] != null)
+					{
+						return _elements.ui[tag];
+					}
+					else
+					{
+						throw "No UI element with tag '"+ tag +"' was found.";
+					}									
+				}
+				
+				//	function showBusy ()
+				//	{
+				//		_elements["busy"].style.display = "block";
+				//		SNDK.animation.opacityFade (_elements["busy"], 0, 100, 150);
+				//	}
+				
+				//	function hideBusy ()
+				//	{
+				//		SNDK.animation.opacityFade (_elements["busy"], 100, 0, 150);
+				//		
+				//				setTimeout (	
+				//		function () 
+				//				{ 
+				//					_elements["busy"].style.display = "none";	
+				//				}, 150);
+				//
+				//	}
+				
+				
+				
+				
+				// ------------------------------------
+				// open
+				// ------------------------------------		
+				function functionOpen ()
+				{
+					open ();
+					
+				}
+				
+				// ------------------------------------
+				// close
+				// ------------------------------------		
+				function functionClose ()
+				{
+					close ();
+				}
+				
+				// ------------------------------------
+				// dispose
+				// ------------------------------------	
+				function functionDispose ()
+				{
+					dispose ();
+				}	
+				
+				// ------------------------------------
+				// toggleBusy
+				// ------------------------------------	
+				function functionToggleBusy ()
+				{
+					toggleBusy ();
+				}	
+			},
+		
+			depth: 0,		
+			container: null
+					,
+		
+			init: function (attributes)
+			{
+				SNDK.SUI.modal.container = SNDK.tools.newElement ("div", {id: "modals", appendTo: document.body}); ;
+			}
+		},
+	
+		// ---------------------------------------------------------------------------------------------------------------
 		// CLASS: builder
 		// ---------------------------------------------------------------------------------------------------------------
 		builder :
 		{
 			construct : function (attributes)
 			{
+				
+			
 				var xmldoc;
 			
 				if (attributes.URL)
@@ -3607,6 +4227,8 @@ var SNDK =
 				{
 					throw "Neither URL or xml was given.";
 				}
+				
+				
 			
 				
 				var root = xmldoc.getElementsByTagName ('sui').item(0);	
@@ -3707,7 +4329,7 @@ var SNDK =
 									{						
 										elements[attributes.tag] = new SNDK.SUI.canvas (attributes);
 										parser (node.childNodes, elements[attributes.tag]);
-										
+										continue;
 										break;
 									}
 			
@@ -3716,7 +4338,7 @@ var SNDK =
 										elements[attributes.tag] = new SNDK.SUI.container (attributes);
 										Parent.addUIElement (elements[attributes.tag]);
 										parser (node.childNodes, elements[attributes.tag]);
-										
+										continue;
 										break;						
 									}
 									
@@ -3741,7 +4363,7 @@ var SNDK =
 												}						
 											}																
 										}
-										
+										continue;
 										break;
 									}
 															
@@ -3766,7 +4388,7 @@ var SNDK =
 												}						
 											}																
 										}							
-										
+										continue;
 										break;
 									}
 									
@@ -3774,7 +4396,7 @@ var SNDK =
 									{
 										elements[attributes.tag] = new SNDK.SUI.button (attributes);
 										Parent.addUIElement (elements[attributes.tag]);							
-										
+										continue;
 										break;
 									}
 									
@@ -3782,7 +4404,7 @@ var SNDK =
 									{
 										elements[attributes.tag] = new SNDK.SUI.textbox (attributes);
 										Parent.addUIElement (elements[attributes.tag]);			
-														
+											continue;			
 										break;
 									}						
 			
@@ -3790,7 +4412,7 @@ var SNDK =
 									{
 										elements[attributes.tag] = new SNDK.SUI.label (attributes);
 										Parent.addUIElement (elements[attributes.tag]);			
-										
+										continue;
 										break;
 									}						
 									
@@ -3821,7 +4443,7 @@ var SNDK =
 			
 										elements[attributes.tag] = new SNDK.SUI.listview (attributes);
 										Parent.addUIElement (elements[attributes.tag]);									
-																
+											continue;					
 										break;
 									}																	
 			
@@ -3829,7 +4451,7 @@ var SNDK =
 									{
 										elements[attributes.tag] = new SNDK.SUI.checkbox (attributes);
 										Parent.addUIElement (elements[attributes.tag]);									
-			
+			continue;
 										break;
 									}																	
 			
@@ -3856,7 +4478,7 @@ var SNDK =
 			
 										elements[attributes.tag] = new SNDK.SUI.dropbox (attributes);
 										Parent.addUIElement (elements[attributes.tag]);									
-																	
+											continue;						
 										break;
 									}																	
 			
@@ -3864,7 +4486,7 @@ var SNDK =
 									{
 										elements[attributes.tag] = new SNDK.SUI.upload (attributes);
 										Parent.addUIElement (elements[attributes.tag]);
-										
+										continue;
 										break;
 									}																	
 			
@@ -3900,7 +4522,7 @@ var SNDK =
 									
 										elements[attributes.tag] = new SNDK.SUI.iconview (attributes);
 										Parent.addUIElement (elements[attributes.tag]);
-										
+										continue;
 										break;
 									}	
 									
@@ -3908,7 +4530,7 @@ var SNDK =
 									{													
 										elements[attributes.tag] = new SNDK.SUI.htmlview (attributes);
 										Parent.addUIElement (elements[attributes.tag]);
-										
+										continue;
 										break;
 									}	
 									
@@ -3916,7 +4538,7 @@ var SNDK =
 									{													
 										elements[attributes.tag] = new SNDK.SUI.image (attributes);
 										Parent.addUIElement (elements[attributes.tag]);
-										
+										continue;
 										break;
 									}							
 															
@@ -3924,7 +4546,8 @@ var SNDK =
 									case "text":
 									{						
 										elements[attributes.tag] = new SNDK.SUI.text (attributes);
-										Parent.addUIElement (elements[attributes.tag]);			
+										Parent.addUIElement (elements[attributes.tag]);		
+										continue;	
 										break;
 									}											
 			
@@ -3973,6 +4596,7 @@ var SNDK =
 			
 										elements[attributes.tag] = new SNDK.SUI.textarea (attributes);
 										Parent.addUIElement (elements[attributes.tag]);
+										continue;
 										break;
 									}											
 								}
@@ -3989,6 +4613,9 @@ var SNDK =
 				{
 					parser (root.childNodes, suiattributes.appendTo);
 				}
+				
+					
+			
 				
 				return elements;
 			}
@@ -8326,6 +8953,9 @@ var SNDK =
 			// ------------------------------------		
 			function refresh ()
 			{	
+				if (!SNDK.debugStopRefresh)
+				{
+			
 				// Only refresh if control has been initalized.	
 				if (_temp.initialized)
 				{		
@@ -8333,6 +8963,8 @@ var SNDK =
 				}
 				
 				setDimensions ();
+				}
+				
 			}
 			
 			// ------------------------------------
@@ -12097,7 +12729,7 @@ var SNDK =
 			
 				// Width
 				if (!_attributes.width) 
-					_attributes.width = "100px";				
+					_attributes.width = "100%";				
 					
 				if (_attributes.width.substring (_attributes.width.length - 1) == "%")
 				{
@@ -12112,7 +12744,7 @@ var SNDK =
 		
 				// Height
 				if (!_attributes.height) 
-					_attributes.height = "100px";
+					_attributes.height = "100%";
 					
 				if (_attributes.height.substring (_attributes.height.length - 1) == "%")
 				{
@@ -13690,6 +14322,8 @@ var SNDK =
 			// ------------------------------------	
 			function refresh ()
 			{
+			if (!SNDK.debugStopRefresh)
+				{
 				if (_temp.initialized)
 				{
 					if (_attributes.disabled)
@@ -13705,6 +14339,7 @@ var SNDK =
 				}
 				
 				setDimensions ();
+				}
 			}	
 		
 			// ------------------------------------
@@ -14143,6 +14778,8 @@ var SNDK =
 			// ------------------------------------		
 			function refresh ()
 			{	
+				if (!SNDK.debugStopRefresh)
+				{
 				// Only refresh if control has been initalized.	
 				if (_temp.initialized)
 				{
@@ -14151,6 +14788,7 @@ var SNDK =
 				
 				changeTab (_temp.selectedTab);
 				setDimensions ();
+				}
 			}
 			
 			// ------------------------------------
@@ -17690,7 +18328,8 @@ var SNDK =
 		
 	},
 
-	debugMode: false
+	debugMode: false,
+	debugStopRefresh: false
 	,
 
 	includeJS : function (attributes)

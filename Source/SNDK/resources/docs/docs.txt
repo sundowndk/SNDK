@@ -1,0 +1,16 @@
+CANVAS
+
+canvas (attributes)
+addUIElement (element)
+getUIElement (tag)
+
+
+TABVIEW
+tabview (attributes)
+addTab (attributes)
+getTab (tag)
+
+	TAB
+	addUIElement (element)
+	getUIElement (tag)
+

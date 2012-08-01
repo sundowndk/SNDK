@@ -124,6 +124,9 @@
     <Folder Include="resources\css\images\effects\" />
     <Folder Include="javascript\sui\textbox\" />
     <Folder Include="resources\css\fonts\" />
+    <Folder Include="javascript\sui\modal\" />
+    <Folder Include="javascript\sui\modal\window\" />
+    <Folder Include="resources\docs\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -897,6 +900,13 @@
     <None Include="resources\css\06_icons.css" />
     <None Include="resources\css\92_infospot.css" />
     <None Include="javascript\definitions.js" />
+    <None Include="javascript\sui\modal\window\10_definitions.js" />
+    <None Include="javascript\sui\modal\window\30_public_functions.js" />
+    <None Include="javascript\sui\modal\definitions.js" />
+    <None Include="javascript\sui\modal\functions.js" />
+    <None Include="javascript\sui\modal\window\20_private_functions.js" />
+    <None Include="resources\css\15_modal.css" />
+    <None Include="resources\docs\docs.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

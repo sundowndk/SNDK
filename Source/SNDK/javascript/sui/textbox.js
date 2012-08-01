@@ -133,6 +133,8 @@ textbox : function (attributes)
 	// ------------------------------------		
 	function refresh ()
 	{
+		if (!SNDK.debugStopRefresh)
+		{
 		if (_temp.initialized)
 		{					
 			if (_attributes.disabled)
@@ -184,6 +186,7 @@ textbox : function (attributes)
 		}
 				
 		setDimensions ();	
+		}
 	}	
 	
 	// ------------------------------------

@@ -25,7 +25,16 @@
 				<js file="javascript/widgets/simplamenu.js" />
 				<js file="javascript/widgets/shortcuts.js" />
 			</class>			
-			<class name="SUI">			
+			<class name="SUI">		
+				<class name="modal">
+					<js file="javascript/sui/modal/definitions.js" />
+					<js file="javascript/sui/modal/functions.js" />					
+					<constructor name="window" variables="attributes">
+						<js file="javascript/sui/modal/window/10_definitions.js" />
+						<js file="javascript/sui/modal/window/20_private_functions.js" />
+						<js file="javascript/sui/modal/window/30_public_functions.js" />					
+					</constructor>					
+				</class>					
 				<constructor name="canvas" variables="attributes">
 					<js file="javascript/sui/canvas/10_definitions.js" />
 					<js file="javascript/sui/canvas/20_private_functions.js" />

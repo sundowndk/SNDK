@@ -1,2 +1,3 @@
-debugMode: false
+debugMode: false,
+debugStopRefresh: false
 

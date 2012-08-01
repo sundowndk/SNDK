@@ -100,6 +100,9 @@ layoutbox : function (attributes)
 	// ------------------------------------		
 	function refresh ()
 	{	
+		if (!SNDK.debugStopRefresh)
+		{
+	
 		// Only refresh if control has been initalized.	
 		if (_temp.initialized)
 		{		
@@ -107,6 +110,8 @@ layoutbox : function (attributes)
 		}
 		
 		setDimensions ();
+		}
+		
 	}
 	
 	// ------------------------------------

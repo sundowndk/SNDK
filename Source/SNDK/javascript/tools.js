@@ -35,7 +35,7 @@ getTicks : function ()
 getStyle : function (element, property)
 {
 	var result = null;
-			
+				
 	if (client.browser == "Explorer" &&  parseInt (client.version) < 9)
 	{
 		// Internet Explore 8 and below does not work with getComputedStyle, 
@@ -68,7 +68,26 @@ getStyle : function (element, property)
 	{
 		// All moderen browsers work with getComputedStyle.
 	
-		result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
+		//result = document.defaultView.getComputedStyle (element, null).getPropertyValue (property);
+		result = window.getComputedStyle (element, null).getPropertyValue (property);
+	}
+	
+	return result;
+},
+
+getStyle2 : function (element)
+{
+var result = null;
+				
+	if (client.browser == "Explorer" &&  parseInt (client.version) < 9)
+	{
+		result = element.currentStyle;
+	}
+	else	
+	{
+		// All moderen browsers work with getComputedStyle.
+	
+		result = window.getComputedStyle (element, null);
 	}
 	
 	return result;
@@ -480,7 +499,8 @@ getStyleMargin : function (element)
 // ------------------------------------	
 getElementStyledMargin : function (element)
 {
-	var result = {top: 0, left: 0, right: 0, bottom: 0};
+
+		var result = {top: 0, left: 0, right: 0, bottom: 0};
 	
 	result.top = parseInt (SNDK.tools.getStyle (element, "margin-top"));
 	result.left = parseInt (SNDK.tools.getStyle (element, "margin-left"));
@@ -493,23 +513,43 @@ getElementStyledMargin : function (element)
 
 getElementStyledPadding : function (element)
 {
+	var styles = SNDK.tools.getStyle2 (element);
+	
 	var result = new Array ();
 	result["vertical"] = 0;
 	result["horizontal"] = 0;
 
 	var dimensions = new Array ();
-	dimensions["paddingLeft"] = parseInt (SNDK.tools.getStyle (element, "padding-left"));
-	dimensions["paddingRight"] = parseInt (SNDK.tools.getStyle (element, "padding-right"));
-	dimensions["paddingTop"] = parseInt (SNDK.tools.getStyle (element, "padding-top"));
-	dimensions["paddingBottom"] = parseInt (SNDK.tools.getStyle (element, "padding-bottom"));
-	dimensions["marginLeft"] = parseInt (SNDK.tools.getStyle (element, "margin-left"));
-	dimensions["marginRight"] = parseInt (SNDK.tools.getStyle (element, "margin-right"));
-	dimensions["marginTop"] = parseInt (SNDK.tools.getStyle (element, "margin-top"));
-	dimensions["marginBottom"] = parseInt (SNDK.tools.getStyle (element, "margin-bottom"));				
-	dimensions["borderLeft"] = parseInt (SNDK.tools.getStyle (element, "border-left-width"));
-	dimensions["borderRight"] = parseInt (SNDK.tools.getStyle (element, "border-right-width"));
-	dimensions["borderTop"] = parseInt (SNDK.tools.getStyle (element, "border-top-width"));
-	dimensions["borderBottom"] = parseInt (SNDK.tools.getStyle (element, "border-bottom-width"));				
+//	var numberRe = new RegExp(/^\d+/);
+//	console.log (numberRe.exec (styles.getPropertyValue ("padding-left")[0][0]));
+	
+	dimensions["paddingLeft"] = parseInt (styles.getPropertyValue ("padding-left"));
+	dimensions["paddingRight"] = parseInt (styles.getPropertyValue ("padding-right"));
+	dimensions["paddingTop"] = parseInt (styles.getPropertyValue ("padding-top"));
+	dimensions["paddingBottom"] = parseInt (styles.getPropertyValue ("padding-bottom"));
+	dimensions["marginLeft"] = parseInt (styles.getPropertyValue ("margin-left"));
+	dimensions["marginRight"] = parseInt (styles.getPropertyValue ("margin-right"));
+	dimensions["marginTop"] = parseInt (styles.getPropertyValue ("margin-top"));
+	dimensions["marginBottom"] = parseInt (styles.getPropertyValue ("margin-bottom"));				
+	dimensions["borderLeft"] = parseInt (styles.getPropertyValue ("border-left-width"));
+	dimensions["borderRight"] = parseInt (styles.getPropertyValue ("border-right-width"));
+	dimensions["borderTop"] = parseInt (styles.getPropertyValue ("border-top-width"));
+	dimensions["borderBottom"] = parseInt (styles.getPropertyValue ("border-bottom-width"));				
+
+//	dimensions["paddingLeft"] = parseInt (styles["paddingLeft"]);
+//	dimensions["paddingRight"] = parseInt (styles["paddingRight"]);
+//	dimensions["paddingTop"] = parseInt (styles["paddingTop"]);
+//	dimensions["paddingBottom"] = parseInt (styles["paddingBottom"]);
+//	dimensions["marginLeft"] = parseInt (styles["marginLeft"]);
+//	dimensions["marginRight"] = parseInt (styles["marginRight"]);
+//	dimensions["marginTop"] = parseInt (styles["marginTop"]);
+//	dimensions["marginBottom"] = parseInt (styles["marginBottom"]);				
+//	dimensions["borderLeft"] = parseInt (styles["borderLeftWidth"]);
+//	dimensions["borderRight"] = parseInt (styles["borderRightWidth"]);
+//	dimensions["borderTop"] = parseInt (styles["borderTopWidth"]);
+//	dimensions["borderBottom"] = parseInt (styles["borderBottomWidth"]);				
+	
+
 
 //	console.log ("paddingleft"+ dimensions.paddingLeft);
 //	console.log ("paddingright"+ dimensions.paddingRight);
@@ -527,6 +567,59 @@ getElementStyledPadding : function (element)
 
 
 getElementStyledBoxSize : function (element)
+{
+	var result = new Array ();
+	result["vertical"] = 0;
+	result["horizontal"] = 0;
+
+	var dimensions = new Array ();
+	
+	var styles = SNDK.tools.getStyle2 (element);
+	
+	// PADDING	
+	//parseInt (styles.getPropertyValue (""));
+	
+	dimensions["paddingLeft"] = parseInt (styles["paddingLeft"]);
+	dimensions["paddingRight"] = parseInt (styles["paddingRight"]);
+	dimensions["paddingTop"] = parseInt (styles["paddingTop"]);
+	dimensions["paddingBottom"] = parseInt (styles["paddingBottom"]);
+	
+	// MARGIN
+//	dimensions["marginLeft"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-left")));
+//	dimensions["marginRight"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-right")));
+//	dimensions["marginTop"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-top")));
+//	dimensions["marginBottom"] = Math.abs (parseInt (SNDK.tools.getStyle (element, "margin-bottom")));				
+	
+ 	dimensions["marginLeft"] = parseInt (styles["marginLeft"]);
+	dimensions["marginRight"] = parseInt (styles["marginRight"]);
+	dimensions["marginTop"] = parseInt (styles.getPropertyValue ("margin-top"));
+	dimensions["marginBottom"] = parseInt (styles.getPropertyValue ("margin-bottom"));
+	
+	//BORDER
+	dimensions["borderLeft"] = parseInt (styles.getPropertyValue ("border-left-width"))
+	dimensions["borderRight"] = parseInt (styles.getPropertyValue ("border-right-width"));
+	dimensions["borderTop"] = parseInt (styles.getPropertyValue ("border-top-width"));
+	dimensions["borderBottom"] = parseInt (styles.getPropertyValue ("border-bottom-width"));
+	
+	//console.log (dimensions)	
+	
+	for (index in dimensions)
+	{
+		if (dimensions[index] < 0)
+		{
+			dimensions[index] = 0;
+		}
+	}
+	
+	
+	result["vertical"] = (dimensions.paddingTop + dimensions.paddingBottom + dimensions.marginTop + dimensions.marginBottom + dimensions.borderTop + dimensions.borderBottom);
+	result["horizontal"] = (dimensions.paddingLeft + dimensions.paddingRight + dimensions.marginLeft + dimensions.marginRight + dimensions.borderLeft + dimensions.borderRight);
+	result["dimensions"] = dimensions;
+	
+	return result;
+},
+
+getElementStyledBoxSizeOLD : function (element)
 {
 	var result = new Array ();
 	result["vertical"] = 0;
@@ -576,13 +669,17 @@ getElementStyledBoxSize : function (element)
 },
 
 
+
 // ------------------------------------
 // getElementStyleWidth
 // ------------------------------------	
 getElementStyledWidth : function (element)
 {
+	var styles = SNDK.tools.getStyle2 (element);
+	
 	// LeftMargin
-	var leftmargin = SNDK.tools.getStyle (element, "margin-left");
+	//var leftmargin = SNDK.tools.getStyle (element, "margin-left");
+	var leftmargin = styles.getPropertyValue ("margin-left");
 	
 	if (leftmargin != null && leftmargin != "auto")
 	{
@@ -594,7 +691,8 @@ getElementStyledWidth : function (element)
 	}
 		
 	// RightMargin	
-	var rightmargin = SNDK.tools.getStyle (element, "margin-right");
+	//var rightmargin = SNDK.tools.getStyle (element, "margin-right");
+	var rightmargin = styles.getPropertyValue ("margin-right");
 		
 	if (rightmargin != null && rightmargin != "auto")
 	{
@@ -606,13 +704,16 @@ getElementStyledWidth : function (element)
 	}
 	
 	// LeftPadding
-	var leftpadding = parseInt (SNDK.tools.getStyle (element, "padding-left"), 10);
+	//var leftpadding = parseInt (SNDK.tools.getStyle (element, "padding-left"), 10);
+	var leftpadding = parseInt (styles.getPropertyValue ("padding-left"), 10);
 	
 	// RightPadding
-	var rightpadding = parseInt (SNDK.tools.getStyle (element, "padding-right"), 10);
+	//var rightpadding = parseInt (SNDK.tools.getStyle (element, "padding-right"), 10);
+	var rightpadding = parseInt (styles.getPropertyValue ("padding-right"), 10);
 		
 	// Width
-	var width = SNDK.tools.getStyle (element, "width");
+	//var width = SNDK.tools.getStyle (element, "width");
+	var width = styles.getPropertyValue ("width");
 	if (width != null && width != "auto")
 	{
 		width = parseInt (width, 10);

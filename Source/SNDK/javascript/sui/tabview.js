@@ -145,6 +145,8 @@ tabview : function (attributes)
 	// ------------------------------------		
 	function refresh ()
 	{	
+		if (!SNDK.debugStopRefresh)
+		{
 		// Only refresh if control has been initalized.	
 		if (_temp.initialized)
 		{
@@ -153,6 +155,7 @@ tabview : function (attributes)
 		
 		changeTab (_temp.selectedTab);
 		setDimensions ();
+		}
 	}
 	
 	// ------------------------------------
