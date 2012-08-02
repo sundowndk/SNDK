@@ -251,7 +251,7 @@ function open ()
 							});
 		//anim.play ();	
 		
-		//SNDK.SUI.refresh ();
+		SNDK.SUI.refresh ();
 		
 		_temp.isOpen = true;		
 	}
