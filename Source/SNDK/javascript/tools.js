@@ -1,3 +1,35 @@
+// ------------------------------------
+// arrayChecksum
+// ------------------------------------	
+arrayChecksum : function (value)
+{			
+	var result = "";
+
+	for (key in value)
+		{	
+		var segment = "";
+		
+		if (value[key] != null)
+		{	
+			if (typeof(value[key]) == "object")
+			{								 
+				segment = SNDK.tools.arrayChecksum (value[key]);
+			}	
+			else
+			{
+				segment = value[key];
+			}
+		}	
+			
+		result += segment;
+	}				
+		
+	return result;			
+	//return hex_md5 (result);	
+},
+
+
+
 setButtonLabel : function (element, text)
 {
 	if (element)
