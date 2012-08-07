@@ -29,6 +29,19 @@
 				<class name="modal">
 					<js file="javascript/sui/modal/definitions.js" />
 					<js file="javascript/sui/modal/functions.js" />					
+					<class name="dialog">											
+						<constructor name="base" variables="attributes">
+							<js file="javascript/sui/modal/dialog/base/10_definitions.js" />
+							<js file="javascript/sui/modal/dialog/base/20_private_functions.js" />
+							<js file="javascript/sui/modal/dialog/base/30_public_functions.js" />					
+						</constructor>
+						<class name="alert">
+							<js file="javascript/sui/modal/dialog/alert.js" />								
+						</class>
+						<class name="confirm">
+							<js file="javascript/sui/modal/dialog/confirm.js" />
+						</class>
+					</class>
 					<constructor name="window" variables="attributes">
 						<js file="javascript/sui/modal/window/10_definitions.js" />
 						<js file="javascript/sui/modal/window/20_private_functions.js" />

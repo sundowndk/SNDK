@@ -117,16 +117,16 @@ function eventOnBlur ()
 		}
 	}
 }	
-	
+
 // ------------------------------------
 // onChange
 // ------------------------------------			
 function eventOnChange ()
 {	
 	_attributes.value = _elements["input"].value;
-
+		
 	if (_attributes.onChange != null)
-	{
+	{	
 		setTimeout( function () { _attributes.onChange (_attributes.tag); }, 1);
 	}
 }

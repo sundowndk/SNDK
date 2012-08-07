@@ -2825,6 +2825,7 @@ left: 0;
 		background-color: #ffffff;
 	}
 	.modal-content {
+		padding: 20px;
 		overflow: hidden;
 	}
 	.modal-scroll {
@@ -2949,7 +2950,7 @@ left: 0;
 				}
 
 .modal-buttons {
-	margin: 10px -30px -30px -30px;
+	margin: 20px -30px -30px -30px;
 	padding: 10px 15px 15px;
 
 	-webkit-background-clip: padding-box;

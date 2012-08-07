@@ -127,6 +127,8 @@
     <Folder Include="javascript\sui\modal\" />
     <Folder Include="javascript\sui\modal\window\" />
     <Folder Include="resources\docs\" />
+    <Folder Include="javascript\sui\modal\dialog\" />
+    <Folder Include="javascript\sui\modal\dialog\base\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -907,6 +909,11 @@
     <None Include="javascript\sui\modal\window\20_private_functions.js" />
     <None Include="resources\css\15_modal.css" />
     <None Include="resources\docs\docs.txt" />
+    <None Include="javascript\sui\modal\dialog\base\10_definitions.js" />
+    <None Include="javascript\sui\modal\dialog\base\20_private_functions.js" />
+    <None Include="javascript\sui\modal\dialog\base\30_public_functions.js" />
+    <None Include="javascript\sui\modal\dialog\alert.js" />
+    <None Include="javascript\sui\modal\dialog\confirm.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />
