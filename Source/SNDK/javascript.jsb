@@ -42,6 +42,13 @@
 							<js file="javascript/sui/modal/dialog/confirm.js" />
 						</class>
 					</class>
+					<class name="chooser">
+						<constructor name="base" variables="attributes">
+							<js file="javascript/sui/modal/chooser/base/10_definitions.js" />
+							<js file="javascript/sui/modal/chooser/base/20_private_functions.js" />
+							<js file="javascript/sui/modal/chooser/base/30_public_functions.js" />					
+						</constructor>
+					</class>
 					<constructor name="window" variables="attributes">
 						<js file="javascript/sui/modal/window/10_definitions.js" />
 						<js file="javascript/sui/modal/window/20_private_functions.js" />

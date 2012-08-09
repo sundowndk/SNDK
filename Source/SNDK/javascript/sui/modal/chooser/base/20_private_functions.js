@@ -27,46 +27,47 @@ function construct ()
 	_elements.container.className = "modal";
 	_elements.container.style.display = "none";		
 	SNDK.tools.changeOpacityByObject (_elements.container, 0);								
-	
-	// Bar.
-	_elements.bar = SNDK.tools.newElement ("div", {appendTo: _elements.container});
-	_elements.bar.className = "modal-bar";
-	
-	// Title.
-	_elements.title = SNDK.tools.newElement ("h2", {appendTo: _elements.bar});
-	
+		
 	// Content.
 	_elements.content = SNDK.tools.newElement ("div", {appendTo: _elements.container});
-	_elements.content.className = "modal-bg";		
-
+	_elements.content.className = "modal-content align-center";	
+	
+	// Text.
+//	_elements.text = SNDK.tools.newElement ("div", {appendTo: _elements.content});		
+//	_elements.text.style.width = "100%";
+//	_elements.text.style.height = "100%";
+	
+	
 	// Canvas.
 	var canvas = new SNDK.SUI.canvas ({canScroll: false, appendTo: _elements.content,  width: "100%", height: "100%"});
 				
 	// UI.
 	_elements.ui = {};
-	
-	
-	
-	
+			
 	// Process UI from xml document or url.
 	if (_attributes.UIXML != null)
 	{
 		_elements.ui = SNDK.SUI.builder.construct ({XML: _attributes.UIXML, appendTo: canvas});	
-	} 
+	}
 	else if (_attributes.UIURL != null)
 	{				
 		_elements.ui = SNDK.SUI.builder.construct ({URL: _attributes.UIURL, appendTo: canvas});	
 	}
 	
 	_elements.ui.canvas = canvas;
-															
+
+	// Buttons.
+	_elements.buttons = SNDK.tools.newElement ("div", {appendTo: _elements.content});
+	_elements.buttons.className = "modal-buttons align-center";
+	
+	var buttonWidth = 100 / _attributes.buttons.length;			
+	for (index in _attributes.buttons)
+	{									
+		new SNDK.SUI.button ({label: _attributes.buttons[index].label, width: buttonWidth +"%", stylesheet: _attributes.buttons[index].stylesheet, appendTo: _elements.buttons, onClick: _attributes.buttons[index].onClick});
+	}
+	
 	SNDK.SUI.init ();
-			
-	// Busy.
-	_elements.busy = SNDK.tools.newElement ("div", {appendTo: _elements.content});
-	_elements.busy.style.display = "none";
-	_elements.busy.className = "modal-busy";
-			
+				
 	// Hook events.		
 	window.addEvent (window, 'resize', refresh);				
 	
@@ -78,7 +79,7 @@ function construct ()
 // ------------------------------------				
 function refresh ()
 {
-	_elements.title.innerHTML = _attributes.title;
+	//_elements.text.innerHTML = _attributes.text;
 	
 	setDimensions ();
 }	
@@ -90,13 +91,13 @@ function updateCache ()
 {
 	_temp.cache["containerBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
 
-	_temp.cache["barBoxSize"] = SNDK.tools.getElementStyledBoxSize (_elements["bar"]);
-	_temp.cache["barHeight"] = SNDK.tools.getElementStyledHeight (_elements["bar"]);
+//	_temp.cache["barBoxSize"] = SNDK.tools.getElementStyledBoxSize (_elements["bar"]);
+//	_temp.cache["barHeight"] = SNDK.tools.getElementStyledHeight (_elements["bar"]);
 						
-	_temp.cache.containerHeight = _temp.cache.containerBoxDimensions.vertical + _temp.cache.barHeight + _temp.cache.barBoxSize.vertical ;
-	_temp.cache.containerWidth = _temp.cache.containerBoxDimensions.horizontal + _temp.cache.barBoxSize.horizontal;
+	_temp.cache.containerHeight = _temp.cache.containerBoxDimensions.vertical;
+	_temp.cache.containerWidth = _temp.cache.containerBoxDimensions.horizontal;
 	
-	_temp.cache["barBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["bar"]);		
+//	_temp.cache["barBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["bar"]);		
 }	
 
 // ------------------------------------
@@ -148,9 +149,13 @@ function setAttributes ()
 		_attributes.heightType = "content";		
 	}
 	
+	// Buttons
+	if (!_attributes.buttons) 
+		_attributes.buttons = new Array ();
+	
 	// Title
-	if (!_attributes.title) 
-		_attributes.title = "";					
+	if (!_attributes.text) 
+		_attributes.text = "";					
 }
 	
 // ------------------------------------
@@ -181,9 +186,11 @@ function setDimensions ()
 
 	_elements["content"].style.width = width - (_temp.cache.containerWidth) +"px";
 	_elements["content"].style.height = height - (_temp.cache.containerHeight) +"px";
+		
+//	_elements["text"].style.height = height - (_temp.cache.containerHeight) - 50 +"px";
 	
-	_elements["busy"].style.width = width - (_temp.cache.containerWidth) +"px";		
-	_elements["busy"].style.height = height - (_temp.cache.containerHeight) +"px";
+//	_elements["busy"].style.width = width - (_temp.cache.containerWidth) +"px";		
+//	_elements["busy"].style.height = height - (_temp.cache.containerHeight) +"px";
 	
 	
 	
@@ -357,3 +364,5 @@ function toggleBusy ()
 		setTimeout (onDone, 150);			
 	}
 }
+
+

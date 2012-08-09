@@ -90,8 +90,8 @@ request : function (application, applicationparam, applicationdatafield, request
 		
 		if (_data["success"] == false)
 		{
-			throw _data["exception"].split ("|")[0];
-			//throw _data["exception"];
+			//throw _data["exception"].split ("|")[0];
+			throw _data["exception"];
 		}			
 	}
 	
