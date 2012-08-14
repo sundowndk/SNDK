@@ -248,7 +248,8 @@ function open ()
 function close ()
 {
 	if (_temp.isOpen)
-	{		
+	{				
+	
 		// Hide blocker.
 		SNDK.animation.opacityFade (_elements.container, 100, 0, 200);
 					
