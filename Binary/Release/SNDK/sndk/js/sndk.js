@@ -4048,7 +4048,8 @@ var SNDK =
 					function close ()
 					{
 						if (_temp.isOpen)
-						{		
+						{				
+						
 							// Hide blocker.
 							SNDK.animation.opacityFade (_elements.container, 100, 0, 200);
 										
@@ -4144,7 +4145,6 @@ var SNDK =
 							setTimeout (onDone, 150);			
 						}
 					}
-					
 					// -----------------------------------------------------------------------------------------------------------------
 					// Public functions
 					// ----------------------------------------------------------------------------------------------------------------- 	
@@ -4210,6 +4210,15 @@ var SNDK =
 					
 					
 					
+					function functionSetAttribute (attribute, value)
+					{
+					
+					}
+					
+					function functionGetAttribute (attribute)
+					{
+					
+					}
 					
 					// ------------------------------------
 					// open
@@ -4801,6 +4810,9 @@ var SNDK =
 				this.getUIElement = functionGetUIElement;
 				this.addUIElement = functionAddUIElement;
 				//	this.addUIElementsByXML = functionAddUIElementsByXML;
+				
+				this.setAttribute = functionSetAttribute;
+				this.getAttribute = functionGetAttribute;
 					
 				// Construct
 				construct ();
@@ -5166,6 +5178,48 @@ var SNDK =
 						setTimeout (onDone, 150);			
 					}
 				}
+				
+				
+				
+				// ------------------------------------
+				// getAttribute
+				// ------------------------------------						
+				function getAttribute (attribute)
+				{
+					switch (attribute)
+					{		
+						case "title":
+						{
+							return _attributes[attribute];
+						}
+								
+						default:
+						{
+							throw "No attribute with the name '"+ attribute +"' exist in this object";
+						}
+					}	
+				}
+				
+				// ------------------------------------
+				// setAttribute
+				// ------------------------------------						
+				function setAttribute (attribute, value)
+				{
+					switch (attribute)
+					{
+						case "title":
+						{
+							_attributes[attribute] = value;
+							refresh ();
+							break;
+						}
+								
+						default:
+						{
+							throw "No attribute with the name '"+ attribute +"' exist in this object";
+						}
+					}	
+				}
 				// -----------------------------------------------------------------------------------------------------------------
 				// Public functions
 				// ----------------------------------------------------------------------------------------------------------------- 	
@@ -5230,6 +5284,15 @@ var SNDK =
 				//	}
 				
 				
+				function functionSetAttribute (attribute, value)
+				{
+					setAttribute (attribute, value);
+				}
+				
+				function functionGetAttribute (attribute)
+				{
+					return getAttribute (attribute);
+				}
 				
 				
 				// ------------------------------------

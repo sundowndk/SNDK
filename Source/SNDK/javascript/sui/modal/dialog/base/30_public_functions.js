@@ -63,6 +63,15 @@ function functionGetUIElement (tag)
 
 
 
+function functionSetAttribute (attribute, value)
+{
+
+}
+
+function functionGetAttribute (attribute)
+{
+
+}
 
 // ------------------------------------
 // open

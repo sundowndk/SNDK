@@ -345,4 +345,3 @@ function toggleBusy ()
 		setTimeout (onDone, 150);			
 	}
 }
-

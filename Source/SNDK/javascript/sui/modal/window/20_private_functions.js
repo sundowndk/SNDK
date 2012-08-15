@@ -357,3 +357,45 @@ function toggleBusy ()
 		setTimeout (onDone, 150);			
 	}
 }
+
+
+
+// ------------------------------------
+// getAttribute
+// ------------------------------------						
+function getAttribute (attribute)
+{
+	switch (attribute)
+	{		
+		case "title":
+		{
+			return _attributes[attribute];
+		}
+				
+		default:
+		{
+			throw "No attribute with the name '"+ attribute +"' exist in this object";
+		}
+	}	
+}
+
+// ------------------------------------
+// setAttribute
+// ------------------------------------						
+function setAttribute (attribute, value)
+{
+	switch (attribute)
+	{
+		case "title":
+		{
+			_attributes[attribute] = value;
+			refresh ();
+			break;
+		}
+				
+		default:
+		{
+			throw "No attribute with the name '"+ attribute +"' exist in this object";
+		}
+	}	
+}

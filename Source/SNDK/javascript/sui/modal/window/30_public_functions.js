@@ -62,6 +62,15 @@ function functionGetUIElement (tag)
 //	}
 
 
+function functionSetAttribute (attribute, value)
+{
+	setAttribute (attribute, value);
+}
+
+function functionGetAttribute (attribute)
+{
+	return getAttribute (attribute);
+}
 
 
 // ------------------------------------

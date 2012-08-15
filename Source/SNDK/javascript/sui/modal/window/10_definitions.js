@@ -28,6 +28,9 @@ this.toggleBusy = functionToggleBusy;
 this.getUIElement = functionGetUIElement;
 this.addUIElement = functionAddUIElement;
 //	this.addUIElementsByXML = functionAddUIElementsByXML;
+
+this.setAttribute = functionSetAttribute;
+this.getAttribute = functionGetAttribute;
 	
 // Construct
 construct ();
