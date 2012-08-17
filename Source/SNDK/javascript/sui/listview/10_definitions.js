@@ -26,6 +26,8 @@ this.type = "LISTVIEW";
 this.addItem = functionAddItem;
 this.addItems = functionAddItems;
 this.removeItem = functionRemoveItem;	
+this.clear = functionRemoveAllItems;
+this.count = functionCount;
 
 this.setItem = functionSetItem;
 this.getItem = functionGetItem;	

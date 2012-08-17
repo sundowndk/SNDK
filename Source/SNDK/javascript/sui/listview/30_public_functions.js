@@ -153,6 +153,13 @@ function functionRemoveAllItems ()
 	removeAllItems ();	
 }	
 	
+function functionCount ()
+{
+	return _attributes.items.length;
+
+}
+	
+	
 // ------------------------------------
 // removeRow
 // ------------------------------------						

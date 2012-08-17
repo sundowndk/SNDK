@@ -7014,6 +7014,8 @@ var SNDK =
 			this.addItem = functionAddItem;
 			this.addItems = functionAddItems;
 			this.removeItem = functionRemoveItem;	
+			this.clear = functionRemoveAllItems;
+			this.count = functionCount;
 			
 			this.setItem = functionSetItem;
 			this.getItem = functionGetItem;	
@@ -8234,6 +8236,13 @@ var SNDK =
 			{
 				removeAllItems ();	
 			}	
+				
+			function functionCount ()
+			{
+				return _attributes.items.length;
+			
+			}
+				
 				
 			// ------------------------------------
 			// removeRow
