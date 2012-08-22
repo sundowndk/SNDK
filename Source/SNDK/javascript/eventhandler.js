@@ -1,3 +1,6 @@
+
+try
+{
 /*********************************************************************
  * No onMouseOut event if the mouse pointer hovers a child element 
  * *** Please do not remove this header. ***
@@ -43,9 +46,7 @@ function fixOnMouseOut (element, event, JavaScript_code)
 	}
 }
 /*********************************************************************/
-
-
-﻿// -------------------------------------------------------------------------------------------------------------------------
+// -------------------------------------------------------------------------------------------------------------------------
 // Event handling
 // -------------------------------------------------------------------------------------------------------------------------
 function addEvent (element, type, handler) 
@@ -367,6 +368,8 @@ This must be called
 a framework that provides such an event)
 */
 
+try
+{
 var i = document.createElement("p");
 i.style.width = "100%";
 
@@ -395,6 +398,11 @@ document.body.removeChild(o);
 
 window.scrollbarWidth = w1-w2;
 window.scrollbarHeight = h1-h2;
+}
+catch (error)
+{
+
+}
 
 };
 
@@ -403,3 +411,8 @@ window.onDomReady (bla);
 
 
 
+}
+catch (error)
+{
+
+}

@@ -2,7 +2,12 @@ hasFocus : true,
 		
 init : function ()
 {
+	try
+	{
 	document.onkeypress = SNDK.page.onKeyDown;
+	}
+	catch (erorr)
+	{}
 },
 
 keyHandler : function (event)

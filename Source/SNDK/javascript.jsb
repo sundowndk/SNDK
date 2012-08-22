@@ -1,4 +1,4 @@
-<solution name="SNDK" outputdirectory="">	
+<solution name="SNDK" outputdirectory="" buildjsm="true">	
 	<project name="sndk">
 		<class name="SNDK">	
 			<js file="javascript/definitions.js" />
