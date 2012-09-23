@@ -66,8 +66,10 @@ getTicks : function ()
 },
 
 timestampToDate : function (timestamp)
-{
-	return new Date(timestamp * 1000);
+{	
+	var timeZoneOffset = (new Date ().getTimezoneOffset () * 60000) ;
+	
+	return new Date((timestamp * 1000) + timeZoneOffset);
 },
 
 // ***************************************************************************************************************************************************

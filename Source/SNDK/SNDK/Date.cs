@@ -64,6 +64,54 @@ namespace SNDK
 			
 			return result;			
 		}
+
+		public static decimal GetMonthsBetweenDates (DateTime begin, DateTime end)
+		{
+			decimal result = 0;
+			
+			// Find out how many months there is between the two dates, ruff calculation.
+			decimal months = 0;
+			var dummy = begin;
+			while (dummy < end)
+			{
+				dummy = dummy.AddMonths (1);
+				months++;
+			}
+			
+			// If begin date does not start on day one of the month, we need to know how much of the month has to be excluded.
+			// We also substract 1 month from the ruff calculation of months.
+			decimal segment1 = 0;
+			if (begin.Day > 1)
+			{
+				// Findout how many days are left in the month from the given date.
+				int daysleft = (SNDK.Date.GetDaysInMonth (begin.Year, begin.Month) - begin.Day) + 1;
+				
+				// Calculate perentage of days left.
+				segment1 = Math.Round (((decimal)daysleft / (decimal)SNDK.Date.GetDaysInMonth (begin.Year, begin.Month)), 12, MidpointRounding.ToEven);
+				
+				// Substact 1 month from ruff calculation, since this month is not complete.
+				months--;
+			}
+			
+			// If end date does not start on day one of the month, we need to know how much of the month has to be excluded.
+			// We also substract 1 month from the ruff calculation of months.
+			decimal segment2 = 0;
+			if (end.Day > 1)
+			{
+				// Findout how many days are left in the month from the given date.
+				var daysleft = (SNDK.Date.GetDaysInMonth (end.Year, end.Month) - end.Day);
+				
+				// Calculate percentage of days left.
+				segment2 = Math.Round ((1 - ((decimal)daysleft / (decimal)SNDK.Date.GetDaysInMonth (end.Year, end.Month))), 12, MidpointRounding.ToEven);				
+				
+				// Substract 1 month from ruff calculation, since this month is not complete.
+				months--;
+			}
+			
+			result = segment1 + segment2+ months;
+			
+			return result;
+		}
 						
 		public static int GetDaysInQuarter (int Year, SNDK.Enums.Quarter Quarter)
 		{
