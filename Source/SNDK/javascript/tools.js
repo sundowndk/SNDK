@@ -49,10 +49,20 @@ setButtonLabel : function (element, text)
 	}
 },
 
+dateToYMD : function (date)
+{
+    var d = date.getDate();
+    var m = date.getMonth()+1;
+    var y = date.getFullYear();
+    return '' + y +'/'+ (m<=9?'0'+m:m) +'/'+ (d<=9?'0'+d:d);
+},
+
 
 dateToTimestamp : function (date)
-{
-	return Math.floor( date.getTime ()/1000 );
+{	
+	return Math.round (date/1000);
+
+	//return Math.floor( date.getTime ()/1000 );
 },
 
 // ***************************************************************************************************************************************************
