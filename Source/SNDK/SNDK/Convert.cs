@@ -243,7 +243,15 @@ namespace SNDK
 					type.Value = "string";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString ()));
 					break;					
-				}						
+				}	
+
+				case "double":
+				{
+					element = xmlDocument.CreateElement ("", name, "");
+					type.Value = "string";					
+					element.AppendChild (xmlDocument.CreateCDataSection (((double)data).ToString ()));
+					break;					
+				}	
 					
 				case "datetime":
 				{
