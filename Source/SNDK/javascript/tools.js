@@ -49,6 +49,50 @@ setButtonLabel : function (element, text)
 	}
 },
 
+sortArayHash : function (array, key, direction)
+{
+	if (direction == "numeric")
+	{
+		compareFunc = 	function compare (first, second)
+						{	
+							return first[key]-second[key];
+						} 
+	}
+	else if (direction == "ascending") 
+	{																					
+		compareFunc = 	function (first, second) 
+						{       									
+							if (first[key].toLowerCase () < second[key].toLowerCase ())
+							{
+								return -1;	
+							}
+						
+							if (first[key].toLowerCase () > second[key].toLowerCase ())
+							{
+								return 1;	
+							}
+							return 0;      								
+						}													
+	} 								
+	else 
+	{  					
+		compareFunc = 	function (second, first) 
+						{    									    							
+							if (first[key].toLowerCase () < second[key].toLowerCase ())
+							{
+								return -1;	
+							}
+		
+							if (first[key].toLowerCase () > second[key].toLowerCase ())
+							{
+								return 1;	
+							}
+						}
+	}
+
+	array.sort (compareFunc);
+},
+	
 dateToYMD : function (date)
 {
     var d = date.getDate();
