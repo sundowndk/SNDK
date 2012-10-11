@@ -145,7 +145,7 @@ var SNDK =
 			}
 		},
 		
-		sortArayHash : function (array, key, direction)
+		sortArrayHash : function (array, key, direction)
 		{
 			if (direction == "numeric")
 			{
