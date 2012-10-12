@@ -16,6 +16,8 @@ request : function (application, applicationparam, applicationdatafield, request
 
 	var _seed = Math.random();			
 	var _data = null;	
+	
+	var _sentdata = "";
 
 	// Event handlers.
 	var _event_onsent = null;
@@ -30,6 +32,8 @@ request : function (application, applicationparam, applicationdatafield, request
 	this.onSent = valueOnSent;
 	this.onReceiving = valueOnReceiving;		
 	this.onLoaded = valueOnLoaded;
+	
+	this.sentData = valueSentData;
 
 	// Init object.
 	init ();
@@ -301,8 +305,10 @@ request : function (application, applicationparam, applicationdatafield, request
 				// Prepare header information.	
 				_xmlhttp.setRequestHeader("Content-type", "multipart/form-data; boundary=" + boundaryseed);
 				_xmlhttp.setRequestHeader("Content-length", requestbody.length);
-												
-				// Send request.
+											
+				_sentdata = requestbody;								
+					
+				// Send request.				
 				_xmlhttp.send(requestbody);
 			}
 				
@@ -421,6 +427,11 @@ request : function (application, applicationparam, applicationdatafield, request
 		
 		return document;	
 	}	
+	
+	function valueSentData ()
+	{
+		return _sentdata;
+	}
 	
 	function valueRespons ()
 	{
