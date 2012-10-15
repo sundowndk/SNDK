@@ -169,7 +169,7 @@ request : function (application, applicationparam, applicationdatafield, request
 				
 				case "hashtable":
 				{
-					var hashtable = new Array ();
+					var hashtable = new Array ();					
 					
 					parseResponsRecursive (node.childNodes, hashtable);
 					
@@ -377,7 +377,7 @@ request : function (application, applicationparam, applicationdatafield, request
 					if (data[index].constructor == Array)
 					{
 						
-						var islist = true;
+						var islist = true;						
 						for (index2 in data[index])
 						{
 							if (isNaN (index2))
