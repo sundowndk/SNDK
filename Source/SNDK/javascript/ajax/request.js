@@ -146,6 +146,24 @@ request : function (application, applicationparam, applicationdatafield, request
 					break;
 				}
 				
+				case "decimal":
+				{				
+					if (node.firstChild != null)
+					{
+						//sXUL.console.log ("DEC "+ parseFloat (node.childNodes[0].nodeValue))
+					
+						Data[node.tagName] = parseFloat (node.childNodes[0].nodeValue);
+						
+						//sXUL.console.log ("DECIMAL IN: "+ Data[node.tagName])
+					}
+					else
+					{
+						Data[node.tagName] = 0;
+					}
+
+					break;
+				}
+				
 				case "boolean":
 				{				
 					if (node.firstChild != null)
@@ -327,7 +345,6 @@ request : function (application, applicationparam, applicationdatafield, request
 	{				
 		for (var index in data)
 		{
-		 
 			switch (typeof(data[index]))
 			{
 				case "string":

@@ -240,7 +240,7 @@ namespace SNDK
 				case "decimal":
 				{
 					element = xmlDocument.CreateElement ("", name, "");
-					type.Value = "string";					
+					type.Value = "decimal";					
 					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString ()));
 					break;					
 				}	
@@ -762,6 +762,20 @@ namespace SNDK
 					case "string":
 					{
 						result.Add (node.Name, node.InnerText);
+						break;
+					}
+
+					case "decimal":
+					{
+//						try
+//						{
+//							result.Add (node.Name, decimal.Parse (node.InnerText));
+							result.Add (node.Name, node.InnerText);
+//						}
+//						catch
+//						{
+//							result.Add (node.Name, 0m);
+//						}
 						break;
 					}
 						
