@@ -95,13 +95,21 @@ sortArrayHash : function (array, key, direction)
 	
 dateToYMD : function (date)
 {
-    var d = date.getDate();
-    var m = date.getMonth()+1;
-    var y = date.getFullYear();
+    var d = date.getDate ();
+    var m = date.getMonth ()+1;
+    var y = date.getFullYear ();    
     return '' + y +'/'+ (m<=9?'0'+m:m) +'/'+ (d<=9?'0'+d:d);
 },
 
-
+dateToYMDHM : function (date)
+{
+    var d = date.getDate ();
+    var m = date.getMonth ()+1;
+    var y = date.getFullYear ();
+    var H = date.getHours ();
+    var M = date.getMinutes ();
+    return '' + y +'/'+ (m<=9?'0'+m:m) +'/'+ (d<=9?'0'+d:d) +" "+ (H<=9?'0'+H:H) +":"+ (M<=9?'0'+M:M);       
+},
 dateToTimestamp : function (date)
 {	
 	return Math.round (date/1000);
