@@ -131,6 +131,7 @@
     <Folder Include="javascript\sui\modal\dialog\base\" />
     <Folder Include="javascript\sui\modal\chooser\" />
     <Folder Include="javascript\sui\modal\chooser\base\" />
+    <Folder Include="resources\examples\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -919,6 +920,7 @@
     <None Include="javascript\sui\modal\chooser\base\10_definitions.js" />
     <None Include="javascript\sui\modal\chooser\base\20_private_functions.js" />
     <None Include="javascript\sui\modal\chooser\base\30_public_functions.js" />
+    <None Include="resources\examples\textbox.html" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

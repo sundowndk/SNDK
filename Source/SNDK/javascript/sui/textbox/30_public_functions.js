@@ -86,18 +86,18 @@ function functionGetAttribute (attribute)
 		{
 			return _attributes[attribute];			
 		}
-		
-		case "focus":
-		{
-			return _attributes[attribute];			
-		}
-
+				
 		case "password":
 		{
 			return _attributes[attribute];			
 		}
 		
 		case "textTransform":
+		{
+			return _attributes[attribute];			
+		}
+		
+		case "focus":
 		{
 			return _attributes[attribute];			
 		}
@@ -127,16 +127,16 @@ function functionGetAttribute (attribute)
 			return _attributes[attribute];
 		}
 
-		case "value":
-		{
-			return getValue ();
-		}
-		
 		case "tabIndex":
 		{
 			return _attributes[attribute];
 		}
-				
+
+		case "value":
+		{
+			return getValue ();
+		}
+					
 		default:
 		{
 			throw "No attribute with the name '"+ attribute +"' exist in this object";
@@ -239,13 +239,6 @@ function functionSetAttribute (attribute, value)
 			break;
 		}
 		
-		case "focus":
-		{
-			_attributes[attribute] = value;
-			refresh ();
-			break;
-		}
-
 		case "password":
 		{
 			_attributes[attribute] = value;
@@ -254,6 +247,13 @@ function functionSetAttribute (attribute, value)
 		}
 		
 		case "textTransform":
+		{
+			_attributes[attribute] = value;
+			refresh ();
+			break;
+		}
+		
+		case "focus":
 		{
 			_attributes[attribute] = value;
 			refresh ();
@@ -290,6 +290,12 @@ function functionSetAttribute (attribute, value)
 			break;
 		}
 
+		case "tabIndex":
+		{
+			_attributes[attribute] = value;
+			refresh ();
+		}
+
 		case "value":
 		{
 			_attributes[attribute] = value;
@@ -299,13 +305,7 @@ function functionSetAttribute (attribute, value)
 				eventOnChange ();
 			}
 			break;
-		}
-		
-		case "tabIndex":
-		{
-			_attributes[attribute] = value;
-			refresh ();
-		}
+		}		
 				
 		default:
 		{

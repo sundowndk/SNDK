@@ -35,6 +35,8 @@ cp -rv "resources/css/images/" "$OUTPUTDIR/sndk/css/"
 cp -rv "resources/css/widgets/" "$OUTPUTDIR/sndk/css/"
 cp -rv "resources/css/fonts/" "$OUTPUTDIR/sndk/css/"
 
+
+
 ####################################################
 # INCLUDES                                         #
 ####################################################
@@ -42,6 +44,19 @@ echo "Copying 'includes'..."
 for file in resources/includes*; do
     cp -rv $file "$OUTPUTDIR/sndk/"
 done
+
+####################################################
+# EXAMPLES                                         #
+####################################################
+echo "Copying 'examples'..."
+for file in resources/examples*; do
+    cp -rv $file "$OUTPUTDIR/sndk/"
+done
+
+for file in $OUTPUTDIR/sndk/css*; do
+    cp -rv $file "$OUTPUTDIR/sndk/examples/"
+done
+
 
 ####################################################
 # JAVASCRIPT                                       #

@@ -10,7 +10,7 @@ function init ()
 	updateCache ();		
 	
 	_attributes.heightType = "pixel";
-	_attributes.height = _temp.cache["containerBoxDimensions"]["vertical"] + _temp.cache["containerHeight"];		
+	_attributes.height = _temp.cache["containerBoxDimensions"]["vertical"] + _temp.cache["containerHeight"];			
 }
 
 // ------------------------------------
@@ -56,7 +56,7 @@ function construct ()
 	_elements["input"].onkeyup = eventOnKeyUp;	
 	_elements["input"].onkeypress = eventOnKeyPress;
 	
-	window.addEvent (window, 'SUIREFRESH', refresh);						
+	window.addEvent (window, 'SUIREFRESH', refresh);							 
 }		
 		
 // ------------------------------------
@@ -77,8 +77,7 @@ function refresh ()
 		{
 			if (_attributes.focus)
 			{	
-				_elements["container"].className = _attributes.stylesheet +" focus";								
-				//_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Focus";					
+				_elements["container"].className = _attributes.stylesheet +" focus";				
 				setFocus ();
 			}
 			else
@@ -123,23 +122,23 @@ function refresh ()
 // ------------------------------------		
 function updateCache ()
 {
-	_temp.cache["containerBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
-	_temp.cache["inputBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["input"]);
+	_temp.cache.containerBoxDimensions = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
+	_temp.cache.inputBoxDimensions = SNDK.tools.getElementStyledBoxSize (_elements["input"]);
 	_temp.cache.containerBoxDimensions.horizontal += _temp.cache.inputBoxDimensions.horizontal;
 		
 	if (_attributes.icon)
 	{
-		_temp.cache["iconWidth"] = _elements["icon"].offsetWidth;
-		_temp.cache.containerBoxDimensions.horizontal += _temp.cache.iconWidth;
+		_temp.cache.iconWidth = _elements["iconcontainer"].offsetWidth;			
+		_temp.cache.containerBoxDimensions.horizontal += _temp.cache.iconWidth;		
 	}
 		
 	if (_attributes.infoBubble)
 	{
-		_temp.cache["infoBubbleWidth"] = _elements["infospot"].offsetWidth;
+		_temp.cache.infoBubbleWidth = _elements["infospot"].offsetWidth;	
 		_temp.cache.containerBoxDimensions.horizontal += _temp.cache.infoBubbleWidth;
 	}
 	
-	_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["container"]);
+	_temp.cache.containerHeight = SNDK.tools.getElementStyledHeight (_elements["container"]);
 }		
 	
 // ------------------------------------
@@ -315,14 +314,13 @@ function setInfoBubble ()
 	if (_attributes.infoBubble != null)
 	{		
 		var icon = _attributes.infoBubble.split (";")[0];
-		var color = _attributes.infoBubble.split (";")[1];
-		var text = _attributes.infoBubble.split (";")[2];
+		var text = _attributes.infoBubble.split (";")[1];
 
 		_elements["infospot"] = SNDK.tools.newElement ("span", {appendTo: _elements["infobubblecontainer"]});
 		_elements["infospot"].className = "info-spot";
 
 		_elements["infoicon"] = SNDK.tools.newElement ("span", {appendTo: _elements["infospot"]});
-		_elements["infoicon"].className = "icon-"+ icon +" "+ color;
+		_elements["infoicon"].className = "icon-"+ icon; 
 		
 		_elements["infobubble"] = SNDK.tools.newElement ("span", {appendTo: _elements["infospot"]});
 		_elements["infobubble"].className = "info-bubble";

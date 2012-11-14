@@ -5,6 +5,7 @@
 
 @font-face {
 	font-family: 'EntypoRegular';
+			
 	src: url('fonts/Entypo/entypo-webfont.eot');
 	src: url('fonts/Entypo/entypo-webfont.eot?#iefix') format('embedded-opentype'),
 		 url('fonts/Entypo/entypo-webfont.woff') format('woff'),
@@ -18,6 +19,7 @@
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'EntypoRegular';
+	width: 12px;
 	font-size: 2em;
 	line-height: 1em;
 	margin: -0.5em 0.115em -0.5em -0.077em;

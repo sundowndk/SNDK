@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------------------------------------------
+﻿// ---------------------------------------------------------------------------------------------------------------
 // PROJECT: sndk
 // ---------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------
@@ -8793,7 +8793,7 @@ var SNDK =
 				updateCache ();		
 				
 				_attributes.heightType = "pixel";
-				_attributes.height = _temp.cache["containerBoxDimensions"]["vertical"] + _temp.cache["containerHeight"];		
+				_attributes.height = _temp.cache["containerBoxDimensions"]["vertical"] + _temp.cache["containerHeight"];			
 			}
 			
 			// ------------------------------------
@@ -8839,7 +8839,7 @@ var SNDK =
 				_elements["input"].onkeyup = eventOnKeyUp;	
 				_elements["input"].onkeypress = eventOnKeyPress;
 				
-				window.addEvent (window, 'SUIREFRESH', refresh);						
+				window.addEvent (window, 'SUIREFRESH', refresh);							 
 			}		
 					
 			// ------------------------------------
@@ -8860,8 +8860,7 @@ var SNDK =
 					{
 						if (_attributes.focus)
 						{	
-							_elements["container"].className = _attributes.stylesheet +" focus";								
-							//_elements["container"].className = _attributes.stylesheet +" "+ _attributes.stylesheet+"Focus";					
+							_elements["container"].className = _attributes.stylesheet +" focus";				
 							setFocus ();
 						}
 						else
@@ -8906,23 +8905,23 @@ var SNDK =
 			// ------------------------------------		
 			function updateCache ()
 			{
-				_temp.cache["containerBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
-				_temp.cache["inputBoxDimensions"] = SNDK.tools.getElementStyledBoxSize (_elements["input"]);
+				_temp.cache.containerBoxDimensions = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
+				_temp.cache.inputBoxDimensions = SNDK.tools.getElementStyledBoxSize (_elements["input"]);
 				_temp.cache.containerBoxDimensions.horizontal += _temp.cache.inputBoxDimensions.horizontal;
 					
 				if (_attributes.icon)
 				{
-					_temp.cache["iconWidth"] = _elements["icon"].offsetWidth;
-					_temp.cache.containerBoxDimensions.horizontal += _temp.cache.iconWidth;
+					_temp.cache.iconWidth = _elements["iconcontainer"].offsetWidth;			
+					_temp.cache.containerBoxDimensions.horizontal += _temp.cache.iconWidth;		
 				}
 					
 				if (_attributes.infoBubble)
 				{
-					_temp.cache["infoBubbleWidth"] = _elements["infospot"].offsetWidth;
+					_temp.cache.infoBubbleWidth = _elements["infospot"].offsetWidth;	
 					_temp.cache.containerBoxDimensions.horizontal += _temp.cache.infoBubbleWidth;
 				}
 				
-				_temp.cache["containerHeight"] = SNDK.tools.getElementStyledHeight (_elements["container"]);
+				_temp.cache.containerHeight = SNDK.tools.getElementStyledHeight (_elements["container"]);
 			}		
 				
 			// ------------------------------------
@@ -9098,14 +9097,13 @@ var SNDK =
 				if (_attributes.infoBubble != null)
 				{		
 					var icon = _attributes.infoBubble.split (";")[0];
-					var color = _attributes.infoBubble.split (";")[1];
-					var text = _attributes.infoBubble.split (";")[2];
+					var text = _attributes.infoBubble.split (";")[1];
 			
 					_elements["infospot"] = SNDK.tools.newElement ("span", {appendTo: _elements["infobubblecontainer"]});
 					_elements["infospot"].className = "info-spot";
 			
 					_elements["infoicon"] = SNDK.tools.newElement ("span", {appendTo: _elements["infospot"]});
-					_elements["infoicon"].className = "icon-"+ icon +" "+ color;
+					_elements["infoicon"].className = "icon-"+ icon; 
 					
 					_elements["infobubble"] = SNDK.tools.newElement ("span", {appendTo: _elements["infospot"]});
 					_elements["infobubble"].className = "info-bubble";
@@ -9207,18 +9205,18 @@ var SNDK =
 					{
 						return _attributes[attribute];			
 					}
-					
-					case "focus":
-					{
-						return _attributes[attribute];			
-					}
-			
+							
 					case "password":
 					{
 						return _attributes[attribute];			
 					}
 					
 					case "textTransform":
+					{
+						return _attributes[attribute];			
+					}
+					
+					case "focus":
 					{
 						return _attributes[attribute];			
 					}
@@ -9248,16 +9246,16 @@ var SNDK =
 						return _attributes[attribute];
 					}
 			
-					case "value":
-					{
-						return getValue ();
-					}
-					
 					case "tabIndex":
 					{
 						return _attributes[attribute];
 					}
-							
+			
+					case "value":
+					{
+						return getValue ();
+					}
+								
 					default:
 					{
 						throw "No attribute with the name '"+ attribute +"' exist in this object";
@@ -9360,13 +9358,6 @@ var SNDK =
 						break;
 					}
 					
-					case "focus":
-					{
-						_attributes[attribute] = value;
-						refresh ();
-						break;
-					}
-			
 					case "password":
 					{
 						_attributes[attribute] = value;
@@ -9375,6 +9366,13 @@ var SNDK =
 					}
 					
 					case "textTransform":
+					{
+						_attributes[attribute] = value;
+						refresh ();
+						break;
+					}
+					
+					case "focus":
 					{
 						_attributes[attribute] = value;
 						refresh ();
@@ -9411,6 +9409,12 @@ var SNDK =
 						break;
 					}
 			
+					case "tabIndex":
+					{
+						_attributes[attribute] = value;
+						refresh ();
+					}
+			
 					case "value":
 					{
 						_attributes[attribute] = value;
@@ -9420,13 +9424,7 @@ var SNDK =
 							eventOnChange ();
 						}
 						break;
-					}
-					
-					case "tabIndex":
-					{
-						_attributes[attribute] = value;
-						refresh ();
-					}
+					}		
 							
 					default:
 					{
@@ -20242,7 +20240,7 @@ function bla ()
 This function calculates window.scrollbarWidth and window.scrollbarHeight
 
 This must be called
-?onload? to work correctly (or on ?DOM ready?, if you?re using
+“onload” to work correctly (or on “DOM ready”, if you’re using
 a framework that provides such an event)
 */
 
