@@ -21,6 +21,7 @@
 			</class>
 			<class name="widgets">
 				<js file="javascript/widgets/rotator.js" />
+				<js file="javascript/widgets/rotator2.js" />
 				<js file="javascript/widgets/blobmenu.js" />
 				<js file="javascript/widgets/simplamenu.js" />
 				<js file="javascript/widgets/shortcuts.js" />

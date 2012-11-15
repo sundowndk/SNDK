@@ -132,6 +132,8 @@
     <Folder Include="javascript\sui\modal\chooser\" />
     <Folder Include="javascript\sui\modal\chooser\base\" />
     <Folder Include="resources\examples\" />
+    <Folder Include="resources\examples\images\" />
+    <Folder Include="resources\examples\images\rotator\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -921,6 +923,16 @@
     <None Include="javascript\sui\modal\chooser\base\20_private_functions.js" />
     <None Include="javascript\sui\modal\chooser\base\30_public_functions.js" />
     <None Include="resources\examples\textbox.html" />
+    <None Include="resources\examples\rotator.html" />
+    <None Include="javascript\widgets\rotator2.js" />
+    <None Include="resources\examples\images\rotator\image1.jpg" />
+    <None Include="resources\examples\images\rotator\image2.jpg" />
+    <None Include="resources\examples\images\rotator\image3.jpg" />
+    <None Include="resources\examples\images\rotator\image4.jpg" />
+    <None Include="resources\examples\images\rotator\image5.jpg" />
+    <None Include="resources\examples\images\rotator\image6.jpg" />
+    <None Include="resources\examples\images\rotator\image7.jpg" />
+    <None Include="resources\examples\images\rotator\image8.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

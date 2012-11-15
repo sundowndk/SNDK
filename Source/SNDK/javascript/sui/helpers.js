@@ -36,10 +36,16 @@ getContainer : function (options)
 		throw "Nowhere to park control.";
 	}
 	
-	element.setAttribute ("id", options.id);
+	if (options.id)
+	{
+		element.setAttribute ("id", options.id);
+	}
 
 	// TODO: remove this.	
-	element.className = options.stylesheet;	
+	if (options.stylesheet)
+	{
+		element.className = options.stylesheet;	
+	}
 	
 	return element;
 }
