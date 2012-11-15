@@ -82,16 +82,18 @@ button : function (attributes)
 		_elements["container"].className = _attributes.stylesheet;
 		
 		// Icon
-		if (_attributes.icon)
+		if (_attributes.icon != null)
 		{						
 			_elements["button-icon"] = SNDK.tools.newElement ("span", {appendTo: _elements["container"]});
 			
-			_elements["button-icon"].className = "button-icon "+ _attributes.iconColor;
+			_elements["button-icon"].className = "button-icon "+ _attributes.icon.split (";")[1];
 			_elements["button-icon"].style.cssFloat = "left";
 		
 			_elements["icon"] = SNDK.tools.newElement ("span", {appendTo: _elements["button-icon"]});
-			_elements["icon"].className = "icon-"+ _attributes.iconName;
+			_elements["icon"].className = "icon-"+ _attributes.icon.split (";")[0];
 		}	
+		
+		_elements["label"] = SNDK.tools.newElement ("span", {appendTo: _elements["container"]});			
 																			
 		// Hook events	
 		_elements["container"].onfocus = eventOnFocus;
@@ -109,7 +111,7 @@ button : function (attributes)
 	{
 		if (_temp.initialized)
 		{
-			var style = _attributes.stylesheet;
+			var style = _attributes.stylesheet +" "+ _attributes.color;
 					
 			if (_attributes.disabled)
 			{
@@ -137,8 +139,8 @@ button : function (attributes)
 				_elements["container"].tabIndex = _attributes.tabIndex;
 			}	
 						
-			SNDK.tools.setButtonLabel (_elements["container"], _attributes.label);						
-			
+			_elements["label"].innerHTML = _attributes.label;		
+						
 			_elements["container"].className = style;
 		
 			setDimensions ();
@@ -194,22 +196,7 @@ button : function (attributes)
 			_attributes.widthType = "pixel";
 			_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
 		}						
-								
-		// Icon
-		if (!_attributes.icon)
-		{
-			_attributes.icon = false;
-		}
-		else
-		{
-			_attributes.iconName = _attributes.icon;
-			_attributes.icon = true;
-		}	
-			
-		// IconColor
-		if (!_attributes.iconColor)
-			_attributes.iconColor = "";	
-								
+																					
 		// Label
 		if (!_attributes.label)
 			_attributes.label = "BUTTON";	

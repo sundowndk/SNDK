@@ -34,16 +34,16 @@ setButtonLabel : function (element, text)
 {
 	if (element)
 	{
-		if (element.childNodes[0])
-		{
+		if (element.value)
+		{		
+			element.value = text;		
+		}
+		else if (element.childNodes[0])
+		{		
 			element.childNodes[0].nodeValue = text;
 		}
-		else if (element.value)
-		{
-			element.value = text;
-		}
 		else
-		{
+		{		
 			element.innerHTML = text;
 		}
 	}

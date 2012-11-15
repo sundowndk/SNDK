@@ -1,4 +1,4 @@
-// ---------------------------------------------------------------------------------------------------------------
+﻿// ---------------------------------------------------------------------------------------------------------------
 // PROJECT: sndk
 // ---------------------------------------------------------------------------------------------------------------
 // ---------------------------------------------------------------------------------------------------------------
@@ -130,16 +130,16 @@ var SNDK =
 		{
 			if (element)
 			{
-				if (element.childNodes[0])
-				{
+				if (element.value)
+				{		
+					element.value = text;		
+				}
+				else if (element.childNodes[0])
+				{		
 					element.childNodes[0].nodeValue = text;
 				}
-				else if (element.value)
-				{
-					element.value = text;
-				}
 				else
-				{
+				{		
 					element.innerHTML = text;
 				}
 			}
@@ -11228,16 +11228,18 @@ var SNDK =
 				_elements["container"].className = _attributes.stylesheet;
 				
 				// Icon
-				if (_attributes.icon)
+				if (_attributes.icon != null)
 				{						
 					_elements["button-icon"] = SNDK.tools.newElement ("span", {appendTo: _elements["container"]});
 					
-					_elements["button-icon"].className = "button-icon "+ _attributes.iconColor;
+					_elements["button-icon"].className = "button-icon "+ _attributes.icon.split (";")[1];
 					_elements["button-icon"].style.cssFloat = "left";
 				
 					_elements["icon"] = SNDK.tools.newElement ("span", {appendTo: _elements["button-icon"]});
-					_elements["icon"].className = "icon-"+ _attributes.iconName;
+					_elements["icon"].className = "icon-"+ _attributes.icon.split (";")[0];
 				}	
+				
+				_elements["label"] = SNDK.tools.newElement ("span", {appendTo: _elements["container"]});			
 																					
 				// Hook events	
 				_elements["container"].onfocus = eventOnFocus;
@@ -11255,7 +11257,7 @@ var SNDK =
 			{
 				if (_temp.initialized)
 				{
-					var style = _attributes.stylesheet;
+					var style = _attributes.stylesheet +" "+ _attributes.color;
 							
 					if (_attributes.disabled)
 					{
@@ -11283,8 +11285,8 @@ var SNDK =
 						_elements["container"].tabIndex = _attributes.tabIndex;
 					}	
 								
-					SNDK.tools.setButtonLabel (_elements["container"], _attributes.label);						
-					
+					_elements["label"].innerHTML = _attributes.label;		
+								
 					_elements["container"].className = style;
 				
 					setDimensions ();
@@ -11340,22 +11342,7 @@ var SNDK =
 					_attributes.widthType = "pixel";
 					_attributes.width = _attributes.width.substring (0, _attributes.width.length - 2)
 				}						
-										
-				// Icon
-				if (!_attributes.icon)
-				{
-					_attributes.icon = false;
-				}
-				else
-				{
-					_attributes.iconName = _attributes.icon;
-					_attributes.icon = true;
-				}	
-					
-				// IconColor
-				if (!_attributes.iconColor)
-					_attributes.iconColor = "";	
-										
+																							
 				// Label
 				if (!_attributes.label)
 					_attributes.label = "BUTTON";	
@@ -20473,7 +20460,7 @@ function bla ()
 This function calculates window.scrollbarWidth and window.scrollbarHeight
 
 This must be called
-?onload? to work correctly (or on ?DOM ready?, if you?re using
+“onload” to work correctly (or on “DOM ready”, if you’re using
 a framework that provides such an event)
 */
 
