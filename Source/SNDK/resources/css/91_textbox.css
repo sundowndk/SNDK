@@ -245,7 +245,7 @@
 		}
 
 	.input.large {
-		padding: 0 19px;
+		padding: 0 19px;	
 		line-height: 50px;
 		}
 		input.input.large {
@@ -255,7 +255,7 @@
 		}
 		.inputs.large > li {
 			line-height: 50px;
-			padding: 0 19px;
+			padding: 0;
 		}
 		.large > .input-unstyled, .large > li > .input-unstyled {
 			padding-top: 17px;
@@ -263,13 +263,12 @@
 		}
 		.large > .input-unstyled:first-child,
 		.large > li > .input-unstyled:first-child {
-			margin-left: -19px;
+			
 			padding-left: 19px !important;
 		}
 		.large > .input-unstyled:last-child,
 		.large > li > .input-unstyled:last-child {
-			margin-right: -19px;
-			padding-right: 19px !important;
+			
 			}
 			/* IE7 */
 			.large > .input-unstyled.last-child,

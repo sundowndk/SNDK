@@ -80,7 +80,8 @@ button::-moz-focus-inner {
 	-webkit-appearance: none;
 	background-position: center center !important; /* This is required for glossy gradients image fallbacck*/
 	
-
+	text-overflow:ellipsis;
+	white-space:nowrap;
 	}
 	.ie7 button.button {
 		line-height: 24px;
@@ -550,8 +551,7 @@ button::-moz-focus-inner {
 		}
 
 /* Huge button */
-.button.huge, .huge .button {
-	padding: 0 18px;
+.button.huge, .huge .button {	
 	font-size: 18px;
 	line-height: 46px;
 	height: 46px;
@@ -578,7 +578,7 @@ button::-moz-focus-inner {
 	.button.huge.active, .huge .button.active,
 	.button.huge:first-child:active, .huge .button:first-child:active,
 	.button.huge.active:first-child, .huge .button.active:first-child {
-		padding: 1px 19px;
+		padding: 1px 12px 1px;
 		}
 		.button.huge:disabled, .button.huge.disabled,
 		.huge .button:disabled, .huge .button.disabled,

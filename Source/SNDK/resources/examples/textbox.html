@@ -18,18 +18,32 @@
 		new SNDK.SUI.textbox ({appendTo: "textboxinfobubble", width: "300px", infoBubble: "info-round;This is an infobubble, nice right!?", value: "Infobubble"});
 		new SNDK.SUI.textbox ({appendTo: "textboxicon", width: "300px", icon: "lock;black", value: "Icon"});
 		
+		var credentialsOnEnter = 	function (data)
+									{
+										alert ("Username: "+ data.username +"\nPassword: "+ data.password);										
+									};
+		
+		new SNDK.SUI.credentials ({appendTo: "credentialsnormal", width: "300px", username: {name: "username", placeholder: "Username"}, password: {name: "password", placeholder: "Password"}, button: {label: "Login"}, onEnter: credentialsOnEnter});
+		new SNDK.SUI.credentials ({appendTo: "credentialsdisabled", width: "300px", username: {name: "username", placeholder: "Username"}, password: {name: "password", placeholder: "Password"}, button: {label: "Login"}, disabled: true});
+				
 		new SNDK.SUI.button ({appendTo: "buttonnormal", width: "300px", label: "Normal"});
 		new SNDK.SUI.button ({appendTo: "buttondisabled", width: "300px", label: "Disabled", disabled: true});
 		new SNDK.SUI.button ({appendTo: "buttonicon", width: "300px", label: "Icon", icon: "tag;white"});
-		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "Color", color: "blue-gradient"});
-		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "Color", color: "green-gradient"});
-		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "Color", color: "black-gradient"});		
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "blue-gradient", color: "blue-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "green-gradient", color: "green-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "black-gradient", color: "black-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "orange-gradient", color: "orange-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "red-gradient", color: "red-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "anthracite-gradient", color: "anthracite-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "white-gradient", color: "white-gradient"});
+		new SNDK.SUI.button ({appendTo: "buttoncolor", width: "100px", label: "white-gradient", color: "silver-gradient"});
+		
 		SNDK.SUI.init ();
 	</script>
 			
 	<body>	
 		<div id="ui" style="height: 100%; margin: 20px;">
-			<div style="float: left; margin: 20px; width: 400px;">
+			<div style="float: left; margin: 20px; width: 300px;">
 				TEXTBOX:NORMAL
 				<div id="textboxnormal"></div><br>
 				TEXTBOX:DISABLED
@@ -37,10 +51,7 @@
 				TEXTBOX:READONLY
 				<div id="textboxreadonly"></div><br>
 				TEXTBOX:PASSWORD
-				<div id="textboxpassword"></div><br>				
-			</div>
-			
-			<div style="float: left; margin: 20px; width: 400px;">
+				<div id="textboxpassword"></div><br>
 				TEXTBOX:TEXTTRANSFORM:UPPERCASE
 				<div id="textboxtexttransform1"></div><br>
 				TEXTBOX:TEXTTRANSFORM:LOWERCASE
@@ -48,10 +59,17 @@
 				TEXTBOX:INFOBUBBLE
 				<div id="textboxinfobubble"></div><br>				
 				TEXTBOX:ICON
-				<div id="textboxicon"></div><br>				
-			</div>		
+				<div id="textboxicon"></div><br>								
+			</div>
 			
-			<div style="float: left; margin: 20px; width: 400px;">
+			<div style="float: left; margin: 20px; width: 300px;">
+				CREDENTIALS:NORMAL
+				<div id="credentialsnormal"></div><br>							
+				CREDENTIALS:DISABLED
+				<div id="credentialsdisabled"></div><br>				
+			</div>		
+									
+			<div style="float: left; margin: 20px; width: 300px;">
 				BUTTON:NORMAL
 				<div id="buttonnormal"></div><br>
 				BUTTON:DISABLED
@@ -61,6 +79,6 @@
 				BUTTON:COLOR
 				<div id="buttoncolor"></div><br>				
 			</div>		
-		</div>
+		</div>		
 	</body>
 </html>

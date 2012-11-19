@@ -134,6 +134,8 @@
     <Folder Include="resources\examples\" />
     <Folder Include="resources\examples\images\" />
     <Folder Include="resources\examples\images\rotator\" />
+    <Folder Include="javascript\sui\button\" />
+    <Folder Include="javascript\sui\credentials\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="SNDK.Google.Geocode\Language.cs" />
@@ -933,6 +935,16 @@
     <None Include="resources\examples\images\rotator\image6.jpg" />
     <None Include="resources\examples\images\rotator\image7.jpg" />
     <None Include="resources\examples\images\rotator\image8.jpg" />
+    <None Include="javascript\sui\button\10_definitions.js" />
+    <None Include="javascript\sui\button\20_private_functions.js" />
+    <None Include="javascript\sui\button\30_public_functions.js" />
+    <None Include="javascript\sui\button\40_events.js" />
+    <None Include="javascript\sui\credentials.js" />
+    <None Include="javascript\sui\credentials\10_definitions.js" />
+    <None Include="javascript\sui\credentials\30_public_functions.js" />
+    <None Include="javascript\sui\credentials\40_events.js" />
+    <None Include="javascript\sui\credentials\20_private_functions.js" />
+    <None Include="javascript\sui\credentials\00_doc.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="javascript\sui\listview\20_private_functions.js" />

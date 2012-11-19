@@ -8,6 +8,15 @@
 // ------------------------------------			
 function eventOnKeyPress (event)
 {
+
+	_attributes.value = _elements["input"].value;			
+							
+	
+}
+
+function eventOnKeyDown ()
+{
+	
 	_attributes.value = _elements["input"].value;			
 							
 	
@@ -52,10 +61,8 @@ function eventOnKeyUp (event)
 	var result = true;
 		
 	var key = keyHandler (event);
-	
-	
-
-	//_attributes.value = _elements["input"].value;				
+		
+//	_attributes.value = _elements["input"].value;				
 				
 	if (_attributes.onKeyUp != null)
 	{
@@ -127,6 +134,6 @@ function eventOnChange ()
 		
 	if (_attributes.onChange != null)
 	{	
-		setTimeout( function () { _attributes.onChange (_attributes.tag); }, 1);
+		setTimeout( function () { _attributes.onChange (this); }, 1);
 	}
 }

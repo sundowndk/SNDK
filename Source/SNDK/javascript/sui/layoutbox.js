@@ -508,7 +508,7 @@ layoutbox : function (attributes)
 
 		 	_temp.uiElements[count] = element;
  	
-		 	element.setAttribute ("managed", true);
+		 	//element.setAttribute ("managed", true);
 		 	element.setAttribute ("appendTo", _elements["container"]);
 		 	
 		 	_temp.contentHeight += parseInt (element.height); 		 	

@@ -2,7 +2,7 @@ var _elements = new Array ();
 var _attributes = attributes;
 		
 var _temp = 	{ initialized: false,
-	  	  cache: new Array ()
+	  	  
 		};
 							
 setAttributes ();		

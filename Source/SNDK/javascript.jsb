@@ -78,9 +78,23 @@
 					<js file="javascript/sui/textbox/30_public_functions.js" />					
 					<js file="javascript/sui/textbox/40_events.js" />	
 				</constructor>									
+				<constructor name="button" variables="attributes">
+					<js file="javascript/sui/button/10_definitions.js" />
+					<js file="javascript/sui/button/20_private_functions.js" />
+					<js file="javascript/sui/button/30_public_functions.js" />					
+					<js file="javascript/sui/button/40_events.js" />	
+				</constructor>
+				<constructor name="credentials" variables="attributes">
+					<js file="javascript/sui/credentials/10_definitions.js" />
+					<js file="javascript/sui/credentials/20_private_functions.js" />
+					<js file="javascript/sui/credentials/30_public_functions.js" />					
+					<js file="javascript/sui/credentials/40_events.js" />	
+				</constructor>
 				<js file="javascript/sui/checkbox.js" />
 				<js file="javascript/sui/layoutbox.js" />
-				<js file="javascript/sui/button.js" />
+				
+				
+				
 				<js file="javascript/sui/dropbox.js" />				
 				<js file="javascript/sui/iconview.js" />
 				<js file="javascript/sui/textarea.js" />

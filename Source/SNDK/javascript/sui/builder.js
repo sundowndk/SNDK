@@ -220,9 +220,17 @@ construct : function (attributes)
 						{
 							elements[attributes.tag] = new SNDK.SUI.textbox (attributes);
 							Parent.addUIElement (elements[attributes.tag]);			
-								continue;			
+							continue;			
 							break;
 						}						
+						
+						case "credentials":
+						{
+							elements[attributes.tag] = new SNDK.SUI.credentials (attributes);
+							Parent.addUIElement (elements[attributes.tag]);			
+							continue;			
+							break;
+						}
 
 						case "label":
 						{

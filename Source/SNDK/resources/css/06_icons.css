@@ -19,11 +19,12 @@
 	font-weight: normal;
 	font-style: normal;
 	font-family: 'EntypoRegular';
-	width: 12px;
+	width: 16px;
 	font-size: 2em;
 	line-height: 1em;
 	margin: -0.5em 0.115em -0.5em -0.077em;
 	vertical-align: -0.077em;
+	text-align: center;
 	}
 	.button.icon:before, .button > .icon:before,
 	.button-icon.icon:before, .button-icon > .icon:before {

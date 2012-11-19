@@ -7,7 +7,7 @@
 // ------------------------------------			
 function init ()
 {
-	updateCache ();		
+	updateCache ();
 	
 	_attributes.heightType = "pixel";
 	_attributes.height = _temp.cache["containerBoxDimensions"]["vertical"] + _temp.cache["containerHeight"];			
@@ -31,9 +31,15 @@ function construct ()
 	{
 		type = "password";
 	}
-
+	
 	_elements["input"] = SNDK.tools.newElement ("input", {type: type, appendTo: _elements["container"]});
 	_elements["input"].className = "input-unstyled";
+	
+	if (_attributes.placeholder != null)
+	{
+		_elements["input"].placeholder = _attributes.placeholder;
+	} 
+	
 	
 	if (_attributes.textTransform)
 	{
@@ -52,7 +58,7 @@ function construct ()
 	// Hook Events
 	_elements["input"].onfocus = eventOnFocus;
 	_elements["input"].onblur = eventOnBlur;
-	_elements["input"].onchange = eventOnChange;
+	_elements["input"].onchange = eventOnChange;	
 	_elements["input"].onkeyup = eventOnKeyUp;	
 	_elements["input"].onkeypress = eventOnKeyPress;
 	
@@ -122,6 +128,7 @@ function refresh ()
 // ------------------------------------		
 function updateCache ()
 {
+	_temp.cache = {};
 	_temp.cache.containerBoxDimensions = SNDK.tools.getElementStyledBoxSize (_elements["container"]);
 	_temp.cache.inputBoxDimensions = SNDK.tools.getElementStyledBoxSize (_elements["input"]);
 	_temp.cache.containerBoxDimensions.horizontal += _temp.cache.inputBoxDimensions.horizontal;
