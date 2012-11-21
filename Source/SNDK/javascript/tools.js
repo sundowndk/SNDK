@@ -1,3 +1,45 @@
+padLeft : function (value, totalLength, padString)
+{
+	var result = value.toString ();				
+	
+	if (result == null)
+		throw "SNDK.TOOLS.PADLEFT: value is null";
+	
+	if (totalLength == null || totalLength <= 0)
+		throw "SNDK.TOOLS.PADLEFT: totalLength not specified or less than 1";
+	
+	if (padString == null)
+		padString = " ";
+		
+	while (result.length < totalLength)
+	{		
+	result = padString + result;			
+}
+	
+	return result;	
+},
+	
+padRight : function (value, totalLength, padString)
+{
+	var result = value.toString ();				
+	
+	if (result == null)
+		throw "SNDK.TOOLS.PADRIGHT: value is null";
+	
+	if (totalLength == null || totalLength <= 0)
+		throw "SNDK.TOOLS.PADRIGHT: totalLength not specified or less than 1";
+	
+	if (padString == null)
+		padString = " ";
+		
+	while (result.length < totalLength)
+	{		
+		result = result + padString;
+	}	
+			
+	return result;	
+},
+
 // ------------------------------------
 // arrayChecksum
 // ------------------------------------	
