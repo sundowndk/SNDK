@@ -14,7 +14,7 @@ padLeft : function (value, totalLength, padString)
 	while (result.length < totalLength)
 	{		
 	result = padString + result;			
-}
+	}
 	
 	return result;	
 },

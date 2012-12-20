@@ -75,27 +75,46 @@ namespace SNDK
 			
 			return result;
 		}
-		
-		
-		
-		public static string ListToString<T> (T list)
+
+		// REMOVE REMOVE REMOVE
+		public static string ListToString<T> (T List)
 		{
-			return ListToString (list, ";");
+			return ListToString (List, ";");
 		}
-		
-		public static string ListToString<T> (T list, string delimiter)
+
+		// REMOVE REMOVE REMOVE
+		public static string ListToString<T> (T List, string Delimiter)
 		{
 			string result = string.Empty;
 			
-			System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)list.GetType ().GetMethod("GetEnumerator").Invoke (list, null);
+			System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)List.GetType ().GetMethod("GetEnumerator").Invoke (List, null);
 			
 			while (enumerator.MoveNext ())
 			{
-				result += enumerator.Current.ToString () + delimiter;
+				result += enumerator.Current.ToString () + Delimiter;
 			}				
 			
 			return result;
-//			return result.TrimEnd (delimiter.ToCharArray ());			
+		}
+
+		
+		public static string ListToString<T> (List<T> List)
+		{
+			return ListToString (List, ";");
+		}
+		
+		public static string ListToString<T> (List<T> List, string Delimiter)
+		{
+			string result = string.Empty;
+			
+			System.Collections.IEnumerator enumerator = (System.Collections.IEnumerator)List.GetType ().GetMethod("GetEnumerator").Invoke (List, null);
+			
+			while (enumerator.MoveNext ())
+			{
+				result += enumerator.Current.ToString () + Delimiter;
+			}				
+			
+			return result;
 		}
 		
 		
