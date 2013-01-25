@@ -19979,7 +19979,8 @@ var SNDK =
 			// Event handlers.
 			var _event_onsent = null;
 			var _event_onreceiving = null;
-			var _event_onloaded = null;			
+			var _event_onloaded = null;		
+			var _event_onerror = null;	
 		
 			// Methods
 			this.send = send;		
@@ -19989,6 +19990,7 @@ var SNDK =
 			this.onSent = valueOnSent;
 			this.onReceiving = valueOnReceiving;		
 			this.onLoaded = valueOnLoaded;
+			this.onError = valueOnError;
 			
 			this.sentData = valueSentData;
 		
@@ -20051,8 +20053,15 @@ var SNDK =
 				
 				if (_data["success"] == false)
 				{
-					//throw _data["exception"].split ("|")[0];
-					throw _data["exception"];
+					if (!_asynchronous)
+					{
+						throw _data["exception"];
+					}
+					else
+					{
+						sXUL.console.log (_data["exception"]);
+						_event_onerror (_data["exception"]);				
+					}
 				}			
 			}
 			
@@ -20426,6 +20435,11 @@ var SNDK =
 			function valueOnLoaded (value)
 			{	
 				_event_onloaded = value;
+			}
+			
+			function valueOnError (value)
+			{	
+				_event_onerror = value;
 			}
 		
 			function getXmlHttpObject ()
