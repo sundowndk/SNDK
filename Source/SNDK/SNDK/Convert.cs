@@ -260,7 +260,7 @@ namespace SNDK
 				{
 					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "decimal";					
-					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString ()));
+					element.AppendChild (xmlDocument.CreateCDataSection (((decimal)data).ToString (System.Globalization.CultureInfo.InvariantCulture)));
 					break;					
 				}	
 
@@ -268,7 +268,7 @@ namespace SNDK
 				{
 					element = xmlDocument.CreateElement ("", name, "");
 					type.Value = "string";					
-					element.AppendChild (xmlDocument.CreateCDataSection (((double)data).ToString ()));
+					element.AppendChild (xmlDocument.CreateCDataSection (((double)data).ToString (System.Globalization.CultureInfo.InvariantCulture)));
 					break;					
 				}	
 					
@@ -788,7 +788,7 @@ namespace SNDK
 					{
 //						try
 //						{
-//							result.Add (node.Name, decimal.Parse (node.InnerText));
+//							result.Add (node.Name, decimal.Parse (node.InnerText, System.Globalization.CultureInfo.InvariantCulture));
 							result.Add (node.Name, node.InnerText);
 //						}
 //						catch
