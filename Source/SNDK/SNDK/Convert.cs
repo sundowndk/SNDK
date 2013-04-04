@@ -27,6 +27,7 @@
 using System;
 using System.IO;
 using System.Xml;
+using System.Text;
 using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
@@ -36,6 +37,16 @@ namespace SNDK
 	public class Convert
 	{	
 		#region Public Static Methods
+
+		public static Stream StringToStream (string Value)
+		{
+			return StringToStream (Value, Encoding.Default);
+		}
+
+		public static Stream StringToStream (string Value, Encoding Encoding)
+		{
+			return new MemoryStream(Encoding.GetBytes (Value ?? ""));
+		}
 		
 		public static List<T> StringToList<T> (string value)
 		{
