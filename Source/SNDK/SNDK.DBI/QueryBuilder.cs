@@ -121,7 +121,7 @@ namespace SNDK.DBI
 							result += "VALUES (";
 							foreach (string value in this._values)
 							{
-								result += "'"+ value + "', ";
+								result += "'"+ MySql.Data.MySqlClient.MySqlHelper.EscapeString (value) + "', ";
 							}
 							result = result.TrimEnd(", ".ToCharArray ()) + ") ";
 						}
@@ -155,7 +155,7 @@ namespace SNDK.DBI
 							int columnpos = 0;
 							foreach (string column in this._columns)
 							{
-								result += column +" = '"+ this._values[columnpos]+ "', ";
+								result += column +" = '"+ MySql.Data.MySqlClient.MySqlHelper.EscapeString (this._values[columnpos])+ "', ";
 								columnpos++;
 							}
 							result = result.TrimEnd(", ".ToCharArray ()) + " ";
