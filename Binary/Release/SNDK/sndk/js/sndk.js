@@ -230,7 +230,33 @@ var SNDK =
 		
 			array.sort (compareFunc);
 		},
-			
+		
+		dateToDMYHMSS : function (date)
+		{
+		    var d = date.getDate ();
+		    var m = date.getMonth ()+1;
+		    var y = date.getFullYear ();
+		    var H = date.getHours ();
+		    var M = date.getMinutes ();
+		           
+		    return ""+ (d<=9?"0"+d:d) +"/"+ (m<=9?"0"+m:m) +"/"+ y +" "+ (H<=9?"0"+H:H) +":"+ (M<=9?"0"+M:M) +":00";       
+		},
+		
+		
+		DMYTHMSSToDate : function (string)
+		{
+		  var date = string.split (" ")[0];
+		  var time = string.split (" ")[1];
+		  
+		  var dateparts = date.split ("/");
+		  var timeparts = time.split (":");
+		    
+		  // new Date(year, month [, date [, hours[, minutes[, seconds[, ms]]]]])
+		  return new Date(dateparts[2], dateparts[1]-1, dateparts[0], timeparts[0], timeparts[1], timeparts[2]); // months are 0-based
+		
+		},
+		
+					
 		dateToYMD : function (date)
 		{
 		    var d = date.getDate ();
